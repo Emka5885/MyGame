@@ -48,4 +48,15 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="black.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="white.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="red.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
