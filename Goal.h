@@ -8,7 +8,6 @@ class Goal
 {
 private:
 	sf::CircleShape body;
-	float speed;
 	int row;
 	bool right;
 	int number;
@@ -16,11 +15,11 @@ private:
 	int hight;
 
 public:
-	Goal(sf::Texture *texture, int row, int number, int count, int r);
+	Goal(sf::Texture *texture, int row, int number, int r);
 	~Goal();
 
 	void position();
-	int move();
+	void move();
 	void create(sf::RenderWindow& window);
 	bool existence();
 };

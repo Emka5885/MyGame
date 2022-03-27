@@ -4,15 +4,11 @@
 #include <ctime>
 #include <cstdlib>
 #include <SFML\Graphics.hpp>
-//#include "windows.h"
 #include "MyFunctions.h"
 #include "Goal.h"
 #include "Platform.h"
 
-const int SPEED = 1;
-int num1 = 1;
-int num2 = 1;
-int num3 = 1;
+const int SPEED = 3;
 
 void score();
 void time();
@@ -32,9 +28,9 @@ int main()
         system("PAUSE");
     }
 
-    goal1 = new Goal(&tg123, 1, num1, 0, rand() % 1000);
-    goal2 = new Goal(&tg123, 2, num2, 0, rand() % 1000);
-    goal3 = new Goal(&tg123, 3, num3, 0, rand() % 1000);
+    goal1 = new Goal(&tg123, 1, 0, rand() % 1000);
+    goal2 = new Goal(&tg123, 2, 0, rand() % 1000);
+    goal3 = new Goal(&tg123, 3, 0, rand() % 1000);
 
     sf::Texture tplat123;
     if (!tplat123.loadFromFile("white.png"))
@@ -56,9 +52,15 @@ int main()
     Platform plat5(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 250.0f));
     Platform plat6(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 0.0f));
 
+    sf::Clock clock;
+    window.setFramerateLimit(SPEED);
+
+    sf::Time time;
+
     while (window.isOpen())
     {
         sf::Event event;
+        clock.restart().asSeconds();
         while (window.pollEvent(event))
         {
             switch (event.type)
@@ -73,25 +75,25 @@ int main()
             }
         }
 
-        //if (!goal1->existence())
-        //{
-        //    delete goal1;
-        //    goal1 = new Goal(&tg123, 1, num1, 0, rand() % 1000);
-        //}
-        //if (!goal2->existence())
-        //{
-        //    delete goal2;
-        //    goal2 = new Goal(&tg123, 2, num2, 0, rand() % 1000);
-        //}
-        //if (!goal3->existence())
-        //{
-        //    delete goal3;
-        //    goal3 = new Goal(&tg123, 3, num3, 0, rand() % 1000);
-        //}
+        if (!goal1->existence())
+        {
+            delete goal1;
+            goal1 = new Goal(&tg123, 1, 0, rand() % 1000);
+        }
+        if (!goal2->existence())
+        {
+            delete goal2;
+            goal2 = new Goal(&tg123, 2, 0, rand() % 1000);
+        }
+        if (!goal3->existence())
+        {
+            delete goal3;
+            goal3 = new Goal(&tg123, 3, 0, rand() % 1000);
+        }
 
-        //num1 = goal1->move();
-        //num2 = goal2->move();
-        //num3 = goal3->move();
+        goal1->move();
+        goal2->move();
+        goal3->move();
         
 
         window.clear();
@@ -110,7 +112,7 @@ int main()
 
         window.display();
 
-        //Sleep(1000);
+        time = clock.getElapsedTime();
     }
 
     system("PAUSE");

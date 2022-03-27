@@ -9,13 +9,13 @@ void Goal::position()
 		switch (this->row)
 		{
 		case 1:
-			body.setPosition((x), 700);
+			body.setPosition((x), 740);
 			break;
 		case 2:
-			body.setPosition((x), 450);
+			body.setPosition((x), 475);
 			break;
 		case 3:
-			body.setPosition((x), 200);
+			body.setPosition((x), 235);
 			break;
 		}
 	}
@@ -24,23 +24,22 @@ void Goal::position()
 		switch (this->row)
 		{
 		case 1:
-			body.setPosition((x), 700);
+			body.setPosition((x), 740);
 			break;
 		case 2:
-			body.setPosition((x), 450);
+			body.setPosition((x), 475);
 			break;
 		case 3:
-			body.setPosition((x), 200);
+			body.setPosition((x), 235);
 			break;
 		}
 	}
 }
 
-Goal::Goal(sf::Texture* texture, int row, int number, int count, int r)
+Goal::Goal(sf::Texture* texture, int row, int number, int r)
 {
 	this->row = row;
 	this->number = number;
-	this->count = count;
 
 	body.setTexture(texture);
 
@@ -78,111 +77,175 @@ Goal::~Goal()
 {
 }
 
-int Goal::move()
+void Goal::move()
 {
-	//if (right)
-	//{
-	//	switch (this->row)
-	//	{
-	//	case 1:
-	//		switch (this->number)
-	//		{
-	//		case 1:
-	//			switch (this->hight)
-	//			{
-	//			case 1:
-	//				body.move(90, -60);
-	//				break;
-	//			case 2:
-	//				body.move(65, -75);
-	//				break;
-	//			case 3:
-	//				body.move(40, -100);
-	//				break;
-	//			}
-	//			break;
+	if (right)
+	{
+		switch (this->row)
+		{
+		case 1:
+			switch (this->number)
+			{
+			case 0:
+				break;
+			case 1:
+				body.move(rand() % 60 + 10, -(rand() % 50 + 40));
+				break;
+			case 2:
+				body.move(rand() % 60 + 20, -(rand() % 40 + 30));
+				break;
+			case 3:
+				body.move(rand() % 60 + 30, -(rand() % 30 + 20));
+				break;
+			case 4:
+				body.move(rand() % 60 + 30, (rand() % 30 + 20));
+				break;
+			case 5:
+				body.move(rand() % 60 + 20, (rand() % 40 + 30));
+				break;
+			case 6:
+				body.move(rand() % 60 + 10, (rand() % 50 + 40));
+				break;
+			}
+			break;
 
-	//		case 2:
-	//			switch (this->hight)
-	//			{
-	//			case 1:
-	//				body.move(60, -50);
-	//				break;
-	//			case 2:
-	//				body.move(40, -65);
-	//				break;
-	//			case 3:
-	//				body.move(25, -85);
-	//				break;
-	//			}
-	//			break;
+		case 2:
+			switch (this->number)
+			{
+			case 0:
+				break;
+			case 1:
+				body.move(rand() % 55 + 10, -(rand() % 50 + 40));
+				break;
+			case 2:
+				body.move(rand() % 55 + 20, -(rand() % 40 + 30));
+				break;
+			case 3:
+				body.move(rand() % 55 + 30, -(rand() % 30 + 20));
+				break;
+			case 4:
+				body.move(rand() % 55 + 30, (rand() % 30 + 20));
+				break;
+			case 5:
+				body.move(rand() % 55 + 20, (rand() % 40 + 30));
+				break;
+			case 6:
+				body.move(rand() % 55 + 10, (rand() % 50 + 40));
+				break;
+			}
+			break;
 
-	//		case 3:
-	//			switch (this->hight)
-	//			{
-	//			case 1:
-	//				body.move(30, -40);
-	//				break;
-	//			case 2:
-	//				body.move(15, -60);
-	//				break;
-	//			case 3:
-	//				body.move(10, -65);
-	//				break;
-	//			}
-	//			break;
+		case 3:
+			switch (this->number)
+			{
+			case 0:
+				break;
+			case 1:
+				body.move(rand() % 50 + 10, -(rand() % 50 + 30));
+				break;
+			case 2:
+				body.move(rand() % 50 + 20, -(rand() % 40 + 20));
+				break;
+			case 3:
+				body.move(rand() % 50 + 30, -(rand() % 30 + 10));
+				break;
+			case 4:
+				body.move(rand() % 50 + 30, (rand() % 30 + 10));
+				break;
+			case 5:
+				body.move(rand() % 50 + 20, (rand() % 40 + 20));
+				break;
+			case 6:
+				body.move(rand() % 50 + 10, (rand() % 50 + 30));
+				break;
+			}
+			break;
+		}
+	}
+	else {
+		switch (this->row)
+		{
+		case 1:
+			switch (this->number)
+			{
+			case 0:
+				break;
+			case 1:
+				body.move(-(rand() % 60 + 10), -(rand() % 50 + 40));
+				break;
+			case 2:
+				body.move(-(rand() % 60 + 20), -(rand() % 40 + 30));
+				break;
+			case 3:
+				body.move(-(rand() % 60 + 30), -(rand() % 30 + 20));
+				break;
+			case 4:
+				body.move(-(rand() % 60 + 30), (rand() % 30 + 20));
+				break;
+			case 5:
+				body.move(-(rand() % 60 + 20), (rand() % 40 + 30));
+				break;
+			case 6:
+				body.move(-(rand() % 60 + 10), (rand() % 50 + 40));
+				break;
+			}
+			break;
 
-	//		case 4:
-	//			switch (this->hight)
-	//			{
-	//			case 1:
-	//				body.move(30, 40);
-	//				break;
-	//			case 2:
-	//				body.move(15, 60);
-	//				break;
-	//			case 3:
-	//				body.move(10, 65);
-	//				break;
-	//			}
-	//			break;
+		case 2:
+			switch (this->number)
+			{
+			case 0:
+				break;
+			case 1:
+				body.move(-(rand() % 55 + 10), -(rand() % 50 + 40));
+				break;
+			case 2:
+				body.move(-(rand() % 55 + 20), -(rand() % 40 + 30));
+				break;
+			case 3:
+				body.move(-(rand() % 55 + 30), -(rand() % 30 + 20));
+				break;
+			case 4:
+				body.move(-(rand() % 55 + 30), (rand() % 30 + 20));
+				break;
+			case 5:
+				body.move(-(rand() % 55 + 20), (rand() % 40 + 30));
+				break;
+			case 6:
+				body.move(-(rand() % 55 + 10), (rand() % 50 + 40));
+				break;
+			}
+			break;
 
-	//		case 5:
-	//			switch (this->hight)
-	//			{
-	//			case 1:
-	//				body.move(60, 50);
-	//				break;
-	//			case 2:
-	//				body.move(40, 65);
-	//				break;
-	//			case 3:
-	//				body.move(25, 85);
-	//				break;
-	//			}
-	//			break;
+		case 3:
+			switch (this->number)
+			{
+			case 0:
+				break;
+			case 1:
+				body.move(-(rand() % 50 + 10), -(rand() % 50 + 30));
+				break;
+			case 2:
+				body.move(-(rand() % 50 + 20), -(rand() % 40 + 20));
+				break;
+			case 3:
+				body.move(-(rand() % 50 + 30), -(rand() % 30 + 10));
+				break;
+			case 4:
+				body.move(-(rand() % 50 + 30), (rand() % 30 + 10));
+				break;
+			case 5:
+				body.move(-(rand() % 50 + 20), (rand() % 40 + 20));
+				break;
+			case 6:
+				body.move(-(rand() % 50 + 10), (rand() % 50 + 30));
+				break;
+			}
+			break;
+		}
+	}
 
-	//		case 6:
-	//			switch (this->hight)
-	//			{
-	//			case 1:
-	//				body.move(90, 60);
-	//				break;
-	//			case 2:
-	//				body.move(65, 75);
-	//				break;
-	//			case 3:
-	//				body.move(40, 100);
-	//				break;
-	//			}
-	//			break;
-	//		}
-	//	}
-	//}
-	//else {
-	//}
-
-	return this->number++;
+	this->number++;
 }
 
 void Goal::create(sf::RenderWindow& window)
