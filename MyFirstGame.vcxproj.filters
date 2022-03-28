@@ -58,5 +58,20 @@
     <Image Include="red.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="Goal\Bunny01.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Goal\Bunny02.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Goal\Bunny03.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Goal\Bunny04.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Goal\Bunny05.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <vector>
 #include <SFML\Graphics.hpp>
 #include "MyFunctions.h"
 #include "Goal.h"
@@ -17,7 +18,47 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(1200, 800), "Title", sf::Style::Close | sf::Style::Titlebar);
 
-    Goal *goal1, *goal2, *goal3;
+    //Tekstury do animacji celu
+    std::vector<sf::Texture> goalTextures;
+
+    sf::Texture goal01;
+    if (!goal01.loadFromFile("Goal/Bunny01.png"))
+    {
+        std::cout << "ErrorGB01" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal02;
+    if (!goal01.loadFromFile("Goal/Bunny02.png"))
+    {
+        std::cout << "ErrorGB02" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal03;
+    if (!goal01.loadFromFile("Goal/Bunny03.png"))
+    {
+        std::cout << "ErrorGB03" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal04;
+    if (!goal01.loadFromFile("Goal/Bunny04.png"))
+    {
+        std::cout << "ErrorGB04" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal05;
+    if (!goal01.loadFromFile("Goal/Bunny05.png"))
+    {
+        std::cout << "ErrorGB05" << std::endl;
+        system("PAUSE");
+    }
+
+    goalTextures.push_back(goal01);
+    goalTextures.push_back(goal02);
+    goalTextures.push_back(goal03);
+    goalTextures.push_back(goal04);
+    goalTextures.push_back(goal05);
+
+    Goal* goal1, * goal2, * goal3;
 
     srand(time(NULL));
 
@@ -94,7 +135,7 @@ int main()
         goal1->move();
         goal2->move();
         goal3->move();
-        
+
 
         window.clear();
 
