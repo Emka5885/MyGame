@@ -58,19 +58,40 @@
     <Image Include="red.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="Goal\Bunny00.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Goal\Bunny00r.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
     <Image Include="Goal\Bunny01.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Goal\Bunny01r.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="Goal\Bunny02.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="Goal\Bunny02r.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
     <Image Include="Goal\Bunny03.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Goal\Bunny03r.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="Goal\Bunny04.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="Goal\Bunny04r.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
     <Image Include="Goal\Bunny05.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Goal\Bunny05r.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

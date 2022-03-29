@@ -36,12 +36,12 @@ void Goal::position()
 	}
 }
 
-Goal::Goal(sf::Texture* texture, int row, int number, int r)
+Goal::Goal(int row, int number, int r)
 {
 	this->row = row;
 	this->number = number;
 
-	body.setTexture(texture);
+	//body.setTexture(&this->goalT[2]);
 
 	srand((time(NULL) + r));
 
@@ -75,6 +75,56 @@ Goal::Goal(sf::Texture* texture, int row, int number, int r)
 
 Goal::~Goal()
 {
+}
+
+void Goal::setTexture(std::vector<sf::Texture>& goalT)
+{
+	if (!this->right)
+	{
+		switch (this->number)
+		{
+		case 1:
+			this->body.setTexture(&goalT[1]);
+			break;
+		case 2:
+			this->body.setTexture(&goalT[2]);
+			break;
+		case 3:
+			this->body.setTexture(&goalT[3]);
+			break;
+		case 4:
+			this->body.setTexture(&goalT[4]);
+			break;
+		case 5:
+			this->body.setTexture(&goalT[5]);
+			break;
+		default:
+			this->body.setTexture(&goalT[0]);
+		}
+	}
+	else
+	{
+		switch (this->number)
+		{
+		case 1:
+			this->body.setTexture(&goalT[7]);
+			break;
+		case 2:
+			this->body.setTexture(&goalT[8]);
+			break;
+		case 3:
+			this->body.setTexture(&goalT[9]);
+			break;
+		case 4:
+			this->body.setTexture(&goalT[10]);
+			break;
+		case 5:
+			this->body.setTexture(&goalT[11]);
+			break;
+		default:
+			this->body.setTexture(&goalT[6]);
+		}
+	}
 }
 
 void Goal::move()

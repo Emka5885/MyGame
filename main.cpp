@@ -9,7 +9,7 @@
 #include "Goal.h"
 #include "Platform.h"
 
-const int SPEED = 3;
+const int SPEED = 5;
 
 void score();
 void time();
@@ -21,6 +21,12 @@ int main()
     //Tekstury do animacji celu
     std::vector<sf::Texture> goalTextures;
 
+    sf::Texture goal00;
+    if (!goal00.loadFromFile("Goal/Bunny00.png"))
+    {
+        std::cout << "ErrorGB00" << std::endl;
+        system("PAUSE");
+    }
     sf::Texture goal01;
     if (!goal01.loadFromFile("Goal/Bunny01.png"))
     {
@@ -28,50 +34,87 @@ int main()
         system("PAUSE");
     }
     sf::Texture goal02;
-    if (!goal01.loadFromFile("Goal/Bunny02.png"))
+    if (!goal02.loadFromFile("Goal/Bunny02.png"))
     {
         std::cout << "ErrorGB02" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal03;
-    if (!goal01.loadFromFile("Goal/Bunny03.png"))
+    if (!goal03.loadFromFile("Goal/Bunny03.png"))
     {
         std::cout << "ErrorGB03" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal04;
-    if (!goal01.loadFromFile("Goal/Bunny04.png"))
+    if (!goal04.loadFromFile("Goal/Bunny04.png"))
     {
         std::cout << "ErrorGB04" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal05;
-    if (!goal01.loadFromFile("Goal/Bunny05.png"))
+    if (!goal05.loadFromFile("Goal/Bunny05.png"))
     {
         std::cout << "ErrorGB05" << std::endl;
         system("PAUSE");
     }
-
+    goalTextures.push_back(goal00);
     goalTextures.push_back(goal01);
     goalTextures.push_back(goal02);
     goalTextures.push_back(goal03);
     goalTextures.push_back(goal04);
     goalTextures.push_back(goal05);
 
+    sf::Texture goal00r;
+    if (!goal00r.loadFromFile("Goal/Bunny00r.png"))
+    {
+        std::cout << "ErrorGB00r" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal01r;
+    if (!goal01r.loadFromFile("Goal/Bunny01r.png"))
+    {
+        std::cout << "ErrorGB01r" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal02r;
+    if (!goal02r.loadFromFile("Goal/Bunny02r.png"))
+    {
+        std::cout << "ErrorGB02r" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal03r;
+    if (!goal03r.loadFromFile("Goal/Bunny03r.png"))
+    {
+        std::cout << "ErrorGB03r" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal04r;
+    if (!goal04r.loadFromFile("Goal/Bunny04r.png"))
+    {
+        std::cout << "ErrorGB04r" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture goal05r;
+    if (!goal05r.loadFromFile("Goal/Bunny05r.png"))
+    {
+        std::cout << "ErrorGB05r" << std::endl;
+        system("PAUSE");
+    }
+    goalTextures.push_back(goal00r);
+    goalTextures.push_back(goal01r);
+    goalTextures.push_back(goal02r);
+    goalTextures.push_back(goal03r);
+    goalTextures.push_back(goal04r);
+    goalTextures.push_back(goal05r);
+
+
     Goal* goal1, * goal2, * goal3;
 
     srand(time(NULL));
 
-    sf::Texture tg123;
-    if (!tg123.loadFromFile("red.png"))
-    {
-        std::cout << "Errorg123" << std::endl;
-        system("PAUSE");
-    }
-
-    goal1 = new Goal(&tg123, 1, 0, rand() % 1000);
-    goal2 = new Goal(&tg123, 2, 0, rand() % 1000);
-    goal3 = new Goal(&tg123, 3, 0, rand() % 1000);
+    goal1 = new Goal(1, 0, rand() % 1000);
+    goal2 = new Goal(2, 0, rand() % 1000);
+    goal3 = new Goal(3, 0, rand() % 1000);
 
     sf::Texture tplat123;
     if (!tplat123.loadFromFile("white.png"))
@@ -119,18 +162,22 @@ int main()
         if (!goal1->existence())
         {
             delete goal1;
-            goal1 = new Goal(&tg123, 1, 0, rand() % 1000);
+            goal1 = new Goal(1, 0, rand() % 1000);
         }
         if (!goal2->existence())
         {
             delete goal2;
-            goal2 = new Goal(&tg123, 2, 0, rand() % 1000);
+            goal2 = new Goal(2, 0, rand() % 1000);
         }
         if (!goal3->existence())
         {
             delete goal3;
-            goal3 = new Goal(&tg123, 3, 0, rand() % 1000);
+            goal3 = new Goal(3, 0, rand() % 1000);
         }
+
+        goal1->setTexture(goalTextures);
+        goal2->setTexture(goalTextures);
+        goal3->setTexture(goalTextures);
 
         goal1->move();
         goal2->move();

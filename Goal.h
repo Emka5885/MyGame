@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <vector>
 
 class Goal
 {
@@ -15,9 +16,10 @@ private:
 	int hight;
 
 public:
-	Goal(sf::Texture *texture, int row, int number, int r);
+	Goal(int row, int number, int r);
 	~Goal();
 
+	void setTexture(std::vector<sf::Texture>& goalT);
 	void position();
 	void move();
 	void create(sf::RenderWindow& window);

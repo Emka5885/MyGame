@@ -166,11 +166,18 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="black.png" />
+    <Image Include="Goal\Bunny00.png" />
+    <Image Include="Goal\Bunny00r.png" />
     <Image Include="Goal\Bunny01.png" />
+    <Image Include="Goal\Bunny01r.png" />
     <Image Include="Goal\Bunny02.png" />
+    <Image Include="Goal\Bunny02r.png" />
     <Image Include="Goal\Bunny03.png" />
+    <Image Include="Goal\Bunny03r.png" />
     <Image Include="Goal\Bunny04.png" />
+    <Image Include="Goal\Bunny04r.png" />
     <Image Include="Goal\Bunny05.png" />
+    <Image Include="Goal\Bunny05r.png" />
     <Image Include="red.png" />
     <Image Include="white.png" />
   </ItemGroup>
