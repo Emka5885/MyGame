@@ -8,8 +8,9 @@
 #include "MyFunctions.h"
 #include "Goal.h"
 #include "Platform.h"
+#include "Player.h"
 
-const int SPEED = 5;
+const int SPEED = 4;
 
 void score();
 void time();
@@ -136,15 +137,27 @@ int main()
     Platform plat5(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 250.0f));
     Platform plat6(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 0.0f));
 
-    sf::Clock clock;
-    window.setFramerateLimit(SPEED);
 
-    sf::Time time;
+    sf::Texture tgun00;
+    if (!tgun00.loadFromFile("Gun/gun00.png"))
+    {
+        std::cout << "Errorg00" << std::endl;
+        system("PAUSE");
+    }
+
+    sf::Mouse::setPosition(sf::Vector2i((window.getPosition().x / 2), (window.getPosition().y / 2)), window);
+    window.setMouseCursorVisible(false);
+    Player p1(&tgun00, 0, 50, 40, window);
+
+    //sf::Clock clock;   //?
+    window.setFramerateLimit(SPEED);   //zmienić, tak aby było tylko opóźnienie celów
+
+    //sf::Time time;
 
     while (window.isOpen())
     {
         sf::Event event;
-        clock.restart().asSeconds();
+        //clock.restart().asSeconds();
         while (window.pollEvent(event))
         {
             switch (event.type)
@@ -157,6 +170,10 @@ int main()
             case sf::Event::GainedFocus:
                 break;
             }
+        }
+        if (sf::Event::MouseMoved)
+        {
+            p1.position(event.mouseMove.x, event.mouseMove.y);
         }
 
         if (!goal1->existence())
@@ -198,9 +215,11 @@ int main()
         goal1->create(window);
         plat1.create(window);
 
+        p1.create(window);
+
         window.display();
 
-        time = clock.getElapsedTime();
+        //time = clock.getElapsedTime();
     }
 
     system("PAUSE");
