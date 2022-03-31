@@ -11,6 +11,7 @@
 #include "Player.h"
 
 const int SPEED = 4;
+float count = 0;
 
 void score();
 void time();
@@ -28,6 +29,8 @@ int main()
         std::cout << "ErrorGB00" << std::endl;
         system("PAUSE");
     }
+    goalTextures.push_back(goal00);
+
     sf::Texture goal01;
     if (!goal01.loadFromFile("Goal/Bunny01.png"))
     {
@@ -58,19 +61,12 @@ int main()
         std::cout << "ErrorGB05" << std::endl;
         system("PAUSE");
     }
-    goalTextures.push_back(goal00);
     goalTextures.push_back(goal01);
     goalTextures.push_back(goal02);
     goalTextures.push_back(goal03);
     goalTextures.push_back(goal04);
     goalTextures.push_back(goal05);
 
-    sf::Texture goal00r;
-    if (!goal00r.loadFromFile("Goal/Bunny00r.png"))
-    {
-        std::cout << "ErrorGB00r" << std::endl;
-        system("PAUSE");
-    }
     sf::Texture goal01r;
     if (!goal01r.loadFromFile("Goal/Bunny01r.png"))
     {
@@ -101,7 +97,6 @@ int main()
         std::cout << "ErrorGB05r" << std::endl;
         system("PAUSE");
     }
-    goalTextures.push_back(goal00r);
     goalTextures.push_back(goal01r);
     goalTextures.push_back(goal02r);
     goalTextures.push_back(goal03r);
@@ -116,6 +111,9 @@ int main()
     goal1 = new Goal(1, 0, rand() % 1000);
     goal2 = new Goal(2, 0, rand() % 1000);
     goal3 = new Goal(3, 0, rand() % 1000);
+    goal1->setTexture(goalTextures);
+    goal2->setTexture(goalTextures);
+    goal3->setTexture(goalTextures);
 
     sf::Texture tplat123;
     if (!tplat123.loadFromFile("white.png"))
@@ -149,8 +147,7 @@ int main()
     window.setMouseCursorVisible(false);
     Player p1(&tgun00, 0, 50, 40, window);
 
-    //sf::Clock clock;   //?
-    window.setFramerateLimit(SPEED);   //zmienić, tak aby było tylko opóźnienie celów
+    //sf::Clock clock;
 
     //sf::Time time;
 
@@ -180,26 +177,35 @@ int main()
         {
             delete goal1;
             goal1 = new Goal(1, 0, rand() % 1000);
+            goal1->setTexture(goalTextures);
         }
         if (!goal2->existence())
         {
             delete goal2;
             goal2 = new Goal(2, 0, rand() % 1000);
+            goal2->setTexture(goalTextures);
         }
         if (!goal3->existence())
         {
             delete goal3;
             goal3 = new Goal(3, 0, rand() % 1000);
+            goal3->setTexture(goalTextures);
         }
 
-        goal1->setTexture(goalTextures);
-        goal2->setTexture(goalTextures);
-        goal3->setTexture(goalTextures);
-
-        goal1->move();
-        goal2->move();
-        goal3->move();
-
+        if (count == 200)
+        {
+            goal1->setTexture(goalTextures);
+            goal2->setTexture(goalTextures);
+            goal3->setTexture(goalTextures);
+            count = 0;
+            goal1->move();
+            goal2->move();
+            goal3->move();
+        }
+        else
+        {
+            count++;
+        }
 
         window.clear();
 

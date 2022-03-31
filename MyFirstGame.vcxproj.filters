@@ -94,5 +94,8 @@
     <Image Include="Goal\Bunny05r.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="Gun\gun00.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>
