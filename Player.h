@@ -15,4 +15,5 @@ public:
 
 	void position(float x, float y);
 	void create(sf::RenderWindow& win);
+	void bullet(sf::RenderWindow& win, float x, float y);
 };

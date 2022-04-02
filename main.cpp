@@ -10,7 +10,7 @@
 #include "Platform.h"
 #include "Player.h"
 
-const int SPEED = 4;
+const int SPEED = 200;
 float count = 0;
 
 void score();
@@ -143,7 +143,8 @@ int main()
         system("PAUSE");
     }
 
-    sf::Mouse::setPosition(sf::Vector2i((window.getPosition().x / 2), (window.getPosition().y / 2)), window);
+    sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
+    sf::Vector2i positionm = sf::Mouse::getPosition();
     window.setMouseCursorVisible(false);
     Player p1(&tgun00, 0, 50, 40, window);
 
@@ -162,15 +163,17 @@ int main()
             case sf::Event::Closed:
                 window.close();
                 break;
-            case sf::Event::LostFocus:
-                break;
-            case sf::Event::GainedFocus:
-                break;
+                //case sf::Event::LostFocus:
+                //    break;
+                //case sf::Event::GainedFocus:
+                //    break;
             }
         }
+
         if (sf::Event::MouseMoved)
         {
             p1.position(event.mouseMove.x, event.mouseMove.y);
+            positionm = sf::Mouse::getPosition();
         }
 
         if (!goal1->existence())
@@ -192,7 +195,7 @@ int main()
             goal3->setTexture(goalTextures);
         }
 
-        if (count == 200)
+        if (count == SPEED)
         {
             goal1->setTexture(goalTextures);
             goal2->setTexture(goalTextures);
@@ -222,6 +225,10 @@ int main()
         plat1.create(window);
 
         p1.create(window);
+        if (sf::Mouse::Button::Left == event.mouseButton.button)
+        {
+            p1.bullet(window, positionm.x, positionm.y);
+        }
 
         window.display();
 

@@ -25,3 +25,11 @@ void Player::create(sf::RenderWindow& win)
 {
 	win.draw(body);
 }
+
+void Player::bullet(sf::RenderWindow& win, float x, float y)
+{
+	sf::CircleShape bullet(2);
+	bullet.setFillColor(sf::Color(255, 0, 0));
+	bullet.setPosition(x, y);
+	win.draw(bullet);
+}
