@@ -167,7 +167,6 @@
   <ItemGroup>
     <Image Include="black.png" />
     <Image Include="Goal\Bunny00.png" />
-    <Image Include="Goal\Bunny00r.png" />
     <Image Include="Goal\Bunny01.png" />
     <Image Include="Goal\Bunny01r.png" />
     <Image Include="Goal\Bunny02.png" />

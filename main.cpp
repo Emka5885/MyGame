@@ -11,6 +11,7 @@
 #include "Player.h"
 
 const int SPEED = 200;
+const int RATE_OF_FIRE = 1400;
 float count = 0;
 bool test = false;
 bool b1 = false;
@@ -148,14 +149,13 @@ int main()
     sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
     Player p1(&tgun00, 0, 40, window);
 
-    //sf::Clock clock;
-
-    //sf::Time time;
+    sf::Clock clock;
+    clock.restart().asMilliseconds();
+    sf::Time time;
 
     while (window.isOpen())
     {
         sf::Event event;
-        //clock.restart().asSeconds();
         while (window.pollEvent(event))
         {
             switch (event.type)
@@ -167,9 +167,11 @@ int main()
                 p1.create(window);
                 break;
             case sf::Event::MouseButtonPressed:
-                if (sf::Mouse::Button::Left == event.mouseButton.button)
+                time = clock.getElapsedTime();
+                if ((sf::Mouse::Button::Left == event.mouseButton.button) && (time.asMilliseconds() >= RATE_OF_FIRE))
                 {
                     test = true;
+                    std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
                 }
                 break;
                 //case sf::Event::LostFocus:
@@ -183,6 +185,7 @@ int main()
         {
             p1.bullet_delete();
             b1 = false;
+            clock.restart().asMilliseconds();
         }
 
         if (!goal1->existence())
@@ -241,8 +244,6 @@ int main()
         }
 
         window.display();
-
-        //time = clock.getElapsedTime();
     }
 
     system("PAUSE");
