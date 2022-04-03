@@ -12,6 +12,8 @@
 
 const int SPEED = 200;
 float count = 0;
+bool test = false;
+bool b1 = false;
 
 void score();
 void time();
@@ -136,7 +138,7 @@ int main()
     Platform plat6(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 0.0f));
 
 
-    sf::Texture tgun00;
+    sf::Image tgun00;
     if (!tgun00.loadFromFile("Gun/gun00.png"))
     {
         std::cout << "Errorg00" << std::endl;
@@ -144,9 +146,7 @@ int main()
     }
 
     sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
-    sf::Vector2i positionm = sf::Mouse::getPosition();
-    window.setMouseCursorVisible(false);
-    Player p1(&tgun00, 0, 50, 40, window);
+    Player p1(&tgun00, 0, 40, window);
 
     //sf::Clock clock;
 
@@ -163,6 +163,15 @@ int main()
             case sf::Event::Closed:
                 window.close();
                 break;
+            case sf::Event::MouseEntered:
+                p1.create(window);
+                break;
+            case sf::Event::MouseButtonPressed:
+                if (sf::Mouse::Button::Left == event.mouseButton.button)
+                {
+                    test = true;
+                }
+                break;
                 //case sf::Event::LostFocus:
                 //    break;
                 //case sf::Event::GainedFocus:
@@ -170,10 +179,10 @@ int main()
             }
         }
 
-        if (sf::Event::MouseMoved)
+        if (b1)
         {
-            p1.position(event.mouseMove.x, event.mouseMove.y);
-            positionm = sf::Mouse::getPosition();
+            p1.bullet_delete();
+            b1 = false;
         }
 
         if (!goal1->existence())
@@ -224,10 +233,11 @@ int main()
         goal1->create(window);
         plat1.create(window);
 
-        p1.create(window);
-        if (sf::Mouse::Button::Left == event.mouseButton.button)
+        if (test)
         {
-            p1.bullet(window, positionm.x, positionm.y);
+            p1.bullet(window, sf::Mouse::getPosition(window));
+            test = false;
+            b1 = true;
         }
 
         window.display();

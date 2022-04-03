@@ -1,20 +1,15 @@
 #include "Player.h"
 
-void Player::position(float x, float y)
-{
-	body.setPosition(x, y);
-}
-
-Player::Player(sf::Texture* texture, float vibrations, float size, float ammunition, sf::RenderWindow& win)
-	: size(size, size)
+Player::Player(sf::Image* image, float vibrations, float ammunition, sf::RenderWindow& win)
 {
 	this->vibrations = vibrations;
 	this->ammunition = ammunition;
 
-	body.setSize(this->size);
-	body.setTexture(texture);
+	c1.loadFromPixels(image->getPixelsPtr(), image->getSize(), {});
+	win.setMouseCursor(c1);
 
-	position((win.getSize().x / 2), (win.getSize().y / 2));
+	b = new sf::CircleShape(2);
+	b->setFillColor(sf::Color(255, 0, 0));
 }
 
 Player::~Player()
@@ -23,13 +18,18 @@ Player::~Player()
 
 void Player::create(sf::RenderWindow& win)
 {
-	win.draw(body);
+	win.setMouseCursor(c1);
 }
 
-void Player::bullet(sf::RenderWindow& win, float x, float y)
+void Player::bullet_delete()
 {
-	sf::CircleShape bullet(2);
-	bullet.setFillColor(sf::Color(255, 0, 0));
-	bullet.setPosition(x, y);
-	win.draw(bullet);
+	delete b;
+}
+
+void Player::bullet(sf::RenderWindow& win, sf::Vector2i positionm)
+{
+	b = new sf::CircleShape(2);
+	b->setFillColor(sf::Color(255, 0, 0));
+	b->setPosition(positionm.x, positionm.y);
+	win.draw(*b);
 }

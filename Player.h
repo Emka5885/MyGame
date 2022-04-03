@@ -1,19 +1,21 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include <iostream>
 
 class Player
 {
 private:
-	sf::RectangleShape body;
-	const sf::Vector2f size;
+	sf::Cursor c1;
+	sf::Image image;
+	sf::CircleShape* b;
 	float vibrations;
 	float ammunition;
 
 public:
-	Player(sf::Texture* texture, float vibrations, float size, float ammunition, sf::RenderWindow& win);
+	Player(sf::Image* image, float vibrations, float ammunition, sf::RenderWindow& win);
 	~Player();
 
-	void position(float x, float y);
 	void create(sf::RenderWindow& win);
-	void bullet(sf::RenderWindow& win, float x, float y);
+	void bullet_delete();
+	void bullet(sf::RenderWindow& win, sf::Vector2i positionm);
 };
