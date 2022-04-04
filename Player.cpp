@@ -9,7 +9,6 @@ Player::Player(sf::Image* image, float vibrations, float ammunition, sf::RenderW
 	win.setMouseCursor(c1);
 
 	b = new sf::CircleShape(2);
-	b->setFillColor(sf::Color(255, 0, 0));
 }
 
 Player::~Player()
@@ -32,4 +31,9 @@ void Player::bullet(sf::RenderWindow& win, sf::Vector2i positionm)
 	b->setFillColor(sf::Color(255, 0, 0));
 	b->setPosition(positionm.x, positionm.y);
 	win.draw(*b);
+}
+
+sf::CircleShape Player::getBullet()
+{
+	return *this->b;
 }

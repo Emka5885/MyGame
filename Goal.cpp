@@ -953,3 +953,8 @@ bool Goal::existence()
 	else
 		return true;
 }
+
+sf::CircleShape Goal::getBody()
+{
+	return this->body;
+}

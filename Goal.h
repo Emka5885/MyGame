@@ -24,5 +24,6 @@ public:
 	void move();
 	void create(sf::RenderWindow& window);
 	bool existence();
+	sf::CircleShape getBody();
 };
 

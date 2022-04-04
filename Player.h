@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include <iostream>
+#include "Collision.h"
 
 class Player
 {
@@ -18,4 +19,5 @@ public:
 	void create(sf::RenderWindow& win);
 	void bullet_delete();
 	void bullet(sf::RenderWindow& win, sf::Vector2i positionm);
+	sf::CircleShape getBullet();
 };

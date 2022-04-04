@@ -6,6 +6,7 @@
 #include <vector>
 #include <SFML\Graphics.hpp>
 #include "MyFunctions.h"
+#include "Collision.h"
 #include "Goal.h"
 #include "Platform.h"
 #include "Player.h"
@@ -117,6 +118,10 @@ int main()
     goal1->setTexture(goalTextures);
     goal2->setTexture(goalTextures);
     goal3->setTexture(goalTextures);
+
+    Collision* collision;
+    sf::CircleShape tym(1);
+    collision = new Collision(tym);
 
     sf::Texture tplat123;
     if (!tplat123.loadFromFile("white.png"))
@@ -238,7 +243,20 @@ int main()
 
         if (test)
         {
+            delete collision;
             p1.bullet(window, sf::Mouse::getPosition(window));
+            sf::CircleShape circle1 = p1.getBullet();
+            collision = new Collision(circle1);
+            sf::CircleShape g1 = goal1->getBody();
+            sf::CircleShape g2 = goal2->getBody();
+            sf::CircleShape g3 = goal3->getBody();
+            if (collision->checkCollision(g1) || collision->checkCollision(g2) || collision->checkCollision(g3))
+            {
+                std::cout << "1 punkt!" << std::endl;
+            }
+            else
+                std::cout << "Brak kolizji" << std::endl;
+
             test = false;
             b1 = true;
         }
