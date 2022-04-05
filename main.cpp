@@ -120,8 +120,6 @@ int main()
     goal3->setTexture(goalTextures);
 
     Collision* collision;
-    sf::CircleShape tym(1);
-    collision = new Collision(tym);
 
     sf::Texture tplat123;
     if (!tplat123.loadFromFile("white.png"))
@@ -243,14 +241,13 @@ int main()
 
         if (test)
         {
-            delete collision;
             p1.bullet(window, sf::Mouse::getPosition(window));
             sf::CircleShape circle1 = p1.getBullet();
-            collision = new Collision(circle1);
-            sf::CircleShape g1 = goal1->getBody();
-            sf::CircleShape g2 = goal2->getBody();
-            sf::CircleShape g3 = goal3->getBody();
-            if (collision->checkCollision(g1) || collision->checkCollision(g2) || collision->checkCollision(g3))
+            Collision collision(circle1);
+            sf::CircleShape g1 = goal1->getBody();   //row1
+            sf::CircleShape g2 = goal2->getBody();   //row2
+            sf::CircleShape g3 = goal3->getBody();   //row3
+            if (collision.checkCollision(g1, 1) || collision.checkCollision(g2, 2) || collision.checkCollision(g3, 3))
             {
                 std::cout << "1 punkt!" << std::endl;
             }

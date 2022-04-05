@@ -12,5 +12,5 @@ public:
 	Collision(sf::CircleShape& cir1);
 	~Collision();
 
-	bool checkCollision(sf::CircleShape& cir2);
+	bool checkCollision(sf::CircleShape& cir2, int row);
 };
