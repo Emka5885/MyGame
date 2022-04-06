@@ -1,8 +1,8 @@
 #pragma once
 
-void score()
+void score(int& s)
 {
-
+	s++;
 };
 
 void time()

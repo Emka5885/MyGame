@@ -12,12 +12,12 @@
 #include "Player.h"
 
 const int SPEED = 200;
-const int RATE_OF_FIRE = 1400;
+const int RATE_OF_FIRE = 1000;
 float count = 0;
 bool test = false;
 bool b1 = false;
 
-void score();
+void score(int& s);
 void time();
 
 int main()
@@ -171,10 +171,12 @@ int main()
                 break;
             case sf::Event::MouseButtonPressed:
                 time = clock.getElapsedTime();
-                if ((sf::Mouse::Button::Left == event.mouseButton.button) && (time.asMilliseconds() >= RATE_OF_FIRE))
+                if ((sf::Mouse::Button::Left == event.mouseButton.button) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
                 {
                     test = true;
                     std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
+                    p1.getAmmunition()--;
+                    std::cout << "amu " << p1.getAmmunition() << std::endl;
                 }
                 break;
                 //case sf::Event::LostFocus:
@@ -247,9 +249,11 @@ int main()
             sf::CircleShape g1 = goal1->getBody();   //row1
             sf::CircleShape g2 = goal2->getBody();   //row2
             sf::CircleShape g3 = goal3->getBody();   //row3
+
             if (collision.checkCollision(g1, 1) || collision.checkCollision(g2, 2) || collision.checkCollision(g3, 3))
             {
-                std::cout << "1 punkt!" << std::endl;
+                score(p1.getScore());
+                std::cout << "punkty: " << p1.getScore() << std::endl;
             }
             else
                 std::cout << "Brak kolizji" << std::endl;

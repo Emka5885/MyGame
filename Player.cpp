@@ -4,6 +4,7 @@ Player::Player(sf::Image* image, float vibrations, float ammunition, sf::RenderW
 {
 	this->vibrations = vibrations;
 	this->ammunition = ammunition;
+	this->score1 = 0;
 
 	c1.loadFromPixels(image->getPixelsPtr(), image->getSize(), {});
 	win.setMouseCursor(c1);
@@ -36,4 +37,14 @@ void Player::bullet(sf::RenderWindow& win, sf::Vector2i positionm)
 sf::CircleShape Player::getBullet()
 {
 	return *this->b;
+}
+
+int& Player::getScore()
+{
+	return this->score1;
+}
+
+int& Player::getAmmunition()
+{
+	return this->ammunition;
 }

@@ -10,7 +10,8 @@ private:
 	sf::Image image;
 	sf::CircleShape* b;
 	float vibrations;
-	float ammunition;
+	int ammunition;
+	int score1;
 
 public:
 	Player(sf::Image* image, float vibrations, float ammunition, sf::RenderWindow& win);
@@ -20,4 +21,6 @@ public:
 	void bullet_delete();
 	void bullet(sf::RenderWindow& win, sf::Vector2i positionm);
 	sf::CircleShape getBullet();
+	int& getScore();
+	int& getAmmunition();
 };
