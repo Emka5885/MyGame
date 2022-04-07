@@ -16,8 +16,9 @@ const int RATE_OF_FIRE = 1000;
 float count = 0;
 bool test = false;
 bool b1 = false;
+bool hit = false;
 
-void score(int& s);
+void score(int& s, int row);
 void time();
 
 int main()
@@ -107,6 +108,14 @@ int main()
     goalTextures.push_back(goal04r);
     goalTextures.push_back(goal05r);
 
+    sf::Texture goalHit;
+    if (!goalHit.loadFromFile("Goal/BunnyHit.png"))
+    {
+        std::cout << "ErrorGBH" << std::endl;
+        system("PAUSE");
+    }
+    goalTextures.push_back(goalHit);
+
 
     Goal* goal1, * goal2, * goal3;
 
@@ -115,32 +124,57 @@ int main()
     goal1 = new Goal(1, 0, rand() % 1000);
     goal2 = new Goal(2, 0, rand() % 1000);
     goal3 = new Goal(3, 0, rand() % 1000);
-    goal1->setTexture(goalTextures);
-    goal2->setTexture(goalTextures);
-    goal3->setTexture(goalTextures);
+    goal1->setTexture(goalTextures, hit);
+    goal2->setTexture(goalTextures, hit);
+    goal3->setTexture(goalTextures, hit);
 
     Collision* collision;
 
     sf::Texture tplat123;
-    if (!tplat123.loadFromFile("white.png"))
+    if (!tplat123.loadFromFile("black.png"))
     {
         std::cout << "Errorp123" << std::endl;
         system("PAUSE");
     }
     sf::Texture tplat456;
-    if (!tplat456.loadFromFile("black.png"))
+    if (!tplat456.loadFromFile("white.png"))
     {
         std::cout << "Errorp456" << std::endl;
         system("PAUSE");
     }
 
-    Platform plat1(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 744.0f));
-    Platform plat2(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 494.0f));
-    Platform plat3(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 246.0f));
-    Platform plat4(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 500.0f));
-    Platform plat5(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 250.0f));
-    Platform plat6(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 0.0f));
+    sf::Texture tplat78910;
+    if (!tplat78910.loadFromFile("black.png"))
+    {
+        std::cout << "Errorp78910" << std::endl;
+        system("PAUSE");
+    }
 
+    //Platforms
+    std::vector<Platform> platformObject;
+
+    Platform plat0(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 744.0f));
+    Platform plat1(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 494.0f));
+    Platform plat2(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 246.0f));
+    platformObject.push_back(plat0);
+    platformObject.push_back(plat1);
+    platformObject.push_back(plat2);
+
+    Platform plat3(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 500.0f));
+    Platform plat4(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 250.0f));
+    Platform plat5(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 0.0f));
+    platformObject.push_back(plat3);
+    platformObject.push_back(plat4);
+    platformObject.push_back(plat5);
+
+    Platform plat6(&tplat78910, sf::Vector2f(1200.0f, 80.0f), sf::Vector2f(0.0f, 0.0f));
+    Platform plat7(&tplat78910, sf::Vector2f(1200.0f, 50.0f), sf::Vector2f(0.0f, 750.0f));
+    Platform plat8(&tplat78910, sf::Vector2f(50.0f, 1200.0f), sf::Vector2f(0.0f, 0.0f));
+    Platform plat9(&tplat78910, sf::Vector2f(50.0f, 1200.0f), sf::Vector2f(1150.0f, 0.0f));
+    platformObject.push_back(plat6);
+    platformObject.push_back(plat7);
+    platformObject.push_back(plat8);
+    platformObject.push_back(plat9);
 
     sf::Image tgun00;
     if (!tgun00.loadFromFile("Gun/gun00.png"))
@@ -149,8 +183,30 @@ int main()
         system("PAUSE");
     }
 
+    sf::Font font;
+    if (!font.loadFromFile("Font/MilkyNice.ttf"))
+    {
+        std::cout << "Errorf00" << std::endl;
+        system("PAUSE");
+    }
+
+    sf::Text textScore;
+    textScore.setFont(font);
+    textScore.setString("Score: 0");
+    textScore.setCharacterSize(40);
+    textScore.setFillColor(sf::Color::White);
+    textScore.setPosition(51, 20);
+
+    sf::Text textAmmunition;
+    textAmmunition.setFont(font);
+    textAmmunition.setCharacterSize(40);
+    textAmmunition.setFillColor(sf::Color::White);
+    textAmmunition.setPosition(351, 20);
+
     sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
     Player p1(&tgun00, 0, 40, window);
+    std::string p1samu = std::to_string(p1.getAmmunition());
+    textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
 
     sf::Clock clock;
     clock.restart().asMilliseconds();
@@ -177,6 +233,7 @@ int main()
                     std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
                     p1.getAmmunition()--;
                     std::cout << "amu " << p1.getAmmunition() << std::endl;
+                    textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
                 }
                 break;
                 //case sf::Event::LostFocus:
@@ -197,30 +254,30 @@ int main()
         {
             delete goal1;
             goal1 = new Goal(1, 0, rand() % 1000);
-            goal1->setTexture(goalTextures);
+            goal1->setTexture(goalTextures, hit);
         }
         if (!goal2->existence())
         {
             delete goal2;
             goal2 = new Goal(2, 0, rand() % 1000);
-            goal2->setTexture(goalTextures);
+            goal2->setTexture(goalTextures, hit);
         }
         if (!goal3->existence())
         {
             delete goal3;
             goal3 = new Goal(3, 0, rand() % 1000);
-            goal3->setTexture(goalTextures);
+            goal3->setTexture(goalTextures, hit);
         }
 
         if (count == SPEED)
         {
-            goal1->setTexture(goalTextures);
-            goal2->setTexture(goalTextures);
-            goal3->setTexture(goalTextures);
+            goal1->setTexture(goalTextures, hit);
+            goal2->setTexture(goalTextures, hit);
+            goal3->setTexture(goalTextures, hit);
             count = 0;
-            goal1->move();
-            goal2->move();
-            goal3->move();
+            goal1->move(hit);
+            goal2->move(hit);
+            goal3->move(hit);
         }
         else
         {
@@ -229,17 +286,22 @@ int main()
 
         window.clear();
 
-        plat6.create(window);
+        platformObject[5].create(window);
         goal3->create(window);
-        plat3.create(window);
+        platformObject[2].create(window);
 
-        plat5.create(window);
+        platformObject[4].create(window);
         goal2->create(window);
-        plat2.create(window);
+        platformObject[1].create(window);
 
-        plat4.create(window);
+        platformObject[3].create(window);
         goal1->create(window);
-        plat1.create(window);
+        platformObject[0].create(window);
+
+        platformObject[6].create(window);
+        platformObject[7].create(window);
+        platformObject[8].create(window);
+        platformObject[9].create(window);
 
         if (test)
         {
@@ -250,17 +312,31 @@ int main()
             sf::CircleShape g2 = goal2->getBody();   //row2
             sf::CircleShape g3 = goal3->getBody();   //row3
 
-            if (collision.checkCollision(g1, 1) || collision.checkCollision(g2, 2) || collision.checkCollision(g3, 3))
+            if (collision.checkCollision(g1, 1))
             {
-                score(p1.getScore());
-                std::cout << "punkty: " << p1.getScore() << std::endl;
+                score(p1.getScore(), 1);
+                textScore.setString("Score: " + std::to_string(p1.getScore()));
+                hit = true;
             }
-            else
-                std::cout << "Brak kolizji" << std::endl;
+            else if (collision.checkCollision(g2, 2))
+            {
+                score(p1.getScore(), 2);
+                textScore.setString("Score: " + std::to_string(p1.getScore()));
+                hit = true;
+            }
+            else if (collision.checkCollision(g3, 3))
+            {
+                score(p1.getScore(), 3);
+                textScore.setString("Score: " + std::to_string(p1.getScore()));
+                hit = true;
+            }
 
             test = false;
             b1 = true;
         }
+
+        window.draw(textScore);
+        window.draw(textAmmunition);
 
         window.display();
     }

@@ -19,9 +19,9 @@ public:
 	Goal(int row, int number, int r);
 	~Goal();
 
-	void setTexture(std::vector<sf::Texture>& goalT);
+	void setTexture(std::vector<sf::Texture>& goalT, bool hit);
 	void position();
-	void move();
+	void move(bool& hit);
 	void create(sf::RenderWindow& window);
 	bool existence();
 	sf::CircleShape getBody();
