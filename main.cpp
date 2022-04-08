@@ -1,4 +1,4 @@
-﻿//My first game :)
+//My first game :)
 
 #include <iostream>
 #include <ctime>
@@ -17,6 +17,7 @@ float count = 0;
 bool test = false;
 bool b1 = false;
 bool hit = false;
+bool end = true;
 
 void score(int& s, int row);
 void time();
@@ -29,7 +30,7 @@ int main()
     std::vector<sf::Texture> goalTextures;
 
     sf::Texture goal00;
-    if (!goal00.loadFromFile("Goal/Bunny00.png"))
+    if (!goal00.loadFromFile("Resources/Goal/Bunny00.png"))
     {
         std::cout << "ErrorGB00" << std::endl;
         system("PAUSE");
@@ -37,31 +38,31 @@ int main()
     goalTextures.push_back(goal00);
 
     sf::Texture goal01;
-    if (!goal01.loadFromFile("Goal/Bunny01.png"))
+    if (!goal01.loadFromFile("Resources/Goal/Bunny01.png"))
     {
         std::cout << "ErrorGB01" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal02;
-    if (!goal02.loadFromFile("Goal/Bunny02.png"))
+    if (!goal02.loadFromFile("Resources/Goal/Bunny02.png"))
     {
         std::cout << "ErrorGB02" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal03;
-    if (!goal03.loadFromFile("Goal/Bunny03.png"))
+    if (!goal03.loadFromFile("Resources/Goal/Bunny03.png"))
     {
         std::cout << "ErrorGB03" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal04;
-    if (!goal04.loadFromFile("Goal/Bunny04.png"))
+    if (!goal04.loadFromFile("Resources/Goal/Bunny04.png"))
     {
         std::cout << "ErrorGB04" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal05;
-    if (!goal05.loadFromFile("Goal/Bunny05.png"))
+    if (!goal05.loadFromFile("Resources/Goal/Bunny05.png"))
     {
         std::cout << "ErrorGB05" << std::endl;
         system("PAUSE");
@@ -73,31 +74,31 @@ int main()
     goalTextures.push_back(goal05);
 
     sf::Texture goal01r;
-    if (!goal01r.loadFromFile("Goal/Bunny01r.png"))
+    if (!goal01r.loadFromFile("Resources/Goal/Bunny01r.png"))
     {
         std::cout << "ErrorGB01r" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal02r;
-    if (!goal02r.loadFromFile("Goal/Bunny02r.png"))
+    if (!goal02r.loadFromFile("Resources/Goal/Bunny02r.png"))
     {
         std::cout << "ErrorGB02r" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal03r;
-    if (!goal03r.loadFromFile("Goal/Bunny03r.png"))
+    if (!goal03r.loadFromFile("Resources/Goal/Bunny03r.png"))
     {
         std::cout << "ErrorGB03r" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal04r;
-    if (!goal04r.loadFromFile("Goal/Bunny04r.png"))
+    if (!goal04r.loadFromFile("Resources/Goal/Bunny04r.png"))
     {
         std::cout << "ErrorGB04r" << std::endl;
         system("PAUSE");
     }
     sf::Texture goal05r;
-    if (!goal05r.loadFromFile("Goal/Bunny05r.png"))
+    if (!goal05r.loadFromFile("Resources/Goal/Bunny05r.png"))
     {
         std::cout << "ErrorGB05r" << std::endl;
         system("PAUSE");
@@ -109,7 +110,7 @@ int main()
     goalTextures.push_back(goal05r);
 
     sf::Texture goalHit;
-    if (!goalHit.loadFromFile("Goal/BunnyHit.png"))
+    if (!goalHit.loadFromFile("Resources/Goal/BunnyHit.png"))
     {
         std::cout << "ErrorGBH" << std::endl;
         system("PAUSE");
@@ -131,20 +132,20 @@ int main()
     Collision* collision;
 
     sf::Texture tplat123;
-    if (!tplat123.loadFromFile("black.png"))
+    if (!tplat123.loadFromFile("Resources/black.png"))
     {
         std::cout << "Errorp123" << std::endl;
         system("PAUSE");
     }
     sf::Texture tplat456;
-    if (!tplat456.loadFromFile("white.png"))
+    if (!tplat456.loadFromFile("Resources/white.png"))
     {
         std::cout << "Errorp456" << std::endl;
         system("PAUSE");
     }
 
     sf::Texture tplat78910;
-    if (!tplat78910.loadFromFile("black.png"))
+    if (!tplat78910.loadFromFile("Resources/black.png"))
     {
         std::cout << "Errorp78910" << std::endl;
         system("PAUSE");
@@ -176,15 +177,18 @@ int main()
     platformObject.push_back(plat8);
     platformObject.push_back(plat9);
 
+    Platform plat10(&tplat456, sf::Vector2f(1100.0f, 670.0f), sf::Vector2f(50.0f, 80.0f));
+    platformObject.push_back(plat10);
+
     sf::Image tgun00;
-    if (!tgun00.loadFromFile("Gun/gun00.png"))
+    if (!tgun00.loadFromFile("Resources/Gun/gun00.png"))
     {
         std::cout << "Errorg00" << std::endl;
         system("PAUSE");
     }
 
     sf::Font font;
-    if (!font.loadFromFile("Font/MilkyNice.ttf"))
+    if (!font.loadFromFile("Resources/Font/MilkyNice.ttf"))
     {
         std::cout << "Errorf00" << std::endl;
         system("PAUSE");
@@ -203,8 +207,12 @@ int main()
     textAmmunition.setFillColor(sf::Color::White);
     textAmmunition.setPosition(351, 20);
 
+    sf::Text textEnd;
+    textEnd.setFont(font);
+    textEnd.setCharacterSize(100);
+
     sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
-    Player p1(&tgun00, 0, 40, window);
+    Player p1(&tgun00, 0, 20, window);
     std::string p1samu = std::to_string(p1.getAmmunition());
     textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
 
@@ -243,102 +251,146 @@ int main()
             }
         }
 
-        if (b1)
+        if (p1.getAmmunition() > 0)
         {
-            p1.bullet_delete();
-            b1 = false;
-            clock.restart().asMilliseconds();
-        }
+            if (b1)
+            {
+                p1.bullet_delete();
+                b1 = false;
+                clock.restart().asMilliseconds();
+            }
 
-        if (!goal1->existence())
-        {
-            delete goal1;
-            goal1 = new Goal(1, 0, rand() % 1000);
-            goal1->setTexture(goalTextures, hit);
-        }
-        if (!goal2->existence())
-        {
-            delete goal2;
-            goal2 = new Goal(2, 0, rand() % 1000);
-            goal2->setTexture(goalTextures, hit);
-        }
-        if (!goal3->existence())
-        {
-            delete goal3;
-            goal3 = new Goal(3, 0, rand() % 1000);
-            goal3->setTexture(goalTextures, hit);
-        }
+            if (!goal1->existence())
+            {
+                delete goal1;
+                goal1 = new Goal(1, 0, rand() % 1000);
+                goal1->setTexture(goalTextures, hit);
+            }
+            if (!goal2->existence())
+            {
+                delete goal2;
+                goal2 = new Goal(2, 0, rand() % 1000);
+                goal2->setTexture(goalTextures, hit);
+            }
+            if (!goal3->existence())
+            {
+                delete goal3;
+                goal3 = new Goal(3, 0, rand() % 1000);
+                goal3->setTexture(goalTextures, hit);
+            }
 
-        if (count == SPEED)
-        {
-            goal1->setTexture(goalTextures, hit);
-            goal2->setTexture(goalTextures, hit);
-            goal3->setTexture(goalTextures, hit);
-            count = 0;
-            goal1->move(hit);
-            goal2->move(hit);
-            goal3->move(hit);
+            if (count == SPEED)
+            {
+                goal1->setTexture(goalTextures, hit);
+                goal2->setTexture(goalTextures, hit);
+                goal3->setTexture(goalTextures, hit);
+                count = 0;
+                goal1->move(hit);
+                goal2->move(hit);
+                goal3->move(hit);
+            }
+            else
+            {
+                count++;
+            }
+
+            window.clear();
+
+            platformObject[5].create(window);
+            goal3->create(window);
+            platformObject[2].create(window);
+
+            platformObject[4].create(window);
+            goal2->create(window);
+            platformObject[1].create(window);
+
+            platformObject[3].create(window);
+            goal1->create(window);
+            platformObject[0].create(window);
+
+            platformObject[6].create(window);
+            platformObject[7].create(window);
+            platformObject[8].create(window);
+            platformObject[9].create(window);
+
+            if (test)
+            {
+                p1.bullet(window, sf::Mouse::getPosition(window));
+                sf::CircleShape circle1 = p1.getBullet();
+                Collision collision(circle1);
+                sf::CircleShape g1 = goal1->getBody();   //row1
+                sf::CircleShape g2 = goal2->getBody();   //row2
+                sf::CircleShape g3 = goal3->getBody();   //row3
+
+                if (collision.checkCollision(g1, 1))
+                {
+                    score(p1.getScore(), 1);
+                    textScore.setString("Score: " + std::to_string(p1.getScore()));
+                    hit = true;
+                }
+                else if (collision.checkCollision(g2, 2))
+                {
+                    score(p1.getScore(), 2);
+                    textScore.setString("Score: " + std::to_string(p1.getScore()));
+                    hit = true;
+                }
+                else if (collision.checkCollision(g3, 3))
+                {
+                    score(p1.getScore(), 3);
+                    textScore.setString("Score: " + std::to_string(p1.getScore()));
+                    hit = true;
+                }
+
+                test = false;
+                b1 = true;
+            }
+
+            window.draw(textScore);
+            window.draw(textAmmunition);
+
+            window.display();
         }
         else
         {
-            count++;
+            window.clear();
+
+            if (count == 5000)
+            {
+                if (end)
+                {
+                    textEnd.setString("End");
+                    textEnd.setFillColor(sf::Color::Red);
+                    textEnd.setPosition(350, 350);
+                    end = false;
+                }
+                else
+                {
+                    textEnd.setString("Game");
+                    textEnd.setFillColor(sf::Color::Black);
+                    textEnd.setPosition(600, 350);
+                    end = true;
+                }
+                count = 0;
+            }
+            else
+            {
+                count++;
+            }
+
+            platformObject[6].create(window);
+            platformObject[7].create(window);
+            platformObject[8].create(window);
+            platformObject[9].create(window);
+
+            platformObject[10].create(window);
+
+            window.draw(textEnd);
+
+            window.draw(textScore);
+            window.draw(textAmmunition);
+
+            window.display();
         }
-
-        window.clear();
-
-        platformObject[5].create(window);
-        goal3->create(window);
-        platformObject[2].create(window);
-
-        platformObject[4].create(window);
-        goal2->create(window);
-        platformObject[1].create(window);
-
-        platformObject[3].create(window);
-        goal1->create(window);
-        platformObject[0].create(window);
-
-        platformObject[6].create(window);
-        platformObject[7].create(window);
-        platformObject[8].create(window);
-        platformObject[9].create(window);
-
-        if (test)
-        {
-            p1.bullet(window, sf::Mouse::getPosition(window));
-            sf::CircleShape circle1 = p1.getBullet();
-            Collision collision(circle1);
-            sf::CircleShape g1 = goal1->getBody();   //row1
-            sf::CircleShape g2 = goal2->getBody();   //row2
-            sf::CircleShape g3 = goal3->getBody();   //row3
-
-            if (collision.checkCollision(g1, 1))
-            {
-                score(p1.getScore(), 1);
-                textScore.setString("Score: " + std::to_string(p1.getScore()));
-                hit = true;
-            }
-            else if (collision.checkCollision(g2, 2))
-            {
-                score(p1.getScore(), 2);
-                textScore.setString("Score: " + std::to_string(p1.getScore()));
-                hit = true;
-            }
-            else if (collision.checkCollision(g3, 3))
-            {
-                score(p1.getScore(), 3);
-                textScore.setString("Score: " + std::to_string(p1.getScore()));
-                hit = true;
-            }
-
-            test = false;
-            b1 = true;
-        }
-
-        window.draw(textScore);
-        window.draw(textAmmunition);
-
-        window.display();
     }
 
     system("PAUSE");
