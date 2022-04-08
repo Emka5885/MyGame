@@ -14,3 +14,4 @@ public:
 
 	bool checkCollision(sf::CircleShape& cir2, int row);
 };
+

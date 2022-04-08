@@ -43,7 +43,6 @@ bool Collision::checkCollision(sf::CircleShape& cir2, int row)
 	float dx = (cir1.getPosition().x - cir2.getPosition().x);
 	float dy = (cir1.getPosition().y - cir2.getPosition().y);
 	float dz = std::sqrt(pow(dx, 2) + pow(dy, 2));
-	std::cout << dz << std::endl;
 
 	if (dz <= cir1.getRadius() + cir2.getRadius())
 	{

@@ -67,6 +67,7 @@ Goal::Goal(int row, int number, int r)
 	}
 	body.setOutlineColor(sf::Color(0, 0, 0));
 	body.setOutlineThickness(1);
+	body.setOrigin(body.getRadius(), body.getRadius());
 
 	this->hight = rand() % 3 + 1;
 

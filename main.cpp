@@ -251,6 +251,39 @@ int main()
             }
         }
 
+        if (test)
+        {
+            std::cout << sf::Mouse::getPosition(window).x << ", mouse " << sf::Mouse::getPosition(window).y << std::endl;
+            p1.bullet(window, sf::Mouse::getPosition(window));
+            sf::CircleShape circle1 = p1.getBullet();
+            Collision collision(circle1);
+            sf::CircleShape g1 = goal1->getBody();   //row1
+            sf::CircleShape g2 = goal2->getBody();   //row2
+            sf::CircleShape g3 = goal3->getBody();   //row3
+
+            if (collision.checkCollision(g1, 1))
+            {
+                score(p1.getScore(), 1);
+                textScore.setString("Score: " + std::to_string(p1.getScore()));
+                hit = true;
+            }
+            else if (collision.checkCollision(g2, 2))
+            {
+                score(p1.getScore(), 2);
+                textScore.setString("Score: " + std::to_string(p1.getScore()));
+                hit = true;
+            }
+            else if (collision.checkCollision(g3, 3))
+            {
+                score(p1.getScore(), 3);
+                textScore.setString("Score: " + std::to_string(p1.getScore()));
+                hit = true;
+            }
+
+            test = false;
+            b1 = true;
+        }
+
         if (p1.getAmmunition() > 0)
         {
             if (b1)
@@ -312,38 +345,6 @@ int main()
             platformObject[7].create(window);
             platformObject[8].create(window);
             platformObject[9].create(window);
-
-            if (test)
-            {
-                p1.bullet(window, sf::Mouse::getPosition(window));
-                sf::CircleShape circle1 = p1.getBullet();
-                Collision collision(circle1);
-                sf::CircleShape g1 = goal1->getBody();   //row1
-                sf::CircleShape g2 = goal2->getBody();   //row2
-                sf::CircleShape g3 = goal3->getBody();   //row3
-
-                if (collision.checkCollision(g1, 1))
-                {
-                    score(p1.getScore(), 1);
-                    textScore.setString("Score: " + std::to_string(p1.getScore()));
-                    hit = true;
-                }
-                else if (collision.checkCollision(g2, 2))
-                {
-                    score(p1.getScore(), 2);
-                    textScore.setString("Score: " + std::to_string(p1.getScore()));
-                    hit = true;
-                }
-                else if (collision.checkCollision(g3, 3))
-                {
-                    score(p1.getScore(), 3);
-                    textScore.setString("Score: " + std::to_string(p1.getScore()));
-                    hit = true;
-                }
-
-                test = false;
-                b1 = true;
-            }
 
             window.draw(textScore);
             window.draw(textAmmunition);

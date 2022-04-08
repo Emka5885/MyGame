@@ -5,6 +5,7 @@ Player::Player(sf::Image* image, float vibrations, float ammunition, sf::RenderW
 	this->vibrations = vibrations;
 	this->ammunition = ammunition;
 	this->score1 = 0;
+	this->image = image;
 
 	c1.loadFromPixels(image->getPixelsPtr(), image->getSize(), {});
 	win.setMouseCursor(c1);
@@ -30,7 +31,8 @@ void Player::bullet(sf::RenderWindow& win, sf::Vector2i positionm)
 {
 	b = new sf::CircleShape(2);
 	b->setFillColor(sf::Color(255, 0, 0));
-	b->setPosition(positionm.x, positionm.y);
+	b->setOrigin(b->getRadius(), b->getRadius());
+	b->setPosition(positionm.x + image->getSize().x / 2 - b->getRadius(), positionm.y + image->getSize().y / 2 - b->getRadius());
 	win.draw(*b);
 }
 

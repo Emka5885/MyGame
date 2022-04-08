@@ -7,7 +7,7 @@ class Player
 {
 private:
 	sf::Cursor c1;
-	sf::Image image;
+	sf::Image* image;
 	sf::CircleShape* b;
 	float vibrations;
 	int ammunition;

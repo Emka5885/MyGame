@@ -26,4 +26,3 @@ public:
 	bool existence();
 	sf::CircleShape getBody();
 };
-
