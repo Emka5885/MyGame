@@ -14,10 +14,12 @@
 const int SPEED = 200;
 const int RATE_OF_FIRE = 1000;
 float count = 0;
+int tv;
 bool test = false;
 bool b1 = false;
 bool hit = false;
 bool end = true;
+bool focus = true;
 
 void score(int& s, int row);
 void time();
@@ -212,7 +214,8 @@ int main()
     textEnd.setCharacterSize(100);
 
     sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
-    Player p1(&tgun00, 0, 20, window);
+    Player p1(&tgun00, 4, 20, window, SPEED * 2);
+    tv = p1.getTimeV();
     std::string p1samu = std::to_string(p1.getAmmunition());
     textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
 
@@ -232,6 +235,10 @@ int main()
                 break;
             case sf::Event::MouseEntered:
                 p1.create(window);
+                focus = true;
+                break;
+            case sf::Event::MouseLeft:
+                focus = false;
                 break;
             case sf::Event::MouseButtonPressed:
                 time = clock.getElapsedTime();
@@ -249,6 +256,30 @@ int main()
                 //case sf::Event::GainedFocus:
                 //    break;
             }
+        }
+
+        if (tv == 0 && focus)
+        {
+            int p1_v = p1.getVibrations();
+            int yes_or_no = rand() % 2;
+            if (yes_or_no == 0)
+            {
+                int rmx = (rand() % p1_v);
+                int rmy = (rand() % p1_v);
+                sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+            }
+            else
+            {
+                int rmx = (rand() % p1_v) * -1;
+                int rmy = (rand() % p1_v) * -1;
+                sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+            }
+
+            tv = p1.getTimeV();
+        }
+        else if (tv != 0 && focus)
+        {
+            tv--;
         }
 
         if (test)

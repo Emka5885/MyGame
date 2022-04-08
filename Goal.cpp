@@ -9,13 +9,13 @@ void Goal::position()
 		switch (this->row)
 		{
 		case 1:
-			body.setPosition((x), 740);
+			body.setPosition((x), 800);
 			break;
 		case 2:
-			body.setPosition((x), 475);
+			body.setPosition((x), 525);
 			break;
 		case 3:
-			body.setPosition((x), 235);
+			body.setPosition((x), 285);
 			break;
 		}
 	}
@@ -24,13 +24,13 @@ void Goal::position()
 		switch (this->row)
 		{
 		case 1:
-			body.setPosition((x), 740);
+			body.setPosition((x), 800);
 			break;
 		case 2:
-			body.setPosition((x), 475);
+			body.setPosition((x), 525);
 			break;
 		case 3:
-			body.setPosition((x), 235);
+			body.setPosition((x), 285);
 			break;
 		}
 	}

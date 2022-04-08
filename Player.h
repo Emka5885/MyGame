@@ -9,12 +9,13 @@ private:
 	sf::Cursor c1;
 	sf::Image* image;
 	sf::CircleShape* b;
-	float vibrations;
+	int vibrations;
 	int ammunition;
 	int score1;
+	int tv;
 
 public:
-	Player(sf::Image* image, float vibrations, float ammunition, sf::RenderWindow& win);
+	Player(sf::Image* image, int vibrations, float ammunition, sf::RenderWindow& win, int tv);
 	~Player();
 
 	void create(sf::RenderWindow& win);
@@ -23,4 +24,6 @@ public:
 	sf::CircleShape getBullet();
 	int& getScore();
 	int& getAmmunition();
+	int& getVibrations();
+	int getTimeV();
 };
