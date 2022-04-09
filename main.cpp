@@ -22,7 +22,9 @@ bool end = true;
 bool focus = true;
 bool end_of_time = false;
 bool end_of_time1 = true;
+bool cursorEndGame = true;
 sf::Time ts = sf::seconds(20.0f);
+sf::Cursor c;
 
 void score(int& s, int row);
 
@@ -215,6 +217,7 @@ int main()
     textEnd.setFont(font);
     textEnd.setCharacterSize(100);
 
+    c.loadFromSystem(sf::Cursor::Hand);
     sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
     Player p1(&tgun00, 4, 20, window, SPEED * 2);
     tv = p1.getTimeV();
@@ -248,6 +251,10 @@ int main()
             case sf::Event::MouseEntered:
                 p1.create(window);
                 focus = true;
+                if (p1.getAmmunition() <= 0 || end_of_time)
+                {
+                    window.setMouseCursor(c);
+                }
                 break;
             case sf::Event::MouseLeft:
                 focus = false;
@@ -291,30 +298,6 @@ int main()
             }
         }
 
-        if (tv == 0 && focus)
-        {
-            int p1_v = p1.getVibrations();
-            int yes_or_no = rand() % 2;
-            if (yes_or_no == 0)
-            {
-                int rmx = (rand() % p1_v);
-                int rmy = (rand() % p1_v);
-                sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
-            }
-            else
-            {
-                int rmx = (rand() % p1_v) * -1;
-                int rmy = (rand() % p1_v) * -1;
-                sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
-            }
-
-            tv = p1.getTimeV();
-        }
-        else if (tv != 0 && focus)
-        {
-            tv--;
-        }
-
         if (test)
         {
             std::cout << sf::Mouse::getPosition(window).x << ", mouse " << sf::Mouse::getPosition(window).y << std::endl;
@@ -350,6 +333,30 @@ int main()
 
         if (p1.getAmmunition() > 0 && !end_of_time)
         {
+            if (tv == 0 && focus)
+            {
+                int p1_v = p1.getVibrations();
+                int yes_or_no = rand() % 2;
+                if (yes_or_no == 0)
+                {
+                    int rmx = (rand() % p1_v);
+                    int rmy = (rand() % p1_v);
+                    sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+                }
+                else
+                {
+                    int rmx = (rand() % p1_v) * -1;
+                    int rmy = (rand() % p1_v) * -1;
+                    sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+                }
+
+                tv = p1.getTimeV();
+            }
+            else if (tv != 0 && focus)
+            {
+                tv--;
+            }
+
             if (b1)
             {
                 p1.bullet_delete();
@@ -418,6 +425,12 @@ int main()
         }
         else
         {
+            if (cursorEndGame)
+            {
+                window.setMouseCursor(c);
+                cursorEndGame = false;
+            }
+
             window.clear();
 
             if (count == SPEED*20)
