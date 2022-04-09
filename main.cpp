@@ -11,7 +11,7 @@
 #include "Platform.h"
 #include "Player.h"
 
-const int SPEED = 200;
+const int SPEED = 50;
 const int RATE_OF_FIRE = 1000;
 float count = 0;
 int tv;
@@ -20,9 +20,11 @@ bool b1 = false;
 bool hit = false;
 bool end = true;
 bool focus = true;
+bool end_of_time = false;
+bool end_of_time1 = true;
+sf::Time ts = sf::seconds(20.0f);
 
 void score(int& s, int row);
-void time();
 
 int main()
 {
@@ -199,15 +201,15 @@ int main()
     sf::Text textScore;
     textScore.setFont(font);
     textScore.setString("Score: 0");
-    textScore.setCharacterSize(40);
+    textScore.setCharacterSize(30);
     textScore.setFillColor(sf::Color::White);
-    textScore.setPosition(51, 20);
+    textScore.setPosition(51, 25);
 
     sf::Text textAmmunition;
     textAmmunition.setFont(font);
-    textAmmunition.setCharacterSize(40);
+    textAmmunition.setCharacterSize(30);
     textAmmunition.setFillColor(sf::Color::White);
-    textAmmunition.setPosition(351, 20);
+    textAmmunition.setPosition(251, 25);
 
     sf::Text textEnd;
     textEnd.setFont(font);
@@ -222,6 +224,16 @@ int main()
     sf::Clock clock;
     clock.restart().asMilliseconds();
     sf::Time time;
+    sf::Clock clock1;
+    clock1.restart().asMilliseconds();
+    sf::Text textEndOfTime;
+    textEndOfTime.setFont(font);
+    textEndOfTime.setCharacterSize(40);
+    textEndOfTime.setFillColor(sf::Color::White);
+    textEndOfTime.setPosition(951, 20);
+    int seconds = ts.asSeconds();
+    textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
+
 
     while (window.isOpen())
     {
@@ -244,17 +256,38 @@ int main()
                 time = clock.getElapsedTime();
                 if ((sf::Mouse::Button::Left == event.mouseButton.button) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
                 {
-                    test = true;
-                    std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
-                    p1.getAmmunition()--;
-                    std::cout << "amu " << p1.getAmmunition() << std::endl;
-                    textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
+                    if (!end_of_time)
+                    {
+                        test = true;
+                        std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
+                        p1.getAmmunition()--;
+                        std::cout << "amu " << p1.getAmmunition() << std::endl;
+                        textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
+                    }
                 }
                 break;
                 //case sf::Event::LostFocus:
                 //    break;
                 //case sf::Event::GainedFocus:
                 //    break;
+            }
+        }
+
+        sf::Time c1get = clock1.getElapsedTime();
+        int seconds1 = c1get.asSeconds();
+
+        if (seconds - seconds1 == 0)
+        {
+            end_of_time = true;
+            textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
+            end_of_time1 = false;
+            textAmmunition.setString("Ammunition: 0/" + p1samu);
+        }
+        else
+        {
+            if (end_of_time1)
+            {
+                textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
             }
         }
 
@@ -315,7 +348,7 @@ int main()
             b1 = true;
         }
 
-        if (p1.getAmmunition() > 0)
+        if (p1.getAmmunition() > 0 && !end_of_time)
         {
             if (b1)
             {
@@ -379,6 +412,7 @@ int main()
 
             window.draw(textScore);
             window.draw(textAmmunition);
+            window.draw(textEndOfTime);
 
             window.display();
         }
@@ -386,20 +420,20 @@ int main()
         {
             window.clear();
 
-            if (count == 5000)
+            if (count == SPEED*20)
             {
                 if (end)
                 {
                     textEnd.setString("End");
                     textEnd.setFillColor(sf::Color::Red);
-                    textEnd.setPosition(350, 350);
+                    textEnd.setPosition(400, 350);
                     end = false;
                 }
                 else
                 {
                     textEnd.setString("Game");
                     textEnd.setFillColor(sf::Color::Black);
-                    textEnd.setPosition(600, 350);
+                    textEnd.setPosition(650, 350);
                     end = true;
                 }
                 count = 0;
@@ -420,6 +454,7 @@ int main()
 
             window.draw(textScore);
             window.draw(textAmmunition);
+            window.draw(textEndOfTime);
 
             window.display();
         }
