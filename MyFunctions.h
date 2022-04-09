@@ -4,8 +4,3 @@ void score(int& s, int row)
 {
 	s += row;
 };
-
-void time()
-{
-
-};
