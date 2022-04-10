@@ -11,7 +11,7 @@
 #include "Platform.h"
 #include "Player.h"
 
-const int SPEED = 50;
+const int SPEED = 200;
 const int RATE_OF_FIRE = 1000;
 float count = 0;
 int tv;
@@ -23,8 +23,9 @@ bool focus = true;
 bool end_of_time = false;
 bool end_of_time1 = true;
 bool cursorEndGame = true;
-sf::Time ts = sf::seconds(20.0f);
+sf::Time ts = sf::seconds(60.0f);
 sf::Cursor c;
+sf::RectangleShape joystick;
 
 void score(int& s, int row);
 
@@ -186,13 +187,6 @@ int main()
     Platform plat10(&tplat456, sf::Vector2f(1100.0f, 670.0f), sf::Vector2f(50.0f, 80.0f));
     platformObject.push_back(plat10);
 
-    sf::Image tgun00;
-    if (!tgun00.loadFromFile("Resources/Gun/gun00.png"))
-    {
-        std::cout << "Errorg00" << std::endl;
-        system("PAUSE");
-    }
-
     sf::Font font;
     if (!font.loadFromFile("Resources/Font/MilkyNice.ttf"))
     {
@@ -217,9 +211,31 @@ int main()
     textEnd.setFont(font);
     textEnd.setCharacterSize(100);
 
+    sf::Image igun00;
+    if (!igun00.loadFromFile("Resources/Gun/gun00.png"))
+    {
+        std::cout << "Errorig00" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tgun00;
+    if (!tgun00.loadFromFile("Resources/Gun/gun00.png"))
+    {
+        std::cout << "Errortg00" << std::endl;
+        system("PAUSE");
+    }
+
     c.loadFromSystem(sf::Cursor::Hand);
-    sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
-    Player p1(&tgun00, 4, 20, window, SPEED * 2);
+    Player p1(&igun00, &tgun00, 4, 20, window, SPEED * 2, false);
+    if (p1.getMouse())
+    {
+        sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
+    }
+    else
+    {
+        window.setMouseCursorVisible(false);
+        sf::Joystick::Identification id = sf::Joystick::getIdentification(0);
+        joystick = p1.getRec();
+    }
     tv = p1.getTimeV();
     std::string p1samu = std::to_string(p1.getAmmunition());
     textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
@@ -273,10 +289,22 @@ int main()
                     }
                 }
                 break;
+            case sf::Event::JoystickMoved:
+                
+                break;
                 //case sf::Event::LostFocus:
                 //    break;
                 //case sf::Event::GainedFocus:
                 //    break;
+            }
+        }
+
+        if (!p1.getMouse())
+        {
+            if (event.type == sf::Event::JoystickMoved)
+            {
+                sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                joystick.move(m.x * 0.003, m.y * 0.003);
             }
         }
 
@@ -300,8 +328,15 @@ int main()
 
         if (test)
         {
-            std::cout << sf::Mouse::getPosition(window).x << ", mouse " << sf::Mouse::getPosition(window).y << std::endl;
-            p1.bullet(window, sf::Mouse::getPosition(window));
+            if (p1.getMouse())
+            {
+                std::cout << sf::Mouse::getPosition(window).x << ", mouse " << sf::Mouse::getPosition(window).y << std::endl;
+                p1.bullet(window, sf::Mouse::getPosition(window));
+            }
+            else
+            {
+                p1.bullet(window, sf::Vector2i(joystick.getPosition()));
+            }
             sf::CircleShape circle1 = p1.getBullet();
             Collision collision(circle1);
             sf::CircleShape g1 = goal1->getBody();   //row1
@@ -341,13 +376,19 @@ int main()
                 {
                     int rmx = (rand() % p1_v);
                     int rmy = (rand() % p1_v);
-                    sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+                    if (p1.getMouse())
+                        sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+                    else
+                        ;
                 }
                 else
                 {
                     int rmx = (rand() % p1_v) * -1;
                     int rmy = (rand() % p1_v) * -1;
-                    sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+                    if (p1.getMouse())
+                        sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+                    else
+                        ;
                 }
 
                 tv = p1.getTimeV();
@@ -417,6 +458,11 @@ int main()
             platformObject[8].create(window);
             platformObject[9].create(window);
 
+            if (!p1.getMouse())
+            {
+                window.draw(joystick);
+            }
+
             window.draw(textScore);
             window.draw(textAmmunition);
             window.draw(textEndOfTime);
@@ -433,7 +479,7 @@ int main()
 
             window.clear();
 
-            if (count == SPEED*20)
+            if (count == SPEED * 20)
             {
                 if (end)
                 {
@@ -464,6 +510,11 @@ int main()
             platformObject[10].create(window);
 
             window.draw(textEnd);
+
+            if (!p1.getMouse())
+            {
+                window.draw(joystick);
+            }
 
             window.draw(textScore);
             window.draw(textAmmunition);
