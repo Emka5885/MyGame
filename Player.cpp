@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(sf::Image* image, int vibrations, float ammunition, sf::RenderWindow& win, int tv)
+Player::Player(sf::Image* image, sf::Texture* texture, int vibrations, float ammunition, sf::RenderWindow& win, int tv, bool mouse)
 {
 	if (vibrations > 0)
 	{
@@ -10,13 +10,27 @@ Player::Player(sf::Image* image, int vibrations, float ammunition, sf::RenderWin
 	{
 		this->vibrations = 1;
 	}
+	this->mouse = mouse;
 	this->ammunition = ammunition;
 	this->score1 = 0;
 	this->image = image;
+	this->texture = texture;
 	this->tv = tv;
 
-	c1.loadFromPixels(image->getPixelsPtr(), image->getSize(), {});
-	win.setMouseCursor(c1);
+	if (mouse)
+	{
+		c1.loadFromPixels(image->getPixelsPtr(), image->getSize(), {});
+		win.setMouseCursor(c1);
+	}
+	else
+	{
+		rec.setSize(sf::Vector2f(texture->getSize()));
+		rec.setTexture(texture);
+		rec.setOrigin(rec.getSize().x / 2, rec.getSize().y / 2);
+		rec.setPosition(sf::Vector2f(win.getSize().x / 2, win.getSize().y / 2));
+		win.draw(rec);
+	}
+
 
 	b = new sf::CircleShape(2);
 }
@@ -40,7 +54,10 @@ void Player::bullet(sf::RenderWindow& win, sf::Vector2i positionm)
 	b = new sf::CircleShape(2);
 	b->setFillColor(sf::Color(255, 0, 0));
 	b->setOrigin(b->getRadius(), b->getRadius());
-	b->setPosition(positionm.x + image->getSize().x / 2 - b->getRadius(), positionm.y + image->getSize().y / 2 - b->getRadius());
+	if (mouse)
+		b->setPosition(positionm.x+ image->getSize().x/2 - b->getRadius(), positionm.y + image->getSize().y / 2 - b->getRadius());
+	else
+		b->setPosition(positionm.x + texture->getSize().x / 2 - b->getRadius(), positionm.y + texture->getSize().y / 2 - b->getRadius());
 	win.draw(*b);
 }
 
@@ -67,4 +84,14 @@ int& Player::getVibrations()
 int Player::getTimeV()
 {
 	return tv;
+}
+
+bool Player::getMouse()
+{
+	return this->mouse;
+}
+
+sf::RectangleShape& Player::getRec()
+{
+	return this->rec;
 }
