@@ -23,7 +23,7 @@ bool focus = true;
 bool end_of_time = false;
 bool end_of_time1 = true;
 bool cursorEndGame = true;
-sf::Time ts = sf::seconds(60.0f);
+sf::Time ts = sf::seconds(20.0f);
 sf::Cursor c;
 sf::RectangleShape joystick;
 
@@ -217,15 +217,27 @@ int main()
         std::cout << "Errorig00" << std::endl;
         system("PAUSE");
     }
-    sf::Texture tgun00;
-    if (!tgun00.loadFromFile("Resources/Gun/gun00.png"))
+    sf::Texture tgun01;
+    if (!tgun01.loadFromFile("Resources/Gun/gun01.png"))
     {
-        std::cout << "Errortg00" << std::endl;
+        std::cout << "Errortg01" << std::endl;
+        system("PAUSE");
+    }
+    sf::Image igun02;
+    if (!igun02.loadFromFile("Resources/Gun/gun02.png"))
+    {
+        std::cout << "Errorig02" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tgun02;
+    if (!tgun02.loadFromFile("Resources/Gun/gun02.png"))
+    {
+        std::cout << "Errortg02" << std::endl;
         system("PAUSE");
     }
 
-    c.loadFromSystem(sf::Cursor::Hand);
-    Player p1(&igun00, &tgun00, 4, 20, window, SPEED * 2, false);
+    c.loadFromPixels(igun02.getPixelsPtr(), igun02.getSize(), {});
+    Player p1(&igun00, &tgun01, 6, 20, window, SPEED * 2, true);
     if (p1.getMouse())
     {
         sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
@@ -252,7 +264,6 @@ int main()
     textEndOfTime.setPosition(951, 20);
     int seconds = ts.asSeconds();
     textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
-
 
     while (window.isOpen())
     {
@@ -290,7 +301,15 @@ int main()
                 }
                 break;
             case sf::Event::JoystickMoved:
-                
+                time = clock.getElapsedTime();
+                if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
+                {
+                    test = true;
+                    std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
+                    p1.getAmmunition()--;
+                    std::cout << "amu " << p1.getAmmunition() << std::endl;
+                    textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
+                }
                 break;
                 //case sf::Event::LostFocus:
                 //    break;
@@ -304,26 +323,30 @@ int main()
             if (event.type == sf::Event::JoystickMoved)
             {
                 sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                joystick.move(m.x * 0.003, m.y * 0.003);
+                joystick.move(m.x * 0.002, m.y * 0.002);
             }
         }
 
         sf::Time c1get = clock1.getElapsedTime();
         int seconds1 = c1get.asSeconds();
 
-        if (seconds - seconds1 == 0)
+        if (end_of_time1)
         {
-            end_of_time = true;
-            textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
-            end_of_time1 = false;
-            textAmmunition.setString("Ammunition: 0/" + p1samu);
-        }
-        else
-        {
-            if (end_of_time1)
+            if (seconds - seconds1 == 0)
+            {
+                end_of_time = true;
+                textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
+                end_of_time1 = false;
+                textAmmunition.setString("Ammunition: 0/" + p1samu);
+            }
+            else
             {
                 textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
             }
+        }
+        else
+        {
+            textEndOfTime.setString("Time: 0s");
         }
 
         if (test)
@@ -336,6 +359,7 @@ int main()
             else
             {
                 p1.bullet(window, sf::Vector2i(joystick.getPosition()));
+                std::cout << "d" << std::endl;
             }
             sf::CircleShape circle1 = p1.getBullet();
             Collision collision(circle1);
@@ -376,19 +400,19 @@ int main()
                 {
                     int rmx = (rand() % p1_v);
                     int rmy = (rand() % p1_v);
-                    if (p1.getMouse())
+                    if(p1.getMouse())
                         sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
                     else
-                        ;
+                        joystick.move(rmx, rmy);
                 }
                 else
                 {
                     int rmx = (rand() % p1_v) * -1;
                     int rmy = (rand() % p1_v) * -1;
-                    if (p1.getMouse())
+                    if(p1.getMouse())
                         sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
                     else
-                        ;
+                        joystick.move(rmx,rmy);
                 }
 
                 tv = p1.getTimeV();
@@ -474,7 +498,9 @@ int main()
             if (cursorEndGame)
             {
                 window.setMouseCursor(c);
+                joystick.setTexture(&tgun02);
                 cursorEndGame = false;
+                end_of_time1 = false;
             }
 
             window.clear();
