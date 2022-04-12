@@ -6,16 +6,16 @@
 class Player
 {
 private:
-	sf::Cursor c1;
 	sf::Image* image;
 	sf::Texture* texture;
 	sf::CircleShape* b;
+	sf::RectangleShape sb;
 	int vibrations;
 	int ammunition;
 	int score1;
 	int tv;
 	bool mouse;
-
+	sf::Cursor c1;
 	sf::RectangleShape rec;
 
 public:
@@ -32,4 +32,5 @@ public:
 	int getTimeV();
 	bool getMouse();
 	sf::RectangleShape& getRec();
+	sf::RectangleShape& getSB();
 };
