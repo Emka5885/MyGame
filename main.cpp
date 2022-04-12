@@ -12,9 +12,9 @@
 #include "Player.h"
 
 const int SPEED = 200;
-const int RATE_OF_FIRE = 1000;
-float count = 0;
+const int RATE_OF_FIRE = 1200;
 int tv;
+int count = 600;
 bool test = false;
 bool b1 = false;
 bool hit = false;
@@ -23,7 +23,10 @@ bool focus = true;
 bool end_of_time = false;
 bool end_of_time1 = true;
 bool cursorEndGame = true;
-sf::Time ts = sf::seconds(20.0f);
+bool speedbar = false;
+sf::Time ts = sf::seconds(60.0f);
+sf::Time tspeed = sf::milliseconds(50);
+sf::Time speedb = sf::milliseconds(RATE_OF_FIRE);
 sf::Cursor c;
 sf::RectangleShape joystick;
 
@@ -237,7 +240,7 @@ int main()
     }
 
     c.loadFromPixels(igun02.getPixelsPtr(), igun02.getSize(), {});
-    Player p1(&igun00, &tgun01, 6, 20, window, SPEED * 2, true);
+    Player p1(&igun00, &tgun01, 6, 20, window, SPEED * 2, false);
     if (p1.getMouse())
     {
         sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
@@ -257,6 +260,9 @@ int main()
     sf::Time time;
     sf::Clock clock1;
     clock1.restart().asMilliseconds();
+    sf::Clock clock2;
+    clock2.restart().asMilliseconds();
+    sf::Clock clock3;
     sf::Text textEndOfTime;
     textEndOfTime.setFont(font);
     textEndOfTime.setCharacterSize(40);
@@ -264,6 +270,20 @@ int main()
     textEndOfTime.setPosition(951, 20);
     int seconds = ts.asSeconds();
     textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
+
+    sf::Text textM;
+    textM.setFont(font);
+    textM.setCharacterSize(30);
+    textM.setFillColor(sf::Color::White);
+    textM.setPosition(13, 710);
+    textM.setString("M");
+
+    sf::Text textC;
+    textC.setFont(font);
+    textC.setCharacterSize(30);
+    textC.setFillColor(sf::Color::White);
+    textC.setPosition(1163, 710);
+    textC.setString("C");
 
     while (window.isOpen())
     {
@@ -274,6 +294,10 @@ int main()
             {
             case sf::Event::Closed:
                 window.close();
+                break;
+            case sf::Event::KeyPressed:
+                if (sf::Keyboard::Escape == event.key.code)
+                    //window.close();
                 break;
             case sf::Event::MouseEntered:
                 p1.create(window);
@@ -297,6 +321,8 @@ int main()
                         p1.getAmmunition()--;
                         std::cout << "amu " << p1.getAmmunition() << std::endl;
                         textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
+                        speedbar = true;
+                        clock3.restart().asMilliseconds();
                     }
                 }
                 break;
@@ -304,11 +330,16 @@ int main()
                 time = clock.getElapsedTime();
                 if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
                 {
-                    test = true;
-                    std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
-                    p1.getAmmunition()--;
-                    std::cout << "amu " << p1.getAmmunition() << std::endl;
-                    textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
+                    if (!end_of_time)
+                    {
+                        test = true;
+                        std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
+                        p1.getAmmunition()--;
+                        std::cout << "amu " << p1.getAmmunition() << std::endl;
+                        textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
+                        speedbar = true;
+                        clock3.restart().asMilliseconds();
+                    }
                 }
                 break;
                 //case sf::Event::LostFocus:
@@ -448,19 +479,15 @@ int main()
                 goal3->setTexture(goalTextures, hit);
             }
 
-            if (count == SPEED)
+            if (clock2.getElapsedTime() >= tspeed)
             {
                 goal1->setTexture(goalTextures, hit);
                 goal2->setTexture(goalTextures, hit);
                 goal3->setTexture(goalTextures, hit);
-                count = 0;
                 goal1->move(hit);
                 goal2->move(hit);
                 goal3->move(hit);
-            }
-            else
-            {
-                count++;
+                clock2.restart().asMilliseconds();
             }
 
             window.clear();
@@ -482,6 +509,28 @@ int main()
             platformObject[8].create(window);
             platformObject[9].create(window);
 
+            float tym = 0;
+            if (speedbar && clock3.getElapsedTime() < speedb)
+            {
+                tym = clock3.getElapsedTime().asMilliseconds() - tym;
+                int change = tym / RATE_OF_FIRE * count;
+                p1.getSB().setSize({ 10.0f, 600.0f - change });
+                if (p1.getMouse())
+                    p1.getSB().setPosition(20, 100 + change);
+                else
+                    p1.getSB().setPosition(1170, 100 + change);
+                window.draw(p1.getSB());
+                if (clock3.getElapsedTime() >= speedb)
+                {
+                    speedbar = false;
+                    p1.getSB().setSize({ 10.0f, 600.0f });
+                    if (p1.getMouse())
+                        p1.getSB().setPosition(20, 100);
+                    else
+                        p1.getSB().setPosition(1170, 100);
+                }
+            }
+
             if (!p1.getMouse())
             {
                 window.draw(joystick);
@@ -490,6 +539,10 @@ int main()
             window.draw(textScore);
             window.draw(textAmmunition);
             window.draw(textEndOfTime);
+            if(p1.getMouse())
+                window.draw(textM);
+            else
+                window.draw(textC);
 
             window.display();
         }
@@ -505,7 +558,8 @@ int main()
 
             window.clear();
 
-            if (count == SPEED * 20)
+            int check = clock2.getElapsedTime().asMilliseconds();
+            if (check >= tspeed.asMilliseconds() * 30)
             {
                 if (end)
                 {
@@ -521,11 +575,7 @@ int main()
                     textEnd.setPosition(650, 350);
                     end = true;
                 }
-                count = 0;
-            }
-            else
-            {
-                count++;
+                clock2.restart().asMilliseconds();
             }
 
             platformObject[6].create(window);
