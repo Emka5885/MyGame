@@ -12,7 +12,7 @@ Player::Player(sf::Image* image, sf::Texture* texture, int vibrations, float amm
 	}
 	this->mouse = mouse;
 	this->ammunition = ammunition;
-	this->score1 = 0;
+	this->score = 0;
 	this->image = image;
 	this->texture = texture;
 	this->tv = tv;
@@ -21,7 +21,7 @@ Player::Player(sf::Image* image, sf::Texture* texture, int vibrations, float amm
 
 	if (mouse)
 	{
-		c1.loadFromPixels(image->getPixelsPtr(), image->getSize(), {});
+		c1.loadFromPixels(this->image->getPixelsPtr(), this->image->getSize(), {});
 		win.setMouseCursor(c1);
 		this->sb.setPosition(20, 100);
 	}
@@ -59,7 +59,7 @@ void Player::bullet(sf::RenderWindow& win, sf::Vector2i positionm)
 	b->setFillColor(sf::Color(255, 0, 0));
 	b->setOrigin(b->getRadius(), b->getRadius());
 	if (mouse)
-		b->setPosition(positionm.x+ image->getSize().x/2 - b->getRadius(), positionm.y + image->getSize().y / 2 - b->getRadius());
+		b->setPosition(positionm.x + image->getSize().x / 2 - b->getRadius(), positionm.y + image->getSize().y / 2 - b->getRadius());
 	else
 		b->setPosition(positionm.x + texture->getSize().x / 2 - b->getRadius(), positionm.y + texture->getSize().y / 2 - b->getRadius());
 	win.draw(*b);
@@ -72,7 +72,7 @@ sf::CircleShape Player::getBullet()
 
 int& Player::getScore()
 {
-	return this->score1;
+	return this->score;
 }
 
 int& Player::getAmmunition()
@@ -103,4 +103,17 @@ sf::RectangleShape& Player::getRec()
 sf::RectangleShape& Player::getSB()
 {
 	return this->sb;
+}
+
+void Player::setImage(sf::Image& nimage, sf::RenderWindow& win)
+{
+	image = &nimage;
+	c1.loadFromPixels(image->getPixelsPtr(), image->getSize(), {});
+	win.setMouseCursor(c1);
+}
+
+void Player::reset()
+{
+	score = 0;
+	ammunition = 20;
 }

@@ -15,6 +15,7 @@ const int SPEED = 200;
 const int RATE_OF_FIRE = 1200;
 int tv;
 int count = 600;
+bool menu = true;
 bool test = false;
 bool b1 = false;
 bool hit = false;
@@ -23,18 +24,72 @@ bool focus = true;
 bool end_of_time = false;
 bool end_of_time1 = true;
 bool cursorEndGame = true;
+bool cursorMenu = true;
 bool speedbar = false;
+bool game = false;
 sf::Time ts = sf::seconds(60.0f);
 sf::Time tspeed = sf::milliseconds(50);
 sf::Time speedb = sf::milliseconds(RATE_OF_FIRE);
 sf::Cursor c;
 sf::RectangleShape joystick;
+sf::CircleShape cursor_mouse(2);
 
 void score(int& s, int row);
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1200, 800), "Title", sf::Style::Close | sf::Style::Titlebar);
+
+    //Menu
+    sf::Font font;
+    if (!font.loadFromFile("Resources/Font/MilkyNice.ttf"))
+    {
+        std::cout << "Errorf00" << std::endl;
+        system("PAUSE");
+    }
+    sf::Text menu_text;
+    menu_text.setFont(font);
+    menu_text.setString("Menu");
+    menu_text.setCharacterSize(100);
+    menu_text.setFillColor(sf::Color::Black);
+    menu_text.setPosition(470, 10);
+
+    sf::RectangleShape rec1;
+    rec1.setSize({ 400, 100 });
+    rec1.setPosition(400, 170);
+    rec1.setOutlineThickness(3);
+    rec1.setOutlineColor(sf::Color::Black);
+    sf::Text n_game;
+    n_game.setFont(font);
+    n_game.setString("New Game");
+    n_game.setCharacterSize(60);
+    n_game.setFillColor(sf::Color::Black);
+    n_game.setPosition(450, 180);
+
+    sf::RectangleShape rec2;
+    rec2.setSize({ 400, 100 });
+    rec2.setPosition(400, 300);
+    rec2.setOutlineThickness(3);
+    rec2.setOutlineColor(sf::Color::Black);
+    sf::Text continue_game;
+    continue_game.setFont(font);
+    continue_game.setString("Continue");
+    continue_game.setCharacterSize(60);
+    continue_game.setFillColor(sf::Color::Black);
+    continue_game.setPosition(470, 310);
+
+    sf::RectangleShape rec3;
+    rec3.setSize({ 400, 100 });
+    rec3.setPosition(400, 300);   //430
+    rec3.setOutlineThickness(3);
+    rec3.setOutlineColor(sf::Color::Black);
+    sf::Text options;
+    options.setFont(font);
+    options.setString("Options");
+    options.setCharacterSize(60);
+    options.setFillColor(sf::Color::Black);
+    options.setPosition(480, 310);   //440
+
 
     //Tekstury do animacji celu
     std::vector<sf::Texture> goalTextures;
@@ -190,13 +245,6 @@ int main()
     Platform plat10(&tplat456, sf::Vector2f(1100.0f, 670.0f), sf::Vector2f(50.0f, 80.0f));
     platformObject.push_back(plat10);
 
-    sf::Font font;
-    if (!font.loadFromFile("Resources/Font/MilkyNice.ttf"))
-    {
-        std::cout << "Errorf00" << std::endl;
-        system("PAUSE");
-    }
-
     sf::Text textScore;
     textScore.setFont(font);
     textScore.setString("Score: 0");
@@ -240,7 +288,7 @@ int main()
     }
 
     c.loadFromPixels(igun02.getPixelsPtr(), igun02.getSize(), {});
-    Player p1(&igun00, &tgun01, 6, 20, window, SPEED * 2, false);
+    Player p1(&igun00, &tgun01, 6, 20, window, SPEED * 2, true);
     if (p1.getMouse())
     {
         sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
@@ -296,49 +344,80 @@ int main()
                 window.close();
                 break;
             case sf::Event::KeyPressed:
-                if (sf::Keyboard::Escape == event.key.code)
-                    //window.close();
+                if (!menu)
+                {
+                    if (sf::Keyboard::Escape == event.key.code)
+                    {
+                        menu = true;
+                    }
+                }
                 break;
             case sf::Event::MouseEntered:
-                p1.create(window);
-                focus = true;
-                if (p1.getAmmunition() <= 0 || end_of_time)
+                if (!menu)
                 {
-                    window.setMouseCursor(c);
+                    p1.create(window);
+                    focus = true;
+                    if (p1.getAmmunition() <= 0 || end_of_time)
+                    {
+                        window.setMouseCursor(c);
+                    }
                 }
                 break;
             case sf::Event::MouseLeft:
-                focus = false;
+                if (!menu)
+                    focus = false;
                 break;
             case sf::Event::MouseButtonPressed:
-                time = clock.getElapsedTime();
-                if ((sf::Mouse::Button::Left == event.mouseButton.button) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
+                if (!menu)
                 {
-                    if (!end_of_time)
+                    time = clock.getElapsedTime();
+                    if ((sf::Mouse::Button::Left == event.mouseButton.button) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
                     {
-                        test = true;
-                        std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
-                        p1.getAmmunition()--;
-                        std::cout << "amu " << p1.getAmmunition() << std::endl;
-                        textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
-                        speedbar = true;
-                        clock3.restart().asMilliseconds();
+                        if (!end_of_time)
+                        {
+                            test = true;
+                            std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
+                            p1.getAmmunition()--;
+                            std::cout << "amu " << p1.getAmmunition() << std::endl;
+                            textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
+                            speedbar = true;
+                            clock3.restart().asMilliseconds();
+                        }
+                    }
+                }
+                else
+                {
+                    cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
+                    cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
+                    if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 200 && cursor_mouse.getPosition().y < 300)
+                    {
+                        menu = false;
+                        p1.reset();
+                        clock1.restart().asSeconds();
+                        textScore.setString("Score: 0");
+                        std::string p1samu = std::to_string(p1.getAmmunition());
+                        textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
+                        textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
+                        game = true;
                     }
                 }
                 break;
             case sf::Event::JoystickMoved:
-                time = clock.getElapsedTime();
-                if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
+                if (!menu)
                 {
-                    if (!end_of_time)
+                    time = clock.getElapsedTime();
+                    if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
                     {
-                        test = true;
-                        std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
-                        p1.getAmmunition()--;
-                        std::cout << "amu " << p1.getAmmunition() << std::endl;
-                        textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
-                        speedbar = true;
-                        clock3.restart().asMilliseconds();
+                        if (!end_of_time)
+                        {
+                            test = true;
+                            std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
+                            p1.getAmmunition()--;
+                            std::cout << "amu " << p1.getAmmunition() << std::endl;
+                            textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
+                            speedbar = true;
+                            clock3.restart().asMilliseconds();
+                        }
                     }
                 }
                 break;
@@ -358,245 +437,286 @@ int main()
             }
         }
 
-        sf::Time c1get = clock1.getElapsedTime();
-        int seconds1 = c1get.asSeconds();
-
-        if (end_of_time1)
+        if (menu)
         {
-            if (seconds - seconds1 == 0)
+            if (cursorMenu)
             {
-                end_of_time = true;
-                textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
-                end_of_time1 = false;
-                textAmmunition.setString("Ammunition: 0/" + p1samu);
-            }
-            else
-            {
-                textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
-            }
-        }
-        else
-        {
-            textEndOfTime.setString("Time: 0s");
-        }
-
-        if (test)
-        {
-            if (p1.getMouse())
-            {
-                std::cout << sf::Mouse::getPosition(window).x << ", mouse " << sf::Mouse::getPosition(window).y << std::endl;
-                p1.bullet(window, sf::Mouse::getPosition(window));
-            }
-            else
-            {
-                p1.bullet(window, sf::Vector2i(joystick.getPosition()));
-                std::cout << "d" << std::endl;
-            }
-            sf::CircleShape circle1 = p1.getBullet();
-            Collision collision(circle1);
-            sf::CircleShape g1 = goal1->getBody();   //row1
-            sf::CircleShape g2 = goal2->getBody();   //row2
-            sf::CircleShape g3 = goal3->getBody();   //row3
-
-            if (collision.checkCollision(g1, 1))
-            {
-                score(p1.getScore(), 1);
-                textScore.setString("Score: " + std::to_string(p1.getScore()));
-                hit = true;
-            }
-            else if (collision.checkCollision(g2, 2))
-            {
-                score(p1.getScore(), 2);
-                textScore.setString("Score: " + std::to_string(p1.getScore()));
-                hit = true;
-            }
-            else if (collision.checkCollision(g3, 3))
-            {
-                score(p1.getScore(), 3);
-                textScore.setString("Score: " + std::to_string(p1.getScore()));
-                hit = true;
-            }
-
-            test = false;
-            b1 = true;
-        }
-
-        if (p1.getAmmunition() > 0 && !end_of_time)
-        {
-            if (tv == 0 && focus)
-            {
-                int p1_v = p1.getVibrations();
-                int yes_or_no = rand() % 2;
-                if (yes_or_no == 0)
-                {
-                    int rmx = (rand() % p1_v);
-                    int rmy = (rand() % p1_v);
-                    if(p1.getMouse())
-                        sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
-                    else
-                        joystick.move(rmx, rmy);
-                }
-                else
-                {
-                    int rmx = (rand() % p1_v) * -1;
-                    int rmy = (rand() % p1_v) * -1;
-                    if(p1.getMouse())
-                        sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
-                    else
-                        joystick.move(rmx,rmy);
-                }
-
-                tv = p1.getTimeV();
-            }
-            else if (tv != 0 && focus)
-            {
-                tv--;
-            }
-
-            if (b1)
-            {
-                p1.bullet_delete();
-                b1 = false;
-                clock.restart().asMilliseconds();
-            }
-
-            if (!goal1->existence())
-            {
-                delete goal1;
-                goal1 = new Goal(1, 0, rand() % 1000);
-                goal1->setTexture(goalTextures, hit);
-            }
-            if (!goal2->existence())
-            {
-                delete goal2;
-                goal2 = new Goal(2, 0, rand() % 1000);
-                goal2->setTexture(goalTextures, hit);
-            }
-            if (!goal3->existence())
-            {
-                delete goal3;
-                goal3 = new Goal(3, 0, rand() % 1000);
-                goal3->setTexture(goalTextures, hit);
-            }
-
-            if (clock2.getElapsedTime() >= tspeed)
-            {
-                goal1->setTexture(goalTextures, hit);
-                goal2->setTexture(goalTextures, hit);
-                goal3->setTexture(goalTextures, hit);
-                goal1->move(hit);
-                goal2->move(hit);
-                goal3->move(hit);
-                clock2.restart().asMilliseconds();
-            }
-
-            window.clear();
-
-            platformObject[5].create(window);
-            goal3->create(window);
-            platformObject[2].create(window);
-
-            platformObject[4].create(window);
-            goal2->create(window);
-            platformObject[1].create(window);
-
-            platformObject[3].create(window);
-            goal1->create(window);
-            platformObject[0].create(window);
-
-            platformObject[6].create(window);
-            platformObject[7].create(window);
-            platformObject[8].create(window);
-            platformObject[9].create(window);
-
-            float tym = 0;
-            if (speedbar && clock3.getElapsedTime() < speedb)
-            {
-                tym = clock3.getElapsedTime().asMilliseconds() - tym;
-                int change = tym / RATE_OF_FIRE * count;
-                p1.getSB().setSize({ 10.0f, 600.0f - change });
-                if (p1.getMouse())
-                    p1.getSB().setPosition(20, 100 + change);
-                else
-                    p1.getSB().setPosition(1170, 100 + change);
-                window.draw(p1.getSB());
-                if (clock3.getElapsedTime() >= speedb)
-                {
-                    speedbar = false;
-                    p1.getSB().setSize({ 10.0f, 600.0f });
-                    if (p1.getMouse())
-                        p1.getSB().setPosition(20, 100);
-                    else
-                        p1.getSB().setPosition(1170, 100);
-                }
-            }
-
-            if (!p1.getMouse())
-            {
-                window.draw(joystick);
-            }
-
-            window.draw(textScore);
-            window.draw(textAmmunition);
-            window.draw(textEndOfTime);
-            if(p1.getMouse())
-                window.draw(textM);
-            else
-                window.draw(textC);
-
-            window.display();
-        }
-        else
-        {
-            if (cursorEndGame)
-            {
-                window.setMouseCursor(c);
+                p1.setImage(igun02, window);
                 joystick.setTexture(&tgun02);
-                cursorEndGame = false;
-                end_of_time1 = false;
+                cursorMenu = false;
             }
+            window.clear(sf::Color::White);
 
-            window.clear();
+            //platformObject[6].create(window);
+            //platformObject[7].create(window);
+            //platformObject[8].create(window);
+            //platformObject[9].create(window);
 
-            int check = clock2.getElapsedTime().asMilliseconds();
-            if (check >= tspeed.asMilliseconds() * 30)
-            {
-                if (end)
-                {
-                    textEnd.setString("End");
-                    textEnd.setFillColor(sf::Color::Red);
-                    textEnd.setPosition(400, 350);
-                    end = false;
-                }
-                else
-                {
-                    textEnd.setString("Game");
-                    textEnd.setFillColor(sf::Color::Black);
-                    textEnd.setPosition(650, 350);
-                    end = true;
-                }
-                clock2.restart().asMilliseconds();
-            }
+            window.draw(menu_text);
 
-            platformObject[6].create(window);
-            platformObject[7].create(window);
-            platformObject[8].create(window);
-            platformObject[9].create(window);
+            window.draw(rec1);
+            window.draw(n_game);
 
-            platformObject[10].create(window);
+            window.draw(rec2);
+            window.draw(continue_game);
 
-            window.draw(textEnd);
+
 
             if (!p1.getMouse())
             {
                 window.draw(joystick);
             }
 
-            window.draw(textScore);
-            window.draw(textAmmunition);
-            window.draw(textEndOfTime);
-
             window.display();
+        }
+        else
+        {
+            if (!cursorMenu)
+            {
+                p1.setImage(igun00, window);
+                joystick.setTexture(&tgun01);
+                cursorMenu = true;
+            }
+            sf::Time c1get = clock1.getElapsedTime();
+            int seconds1 = c1get.asSeconds();
+
+            if (end_of_time1)
+            {
+                if (seconds - seconds1 == 0)
+                {
+                    end_of_time = true;
+                    textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
+                    end_of_time1 = false;
+                    textAmmunition.setString("Ammunition: 0/" + p1samu);
+                }
+                else
+                {
+                    textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
+                }
+            }
+            else
+            {
+                textEndOfTime.setString("Time: 0s");
+            }
+
+            if (test)
+            {
+                if (p1.getMouse())
+                {
+                    std::cout << sf::Mouse::getPosition(window).x << ", mouse " << sf::Mouse::getPosition(window).y << std::endl;
+                    p1.bullet(window, sf::Mouse::getPosition(window));
+                }
+                else
+                {
+                    p1.bullet(window, sf::Vector2i(joystick.getPosition()));
+                    std::cout << "d" << std::endl;
+                }
+                sf::CircleShape circle1 = p1.getBullet();
+                Collision collision(circle1);
+                sf::CircleShape g1 = goal1->getBody();   //row1
+                sf::CircleShape g2 = goal2->getBody();   //row2
+                sf::CircleShape g3 = goal3->getBody();   //row3
+
+                if (collision.checkCollision(g1, 1))
+                {
+                    score(p1.getScore(), 1);
+                    textScore.setString("Score: " + std::to_string(p1.getScore()));
+                    hit = true;
+                }
+                else if (collision.checkCollision(g2, 2))
+                {
+                    score(p1.getScore(), 2);
+                    textScore.setString("Score: " + std::to_string(p1.getScore()));
+                    hit = true;
+                }
+                else if (collision.checkCollision(g3, 3))
+                {
+                    score(p1.getScore(), 3);
+                    textScore.setString("Score: " + std::to_string(p1.getScore()));
+                    hit = true;
+                }
+
+                test = false;
+                b1 = true;
+            }
+
+            if (p1.getAmmunition() > 0 && !end_of_time)
+            {
+                if (tv == 0 && focus)
+                {
+                    int p1_v = p1.getVibrations();
+                    int yes_or_no = rand() % 2;
+                    if (yes_or_no == 0)
+                    {
+                        int rmx = (rand() % p1_v);
+                        int rmy = (rand() % p1_v);
+                        if (p1.getMouse())
+                            sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+                        else
+                            joystick.move(rmx, rmy);
+                    }
+                    else
+                    {
+                        int rmx = (rand() % p1_v) * -1;
+                        int rmy = (rand() % p1_v) * -1;
+                        if (p1.getMouse())
+                            sf::Mouse::setPosition({ sf::Mouse::getPosition().x + rmx, sf::Mouse::getPosition().y + rmy });
+                        else
+                            joystick.move(rmx, rmy);
+                    }
+
+                    tv = p1.getTimeV();
+                }
+                else if (tv != 0 && focus)
+                {
+                    tv--;
+                }
+
+                if (b1)
+                {
+                    p1.bullet_delete();
+                    b1 = false;
+                    clock.restart().asMilliseconds();
+                }
+
+                if (!goal1->existence())
+                {
+                    delete goal1;
+                    goal1 = new Goal(1, 0, rand() % 1000);
+                    goal1->setTexture(goalTextures, hit);
+                }
+                if (!goal2->existence())
+                {
+                    delete goal2;
+                    goal2 = new Goal(2, 0, rand() % 1000);
+                    goal2->setTexture(goalTextures, hit);
+                }
+                if (!goal3->existence())
+                {
+                    delete goal3;
+                    goal3 = new Goal(3, 0, rand() % 1000);
+                    goal3->setTexture(goalTextures, hit);
+                }
+
+                if (clock2.getElapsedTime() >= tspeed)
+                {
+                    goal1->setTexture(goalTextures, hit);
+                    goal2->setTexture(goalTextures, hit);
+                    goal3->setTexture(goalTextures, hit);
+                    goal1->move(hit);
+                    goal2->move(hit);
+                    goal3->move(hit);
+                    clock2.restart().asMilliseconds();
+                }
+
+                window.clear();
+
+                platformObject[5].create(window);
+                goal3->create(window);
+                platformObject[2].create(window);
+
+                platformObject[4].create(window);
+                goal2->create(window);
+                platformObject[1].create(window);
+
+                platformObject[3].create(window);
+                goal1->create(window);
+                platformObject[0].create(window);
+
+                platformObject[6].create(window);
+                platformObject[7].create(window);
+                platformObject[8].create(window);
+                platformObject[9].create(window);
+
+                float tym = 0;
+                if (speedbar && clock3.getElapsedTime() < speedb)
+                {
+                    tym = clock3.getElapsedTime().asMilliseconds() - tym;
+                    int change = tym / RATE_OF_FIRE * count;
+                    p1.getSB().setSize({ 10.0f, 600.0f - change });
+                    if (p1.getMouse())
+                        p1.getSB().setPosition(20, 100 + change);
+                    else
+                        p1.getSB().setPosition(1170, 100 + change);
+                    window.draw(p1.getSB());
+                    if (clock3.getElapsedTime() >= speedb)
+                    {
+                        speedbar = false;
+                        p1.getSB().setSize({ 10.0f, 600.0f });
+                        if (p1.getMouse())
+                            p1.getSB().setPosition(20, 100);
+                        else
+                            p1.getSB().setPosition(1170, 100);
+                    }
+                }
+
+                if (!p1.getMouse())
+                {
+                    window.draw(joystick);
+                }
+
+                window.draw(textScore);
+                window.draw(textAmmunition);
+                window.draw(textEndOfTime);
+                if (p1.getMouse())
+                    window.draw(textM);
+                else
+                    window.draw(textC);
+
+                window.display();
+            }
+            else
+            {
+                if (cursorEndGame)
+                {
+                    window.setMouseCursor(c);
+                    joystick.setTexture(&tgun02);
+                    cursorEndGame = false;
+                    end_of_time1 = false;
+                }
+
+                window.clear();
+
+                int check = clock2.getElapsedTime().asMilliseconds();
+                if (check >= tspeed.asMilliseconds() * 30)
+                {
+                    if (end)
+                    {
+                        textEnd.setString("End");
+                        textEnd.setFillColor(sf::Color::Red);
+                        textEnd.setPosition(400, 350);
+                        end = false;
+                    }
+                    else
+                    {
+                        textEnd.setString("Game");
+                        textEnd.setFillColor(sf::Color::Black);
+                        textEnd.setPosition(650, 350);
+                        end = true;
+                    }
+                    clock2.restart().asMilliseconds();
+                }
+
+                platformObject[6].create(window);
+                platformObject[7].create(window);
+                platformObject[8].create(window);
+                platformObject[9].create(window);
+
+                platformObject[10].create(window);
+
+                window.draw(textEnd);
+
+                if (!p1.getMouse())
+                {
+                    window.draw(joystick);
+                }
+
+                window.draw(textScore);
+                window.draw(textAmmunition);
+                window.draw(textEndOfTime);
+
+                window.display();
+            }
         }
     }
 

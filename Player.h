@@ -12,7 +12,7 @@ private:
 	sf::RectangleShape sb;
 	int vibrations;
 	int ammunition;
-	int score1;
+	int score;
 	int tv;
 	bool mouse;
 	sf::Cursor c1;
@@ -33,4 +33,6 @@ public:
 	bool getMouse();
 	sf::RectangleShape& getRec();
 	sf::RectangleShape& getSB();
+	void setImage(sf::Image& nimage, sf::RenderWindow& win);
+	void reset();
 };
