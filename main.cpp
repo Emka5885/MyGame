@@ -15,6 +15,8 @@ const int SPEED = 200;
 const int RATE_OF_FIRE = 1200;
 int tv;
 int count = 600;
+int seconds1;
+int seconds2;
 bool menu = true;
 bool test = false;
 bool b1 = false;
@@ -27,6 +29,10 @@ bool cursorEndGame = true;
 bool cursorMenu = true;
 bool speedbar = false;
 bool game = false;
+bool pause = false;
+bool pause1 = true;
+bool settings = false;
+bool instruction = false;
 sf::Time ts = sf::seconds(60.0f);
 sf::Time tspeed = sf::milliseconds(50);
 sf::Time speedb = sf::milliseconds(RATE_OF_FIRE);
@@ -52,11 +58,11 @@ int main()
     menu_text.setString("Menu");
     menu_text.setCharacterSize(100);
     menu_text.setFillColor(sf::Color::Black);
-    menu_text.setPosition(470, 10);
+    menu_text.setPosition(465, 5);
 
     sf::RectangleShape rec1;
     rec1.setSize({ 400, 100 });
-    rec1.setPosition(400, 170);
+    rec1.setPosition(400, 150);
     rec1.setOutlineThickness(3);
     rec1.setOutlineColor(sf::Color::Black);
     sf::Text n_game;
@@ -64,11 +70,11 @@ int main()
     n_game.setString("New Game");
     n_game.setCharacterSize(60);
     n_game.setFillColor(sf::Color::Black);
-    n_game.setPosition(450, 180);
+    n_game.setPosition(450, 160);
 
     sf::RectangleShape rec2;
     rec2.setSize({ 400, 100 });
-    rec2.setPosition(400, 300);
+    rec2.setPosition(400, 270);
     rec2.setOutlineThickness(3);
     rec2.setOutlineColor(sf::Color::Black);
     sf::Text continue_game;
@@ -76,11 +82,11 @@ int main()
     continue_game.setString("Continue");
     continue_game.setCharacterSize(60);
     continue_game.setFillColor(sf::Color::Black);
-    continue_game.setPosition(470, 310);
+    continue_game.setPosition(470, 280);
 
     sf::RectangleShape rec3;
     rec3.setSize({ 400, 100 });
-    rec3.setPosition(400, 300);   //430
+    rec3.setPosition(400, 280);   //410
     rec3.setOutlineThickness(3);
     rec3.setOutlineColor(sf::Color::Black);
     sf::Text options;
@@ -88,7 +94,31 @@ int main()
     options.setString("Options");
     options.setCharacterSize(60);
     options.setFillColor(sf::Color::Black);
-    options.setPosition(480, 310);   //440
+    options.setPosition(480, 290);   //420
+
+    sf::RectangleShape rec4;
+    rec4.setSize({ 400, 100 });
+    rec4.setPosition(400, 410);   //540
+    rec4.setOutlineThickness(3);
+    rec4.setOutlineColor(sf::Color::Black);
+    sf::Text manual;
+    manual.setFont(font);
+    manual.setString("Manual");
+    manual.setCharacterSize(60);
+    manual.setFillColor(sf::Color::Black);
+    manual.setPosition(492, 420);   //550
+
+    sf::RectangleShape rec5;
+    rec5.setSize({ 400, 100 });
+    rec5.setPosition(400, 540);   //670
+    rec5.setOutlineThickness(3);
+    rec5.setOutlineColor(sf::Color::Black);
+    sf::Text quit;
+    quit.setFont(font);
+    quit.setString("Quit");
+    quit.setCharacterSize(60);
+    quit.setFillColor(sf::Color::Black);
+    quit.setPosition(533, 550);   //680
 
 
     //Tekstury do animacji celu
@@ -376,9 +406,7 @@ int main()
                         if (!end_of_time)
                         {
                             test = true;
-                            std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
                             p1.getAmmunition()--;
-                            std::cout << "amu " << p1.getAmmunition() << std::endl;
                             textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
                             speedbar = true;
                             clock3.restart().asMilliseconds();
@@ -389,7 +417,7 @@ int main()
                 {
                     cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                     cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
-                    if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 200 && cursor_mouse.getPosition().y < 300)
+                    if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 150 && cursor_mouse.getPosition().y < 250)
                     {
                         menu = false;
                         p1.reset();
@@ -399,6 +427,36 @@ int main()
                         textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                         textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
                         game = true;
+                        pause = false;
+                        pause1 = false;
+                    }
+                    else if (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 270 && cursor_mouse.getPosition().y < 370)
+                    {
+                        menu = false;
+                        if (pause1)
+                        {
+                            seconds2 = seconds2 - seconds1;
+                            textEndOfTime.setString("Time: " + std::to_string(seconds2) + "s");
+                        }
+                        else
+                        {
+                            seconds2 = seconds - seconds1;
+                            textEndOfTime.setString("Time: " + std::to_string(seconds2) + "s");
+                        }
+                        pause = true;
+                        clock1.restart().asSeconds();
+                    }
+                    else if ((game != true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 280 && cursor_mouse.getPosition().y < 380) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 390 && cursor_mouse.getPosition().y < 490))
+                    {
+                        settings = true;
+                    }
+                    else if ((game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 410 && cursor_mouse.getPosition().y < 510) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 510 && cursor_mouse.getPosition().y < 610))
+                    {
+                        instruction = true;
+                    }
+                    else if ((game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 540 && cursor_mouse.getPosition().y < 640) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730))
+                    {
+                        window.close();
                     }
                 }
                 break;
@@ -411,9 +469,7 @@ int main()
                         if (!end_of_time)
                         {
                             test = true;
-                            std::cout << time.asMilliseconds() << std::endl;   //Linijka do usunięcia!!!
                             p1.getAmmunition()--;
-                            std::cout << "amu " << p1.getAmmunition() << std::endl;
                             textAmmunition.setString("Ammunition: " + std::to_string(p1.getAmmunition()) + "/" + p1samu);
                             speedbar = true;
                             clock3.restart().asMilliseconds();
@@ -457,8 +513,32 @@ int main()
             window.draw(rec1);
             window.draw(n_game);
 
-            window.draw(rec2);
-            window.draw(continue_game);
+            if (game)
+            {
+                window.draw(rec2);
+                window.draw(continue_game);
+                rec3.setPosition(400, 390);
+                options.setPosition(480, 400);
+                window.draw(rec3);
+                window.draw(options);
+                rec4.setPosition(400, 510);
+                manual.setPosition(492, 520);
+                window.draw(rec4);
+                window.draw(manual);
+                rec5.setPosition(400, 630);
+                quit.setPosition(533, 640);
+                window.draw(rec5);
+                window.draw(quit);
+            }
+            else
+            {
+                window.draw(rec3);
+                window.draw(options);
+                window.draw(rec4);
+                window.draw(manual);
+                window.draw(rec5);
+                window.draw(quit);
+            }
 
 
 
@@ -469,6 +549,14 @@ int main()
 
             window.display();
         }
+        else if (settings)
+        {
+
+        }
+        else if (instruction)
+        {
+
+        }
         else
         {
             if (!cursorMenu)
@@ -478,9 +566,9 @@ int main()
                 cursorMenu = true;
             }
             sf::Time c1get = clock1.getElapsedTime();
-            int seconds1 = c1get.asSeconds();
+            seconds1 = c1get.asSeconds();
 
-            if (end_of_time1)
+            if (end_of_time1 && !pause)
             {
                 if (seconds - seconds1 == 0)
                 {
@@ -493,6 +581,21 @@ int main()
                 {
                     textEndOfTime.setString("Time: " + std::to_string(seconds - seconds1) + "s");
                 }
+            }
+            else if (end_of_time1 && pause)
+            {
+                if (seconds2 - seconds1 == 0)
+                {
+                    end_of_time = true;
+                    textEndOfTime.setString("Time: " + std::to_string(seconds2 - seconds1) + "s");
+                    end_of_time1 = false;
+                    textAmmunition.setString("Ammunition: 0/" + p1samu);
+                }
+                else
+                {
+                    textEndOfTime.setString("Time: " + std::to_string(seconds2 - seconds1) + "s");
+                }
+                pause1 = true;
             }
             else
             {
@@ -673,6 +776,7 @@ int main()
                     joystick.setTexture(&tgun02);
                     cursorEndGame = false;
                     end_of_time1 = false;
+                    game = false;
                 }
 
                 window.clear();
