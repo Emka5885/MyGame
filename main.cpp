@@ -11,12 +11,14 @@
 #include "Platform.h"
 #include "Player.h"
 
-const int SPEED = 200;
-const int RATE_OF_FIRE = 1200;
-int tv;
-int count = 600;
+const int COUNT = 600;
 int seconds1;
 int seconds2;
+int ammun = 30;
+int vibrations = 6;
+int speed = 50;
+int rate_of_fire = 1200;
+int tv = 200;
 bool menu = true;
 bool test = false;
 bool b1 = false;
@@ -33,9 +35,12 @@ bool pause = false;
 bool pause1 = true;
 bool settings = false;
 bool instruction = false;
-sf::Time ts = sf::seconds(60.0f);
-sf::Time tspeed = sf::milliseconds(50);
-sf::Time speedb = sf::milliseconds(RATE_OF_FIRE);
+bool change = false;
+bool resetrof = false;
+int times = 60;
+sf::Time ts = sf::seconds(times);
+sf::Time tspeed = sf::milliseconds(speed);
+sf::Time speedb = sf::milliseconds(rate_of_fire);
 sf::Cursor c;
 sf::RectangleShape joystick;
 sf::CircleShape cursor_mouse(2);
@@ -86,7 +91,6 @@ int main()
 
     sf::RectangleShape rec3;
     rec3.setSize({ 400, 100 });
-    rec3.setPosition(400, 280);   //410
     rec3.setOutlineThickness(3);
     rec3.setOutlineColor(sf::Color::Black);
     sf::Text options;
@@ -94,11 +98,9 @@ int main()
     options.setString("Options");
     options.setCharacterSize(60);
     options.setFillColor(sf::Color::Black);
-    options.setPosition(480, 290);   //420
 
     sf::RectangleShape rec4;
     rec4.setSize({ 400, 100 });
-    rec4.setPosition(400, 410);   //540
     rec4.setOutlineThickness(3);
     rec4.setOutlineColor(sf::Color::Black);
     sf::Text manual;
@@ -106,11 +108,9 @@ int main()
     manual.setString("Manual");
     manual.setCharacterSize(60);
     manual.setFillColor(sf::Color::Black);
-    manual.setPosition(492, 420);   //550
 
     sf::RectangleShape rec5;
     rec5.setSize({ 400, 100 });
-    rec5.setPosition(400, 540);   //670
     rec5.setOutlineThickness(3);
     rec5.setOutlineColor(sf::Color::Black);
     sf::Text quit;
@@ -118,7 +118,277 @@ int main()
     quit.setString("Quit");
     quit.setCharacterSize(60);
     quit.setFillColor(sf::Color::Black);
-    quit.setPosition(533, 550);   //680
+
+    //Options
+    sf::Texture buttonl;
+    if (!buttonl.loadFromFile("Resources/Button/Left.png"))
+    {
+        std::cout << "ErrorBL" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture buttonr;
+    if (!buttonr.loadFromFile("Resources/Button/Right.png"))
+    {
+        std::cout << "ErrorBR" << std::endl;
+        system("PAUSE");
+    }
+
+    sf::Text options_text;
+    options_text.setFont(font);
+    options_text.setString("Options");
+    options_text.setCharacterSize(100);
+    options_text.setFillColor(sf::Color::Black);
+    options_text.setPosition(413, 5);
+
+    //Back
+    sf::RectangleShape rec0o;
+    rec0o.setSize({ 100, 50 });
+    rec0o.setOrigin(rec0o.getSize().x / 2, rec0o.getSize().y / 2);
+    rec0o.setPosition(200, 90);
+    rec0o.setOutlineThickness(3);
+    rec0o.setOutlineColor(sf::Color::Black);
+    sf::Text back_text;
+    back_text.setFont(font);
+    back_text.setString("Back");
+    back_text.setCharacterSize(30);
+    back_text.setFillColor(sf::Color::Black);
+    back_text.setPosition(162, 70);
+
+    //Default
+    sf::RectangleShape recdo;
+    recdo.setSize({ 130, 50 });
+    recdo.setOrigin(recdo.getSize().x / 2, recdo.getSize().y / 2);
+    recdo.setPosition(983, 90);
+    recdo.setOutlineThickness(3);
+    recdo.setOutlineColor(sf::Color::Black);
+    sf::Text default_text;
+    default_text.setFont(font);
+    default_text.setString("Default");
+    default_text.setCharacterSize(30);
+    default_text.setFillColor(sf::Color::Black);
+    default_text.setPosition(925, 70);
+
+    //Ammunition
+    sf::RectangleShape rec1o;
+    rec1o.setSize({ 900, 80 });
+    rec1o.setPosition(150, 150);
+    rec1o.setOutlineThickness(3);
+    rec1o.setOutlineColor(sf::Color::Black);
+    sf::Text ammuo;
+    ammuo.setFont(font);
+    ammuo.setString("Ammunition");
+    ammuo.setCharacterSize(38);
+    ammuo.setFillColor(sf::Color::Black);
+    ammuo.setPosition(180, 165);
+    sf::Text ammuodash;
+    ammuodash.setFont(font);
+    ammuodash.setString("-");
+    ammuodash.setCharacterSize(38);
+    ammuodash.setFillColor(sf::Color::Black);
+    ammuodash.setPosition(598, 170);
+    sf::RectangleShape b1left;
+    b1left.setSize({ 20, 30 });
+    b1left.setTexture(&buttonl);
+    b1left.setOrigin(b1left.getSize().x / 2, b1left.getSize().y / 2);
+    b1left.setPosition(750, 192);
+    sf::RectangleShape b1right;
+    b1right.setSize({ 20, 30 });
+    b1right.setTexture(&buttonr);
+    b1right.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
+    b1right.setPosition(1000, 192);
+    sf::Text ammun_text;
+    ammun_text.setFont(font);
+    ammun_text.setString(std::to_string(ammun));
+    ammun_text.setCharacterSize(38);
+    ammun_text.setFillColor(sf::Color::Black);
+    if (ammun > 1 && ammun < 10)
+        ammun_text.setPosition(868, 165);
+    else
+        ammun_text.setPosition(858, 165);
+
+    //Time
+    sf::RectangleShape rec2o;
+    rec2o.setSize({ 900, 80 });
+    rec2o.setPosition(150, 250);
+    rec2o.setOutlineThickness(3);
+    rec2o.setOutlineColor(sf::Color::Black);
+    sf::Text timeso;
+    timeso.setFont(font);
+    timeso.setString("Time");
+    timeso.setCharacterSize(38);
+    timeso.setFillColor(sf::Color::Black);
+    timeso.setPosition(180, 265);
+    sf::Text timeodash;
+    timeodash.setFont(font);
+    timeodash.setString("-");
+    timeodash.setCharacterSize(38);
+    timeodash.setFillColor(sf::Color::Black);
+    timeodash.setPosition(598, 270);
+    sf::RectangleShape b2left;
+    b2left.setSize({ 20, 30 });
+    b2left.setTexture(&buttonl);
+    b2left.setOrigin(b1left.getSize().x / 2, b1left.getSize().y / 2);
+    b2left.setPosition(750, 292);
+    sf::RectangleShape b2right;
+    b2right.setSize({ 20, 30 });
+    b2right.setTexture(&buttonr);
+    b2right.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
+    b2right.setPosition(1000, 292);
+    sf::Text times_text;
+    times_text.setFont(font);
+    times_text.setString(std::to_string(times));
+    times_text.setCharacterSize(38);
+    times_text.setFillColor(sf::Color::Black);
+    if (times > 9 && times < 100)
+        times_text.setPosition(858, 265);
+    else
+        times_text.setPosition(848, 265);
+
+    //Vibrations
+    sf::RectangleShape rec3o;
+    rec3o.setSize({ 900, 80 });
+    rec3o.setPosition(150, 350);
+    rec3o.setOutlineThickness(3);
+    rec3o.setOutlineColor(sf::Color::Black);
+    sf::Text vibrationso;
+    vibrationso.setFont(font);
+    vibrationso.setString("Vibrations");
+    vibrationso.setCharacterSize(38);
+    vibrationso.setFillColor(sf::Color::Black);
+    vibrationso.setPosition(180, 365);
+    sf::Text vibodash;
+    vibodash.setFont(font);
+    vibodash.setString("-");
+    vibodash.setCharacterSize(38);
+    vibodash.setFillColor(sf::Color::Black);
+    vibodash.setPosition(598, 370);
+    sf::RectangleShape b3left;
+    b3left.setSize({ 20, 30 });
+    b3left.setTexture(&buttonl);
+    b3left.setOrigin(b1left.getSize().x / 2, b1left.getSize().y / 2);
+    b3left.setPosition(750, 392);
+    sf::RectangleShape b3right;
+    b3right.setSize({ 20, 30 });
+    b3right.setTexture(&buttonr);
+    b3right.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
+    b3right.setPosition(1000, 392);
+    sf::Text vib_text;
+    vib_text.setFont(font);
+    vib_text.setString(std::to_string(vibrations));
+    vib_text.setCharacterSize(38);
+    vib_text.setFillColor(sf::Color::Black);
+    if (vibrations > 1 && vibrations < 10)
+        vib_text.setPosition(868, 365);
+    else
+        vib_text.setPosition(858, 365);
+
+    //Speed of targets
+    sf::RectangleShape rec4o;
+    rec4o.setSize({ 900, 80 });
+    rec4o.setPosition(150, 450);
+    rec4o.setOutlineThickness(3);
+    rec4o.setOutlineColor(sf::Color::Black);
+    sf::Text speedoto;
+    speedoto.setFont(font);
+    speedoto.setString("Speed of targets");
+    speedoto.setCharacterSize(38);
+    speedoto.setFillColor(sf::Color::Black);
+    speedoto.setPosition(180, 465);
+    sf::Text sotodash;
+    sotodash.setFont(font);
+    sotodash.setString("-");
+    sotodash.setCharacterSize(38);
+    sotodash.setFillColor(sf::Color::Black);
+    sotodash.setPosition(598, 470);
+    sf::RectangleShape b4left;
+    b4left.setSize({ 20, 30 });
+    b4left.setTexture(&buttonl);
+    b4left.setOrigin(b1left.getSize().x / 2, b1left.getSize().y / 2);
+    b4left.setPosition(750, 492);
+    sf::RectangleShape b4right;
+    b4right.setSize({ 20, 30 });
+    b4right.setTexture(&buttonr);
+    b4right.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
+    b4right.setPosition(1000, 492);
+    sf::Text sot_text;
+    sot_text.setFont(font);
+    sot_text.setString(std::to_string(speed));
+    sot_text.setCharacterSize(38);
+    sot_text.setFillColor(sf::Color::Black);
+    if (speed > 9 && speed < 100)
+        sot_text.setPosition(858, 465);
+    else
+        sot_text.setPosition(848, 465);
+
+    //Rate of fire
+    sf::RectangleShape rec5o;
+    rec5o.setSize({ 900, 80 });
+    rec5o.setPosition(150, 550);
+    rec5o.setOutlineThickness(3);
+    rec5o.setOutlineColor(sf::Color::Black);
+    sf::Text rateoffireo;
+    rateoffireo.setFont(font);
+    rateoffireo.setString("Rate of fire");
+    rateoffireo.setCharacterSize(38);
+    rateoffireo.setFillColor(sf::Color::Black);
+    rateoffireo.setPosition(180, 565);
+    sf::Text rofodash;
+    rofodash.setFont(font);
+    rofodash.setString("-");
+    rofodash.setCharacterSize(38);
+    rofodash.setFillColor(sf::Color::Black);
+    rofodash.setPosition(598, 570);
+    sf::RectangleShape b5left;
+    b5left.setSize({ 20, 30 });
+    b5left.setTexture(&buttonl);
+    b5left.setOrigin(b1left.getSize().x / 2, b1left.getSize().y / 2);
+    b5left.setPosition(750, 592);
+    sf::RectangleShape b5right;
+    b5right.setSize({ 20, 30 });
+    b5right.setTexture(&buttonr);
+    b5right.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
+    b5right.setPosition(1000, 592);
+    sf::Text rof_text;
+    rof_text.setFont(font);
+    rof_text.setString(std::to_string(rate_of_fire));
+    rof_text.setCharacterSize(38);
+    rof_text.setFillColor(sf::Color::Black);
+    rof_text.setPosition(838, 565);
+
+    //Vibration speed
+    sf::RectangleShape rec6o;
+    rec6o.setSize({ 900, 80 });
+    rec6o.setPosition(150, 650);
+    rec6o.setOutlineThickness(3);
+    rec6o.setOutlineColor(sf::Color::Black);
+    sf::Text vibspeedo;
+    vibspeedo.setFont(font);
+    vibspeedo.setString("Vibration speed");
+    vibspeedo.setCharacterSize(38);
+    vibspeedo.setFillColor(sf::Color::Black);
+    vibspeedo.setPosition(180, 665);
+    sf::Text vsodash;
+    vsodash.setFont(font);
+    vsodash.setString("-");
+    vsodash.setCharacterSize(38);
+    vsodash.setFillColor(sf::Color::Black);
+    vsodash.setPosition(598, 670);
+    sf::RectangleShape b6left;
+    b6left.setSize({ 20, 30 });
+    b6left.setTexture(&buttonl);
+    b6left.setOrigin(b1left.getSize().x / 2, b1left.getSize().y / 2);
+    b6left.setPosition(750, 692);
+    sf::RectangleShape b6right;
+    b6right.setSize({ 20, 30 });
+    b6right.setTexture(&buttonr);
+    b6right.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
+    b6right.setPosition(1000, 692);
+    sf::Text vs_text;
+    vs_text.setFont(font);
+    vs_text.setString(std::to_string(tv));
+    vs_text.setCharacterSize(38);
+    vs_text.setFillColor(sf::Color::Black);
+    vs_text.setPosition(848, 665);
 
 
     //Tekstury do animacji celu
@@ -318,7 +588,7 @@ int main()
     }
 
     c.loadFromPixels(igun02.getPixelsPtr(), igun02.getSize(), {});
-    Player p1(&igun00, &tgun01, 6, 20, window, SPEED * 2, true);
+    Player p1(&igun00, &tgun01, vibrations, ammun, window, tv, true);
     if (p1.getMouse())
     {
         sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
@@ -374,7 +644,7 @@ int main()
                 window.close();
                 break;
             case sf::Event::KeyPressed:
-                if (!menu)
+                if (!menu && !settings && !instruction)
                 {
                     if (sf::Keyboard::Escape == event.key.code)
                     {
@@ -398,10 +668,17 @@ int main()
                     focus = false;
                 break;
             case sf::Event::MouseButtonPressed:
-                if (!menu)
+                //In Game
+                if (!menu && !settings)
                 {
-                    time = clock.getElapsedTime();
-                    if ((sf::Mouse::Button::Left == event.mouseButton.button) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
+                    if (!resetrof)
+                        time = clock.getElapsedTime();
+                    else
+                    {
+                        time = speedb;
+                        resetrof = false;
+                    }
+                    if ((sf::Mouse::Button::Left == event.mouseButton.button) && (time.asMilliseconds() >= rate_of_fire) && (p1.getAmmunition() > 0))
                     {
                         if (!end_of_time)
                         {
@@ -413,23 +690,32 @@ int main()
                         }
                     }
                 }
-                else
+                //Main menu
+                else if (menu && !settings)
                 {
                     cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                     cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
+                    //New Game
                     if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 150 && cursor_mouse.getPosition().y < 250)
                     {
                         menu = false;
                         p1.reset();
+                        seconds = ts.asSeconds();
+                        end_of_time1 = true;
                         clock1.restart().asSeconds();
                         textScore.setString("Score: 0");
-                        std::string p1samu = std::to_string(p1.getAmmunition());
+                        p1samu = std::to_string(p1.getAmmunition());
                         textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                         textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
                         game = true;
                         pause = false;
                         pause1 = false;
+                        change = false;
+                        cursorEndGame = true;
+                        resetrof = true;
+                        end = true;
                     }
+                    //Continue
                     else if (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 270 && cursor_mouse.getPosition().y < 370)
                     {
                         menu = false;
@@ -446,17 +732,270 @@ int main()
                         pause = true;
                         clock1.restart().asSeconds();
                     }
-                    else if ((game != true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 280 && cursor_mouse.getPosition().y < 380) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 390 && cursor_mouse.getPosition().y < 490))
+                    //Options
+                    else if ((game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 280 && cursor_mouse.getPosition().y < 380) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 390 && cursor_mouse.getPosition().y < 490))
                     {
+                        menu = false;
                         settings = true;
                     }
+                    //Manual
                     else if ((game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 410 && cursor_mouse.getPosition().y < 510) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 510 && cursor_mouse.getPosition().y < 610))
                     {
+                        menu = false;
                         instruction = true;
                     }
+                    //Quit
                     else if ((game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 540 && cursor_mouse.getPosition().y < 640) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730))
                     {
                         window.close();
+                    }
+                }
+                //Settings
+                else if (!menu && settings)
+                {
+                    cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
+                    cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
+                    //Back
+                    if (cursor_mouse.getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && cursor_mouse.getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && cursor_mouse.getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && cursor_mouse.getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)
+                    {
+                        settings = false;
+                        menu = true;
+                    }
+                    //Default
+                    else if (cursor_mouse.getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && cursor_mouse.getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && cursor_mouse.getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && cursor_mouse.getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2)
+                    {
+                        ammun = 30;
+                        ammun_text.setString(std::to_string(ammun));
+                        ammun_text.setPosition(858, 165);
+                        p1.setAmmunition(ammun);
+                        p1samu = std::to_string(p1.getAmmunition());
+                        textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
+                        times = 60;
+                        times_text.setString(std::to_string(times));
+                        times_text.setPosition(858, 265);
+                        vibrations = 6;
+                        vib_text.setString(std::to_string(vibrations));
+                        vib_text.setPosition(868, 365);
+                        p1.setVibrations(vibrations);
+                        speed = 50;
+                        sot_text.setString(std::to_string(speed));
+                        sot_text.setPosition(858, 465);
+                        tspeed = sf::milliseconds(speed);
+                        rate_of_fire = 1200;
+                        rof_text.setString(std::to_string(rate_of_fire));
+                        rof_text.setPosition(838, 565);
+                        tv = 200;
+                        vs_text.setString(std::to_string(tv));
+                        vs_text.setPosition(848, 665);
+                        p1.setTimeV(tv);
+                        change = true;
+                        speedbar = true;
+                    }
+                    //Ammunition
+                    else if (cursor_mouse.getPosition().x >= b1left.getPosition().x - b1left.getSize().x / 2 && cursor_mouse.getPosition().x <= b1left.getPosition().x + b1left.getSize().x / 2 && cursor_mouse.getPosition().y >= b1left.getPosition().y - b1left.getSize().y / 2 && cursor_mouse.getPosition().y <= b1left.getPosition().y + b1left.getSize().y / 2)
+                    {
+                        if (ammun == 10)
+                        {
+                            ammun--;
+                            ammun_text.setString(std::to_string(ammun));
+                            ammun_text.setPosition(868, 165);
+                        }
+                        else if (ammun != 1)
+                        {
+                            ammun--;
+                            ammun_text.setString(std::to_string(ammun));
+                        }
+                        change = true;
+                        p1.setAmmunition(ammun);
+                        p1samu = std::to_string(p1.getAmmunition());
+                        textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
+                    }
+                    else if (cursor_mouse.getPosition().x >= b1right.getPosition().x - b1right.getSize().x / 2 && cursor_mouse.getPosition().x <= b1right.getPosition().x + b1right.getSize().x / 2 && cursor_mouse.getPosition().y >= b1right.getPosition().y - b1right.getSize().y / 2 && cursor_mouse.getPosition().y <= b1right.getPosition().y + b1right.getSize().y / 2)
+                    {
+                        if (ammun == 9)
+                        {
+                            ammun++;
+                            ammun_text.setString(std::to_string(ammun));
+                            ammun_text.setPosition(858, 165);
+                        }
+                        else if (ammun != 99)
+                        {
+                            ammun++;
+                            ammun_text.setString(std::to_string(ammun));
+                        }
+                        change = true;
+                        p1.setAmmunition(ammun);
+                        p1samu = std::to_string(p1.getAmmunition());
+                        textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
+                    }
+                    //Time
+                    else if (cursor_mouse.getPosition().x >= b2left.getPosition().x - b2left.getSize().x / 2 && cursor_mouse.getPosition().x <= b2left.getPosition().x + b2left.getSize().x / 2 && cursor_mouse.getPosition().y >= b2left.getPosition().y - b2left.getSize().y / 2 && cursor_mouse.getPosition().y <= b2left.getPosition().y + b2left.getSize().y / 2)
+                    {
+                        if (times == 120)
+                        {
+                            times -= 30;
+                            times_text.setString(std::to_string(times));
+                            times_text.setPosition(858, 265);
+                        }
+                        else if (times != 30)
+                        {
+                            times -= 30;
+                            times_text.setString(std::to_string(times));
+                        }
+                        change = true;
+                        ts = sf::seconds(times);
+                        seconds = ts.asSeconds();
+                        textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
+                    }
+                    else if (cursor_mouse.getPosition().x >= b2right.getPosition().x - b2right.getSize().x / 2 && cursor_mouse.getPosition().x <= b2right.getPosition().x + b2right.getSize().x / 2 && cursor_mouse.getPosition().y >= b2right.getPosition().y - b2right.getSize().y / 2 && cursor_mouse.getPosition().y <= b2right.getPosition().y + b2right.getSize().y / 2)
+                    {
+                        if (times == 120)
+                        {
+                            times += 30;
+                            times_text.setString(std::to_string(times));
+                            times_text.setPosition(848, 265);
+                        }
+                        else if (times != 990)
+                        {
+                            times += 30;
+                            times_text.setString(std::to_string(times));
+                        }
+                        change = true;
+                        ts = sf::seconds(times);
+                        seconds = ts.asSeconds();
+                        textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
+                    }
+                    //Vibrations
+                    else if (cursor_mouse.getPosition().x >= b3left.getPosition().x - b3left.getSize().x / 2 && cursor_mouse.getPosition().x <= b3left.getPosition().x + b3left.getSize().x / 2 && cursor_mouse.getPosition().y >= b3left.getPosition().y - b3left.getSize().y / 2 && cursor_mouse.getPosition().y <= b3left.getPosition().y + b3left.getSize().y / 2)
+                    {
+                        if (vibrations == 10)
+                        {
+                            vibrations--;
+                            vib_text.setString(std::to_string(vibrations));
+                            vib_text.setPosition(868, 365);
+                        }
+                        else if (vibrations != 1)
+                        {
+                            vibrations--;
+                            vib_text.setString(std::to_string(vibrations));
+                        }
+                        p1.setVibrations(vibrations);
+                    }
+                    else if (cursor_mouse.getPosition().x >= b3right.getPosition().x - b3right.getSize().x / 2 && cursor_mouse.getPosition().x <= b3right.getPosition().x + b3right.getSize().x / 2 && cursor_mouse.getPosition().y >= b3right.getPosition().y - b3right.getSize().y / 2 && cursor_mouse.getPosition().y <= b3right.getPosition().y + b3right.getSize().y / 2)
+                    {
+                        if (vibrations == 9)
+                        {
+                            vibrations++;
+                            vib_text.setString(std::to_string(vibrations));
+                            vib_text.setPosition(858, 365);
+                        }
+                        else if (vibrations != 50)
+                        {
+                            vibrations++;
+                            vib_text.setString(std::to_string(vibrations));
+                        }
+                        p1.setVibrations(vibrations);
+                    }
+                    //Speed of targets
+                    else if (cursor_mouse.getPosition().x >= b4left.getPosition().x - b4left.getSize().x / 2 && cursor_mouse.getPosition().x <= b4left.getPosition().x + b4left.getSize().x / 2 && cursor_mouse.getPosition().y >= b4left.getPosition().y - b4left.getSize().y / 2 && cursor_mouse.getPosition().y <= b4left.getPosition().y + b4left.getSize().y / 2)
+                    {
+                        if (speed == 100)
+                        {
+                            speed -= 10;
+                            sot_text.setString(std::to_string(speed));
+                            sot_text.setPosition(858, 465);
+                        }
+                        else if (speed != 10)
+                        {
+                            speed -= 10;
+                            sot_text.setString(std::to_string(speed));
+                        }
+                        change = true;
+                        tspeed = sf::milliseconds(speed);
+                    }
+                    else if (cursor_mouse.getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && cursor_mouse.getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && cursor_mouse.getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && cursor_mouse.getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2)
+                    {
+                        if (speed == 90)
+                        {
+                            speed += 10;
+                            sot_text.setString(std::to_string(speed));
+                            sot_text.setPosition(848, 465);
+                        }
+                        else if (speed != 400)
+                        {
+                            speed += 10;
+                            sot_text.setString(std::to_string(speed));
+                        }
+                        change = true;
+                        tspeed = sf::milliseconds(speed);
+                    }
+                    //Rate of fire
+                    else if (cursor_mouse.getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && cursor_mouse.getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && cursor_mouse.getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && cursor_mouse.getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2)
+                    {
+                        if (rate_of_fire == 1000)
+                        {
+                            rate_of_fire -= 100;
+                            rof_text.setString(std::to_string(rate_of_fire));
+                            rof_text.setPosition(848, 565);
+                        }
+                        else if (rate_of_fire != 100)
+                        {
+                            rate_of_fire -= 100;
+                            rof_text.setString(std::to_string(rate_of_fire));
+                        }
+                        change = true;
+                        speedb = sf::milliseconds(rate_of_fire);
+                        speedbar = true;
+                    }
+                    else if (cursor_mouse.getPosition().x >= b5right.getPosition().x - b5right.getSize().x / 2 && cursor_mouse.getPosition().x <= b5right.getPosition().x + b5right.getSize().x / 2 && cursor_mouse.getPosition().y >= b5right.getPosition().y - b5right.getSize().y / 2 && cursor_mouse.getPosition().y <= b5right.getPosition().y + b5right.getSize().y / 2)
+                    {
+                        if (rate_of_fire == 900)
+                        {
+                            rate_of_fire += 100;
+                            rof_text.setString(std::to_string(rate_of_fire));
+                            rof_text.setPosition(838, 565);
+                        }
+                        else if (rate_of_fire != 5000)
+                        {
+                            rate_of_fire += 100;
+                            rof_text.setString(std::to_string(rate_of_fire));
+                        }
+                        change = true;
+                        speedb = sf::milliseconds(rate_of_fire);
+                        speedbar = true;
+                    }
+                    //Vibration speed
+                    else if (cursor_mouse.getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && cursor_mouse.getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && cursor_mouse.getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && cursor_mouse.getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)
+                    {
+                        tv = p1.getTimeV();
+                        if (tv == 100)
+                        {
+                            tv -= 10;
+                            vs_text.setString(std::to_string(tv));
+                            vs_text.setPosition(858, 665);
+                        }
+                        else if (tv != 10)
+                        {
+                            tv -= 10;
+                            vs_text.setString(std::to_string(tv));
+                        }
+                        p1.setTimeV(tv);
+                    }
+                    else if (cursor_mouse.getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && cursor_mouse.getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && cursor_mouse.getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && cursor_mouse.getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2)
+                    {
+                        tv = p1.getTimeV();
+                        if (tv == 90)
+                        {
+                            tv += 10;
+                            vs_text.setString(std::to_string(tv));
+                            vs_text.setPosition(848, 665);
+                        }
+                        else if (tv != 990)
+                        {
+                            tv += 10;
+                            vs_text.setString(std::to_string(tv));
+                        }
+                        p1.setTimeV(tv);
                     }
                 }
                 break;
@@ -464,7 +1003,7 @@ int main()
                 if (!menu)
                 {
                     time = clock.getElapsedTime();
-                    if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (time.asMilliseconds() >= RATE_OF_FIRE) && (p1.getAmmunition() > 0))
+                    if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (time.asMilliseconds() >= rate_of_fire) && (p1.getAmmunition() > 0))
                     {
                         if (!end_of_time)
                         {
@@ -513,7 +1052,7 @@ int main()
             window.draw(rec1);
             window.draw(n_game);
 
-            if (game)
+            if (game && !change)
             {
                 window.draw(rec2);
                 window.draw(continue_game);
@@ -532,10 +1071,16 @@ int main()
             }
             else
             {
+                rec3.setPosition(400, 280);
+                options.setPosition(480, 290);
                 window.draw(rec3);
                 window.draw(options);
+                rec4.setPosition(400, 410);
+                manual.setPosition(492, 420);
                 window.draw(rec4);
                 window.draw(manual);
+                rec5.setPosition(400, 540);
+                quit.setPosition(533, 550);
                 window.draw(rec5);
                 window.draw(quit);
             }
@@ -551,6 +1096,60 @@ int main()
         }
         else if (settings)
         {
+
+            window.clear(sf::Color::White);
+
+            window.draw(options_text);
+
+            window.draw(rec0o);
+            window.draw(back_text);
+
+            window.draw(recdo);
+            window.draw(default_text);
+
+            window.draw(rec1o);
+            window.draw(ammuo);
+            window.draw(ammuodash);
+            window.draw(b1left);
+            window.draw(b1right);
+            window.draw(ammun_text);
+
+            window.draw(rec2o);
+            window.draw(timeso);
+            window.draw(timeodash);
+            window.draw(b2left);
+            window.draw(b2right);
+            window.draw(times_text);
+
+            window.draw(rec3o);
+            window.draw(vibrationso);
+            window.draw(vibodash);
+            window.draw(b3left);
+            window.draw(b3right);
+            window.draw(vib_text);
+
+            window.draw(rec4o);
+            window.draw(speedoto);
+            window.draw(sotodash);
+            window.draw(b4left);
+            window.draw(b4right);
+            window.draw(sot_text);
+
+            window.draw(rec5o);
+            window.draw(rateoffireo);
+            window.draw(rofodash);
+            window.draw(b5left);
+            window.draw(b5right);
+            window.draw(rof_text);
+
+            window.draw(rec6o);
+            window.draw(vibspeedo);
+            window.draw(vsodash);
+            window.draw(b6left);
+            window.draw(b6right);
+            window.draw(vs_text);
+
+            window.display();
 
         }
         else if (instruction)
@@ -732,10 +1331,19 @@ int main()
                 platformObject[9].create(window);
 
                 float tym = 0;
+                if (resetrof)
+                {
+                    speedbar = false;
+                    p1.getSB().setSize({ 10.0f, 600.0f });
+                    if (p1.getMouse())
+                        p1.getSB().setPosition(20, 100);
+                    else
+                        p1.getSB().setPosition(1170, 100);
+                }
                 if (speedbar && clock3.getElapsedTime() < speedb)
                 {
                     tym = clock3.getElapsedTime().asMilliseconds() - tym;
-                    int change = tym / RATE_OF_FIRE * count;
+                    int change = tym / rate_of_fire * COUNT;
                     p1.getSB().setSize({ 10.0f, 600.0f - change });
                     if (p1.getMouse())
                         p1.getSB().setPosition(20, 100 + change);
@@ -782,7 +1390,7 @@ int main()
                 window.clear();
 
                 int check = clock2.getElapsedTime().asMilliseconds();
-                if (check >= tspeed.asMilliseconds() * 30)
+                if (check >= 50 * 30)
                 {
                     if (end)
                     {

@@ -12,6 +12,7 @@ private:
 	sf::RectangleShape sb;
 	int vibrations;
 	int ammunition;
+	int ammunitionb;
 	int score;
 	int tv;
 	bool mouse;
@@ -19,7 +20,7 @@ private:
 	sf::RectangleShape rec;
 
 public:
-	Player(sf::Image* image, sf::Texture* texture, int vibrations, float ammunition, sf::RenderWindow& win, int tv, bool mouse);
+	Player(sf::Image* image, sf::Texture* texture, int vibrations, int ammunition, sf::RenderWindow& win, int tv, bool mouse);
 	~Player();
 
 	void create(sf::RenderWindow& win);
@@ -34,5 +35,8 @@ public:
 	sf::RectangleShape& getRec();
 	sf::RectangleShape& getSB();
 	void setImage(sf::Image& nimage, sf::RenderWindow& win);
+	void setAmmunition(int ammunition);
+	void setVibrations(int vibrations);
+	void setTimeV(int tv);
 	void reset();
 };

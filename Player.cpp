@@ -1,17 +1,11 @@
 #include "Player.h"
 
-Player::Player(sf::Image* image, sf::Texture* texture, int vibrations, float ammunition, sf::RenderWindow& win, int tv, bool mouse)
+Player::Player(sf::Image* image, sf::Texture* texture, int vibrations, int ammunition, sf::RenderWindow& win, int tv, bool mouse)
 {
-	if (vibrations > 0)
-	{
-		this->vibrations = vibrations;
-	}
-	else
-	{
-		this->vibrations = 1;
-	}
+	this->vibrations = vibrations;
 	this->mouse = mouse;
 	this->ammunition = ammunition;
+	this->ammunitionb = ammunition;
 	this->score = 0;
 	this->image = image;
 	this->texture = texture;
@@ -112,8 +106,24 @@ void Player::setImage(sf::Image& nimage, sf::RenderWindow& win)
 	win.setMouseCursor(c1);
 }
 
+void Player::setAmmunition(int ammunition)
+{
+	this->ammunition = ammunition;
+	this->ammunitionb = ammunition;
+}
+
+void Player::setVibrations(int vibrations)
+{
+	this->vibrations = vibrations;
+}
+
+void Player::setTimeV(int tv)
+{
+	this->tv = tv;
+}
+
 void Player::reset()
 {
 	score = 0;
-	ammunition = 20;
+	ammunition = ammunitionb;
 }
