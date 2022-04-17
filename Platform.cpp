@@ -1,9 +1,9 @@
 #include "Platform.h"
 
-Platform::Platform(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position)
+Platform::Platform(sf::Color* c, sf::Vector2f size, sf::Vector2f position)
 {
 	rec.setSize(size);
-	rec.setTexture(texture);
+	rec.setFillColor(*c);
 	rec.setPosition(position);
 }
 

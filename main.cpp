@@ -35,6 +35,7 @@ bool pause = false;
 bool pause1 = true;
 bool settings = false;
 bool instruction = false;
+bool select_player = false;
 bool change = false;
 bool resetrof = false;
 int times = 60;
@@ -94,7 +95,7 @@ int main()
     player.setString("Player");
     player.setCharacterSize(60);
     player.setFillColor(sf::Color::Black);
-    player.setPosition(510, 280);
+    player.setPosition(506, 280);
 
     sf::RectangleShape rec3;
     rec3.setSize({ 400, 100 });
@@ -403,6 +404,50 @@ int main()
     vs_text.setFillColor(sf::Color::Black);
     vs_text.setPosition(848, 665);
 
+    //Player
+    sf::Text player_text;
+    player_text.setFont(font);
+    player_text.setString("Player");
+    player_text.setCharacterSize(100);
+    player_text.setFillColor(sf::Color::Black);
+    player_text.setPosition(445, 5);
+
+    sf::RectangleShape rec1p;
+    rec1p.setSize({ 400, 60 });
+    rec1p.setPosition(150, 150);
+    rec1p.setOutlineThickness(3);
+    rec1p.setOutlineColor(sf::Color::Black);
+    sf::Text player1;
+    player1.setFont(font);
+    player1.setString("Player 1");
+    player1.setCharacterSize(38);
+    player1.setFillColor(sf::Color::Black);
+    player1.setPosition(270, 155);
+
+    sf::RectangleShape rec3p;
+    rec3p.setSize({ 400, 440 });
+    rec3p.setPosition(150, 230);
+    rec3p.setOutlineThickness(3);
+    rec3p.setOutlineColor(sf::Color::Black);
+
+    sf::RectangleShape rec2p;
+    rec2p.setSize({ 400, 60 });
+    rec2p.setPosition(650, 150);
+    rec2p.setOutlineThickness(3);
+    rec2p.setOutlineColor(sf::Color::Black);
+    sf::Text player2;
+    player2.setFont(font);
+    player2.setString("Player 2");
+    player2.setCharacterSize(38);
+    player2.setFillColor(sf::Color::Black);
+    player2.setPosition(770, 155);
+
+    sf::RectangleShape rec4p;
+    rec4p.setSize({ 400, 440 });
+    rec4p.setPosition(650, 230);
+    rec4p.setOutlineThickness(3);
+    rec4p.setOutlineColor(sf::Color::Black);
+
 
     //Tekstury do animacji celu
     std::vector<sf::Texture> goalTextures;
@@ -509,53 +554,39 @@ int main()
 
     Collision* collision;
 
-    sf::Texture tplat123;
-    if (!tplat123.loadFromFile("Resources/black.png"))
-    {
-        std::cout << "Errorp123" << std::endl;
-        system("PAUSE");
-    }
-    sf::Texture tplat456;
-    if (!tplat456.loadFromFile("Resources/white.png"))
-    {
-        std::cout << "Errorp456" << std::endl;
-        system("PAUSE");
-    }
-
-    sf::Texture tplat78910;
-    if (!tplat78910.loadFromFile("Resources/black.png"))
-    {
-        std::cout << "Errorp78910" << std::endl;
-        system("PAUSE");
-    }
+    sf::Color c0(sf::Color(26, 26, 26));
+    sf::Color c1(sf::Color(51, 51, 51));
+    sf::Color c2(sf::Color(77, 77, 77));
+    sf::Color c345(sf::Color::White);
+    sf::Color c678910(sf::Color::Black);
 
     //Platforms
     std::vector<Platform> platformObject;
 
-    Platform plat0(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 744.0f));
-    Platform plat1(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 494.0f));
-    Platform plat2(&tplat123, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 246.0f));
+    Platform plat0(&c0, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 744.0f));
+    Platform plat1(&c1, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 494.0f));
+    Platform plat2(&c2, sf::Vector2f(1100.0f, 6.0f), sf::Vector2f(50.0f, 246.0f));
     platformObject.push_back(plat0);
     platformObject.push_back(plat1);
     platformObject.push_back(plat2);
 
-    Platform plat3(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 500.0f));
-    Platform plat4(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 250.0f));
-    Platform plat5(&tplat456, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 0.0f));
+    Platform plat3(&c345, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 500.0f));
+    Platform plat4(&c345, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 250.0f));
+    Platform plat5(&c345, sf::Vector2f(1100.0f, 250.0f), sf::Vector2f(50.0f, 0.0f));
     platformObject.push_back(plat3);
     platformObject.push_back(plat4);
     platformObject.push_back(plat5);
 
-    Platform plat6(&tplat78910, sf::Vector2f(1200.0f, 80.0f), sf::Vector2f(0.0f, 0.0f));
-    Platform plat7(&tplat78910, sf::Vector2f(1200.0f, 50.0f), sf::Vector2f(0.0f, 750.0f));
-    Platform plat8(&tplat78910, sf::Vector2f(50.0f, 1200.0f), sf::Vector2f(0.0f, 0.0f));
-    Platform plat9(&tplat78910, sf::Vector2f(50.0f, 1200.0f), sf::Vector2f(1150.0f, 0.0f));
+    Platform plat6(&c678910, sf::Vector2f(1200.0f, 80.0f), sf::Vector2f(0.0f, 0.0f));
+    Platform plat7(&c678910, sf::Vector2f(1200.0f, 50.0f), sf::Vector2f(0.0f, 750.0f));
+    Platform plat8(&c678910, sf::Vector2f(50.0f, 1200.0f), sf::Vector2f(0.0f, 0.0f));
+    Platform plat9(&c678910, sf::Vector2f(50.0f, 1200.0f), sf::Vector2f(1150.0f, 0.0f));
     platformObject.push_back(plat6);
     platformObject.push_back(plat7);
     platformObject.push_back(plat8);
     platformObject.push_back(plat9);
 
-    Platform plat10(&tplat456, sf::Vector2f(1100.0f, 670.0f), sf::Vector2f(50.0f, 80.0f));
+    Platform plat10(&c678910, sf::Vector2f(1100.0f, 670.0f), sf::Vector2f(50.0f, 80.0f));
     platformObject.push_back(plat10);
 
     sf::Text textScore;
@@ -684,7 +715,7 @@ int main()
                 break;
             case sf::Event::MouseButtonPressed:
                 //In Game
-                if (!menu && !settings)
+                if (!menu && !settings && !select_player)
                 {
                     if (!resetrof)
                         time = clock.getElapsedTime();
@@ -706,7 +737,7 @@ int main()
                     }
                 }
                 //Main menu
-                else if (menu && !settings)
+                else if (menu && !settings && !select_player)
                 {
                     cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                     cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
@@ -746,11 +777,13 @@ int main()
                         }
                         pause = true;
                         clock1.restart().asSeconds();
+                        sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
                     }
                     //Player
                     else if (game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 270 && cursor_mouse.getPosition().y < 370)
                     {
-                        std::cout << "Player!" << std::endl;
+                        menu = false;
+                        select_player = true;
                     }
                     //Options
                     else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 390 && cursor_mouse.getPosition().y < 490)
@@ -771,7 +804,7 @@ int main()
                     }
                 }
                 //Settings
-                else if (!menu && settings)
+                else if (!menu && settings && !select_player)
                 {
                     cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                     cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
@@ -1018,6 +1051,17 @@ int main()
                         p1.setTimeV(tv);
                     }
                 }
+                else if (!menu && !settings && select_player)
+                {
+                    cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
+                    cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
+                    //Back
+                    if (cursor_mouse.getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && cursor_mouse.getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && cursor_mouse.getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && cursor_mouse.getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)
+                    {
+                        select_player = false;
+                        menu = true;
+                    }
+                }
                 break;
             case sf::Event::JoystickMoved:
                 if (!menu)
@@ -1162,6 +1206,25 @@ int main()
 
             window.display();
 
+        }
+        else if (select_player)
+        {
+            window.clear(sf::Color::White);
+
+            window.draw(player_text);
+
+            window.draw(rec0o);
+            window.draw(back_text);
+
+            window.draw(rec1p);
+            window.draw(player1);
+            window.draw(rec3p);
+
+            window.draw(rec2p);
+            window.draw(player2);
+            window.draw(rec4p);
+
+            window.display();
         }
         else if (instruction)
         {

@@ -7,9 +7,8 @@ private:
 	sf::RectangleShape rec;
 
 public:
-	Platform(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position);
+	Platform(sf::Color* c, sf::Vector2f size, sf::Vector2f position);
 	~Platform();
 
 	void create(sf::RenderWindow& window);
 };
-
