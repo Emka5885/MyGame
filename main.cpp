@@ -89,35 +89,48 @@ int main()
     continue_game.setFillColor(sf::Color::Black);
     continue_game.setPosition(470, 280);
 
+    sf::Text player;
+    player.setFont(font);
+    player.setString("Player");
+    player.setCharacterSize(60);
+    player.setFillColor(sf::Color::Black);
+    player.setPosition(510, 280);
+
     sf::RectangleShape rec3;
     rec3.setSize({ 400, 100 });
     rec3.setOutlineThickness(3);
     rec3.setOutlineColor(sf::Color::Black);
+    rec3.setPosition(400, 390);
     sf::Text options;
     options.setFont(font);
     options.setString("Options");
     options.setCharacterSize(60);
     options.setFillColor(sf::Color::Black);
+    options.setPosition(480, 400);
 
     sf::RectangleShape rec4;
     rec4.setSize({ 400, 100 });
     rec4.setOutlineThickness(3);
     rec4.setOutlineColor(sf::Color::Black);
+    rec4.setPosition(400, 510);
     sf::Text manual;
     manual.setFont(font);
     manual.setString("Manual");
     manual.setCharacterSize(60);
     manual.setFillColor(sf::Color::Black);
+    manual.setPosition(492, 520);
 
     sf::RectangleShape rec5;
     rec5.setSize({ 400, 100 });
     rec5.setOutlineThickness(3);
     rec5.setOutlineColor(sf::Color::Black);
+    rec5.setPosition(400, 630);
     sf::Text quit;
     quit.setFont(font);
     quit.setString("Quit");
     quit.setCharacterSize(60);
     quit.setFillColor(sf::Color::Black);
+    quit.setPosition(533, 640);
 
     //Options
     sf::Texture buttonl;
@@ -646,6 +659,8 @@ int main()
             case sf::Event::KeyPressed:
                 if (!menu && !settings && !instruction)
                 {
+                    sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
+                    focus = true;
                     if (sf::Keyboard::Escape == event.key.code)
                     {
                         menu = true;
@@ -732,20 +747,25 @@ int main()
                         pause = true;
                         clock1.restart().asSeconds();
                     }
+                    //Player
+                    else if (game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 270 && cursor_mouse.getPosition().y < 370)
+                    {
+                        std::cout << "Player!" << std::endl;
+                    }
                     //Options
-                    else if ((game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 280 && cursor_mouse.getPosition().y < 380) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 390 && cursor_mouse.getPosition().y < 490))
+                    else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 390 && cursor_mouse.getPosition().y < 490)
                     {
                         menu = false;
                         settings = true;
                     }
                     //Manual
-                    else if ((game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 410 && cursor_mouse.getPosition().y < 510) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 510 && cursor_mouse.getPosition().y < 610))
+                    else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 510 && cursor_mouse.getPosition().y < 610)
                     {
                         menu = false;
                         instruction = true;
                     }
                     //Quit
-                    else if ((game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 540 && cursor_mouse.getPosition().y < 640) || (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730))
+                    else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730)
                     {
                         window.close();
                     }
@@ -1056,31 +1076,22 @@ int main()
             {
                 window.draw(rec2);
                 window.draw(continue_game);
-                rec3.setPosition(400, 390);
-                options.setPosition(480, 400);
                 window.draw(rec3);
                 window.draw(options);
-                rec4.setPosition(400, 510);
-                manual.setPosition(492, 520);
                 window.draw(rec4);
                 window.draw(manual);
-                rec5.setPosition(400, 630);
-                quit.setPosition(533, 640);
                 window.draw(rec5);
                 window.draw(quit);
             }
             else
             {
-                rec3.setPosition(400, 280);
-                options.setPosition(480, 290);
+                game = false;
+                window.draw(rec2);
+                window.draw(player);
                 window.draw(rec3);
                 window.draw(options);
-                rec4.setPosition(400, 410);
-                manual.setPosition(492, 420);
                 window.draw(rec4);
                 window.draw(manual);
-                rec5.setPosition(400, 540);
-                quit.setPosition(533, 550);
                 window.draw(rec5);
                 window.draw(quit);
             }

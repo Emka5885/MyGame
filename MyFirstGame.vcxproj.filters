@@ -94,5 +94,11 @@
     <Image Include="Gun\gun00.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="Resources\Button\Left.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="Resources\Button\Right.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>
