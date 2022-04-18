@@ -38,5 +38,6 @@ public:
 	void setAmmunition(int ammunition);
 	void setVibrations(int vibrations);
 	void setTimeV(int tv);
+	void setMouse(bool mouse);
 	void reset();
 };

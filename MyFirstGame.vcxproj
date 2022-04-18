@@ -165,7 +165,6 @@
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="black.png" />
     <Image Include="Goal\Bunny00.png" />
     <Image Include="Goal\Bunny01.png" />
     <Image Include="Goal\Bunny01r.png" />
@@ -178,10 +177,8 @@
     <Image Include="Goal\Bunny05.png" />
     <Image Include="Goal\Bunny05r.png" />
     <Image Include="Gun\gun00.png" />
-    <Image Include="red.png" />
     <Image Include="Resources\Button\Left.png" />
     <Image Include="Resources\Button\Right.png" />
-    <Image Include="white.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -38,6 +38,7 @@ bool instruction = false;
 bool select_player = false;
 bool change = false;
 bool resetrof = false;
+bool select_mouse = true;
 int times = 60;
 sf::Time ts = sf::seconds(times);
 sf::Time tspeed = sf::milliseconds(speed);
@@ -405,6 +406,37 @@ int main()
     vs_text.setPosition(848, 665);
 
     //Player
+    sf::Image igun00;
+    if (!igun00.loadFromFile("Resources/Gun/gun00.png"))
+    {
+        std::cout << "Errorig00" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tgun00;
+    if (!tgun00.loadFromFile("Resources/Gun/gun00.png"))
+    {
+        std::cout << "Errortg00" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tgun01;
+    if (!tgun01.loadFromFile("Resources/Gun/gun01.png"))
+    {
+        std::cout << "Errortg01" << std::endl;
+        system("PAUSE");
+    }
+    sf::Image igun02;
+    if (!igun02.loadFromFile("Resources/Gun/gun02.png"))
+    {
+        std::cout << "Errorig02" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tgun02;
+    if (!tgun02.loadFromFile("Resources/Gun/gun02.png"))
+    {
+        std::cout << "Errortg02" << std::endl;
+        system("PAUSE");
+    }
+
     sf::Text player_text;
     player_text.setFont(font);
     player_text.setString("Player");
@@ -429,6 +461,56 @@ int main()
     rec3p.setPosition(150, 230);
     rec3p.setOutlineThickness(3);
     rec3p.setOutlineColor(sf::Color::Black);
+    sf::RectangleShape recmp;
+    recmp.setSize({ 74, 74 });
+    recmp.setPosition(312, 365);
+    recmp.setTexture(&tgun00);
+    sf::RectangleShape reccp;
+    reccp.setSize({ 74, 74 });
+    reccp.setPosition(312, 365);
+    reccp.setTexture(&tgun01);
+    sf::Text mousep;
+    mousep.setFont(font);
+    mousep.setString("Mouse");
+    mousep.setCharacterSize(30);
+    mousep.setFillColor(sf::Color::Black);
+    mousep.setPosition(300, 475);
+    sf::Text controllerp;
+    controllerp.setFont(font);
+    controllerp.setString("Controller");
+    controllerp.setCharacterSize(30);
+    controllerp.setFillColor(sf::Color::Black);
+    controllerp.setPosition(282, 475);
+    sf::RectangleShape bleftp;
+    bleftp.setSize({ 20, 30 });
+    bleftp.setTexture(&buttonl);
+    bleftp.setOrigin(b1left.getSize().x / 2, b1left.getSize().y / 2);
+    bleftp.setPosition(175, 435);
+    sf::RectangleShape brightp;
+    brightp.setSize({ 20, 30 });
+    brightp.setTexture(&buttonr);
+    brightp.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
+    brightp.setPosition(505, 435);
+
+    sf::RectangleShape choosep11;
+    choosep11.setSize({ 250, 50 });
+    choosep11.setPosition(350, 595);
+    choosep11.setOrigin(choosep11.getSize().x / 2, choosep11.getSize().y / 2);
+    choosep11.setOutlineThickness(2);
+    choosep11.setOutlineColor(sf::Color::Black);
+    choosep11.setFillColor(sf::Color(210, 210, 210));
+    sf::RectangleShape choosep12;
+    choosep12.setSize({ 250, 50 });
+    choosep12.setPosition(350, 595);
+    choosep12.setOrigin(choosep12.getSize().x / 2, choosep12.getSize().y / 2);
+    choosep12.setOutlineThickness(2);
+    choosep12.setOutlineColor(sf::Color::Black);
+    sf::Text select_text;
+    select_text.setFont(font);
+    select_text.setString("Select");
+    select_text.setCharacterSize(38);
+    select_text.setFillColor(sf::Color::Black);
+    select_text.setPosition(292, 572);
 
     sf::RectangleShape rec2p;
     rec2p.setSize({ 400, 60 });
@@ -606,33 +688,9 @@ int main()
     textEnd.setFont(font);
     textEnd.setCharacterSize(100);
 
-    sf::Image igun00;
-    if (!igun00.loadFromFile("Resources/Gun/gun00.png"))
-    {
-        std::cout << "Errorig00" << std::endl;
-        system("PAUSE");
-    }
-    sf::Texture tgun01;
-    if (!tgun01.loadFromFile("Resources/Gun/gun01.png"))
-    {
-        std::cout << "Errortg01" << std::endl;
-        system("PAUSE");
-    }
-    sf::Image igun02;
-    if (!igun02.loadFromFile("Resources/Gun/gun02.png"))
-    {
-        std::cout << "Errorig02" << std::endl;
-        system("PAUSE");
-    }
-    sf::Texture tgun02;
-    if (!tgun02.loadFromFile("Resources/Gun/gun02.png"))
-    {
-        std::cout << "Errortg02" << std::endl;
-        system("PAUSE");
-    }
 
     c.loadFromPixels(igun02.getPixelsPtr(), igun02.getSize(), {});
-    Player p1(&igun00, &tgun01, vibrations, ammun, window, tv, true);
+    Player p1(&igun00, &tgun01, vibrations, ammun, window, tv, select_mouse);
     if (p1.getMouse())
     {
         sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
@@ -1061,6 +1119,28 @@ int main()
                         select_player = false;
                         menu = true;
                     }
+                    //
+                    else if (select_mouse && cursor_mouse.getPosition().x >= brightp.getPosition().x - brightp.getSize().x / 2 && cursor_mouse.getPosition().x <= brightp.getPosition().x + brightp.getSize().x / 2 && cursor_mouse.getPosition().y >= brightp.getPosition().y - brightp.getSize().y / 2 && cursor_mouse.getPosition().y <= brightp.getPosition().y + brightp.getSize().y / 2)
+                    {
+                        select_mouse = false;
+                    }
+                    else if (!select_mouse && cursor_mouse.getPosition().x >= bleftp.getPosition().x - bleftp.getSize().x / 2 && cursor_mouse.getPosition().x <= bleftp.getPosition().x + bleftp.getSize().x / 2 && cursor_mouse.getPosition().y >= bleftp.getPosition().y - bleftp.getSize().y / 2 && cursor_mouse.getPosition().y <= bleftp.getPosition().y + bleftp.getSize().y / 2)
+                    {
+                        select_mouse = true;
+                    }
+                    //Select
+                    else if (select_mouse && cursor_mouse.getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && cursor_mouse.getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && cursor_mouse.getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && cursor_mouse.getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2)
+                    {
+                        choosep11.setFillColor(sf::Color(210, 210, 210));
+                        choosep12.setFillColor(sf::Color::White);
+                        p1.setMouse(select_mouse);
+                    }
+                    else if (!select_mouse && cursor_mouse.getPosition().x >= choosep12.getPosition().x - choosep12.getSize().x / 2 && cursor_mouse.getPosition().x <= choosep12.getPosition().x + choosep12.getSize().x / 2 && cursor_mouse.getPosition().y >= choosep12.getPosition().y - choosep12.getSize().y / 2 && cursor_mouse.getPosition().y <= choosep12.getPosition().y + choosep12.getSize().y / 2)
+                    {
+                        choosep11.setFillColor(sf::Color::White);
+                        choosep12.setFillColor(sf::Color(210, 210, 210));
+                        p1.setMouse(select_mouse);
+                    }
                 }
                 break;
             case sf::Event::JoystickMoved:
@@ -1085,6 +1165,16 @@ int main()
                 //case sf::Event::GainedFocus:
                 //    break;
             }
+        }
+        if (!p1.getMouse())
+        {
+            window.setMouseCursorVisible(false);
+            sf::Joystick::Identification id = sf::Joystick::getIdentification(0);
+            joystick = p1.getRec();
+        }
+        else
+        {
+            window.setMouseCursorVisible(true);
         }
 
         if (!p1.getMouse())
@@ -1219,6 +1309,21 @@ int main()
             window.draw(rec1p);
             window.draw(player1);
             window.draw(rec3p);
+            if (select_mouse)
+            {
+                window.draw(recmp);
+                window.draw(mousep);
+                window.draw(brightp);
+                window.draw(choosep11);
+            }
+            else
+            {
+                window.draw(reccp);
+                window.draw(controllerp);
+                window.draw(bleftp);
+                window.draw(choosep12);
+            }
+            window.draw(select_text);
 
             window.draw(rec2p);
             window.draw(player2);

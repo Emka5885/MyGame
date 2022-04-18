@@ -122,6 +122,11 @@ void Player::setTimeV(int tv)
 	this->tv = tv;
 }
 
+void Player::setMouse(bool mouse)
+{
+	this->mouse = mouse;
+}
+
 void Player::reset()
 {
 	score = 0;
