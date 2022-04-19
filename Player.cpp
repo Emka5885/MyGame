@@ -10,24 +10,21 @@ Player::Player(sf::Image* image, sf::Texture* texture, int vibrations, int ammun
 	this->image = image;
 	this->texture = texture;
 	this->tv = tv;
-	this->sb.setSize({ 10, 600 });
-	this->sb.setFillColor(sf::Color::Red);
+	this->sbm.setSize({ 10, 600 });
+	this->sbm.setFillColor(sf::Color::Red);
+	this->sbc.setSize({ 10, 600 });
+	this->sbc.setFillColor(sf::Color::Red);
 
-	if (mouse)
-	{
-		c1.loadFromPixels(this->image->getPixelsPtr(), this->image->getSize(), {});
-		win.setMouseCursor(c1);
-		this->sb.setPosition(20, 100);
-	}
-	else
-	{
-		rec.setSize(sf::Vector2f(texture->getSize()));
-		rec.setTexture(texture);
-		rec.setOrigin(rec.getSize().x / 2, rec.getSize().y / 2);
-		rec.setPosition(sf::Vector2f(win.getSize().x / 2, win.getSize().y / 2));
-		win.draw(rec);
-		this->sb.setPosition(1170, 100);
-	}
+	c1.loadFromPixels(this->image->getPixelsPtr(), this->image->getSize(), {});
+	win.setMouseCursor(c1);
+	this->sbm.setPosition(20, 100);
+
+	rec.setSize(sf::Vector2f(texture->getSize()));
+	rec.setTexture(texture);
+	rec.setOrigin(rec.getSize().x / 2, rec.getSize().y / 2);
+	rec.setPosition(sf::Vector2f(win.getSize().x / 2, win.getSize().y / 2));
+	win.draw(rec);
+	this->sbc.setPosition(1170, 100);
 
 
 	b = new sf::CircleShape(2);
@@ -96,7 +93,10 @@ sf::RectangleShape& Player::getRec()
 
 sf::RectangleShape& Player::getSB()
 {
-	return this->sb;
+	if (mouse)
+		return this->sbm;
+	else
+		return this->sbc;
 }
 
 void Player::setImage(sf::Image& nimage, sf::RenderWindow& win)

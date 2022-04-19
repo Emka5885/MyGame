@@ -9,7 +9,8 @@ private:
 	sf::Image* image;
 	sf::Texture* texture;
 	sf::CircleShape* b;
-	sf::RectangleShape sb;
+	sf::RectangleShape sbm;
+	sf::RectangleShape sbc;
 	int vibrations;
 	int ammunition;
 	int ammunitionb;
