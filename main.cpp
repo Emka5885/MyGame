@@ -29,6 +29,7 @@ bool end = true;
 bool focus = true;
 bool end_of_time = false;
 bool end_of_time1 = true;
+bool endg = false;
 bool cursorEndGame = true;
 bool cursorMenu = true;
 bool speedbar = false;
@@ -53,6 +54,7 @@ sf::Time speedb = sf::milliseconds(rate_of_fire);
 sf::Cursor c;
 //sf::RectangleShape joystick;
 sf::CircleShape cursor_mouse(2);
+sf::CircleShape cursor_mouse2(2);
 
 void score(int& s, int row);
 
@@ -788,6 +790,8 @@ int main()
     sf::Clock stopClick;
     stopClick.restart().asMilliseconds();
     clock4.restart().asSeconds();
+    //sf::Clock clockm;
+    //clockm.restart().asMilliseconds();
     sf::Text textEndOfTime;
     textEndOfTime.setFont(font);
     textEndOfTime.setCharacterSize(40);
@@ -969,8 +973,9 @@ int main()
                     //Manual
                     else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 510 && cursor_mouse.getPosition().y < 610)
                     {
-                        menu = false;
-                        instruction = true;
+                        //menu = false;
+                        //instruction = true;
+                        std::cout << "Manual" << std::endl;
                     }
                     //Quit
                     else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730)
@@ -1015,16 +1020,16 @@ int main()
                         vs_text.setString(std::to_string(tv));
                         vs_text.setPosition(848, 665);
                         p1.setTimeV(tv);
+                        p2.setAmmunition(ammun);
+                        p2samu = std::to_string(p2.getAmmunition());
+                        p2.setVibrations(vibrations);
+                        p2.setTimeV(tv);
                         if (!p2_exists)
                         {
                             textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                         }
                         else
                         {
-                            p2.setAmmunition(ammun);
-                            p2samu = std::to_string(p2.getAmmunition());
-                            p2.setVibrations(vibrations);
-                            p2.setTimeV(tv);
                             textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                         }
                         change = true;
@@ -1048,12 +1053,12 @@ int main()
                         change = true;
                         p1.setAmmunition(ammun);
                         p1samu = std::to_string(p1.getAmmunition());
+                        p2.setAmmunition(ammun);
+                        p2samu = std::to_string(p2.getAmmunition());
                         if (!p2_exists)
                             textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                         else
                         {
-                            p2.setAmmunition(ammun);
-                            p2samu = std::to_string(p2.getAmmunition());
                             textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                         }
                     }
@@ -1073,12 +1078,12 @@ int main()
                         change = true;
                         p1.setAmmunition(ammun);
                         p1samu = std::to_string(p1.getAmmunition());
+                        p2.setAmmunition(ammun);
+                        p2samu = std::to_string(p2.getAmmunition());
                         if (!p2_exists)
                             textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                         else
                         {
-                            p2.setAmmunition(ammun);
-                            p2samu = std::to_string(p2.getAmmunition());
                             textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                         }
                     }
@@ -1447,11 +1452,12 @@ int main()
                             settings = true;
                         }
                         //Manual
-                        else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 510 && p1.getRec().getPosition().y < 610) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 510 && p2.getRec().getPosition().y < 610)))
-                        {
-                            menu = false;
-                            instruction = true;
-                        }
+                        //else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 510 && p1.getRec().getPosition().y < 610) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 510 && p2.getRec().getPosition().y < 610)))
+                        //{
+                        //    //menu = false;
+                        //    //instruction = true;
+                        //    std::cout << "Manual" << std::endl;
+                        //}
                         //Quit
                         if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 630 && p1.getRec().getPosition().y < 730) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 630 && p2.getRec().getPosition().y < 730)))
                         {
@@ -1493,16 +1499,16 @@ int main()
                             vs_text.setString(std::to_string(tv));
                             vs_text.setPosition(848, 665);
                             p1.setTimeV(tv);
+                            p2.setAmmunition(ammun);
+                            p2samu = std::to_string(p2.getAmmunition());
+                            p2.setVibrations(vibrations);
+                            p2.setTimeV(tv);
                             if (!p2_exists)
                             {
                                 textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                             }
                             else
                             {
-                                p2.setAmmunition(ammun);
-                                p2samu = std::to_string(p2.getAmmunition());
-                                p2.setVibrations(vibrations);
-                                p2.setTimeV(tv);
                                 textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                             }
                             change = true;
@@ -1526,12 +1532,12 @@ int main()
                             change = true;
                             p1.setAmmunition(ammun);
                             p1samu = std::to_string(p1.getAmmunition());
+                            p2.setAmmunition(ammun);
+                            p2samu = std::to_string(p2.getAmmunition());
                             if (!p2_exists)
                                 textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                             else
                             {
-                                p2.setAmmunition(ammun);
-                                p2samu = std::to_string(p2.getAmmunition());
                                 textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                             }
                         }
@@ -1551,12 +1557,12 @@ int main()
                             change = true;
                             p1.setAmmunition(ammun);
                             p1samu = std::to_string(p1.getAmmunition());
+                            p2.setAmmunition(ammun);
+                            p2samu = std::to_string(p2.getAmmunition());
                             if (!p2_exists)
                                 textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                             else
                             {
-                                p2.setAmmunition(ammun);
-                                p2samu = std::to_string(p2.getAmmunition());
                                 textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                             }
                         }
@@ -1792,6 +1798,23 @@ int main()
                     }
                     stopClick.restart().asMilliseconds();
                 }
+
+                //if (!p1.getMouse())
+                //{
+                //    if (event.type == sf::Event::JoystickMoved)
+                //    {
+                //        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                //        p1.getRec().move(m.x * 0.05, m.y * 0.05);
+                //    }
+                //}
+                //else if (p2_exists)
+                //{
+                //    if (event.type == sf::Event::JoystickMoved)
+                //    {
+                //        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                //        p2.getRec().move(m.x * 0.05, m.y * 0.05);
+                //    }
+                //}
                 break;
                 //case sf::Event::LostFocus:
                 //    break;
@@ -1817,7 +1840,18 @@ int main()
             window.setMouseCursorVisible(true);
         }
 
-
+        //if (clockm.getElapsedTime().asMilliseconds() >= 750)
+        //{
+        //    if (select_mouse)
+        //    {
+        //        
+        //    }
+        //    else
+        //    {
+        //        
+        //    }
+        //    clockm.restart().asMilliseconds();
+        //}
 
         if (menu)
         {
@@ -2075,20 +2109,28 @@ int main()
         }
         else
         {
-            if (!p1.getMouse())
+            if (!p1.getMouse() && p2_exists)
             {
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.002, m.y * 0.002);
+                    p1.getRec().move(m.x * 0.001, m.y * 0.001);
                 }
             }
-            else if (p2_exists)
+            else if (p2_exists && p1.getMouse())
             {
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
                     p2.getRec().move(m.x * 0.002, m.y * 0.002);
+                }
+            }
+            else if (!p1.getMouse() && !p2_exists)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.0008, m.y * 0.0008);
                 }
             }
 
@@ -2142,6 +2184,31 @@ int main()
             else
             {
                 textEndOfTime.setString("Time: 0s");
+            }
+
+            if (!p1.getMouse() && p2_exists)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                }
+            }
+            else if (p2_exists && p1.getMouse())
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p2.getRec().move(m.x * 0.002, m.y * 0.002);
+                }
+            }
+            else if (!p1.getMouse() && !p2_exists)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.0008, m.y * 0.0008);
+                }
             }
 
             if (test || test2)
@@ -2237,9 +2304,38 @@ int main()
                 b1 = true;
             }
 
-            if ((p2.getAmmunition() > 0 || p1.getAmmunition() > 0) && !end_of_time)
+            if (!p1.getMouse() && p2_exists)
             {
-                if (tv == 0 && ((select_mouse && focus) || (!select_mouse)))
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                }
+            }
+            else if (p2_exists && p1.getMouse())
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p2.getRec().move(m.x * 0.002, m.y * 0.002);
+                }
+            }
+            else if (!p1.getMouse() && !p2_exists)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.0008, m.y * 0.0008);
+                }
+            }
+
+            if ((p2.getAmmunition() > 0 || p1.getAmmunition() > 0) && !end_of_time && !endg)
+            {
+                if (!p2_exists && p1.getAmmunition() == 0)
+                {
+                    endg = true;
+                }
+                if (tv == 0 && ((select_mouse && focus) || (!select_mouse)) && !p2_exists)
                 {
                     int p1_v = p1.getVibrations();
                     int yes_or_no = rand() % 2;
@@ -2264,12 +2360,12 @@ int main()
 
                     tv = p1.getTimeV();
                 }
-                else if (tv != 0 && ((select_mouse && focus) || (!select_mouse)))
+                else if (tv != 0 && ((select_mouse && focus) || (!select_mouse)) && !p2_exists)
                 {
                     tv--;
                 }
 
-                if (tv2 == 0 && ((p2_exists && !select_mouse && focus) || (p2_exists && select_mouse)))
+                /*if (tv2 == 0 && ((p2_exists && !select_mouse && focus) || (p2_exists && select_mouse)))
                 {
                     int p2_v = p2.getVibrations();
                     int yes_or_no = rand() % 2;
@@ -2297,7 +2393,7 @@ int main()
                 else if (tv2 != 0 && ((p2_exists && !select_mouse && focus) || (p2_exists && select_mouse)))
                 {
                     tv2--;
-                }
+                }*/
 
                 if (b1 && !pla2)
                 {
@@ -2443,9 +2539,9 @@ int main()
                 window.draw(textScore);
                 window.draw(textAmmunition);
                 window.draw(textEndOfTime);
-                if (p1.getMouse())
+                if (p1.getMouse() && !p2_exists)
                     window.draw(textM);
-                else if (!p1.getMouse())
+                else if (!p1.getMouse() && !p2_exists)
                     window.draw(textC);
                 else
                 {
@@ -2457,6 +2553,31 @@ int main()
             }
             else
             {
+                if (!p1.getMouse() && p2_exists)
+                {
+                    if (event.type == sf::Event::JoystickMoved)
+                    {
+                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                        p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                    }
+                }
+                else if (p2_exists && p1.getMouse())
+                {
+                    if (event.type == sf::Event::JoystickMoved)
+                    {
+                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                        p2.getRec().move(m.x * 0.002, m.y * 0.002);
+                    }
+                }
+                else if (!p1.getMouse() && !p2_exists)
+                {
+                    if (event.type == sf::Event::JoystickMoved)
+                    {
+                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                        p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                    }
+                }
+
                 if (cursorEndGame)
                 {
                     window.setMouseCursor(c);
@@ -2467,6 +2588,7 @@ int main()
                     cursorEndGame = false;
                     end_of_time1 = false;
                     game = false;
+                    endg = false;
                 }
 
                 window.clear(sf::Color::White);
