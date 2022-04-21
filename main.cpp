@@ -52,7 +52,6 @@ sf::Time ts = sf::seconds(times);
 sf::Time tspeed = sf::milliseconds(speed);
 sf::Time speedb = sf::milliseconds(rate_of_fire);
 sf::Cursor c;
-//sf::RectangleShape joystick;
 sf::CircleShape cursor_mouse(2);
 sf::CircleShape cursor_mouse2(2);
 
@@ -790,8 +789,6 @@ int main()
     sf::Clock stopClick;
     stopClick.restart().asMilliseconds();
     clock4.restart().asSeconds();
-    //sf::Clock clockm;
-    //clockm.restart().asMilliseconds();
     sf::Text textEndOfTime;
     textEndOfTime.setFont(font);
     textEndOfTime.setCharacterSize(40);
@@ -850,7 +847,7 @@ int main()
                 if (!menu)
                     focus = false;
                 break;
-            case sf::Event::MouseButtonPressed:
+            case sf::Event::MouseButtonReleased:
                 //In Game
                 if (!menu && !settings && !select_player)
                 {
@@ -1816,10 +1813,6 @@ int main()
                 //    }
                 //}
                 break;
-                //case sf::Event::LostFocus:
-                //    break;
-                //case sf::Event::GainedFocus:
-                //    break;
             }
         }
         if (sf::Joystick::isConnected(0))
@@ -1840,18 +1833,7 @@ int main()
             window.setMouseCursorVisible(true);
         }
 
-        //if (clockm.getElapsedTime().asMilliseconds() >= 750)
-        //{
-        //    if (select_mouse)
-        //    {
-        //        
-        //    }
-        //    else
-        //    {
-        //        
-        //    }
-        //    clockm.restart().asMilliseconds();
-        //}
+
 
         if (menu)
         {
