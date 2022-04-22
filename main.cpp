@@ -20,6 +20,7 @@ int speed = 50;
 int rate_of_fire = 1200;
 int tv = 200;
 int tv2 = 200;
+int sensitivity = 10;
 bool menu = true;
 bool test = false;
 bool test2 = false;
@@ -125,10 +126,10 @@ int main()
     rec4.setPosition(400, 510);
     sf::Text manual;
     manual.setFont(font);
-    manual.setString("Manual");
+    manual.setString("Help");
     manual.setCharacterSize(60);
     manual.setFillColor(sf::Color::Black);
-    manual.setPosition(492, 520);
+    manual.setPosition(532, 520);
 
     sf::RectangleShape rec5;
     rec5.setSize({ 400, 100 });
@@ -384,18 +385,18 @@ int main()
     rec6o.setPosition(150, 650);
     rec6o.setOutlineThickness(3);
     rec6o.setOutlineColor(sf::Color::Black);
-    sf::Text vibspeedo;
-    vibspeedo.setFont(font);
-    vibspeedo.setString("Vibration speed");
-    vibspeedo.setCharacterSize(38);
-    vibspeedo.setFillColor(sf::Color::Black);
-    vibspeedo.setPosition(180, 665);
-    sf::Text vsodash;
-    vsodash.setFont(font);
-    vsodash.setString("-");
-    vsodash.setCharacterSize(38);
-    vsodash.setFillColor(sf::Color::Black);
-    vsodash.setPosition(598, 670);
+    sf::Text sensitivityt;
+    sensitivityt.setFont(font);
+    sensitivityt.setString("Sensitivity (J)");
+    sensitivityt.setCharacterSize(38);
+    sensitivityt.setFillColor(sf::Color::Black);
+    sensitivityt.setPosition(180, 665);
+    sf::Text sodash;
+    sodash.setFont(font);
+    sodash.setString("-");
+    sodash.setCharacterSize(38);
+    sodash.setFillColor(sf::Color::Black);
+    sodash.setPosition(598, 670);
     sf::RectangleShape b6left;
     b6left.setSize({ 20, 30 });
     b6left.setTexture(&buttonl);
@@ -406,12 +407,12 @@ int main()
     b6right.setTexture(&buttonr);
     b6right.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
     b6right.setPosition(1000, 692);
-    sf::Text vs_text;
-    vs_text.setFont(font);
-    vs_text.setString(std::to_string(tv));
-    vs_text.setCharacterSize(38);
-    vs_text.setFillColor(sf::Color::Black);
-    vs_text.setPosition(848, 665);
+    sf::Text s_text;
+    s_text.setFont(font);
+    s_text.setString(std::to_string(sensitivity));
+    s_text.setCharacterSize(38);
+    s_text.setFillColor(sf::Color::Black);
+    s_text.setPosition(858, 665);
 
     //Player
     sf::Image igun00;
@@ -475,20 +476,20 @@ int main()
     recmp.setTexture(&tgun00);
     sf::Text mousep;
     mousep.setFont(font);
-    mousep.setString("Mouse");
+    mousep.setString("Mouse (M)");
     mousep.setCharacterSize(30);
     mousep.setFillColor(sf::Color::Black);
-    mousep.setPosition(300, 475);
+    mousep.setPosition(277, 475);
     sf::RectangleShape reccp;
     reccp.setSize({ 74, 74 });
     reccp.setPosition(312, 365);
     reccp.setTexture(&tgun01);
     sf::Text controllerp;
     controllerp.setFont(font);
-    controllerp.setString("Controller");
+    controllerp.setString("Joystick (J)");
     controllerp.setCharacterSize(30);
     controllerp.setFillColor(sf::Color::Black);
-    controllerp.setPosition(278, 475);
+    controllerp.setPosition(273, 475);
 
     sf::RectangleShape bleft1p;
     bleft1p.setSize({ 20, 30 });
@@ -552,20 +553,20 @@ int main()
     recm2p.setTexture(&tgun00);
     sf::Text mouse2p;
     mouse2p.setFont(font);
-    mouse2p.setString("Mouse");
+    mouse2p.setString("Mouse (M)");
     mouse2p.setCharacterSize(30);
     mouse2p.setFillColor(sf::Color::Black);
-    mouse2p.setPosition(800, 475);
+    mouse2p.setPosition(777, 475);
     sf::RectangleShape recc2p;
     recc2p.setSize({ 74, 74 });
     recc2p.setPosition(812, 365);
     recc2p.setTexture(&tgun01);
     sf::Text controller2p;
     controller2p.setFont(font);
-    controller2p.setString("Controller");
+    controller2p.setString("Joystick (J)");
     controller2p.setCharacterSize(30);
     controller2p.setFillColor(sf::Color::Black);
-    controller2p.setPosition(776, 475);
+    controller2p.setPosition(771, 475);
     sf::RectangleShape choosep21;
     choosep21.setSize({ 250, 50 });
     choosep21.setPosition(850, 595);
@@ -967,12 +968,12 @@ int main()
                         menu = false;
                         settings = true;
                     }
-                    //Manual
+                    //Help
                     else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 510 && cursor_mouse.getPosition().y < 610)
                     {
                         //menu = false;
                         //instruction = true;
-                        std::cout << "Manual" << std::endl;
+                        std::cout << "Help" << std::endl;
                     }
                     //Quit
                     else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730)
@@ -1013,9 +1014,9 @@ int main()
                         rate_of_fire = 1200;
                         rof_text.setString(std::to_string(rate_of_fire));
                         rof_text.setPosition(838, 565);
-                        tv = 200;
-                        vs_text.setString(std::to_string(tv));
-                        vs_text.setPosition(848, 665);
+                        sensitivity = 10;
+                        s_text.setString(std::to_string(sensitivity));
+                        s_text.setPosition(858, 665);
                         p1.setTimeV(tv);
                         p2.setAmmunition(ammun);
                         p2samu = std::to_string(p2.getAmmunition());
@@ -1227,39 +1228,31 @@ int main()
                     //Vibration speed
                     else if (cursor_mouse.getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && cursor_mouse.getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && cursor_mouse.getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && cursor_mouse.getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)
                     {
-                        tv = p1.getTimeV();
-                        if (tv == 100)
+                        if (sensitivity == 10)
                         {
-                            tv -= 10;
-                            vs_text.setString(std::to_string(tv));
-                            vs_text.setPosition(858, 665);
+                            sensitivity--;
+                            s_text.setString(std::to_string(sensitivity));
+                            s_text.setPosition(868, 665);
                         }
-                        else if (tv != 10)
+                        else if (sensitivity != 1)
                         {
-                            tv -= 10;
-                            vs_text.setString(std::to_string(tv));
+                            sensitivity--;
+                            s_text.setString(std::to_string(sensitivity));
                         }
-                        p1.setTimeV(tv);
-                        tv2 = tv;
-                        p2.setTimeV(tv2);
                     }
                     else if (cursor_mouse.getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && cursor_mouse.getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && cursor_mouse.getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && cursor_mouse.getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2)
                     {
-                        tv = p1.getTimeV();
-                        if (tv == 90)
+                        if (sensitivity == 9)
                         {
-                            tv += 10;
-                            vs_text.setString(std::to_string(tv));
-                            vs_text.setPosition(848, 665);
+                            sensitivity++;
+                            s_text.setString(std::to_string(sensitivity));
+                            s_text.setPosition(858, 665);
                         }
-                        else if (tv != 990)
+                        else if (sensitivity != 40)
                         {
-                            tv += 10;
-                            vs_text.setString(std::to_string(tv));
+                            sensitivity++;
+                            s_text.setString(std::to_string(sensitivity));
                         }
-                        p1.setTimeV(tv);
-                        tv2 = tv;
-                        p2.setTimeV(tv2);
                     }
                 }
                 else if (!menu && !settings && select_player)
@@ -1448,12 +1441,12 @@ int main()
                             menu = false;
                             settings = true;
                         }
-                        //Manual
+                        //Help
                         //else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 510 && p1.getRec().getPosition().y < 610) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 510 && p2.getRec().getPosition().y < 610)))
                         //{
                         //    //menu = false;
                         //    //instruction = true;
-                        //    std::cout << "Manual" << std::endl;
+                        //    std::cout << "Help" << std::endl;
                         //}
                         //Quit
                         if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 630 && p1.getRec().getPosition().y < 730) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 630 && p2.getRec().getPosition().y < 730)))
@@ -1492,9 +1485,9 @@ int main()
                             rate_of_fire = 1200;
                             rof_text.setString(std::to_string(rate_of_fire));
                             rof_text.setPosition(838, 565);
-                            tv = 200;
-                            vs_text.setString(std::to_string(tv));
-                            vs_text.setPosition(848, 665);
+                            sensitivity = 10;
+                            s_text.setString(std::to_string(sensitivity));
+                            s_text.setPosition(858, 665);
                             p1.setTimeV(tv);
                             p2.setAmmunition(ammun);
                             p2samu = std::to_string(p2.getAmmunition());
@@ -1706,39 +1699,31 @@ int main()
                         //Vibration speed
                         else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p1.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p1.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p1.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2) || (p2.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p2.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p2.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p2.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)))
                         {
-                            tv = p1.getTimeV();
-                            if (tv == 100)
+                            if (sensitivity == 10)
                             {
-                                tv -= 10;
-                                vs_text.setString(std::to_string(tv));
-                                vs_text.setPosition(858, 665);
+                                sensitivity--;
+                                s_text.setString(std::to_string(sensitivity));
+                                s_text.setPosition(868, 665);
                             }
-                            else if (tv != 10)
+                            else if (sensitivity != 1)
                             {
-                                tv -= 10;
-                                vs_text.setString(std::to_string(tv));
+                                sensitivity--;
+                                s_text.setString(std::to_string(sensitivity));
                             }
-                            p1.setTimeV(tv);
-                            tv2 = tv;
-                            p2.setTimeV(tv2);
                         }
                         else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p1.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p1.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p1.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2) || (p2.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p2.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p2.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p2.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2)))
                         {
-                            tv = p1.getTimeV();
-                            if (tv == 90)
+                            if (sensitivity == 9)
                             {
-                                tv += 10;
-                                vs_text.setString(std::to_string(tv));
-                                vs_text.setPosition(848, 665);
+                                sensitivity++;
+                                s_text.setString(std::to_string(sensitivity));
+                                s_text.setPosition(858, 665);
                             }
-                            else if (tv != 990)
+                            else if (sensitivity != 40)
                             {
-                                tv += 10;
-                                vs_text.setString(std::to_string(tv));
+                                sensitivity++;
+                                s_text.setString(std::to_string(sensitivity));
                             }
-                            p1.setTimeV(tv);
-                            tv2 = tv;
-                            p2.setTimeV(tv2);
                         }
                     }
                     else if (!menu && !settings && select_player)
@@ -1975,11 +1960,11 @@ int main()
             window.draw(rof_text);
 
             window.draw(rec6o);
-            window.draw(vibspeedo);
-            window.draw(vsodash);
+            window.draw(sensitivityt);
+            window.draw(sodash);
             window.draw(b6left);
             window.draw(b6right);
-            window.draw(vs_text);
+            window.draw(s_text);
 
             if (!p1.getMouse())
             {
@@ -2096,7 +2081,7 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                    p1.getRec().move(m.x * 0.0001 * sensitivity, m.y * 0.0001 * sensitivity);
                 }
             }
             else if (p2_exists && p1.getMouse())
@@ -2104,7 +2089,7 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p2.getRec().move(m.x * 0.002, m.y * 0.002);
+                    p2.getRec().move(m.x * 0.0001 * sensitivity, m.y * 0.0001 * sensitivity);
                 }
             }
             else if (!p1.getMouse() && !p2_exists)
@@ -2173,7 +2158,7 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                    p1.getRec().move(m.x * 0.0001 * sensitivity, m.y * 0.0001 * sensitivity);
                 }
             }
             else if (p2_exists && p1.getMouse())
@@ -2181,7 +2166,7 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p2.getRec().move(m.x * 0.002, m.y * 0.002);
+                    p2.getRec().move(m.x * 0.0001 * sensitivity, m.y * 0.0001 * sensitivity);
                 }
             }
             else if (!p1.getMouse() && !p2_exists)
@@ -2291,7 +2276,7 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                    p1.getRec().move(m.x * 0.0001 * sensitivity, m.y * 0.0001 * sensitivity);
                 }
             }
             else if (p2_exists && p1.getMouse())
@@ -2299,7 +2284,7 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p2.getRec().move(m.x * 0.002, m.y * 0.002);
+                    p2.getRec().move(m.x * 0.0001 * sensitivity, m.y * 0.0001 * sensitivity);
                 }
             }
             else if (!p1.getMouse() && !p2_exists)
@@ -2540,7 +2525,7 @@ int main()
                     if (event.type == sf::Event::JoystickMoved)
                     {
                         sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                        p1.getRec().move(m.x * 0.0001 * sensitivity, m.y * 0.0001 * sensitivity);
                     }
                 }
                 else if (p2_exists && p1.getMouse())
@@ -2548,7 +2533,7 @@ int main()
                     if (event.type == sf::Event::JoystickMoved)
                     {
                         sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p2.getRec().move(m.x * 0.002, m.y * 0.002);
+                        p2.getRec().move(m.x * 0.0001 * sensitivity, m.y * 0.0001 * sensitivity);
                     }
                 }
                 else if (!p1.getMouse() && !p2_exists)
