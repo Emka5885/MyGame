@@ -1,9 +1,9 @@
 #include "Player.h"
 
-Player::Player(sf::Image* image, sf::Texture* texture, int vibrations, int ammunition, sf::RenderWindow& win, int tv, bool mouse)
+Player::Player(sf::Image* image, sf::Texture* texture, int vibrations, int ammunition, sf::RenderWindow& win, int tv, int select)
 {
 	this->vibrations = vibrations;
-	this->mouse = mouse;
+	this->select = select;
 	this->ammunition = ammunition;
 	this->ammunitionb = ammunition;
 	this->score = 0;
@@ -49,10 +49,17 @@ void Player::bullet(sf::RenderWindow& win, sf::Vector2i positionm)
 	b = new sf::CircleShape(2);
 	b->setFillColor(sf::Color(255, 0, 0));
 	b->setOrigin(b->getRadius(), b->getRadius());
-	if (mouse)
+	switch (select)
+	{
+	case 1:
 		b->setPosition(positionm.x + image->getSize().x / 2 - b->getRadius(), positionm.y + image->getSize().y / 2 - b->getRadius());
-	else
+		break;
+	case 2:
 		b->setPosition(positionm.x + texture->getSize().x / 2 - b->getRadius(), positionm.y + texture->getSize().y / 2 - b->getRadius());
+		break;
+	case 3:
+		break;
+	}
 	win.draw(*b);
 }
 
@@ -81,9 +88,9 @@ int Player::getTimeV()
 	return tv;
 }
 
-bool Player::getMouse()
+int Player::getSelect()
 {
-	return this->mouse;
+	return this->select;
 }
 
 sf::RectangleShape& Player::getRec()
@@ -93,10 +100,17 @@ sf::RectangleShape& Player::getRec()
 
 sf::RectangleShape& Player::getSB()
 {
-	if (mouse)
+	switch (select)
+	{
+	case 1:
 		return this->sbm;
-	else
+		break;
+	case 2:
 		return this->sbc;
+		break;
+	case 3:
+		break;
+	}
 }
 
 void Player::setImage(sf::Image& nimage, sf::RenderWindow& win)
@@ -122,9 +136,9 @@ void Player::setTimeV(int tv)
 	this->tv = tv;
 }
 
-void Player::setMouse(bool mouse)
+void Player::setSelect(int select)
 {
-	this->mouse = mouse;
+	this->select = select;
 }
 
 void Player::reset()
