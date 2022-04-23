@@ -58,6 +58,7 @@ void Player::bullet(sf::RenderWindow& win, sf::Vector2i positionm)
 		b->setPosition(positionm.x + texture->getSize().x / 2 - b->getRadius(), positionm.y + texture->getSize().y / 2 - b->getRadius());
 		break;
 	case 3:
+		b->setPosition(positionm.x + texture->getSize().x / 2 - b->getRadius(), positionm.y + texture->getSize().y / 2 - b->getRadius());
 		break;
 	}
 	win.draw(*b);
@@ -109,6 +110,7 @@ sf::RectangleShape& Player::getSB()
 		return this->sbc;
 		break;
 	case 3:
+		return this->sbm;
 		break;
 	}
 }

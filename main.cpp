@@ -834,6 +834,14 @@ int main()
     textC.setPosition(1163, 710);
     textC.setString("C");
 
+
+    sf::Text textName;
+    textName.setFont(font);
+    textName.setCharacterSize(15);
+    textName.setFillColor(sf::Color::Black);
+    textName.setPosition(1060, 765);
+    textName.setString("© Emilia Masiak");
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -850,6 +858,7 @@ int main()
                     if (sf::Keyboard::Escape == event.key.code)
                     {
                         menu = true;
+                        textName.setFillColor(sf::Color::Black);
                         sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
                         focus = true;
                     }
@@ -927,6 +936,7 @@ int main()
                     if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 150 && cursor_mouse.getPosition().y < 250)
                     {
                         menu = false;
+                        textName.setFillColor(sf::Color::White);
                         p1.reset();
                         if (p2_exists)
                             p2.reset();
@@ -960,6 +970,7 @@ int main()
                     else if (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 270 && cursor_mouse.getPosition().y < 370)
                     {
                         menu = false;
+                        textName.setFillColor(sf::Color::White);
                         if (pause1)
                         {
                             seconds2 = seconds2 - seconds1;
@@ -1352,6 +1363,7 @@ int main()
                     if (sf::Joystick::isButtonPressed(0, 7))
                     {
                         menu = true;
+                        textName.setFillColor(sf::Color::White);
                         p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                     }
                 }
@@ -1403,6 +1415,7 @@ int main()
                         if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 150 && p1.getRec().getPosition().y < 250) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 150 && p2.getRec().getPosition().y < 250)))
                         {
                             menu = false;
+                            textName.setFillColor(sf::Color::White);
                             p1.reset();
                             if (p2_exists)
                                 p2.reset();
@@ -1436,6 +1449,7 @@ int main()
                         else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (game == true) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
                         {
                             menu = false;
+                            textName.setFillColor(sf::Color::White);
                             if (pause1)
                             {
                                 seconds2 = seconds2 - seconds1;
@@ -1912,6 +1926,8 @@ int main()
                 window.draw(quit);
             }
 
+            window.draw(textName);
+
 
             if (p1.getSelect() == 2)
             {
@@ -1994,6 +2010,8 @@ int main()
             window.draw(b6left);
             window.draw(b6right);
             window.draw(s_text);
+
+            window.draw(textName);
 
             if (p1.getSelect() == 2)
             {
@@ -2117,6 +2135,7 @@ int main()
                 window.draw(On_text);
             }
 
+            window.draw(textName);
 
             if (p1.getSelect() == 2)
             {
@@ -2537,15 +2556,6 @@ int main()
                     }
                 }
 
-                if (p1.getSelect() == 2)
-                {
-                    window.draw(p1.getRec());
-                }
-                else if (p2_exists)
-                {
-                    window.draw(p2.getRec());
-                }
-
                 window.draw(textScore);
                 window.draw(textAmmunition);
                 window.draw(textEndOfTime);
@@ -2557,6 +2567,18 @@ int main()
                 {
                     window.draw(textM);
                     window.draw(textC);
+                }
+
+                window.draw(textName);
+
+
+                if (p1.getSelect() == 2)
+                {
+                    window.draw(p1.getRec());
+                }
+                else if (p2_exists)
+                {
+                    window.draw(p2.getRec());
                 }
 
                 window.display();
@@ -2630,6 +2652,12 @@ int main()
 
                 window.draw(textEnd);
 
+                window.draw(textScore);
+                window.draw(textAmmunition);
+                window.draw(textEndOfTime);
+
+                window.draw(textName);
+
                 if (p1.getSelect() == 2)
                 {
                     window.draw(p1.getRec());
@@ -2638,10 +2666,6 @@ int main()
                 {
                     window.draw(p2.getRec());
                 }
-
-                window.draw(textScore);
-                window.draw(textAmmunition);
-                window.draw(textEndOfTime);
 
                 window.display();
             }
