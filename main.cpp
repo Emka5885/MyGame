@@ -676,6 +676,13 @@ int main()
     rec0h.setOutlineThickness(3);
     rec0h.setOutlineColor(sf::Color::Black);
 
+    sf::Text textH1;
+    textH1.setFont(font);
+    textH1.setString("Mouse player");
+    textH1.setCharacterSize(40);
+    textH1.setFillColor(sf::Color::Black);
+    textH1.setPosition(468, 200);
+
     sf::RectangleShape bleft1h;
     bleft1h.setSize({ 20, 30 });
     bleft1h.setTexture(&buttonl);
@@ -687,6 +694,13 @@ int main()
     bright1h.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
     bright1h.setPosition(945, 435);
 
+
+    sf::Text textH;
+    textH.setFont(font);
+    textH.setString("Here will be HELP...");
+    textH.setCharacterSize(50);
+    textH.setFillColor(sf::Color::Black);
+    textH.setPosition(375, 400);
 
     //Tekstury do animacji celu
     std::vector<sf::Texture> goalTextures;
@@ -1026,6 +1040,7 @@ int main()
                             pause = false;
                             pause1 = false;
                             change = false;
+                            end_of_time = false;
                             cursorEndGame = true;
                             resetrof = true;
                             end = true;
@@ -1414,13 +1429,13 @@ int main()
                         {
                             if (!p2_exists)
                             {
-                                selectmjk1 = selectmjk;
-                                if (stop && (selectmjk1 == 2))
+                                if (stop && (selectmjk == 2))
                                 {
                                     std::cout << "Joystick is Disconnected" << std::endl;
                                 }
                                 else
                                 {
+                                    selectmjk1 = selectmjk;
                                     p1.setSelect(selectmjk1);
                                     p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                     switch (selectmjk1)
@@ -1464,13 +1479,13 @@ int main()
                             }
                             else if (selectmjk != selectmjk2)
                             {
-                                selectmjk1 = selectmjk;
-                                if (stop && (selectmjk1 == 2))
+                                if (stop && (selectmjk == 2))
                                 {
                                     std::cout << "Joystick is Disconnected" << std::endl;
                                 }
                                 else
                                 {
+                                    selectmjk1 = selectmjk;
                                     p1.setSelect(selectmjk1);
                                     p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                     switch (selectmjk1)
@@ -1501,13 +1516,13 @@ int main()
                         {
                             if (selectmjk0 != selectmjk1)
                             {
-                                selectmjk2 = selectmjk0;
-                                if (stop && (selectmjk2 == 2))
+                                if (stop && (selectmjk0 == 2))
                                 {
                                     std::cout << "Joystick is Disconnected" << std::endl;
                                 }
                                 else
                                 {
+                                    selectmjk2 = selectmjk0;
                                     p2.setSelect(selectmjk2);
                                     p2.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                     switch (selectmjk2)
@@ -1659,6 +1674,7 @@ int main()
                             pause = false;
                             pause1 = false;
                             change = false;
+                            end_of_time = false;
                             cursorEndGame = true;
                             resetrof = true;
                             end = true;
@@ -2052,13 +2068,13 @@ int main()
                         {
                             if (!p2_exists)
                             {
-                                selectmjk1 = selectmjk;
-                                if (stop && (selectmjk1 == 2))
+                                if (stop && (selectmjk == 2))
                                 {
                                     std::cout << "Joystick is Disconnected" << std::endl;
                                 }
                                 else
                                 {
+                                    selectmjk1 = selectmjk;
                                     p1.setSelect(selectmjk1);
                                     p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                     switch (selectmjk1)
@@ -2102,13 +2118,13 @@ int main()
                             }
                             else if (selectmjk != selectmjk2)
                             {
-                                selectmjk1 = selectmjk;
-                                if (stop && (selectmjk1 == 2))
+                                if (stop && (selectmjk == 2))
                                 {
                                     std::cout << "Joystick is Disconnected" << std::endl;
                                 }
                                 else
                                 {
+                                    selectmjk1 = selectmjk;
                                     p1.setSelect(selectmjk1);
                                     p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                     switch (selectmjk1)
@@ -2139,13 +2155,13 @@ int main()
                         {
                             if (selectmjk0 != selectmjk1)
                             {
-                                selectmjk2 = selectmjk0;
-                                if (stop && (selectmjk2 == 2))
+                                if (stop && (selectmjk0 == 2))
                                 {
                                     std::cout << "Joystick is Disconnected" << std::endl;
                                 }
                                 else
                                 {
+                                    selectmjk2 = selectmjk0;
                                     p2.setSelect(selectmjk2);
                                     p2.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                     switch (selectmjk2)
@@ -2294,6 +2310,7 @@ int main()
                                 pause = false;
                                 pause1 = false;
                                 change = false;
+                                end_of_time = false;
                                 cursorEndGame = true;
                                 resetrof = true;
                                 end = true;
@@ -2680,13 +2697,13 @@ int main()
                             {
                                 if (!p2_exists)
                                 {
-                                    selectmjk1 = selectmjk;
-                                    if (stop && (selectmjk1 == 2))
+                                    if (stop && (selectmjk == 2))
                                     {
                                         std::cout << "Joystick is Disconnected" << std::endl;
                                     }
                                     else
                                     {
+                                        selectmjk1 = selectmjk;
                                         p1.setSelect(selectmjk1);
                                         p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                         switch (selectmjk1)
@@ -2730,13 +2747,13 @@ int main()
                                 }
                                 else if (selectmjk != selectmjk2)
                                 {
-                                    selectmjk1 = selectmjk;
-                                    if (stop && (selectmjk1 == 2))
+                                    if (stop && (selectmjk == 2))
                                     {
                                         std::cout << "Joystick is Disconnected" << std::endl;
                                     }
                                     else
                                     {
+                                        selectmjk1 = selectmjk;
                                         p1.setSelect(selectmjk1);
                                         p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                         switch (selectmjk1)
@@ -2767,13 +2784,13 @@ int main()
                             {
                                 if (selectmjk0 != selectmjk1)
                                 {
-                                    selectmjk2 = selectmjk0;
-                                    if (stop && (selectmjk2 == 2))
+                                    if (stop && (selectmjk0 == 2))
                                     {
                                         std::cout << "Joystick is Disconnected" << std::endl;
                                     }
                                     else
                                     {
+                                        selectmjk2 = selectmjk0;
                                         p2.setSelect(selectmjk2);
                                         p2.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
                                         switch (selectmjk2)
@@ -3314,12 +3331,16 @@ int main()
             window.draw(rec0o);
             window.draw(back_text);
 
-            window.draw(help_text);
-            window.draw(rec0h);
+            //window.draw(help_text);
+            //window.draw(rec0h);
 
-            //if()
-            window.draw(bright1h);
-            window.draw(bleft1h);
+            //window.draw(textH1);
+
+            ////if()
+            //window.draw(bright1h);
+            //window.draw(bleft1h);
+            window.draw(textH);
+
 
             window.draw(textName);
 
