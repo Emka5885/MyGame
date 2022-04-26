@@ -21,6 +21,8 @@ int rate_of_fire = 1200;
 int tv = 200;
 int tv2 = 200;
 int sensitivity = 10;
+int helpc = 1;
+int hcount = 1;
 bool menu = true;
 bool test = false;
 bool test2 = false;
@@ -60,6 +62,7 @@ sf::CircleShape cursor_mouse(2);
 sf::CircleShape cursor_mouse2(2);
 
 void score(int& s, int row);
+sf::RectangleShape drawRecTenP(int xp, int yp);
 
 int main()
 {
@@ -663,6 +666,19 @@ int main()
     Offr.setOutlineColor(sf::Color::Black);
 
     //Help
+    sf::Texture tmouse0h;
+    if (!tmouse0h.loadFromFile("Resources/Help/Mouse/mouse0.png"))
+    {
+        std::cout << "Errortm0h" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tmouse1lh;
+    if (!tmouse1lh.loadFromFile("Resources/Help/Mouse/mouse1l.png"))
+    {
+        std::cout << "Errortm1lh" << std::endl;
+        system("PAUSE");
+    }
+
     sf::Text help_text;
     help_text.setFont(font);
     help_text.setString("Help");
@@ -681,7 +697,16 @@ int main()
     textH1.setString("Mouse player");
     textH1.setCharacterSize(40);
     textH1.setFillColor(sf::Color::Black);
-    textH1.setPosition(468, 200);
+    textH1.setPosition(468, 175);
+
+    sf::RectangleShape recm0h;
+    recm0h.setSize({ 50, 50 });
+    recm0h.setPosition(650, 300);
+    recm0h.setTexture(&tgun00);
+    sf::RectangleShape recm1h;
+    recm1h.setSize({ 100, 125 });
+    recm1h.setPosition(400, 265);
+    recm1h.setTexture(&tmouse0h);
 
     sf::RectangleShape bleft1h;
     bleft1h.setSize({ 20, 30 });
@@ -700,7 +725,7 @@ int main()
     textH.setString("Here will be HELP...");
     textH.setCharacterSize(50);
     textH.setFillColor(sf::Color::Black);
-    textH.setPosition(375, 400);
+    textH.setPosition(375, 450);
 
     //Tekstury do animacji celu
     std::vector<sf::Texture> goalTextures;
@@ -897,6 +922,7 @@ int main()
     sf::Clock stopClick;
     stopClick.restart().asMilliseconds();
     clock4.restart().asSeconds();
+    sf::Clock clockHelp;
     sf::Text textEndOfTime;
     textEndOfTime.setFont(font);
     textEndOfTime.setCharacterSize(40);
@@ -946,6 +972,7 @@ int main()
                         textName.setFillColor(sf::Color::Black);
                         sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
                         focus = true;
+                        endg = false;
                     }
                 }
                 if (sf::Keyboard::Space == event.key.code && (selectmjk1 == 3 || selectmjk2 == 3))
@@ -1720,6 +1747,8 @@ int main()
                         {
                             menu = false;
                             instruction = true;
+                            clockHelp.restart().asMilliseconds();
+                            helpc = 1;
                         }
                         //Quit
                         else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730)
@@ -2213,6 +2242,7 @@ int main()
                         menu = true;
                         textName.setFillColor(sf::Color::White);
                         p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
+                        endg = false;
                     }
                 }
                 break;
@@ -3331,16 +3361,197 @@ int main()
             window.draw(rec0o);
             window.draw(back_text);
 
-            //window.draw(help_text);
-            //window.draw(rec0h);
+            window.draw(help_text);
+            window.draw(rec0h);
 
-            //window.draw(textH1);
+            window.draw(textH1);
 
-            ////if()
-            //window.draw(bright1h);
-            //window.draw(bleft1h);
-            window.draw(textH);
+            sf::Time th = clockHelp.getElapsedTime();
+            int thelp = th.asMilliseconds();
 
+            switch (hcount)
+            {
+            case 1:
+                if (helpc == 1 && thelp > 1800)
+                {
+                    recm1h.setSize({ 100, 125 });
+                    recm1h.setPosition(400, 265);
+                    recm0h.setPosition(650, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 2;
+                }
+                else if (helpc == 2 && thelp > 1800)
+                {
+                    recm1h.setSize({ 100, 125 });
+                    recm1h.setPosition(500, 265);
+                    recm0h.setPosition(750, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 3;
+                }
+                else if (helpc == 3 && thelp > 1800)
+                {
+                    recm1h.setSize({ 100, 125 });
+                    recm1h.setPosition(500, 365);
+                    recm0h.setPosition(750, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 4;
+                }
+                else if (helpc == 4 && thelp > 1800)
+                {
+                    recm1h.setSize({ 100, 125 });
+                    recm1h.setPosition(400, 365);
+                    recm0h.setPosition(650, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                recm1h.setTexture(&tmouse0h);
+                window.draw(recm1h);
+                window.draw(recm0h);
+                break;
+            case 2:
+                recm1h.setSize({ 200, 250 });
+                recm1h.setPosition(500, 265);
+                if (helpc == 1 && thelp > 1500)
+                {
+                    recm1h.setTexture(&tmouse0h);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 2;
+                }
+                else if (helpc == 2 && thelp > 1500)
+                {
+                    recm1h.setTexture(&tmouse1lh);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                window.draw(recm1h);
+                break;
+            case 3:
+                break;
+            }
+
+            //if()
+            window.draw(bright1h);
+            window.draw(bleft1h);
+            /*window.draw(textH);*/
+
+
+            window.draw(textName);
+
+            if (p1.getSelect() != 1)
+            {
+                window.draw(p1.getRec());
+            }
+            if (p2_exists && p2.getSelect() != 1)
+            {
+                window.draw(p2.getRec());
+            }
+
+            window.display();
+        }
+        else if (end_of_time || endg)
+        {
+            if (p1.getSelect() == 2)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                }
+            }
+            else if (p1.getSelect() == 3)
+            {
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+                {
+                    p1.getRec().move(-100 * 0.001, 0);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+                {
+                    p1.getRec().move(100 * 0.001, 0);
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+                {
+                    p1.getRec().move(0, -100 * 0.001);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+                {
+                    p1.getRec().move(0, 100 * 0.001);
+                }
+            }
+            if (p2_exists)
+            {
+                if (p2.getSelect() == 2)
+                {
+                    if (event.type == sf::Event::JoystickMoved)
+                    {
+                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                        p2.getRec().move(m.x * 0.001, m.y * 0.001);
+                    }
+                }
+                else if (p2.getSelect() == 3)
+                {
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+                    {
+                        p2.getRec().move(-100 * 0.001, 0);
+                    }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+                    {
+                        p2.getRec().move(100 * 0.001, 0);
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+                    {
+                        p2.getRec().move(0, -100 * 0.001);
+                    }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+                    {
+                        p2.getRec().move(0, 100 * 0.001);
+                    }
+                }
+            }
+
+            if (cursorEndGame)
+            {
+                window.setMouseCursor(c);
+                p1.setImage(igun02, window);
+                p1.getRec().setTexture(&tgun02);
+                p2.setImage(igun02, window);
+                p2.getRec().setTexture(&tgun02);
+                end_of_time1 = false;
+                game = false;
+                //endg = false;
+            }
+
+            window.clear(sf::Color::White);
+
+            int check = clock2.getElapsedTime().asMilliseconds();
+            platformObject[6].create(window);
+            platformObject[7].create(window);
+            platformObject[8].create(window);
+            platformObject[9].create(window);
+
+            if (check >= 50 * 30)
+            {
+                if (end)
+                {
+                    textEnd.setString("End");
+                    textEnd.setFillColor(sf::Color::Red);
+                    textEnd.setPosition(400, 350);
+                    end = false;
+                }
+                else
+                {
+                    textEnd.setString("Game");
+                    textEnd.setFillColor(sf::Color::Black);
+                    textEnd.setPosition(650, 350);
+                    end = true;
+                }
+                clock2.restart().asMilliseconds();
+            }
+
+            window.draw(textEnd);
+
+            window.draw(textScore);
+            window.draw(textAmmunition);
+            window.draw(textEndOfTime);
 
             window.draw(textName);
 
@@ -3837,125 +4048,6 @@ int main()
 
                 window.draw(textName);
 
-
-                if (p1.getSelect() != 1)
-                {
-                    window.draw(p1.getRec());
-                }
-                if (p2_exists && p2.getSelect() != 1)
-                {
-                    window.draw(p2.getRec());
-                }
-
-                window.display();
-            }
-            else
-            {
-                if (p1.getSelect() == 2)
-                {
-                    if (event.type == sf::Event::JoystickMoved)
-                    {
-                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p1.getRec().move(m.x * 0.001, m.y * 0.001);
-                    }
-                }
-                else if (p1.getSelect() == 3)
-                {
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-                    {
-                        p1.getRec().move(-100 * 0.001, 0);
-                    }
-                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-                    {
-                        p1.getRec().move(100 * 0.001, 0);
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-                    {
-                        p1.getRec().move(0, -100 * 0.001);
-                    }
-                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-                    {
-                        p1.getRec().move(0, 100 * 0.001);
-                    }
-                }
-                if (p2_exists)
-                {
-                    if (p2.getSelect() == 2)
-                    {
-                        if (event.type == sf::Event::JoystickMoved)
-                        {
-                            sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                            p2.getRec().move(m.x * 0.001, m.y * 0.001);
-                        }
-                    }
-                    else if (p2.getSelect() == 3)
-                    {
-                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-                        {
-                            p2.getRec().move(-100 * 0.001, 0);
-                        }
-                        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-                        {
-                            p2.getRec().move(100 * 0.001, 0);
-                        }
-                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-                        {
-                            p2.getRec().move(0, -100 * 0.001);
-                        }
-                        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-                        {
-                            p2.getRec().move(0, 100 * 0.001);
-                        }
-                    }
-                }
-
-                if (cursorEndGame)
-                {
-                    window.setMouseCursor(c);
-                    p1.setImage(igun02, window);
-                    p1.getRec().setTexture(&tgun02);
-                    p2.setImage(igun02, window);
-                    p2.getRec().setTexture(&tgun02);
-                    cursorEndGame = false;
-                    end_of_time1 = false;
-                    game = false;
-                    endg = false;
-                }
-
-                window.clear(sf::Color::White);
-
-                int check = clock2.getElapsedTime().asMilliseconds();
-                platformObject[6].create(window);
-                platformObject[7].create(window);
-                platformObject[8].create(window);
-                platformObject[9].create(window);
-
-                if (check >= 50 * 30)
-                {
-                    if (end)
-                    {
-                        textEnd.setString("End");
-                        textEnd.setFillColor(sf::Color::Red);
-                        textEnd.setPosition(400, 350);
-                        end = false;
-                    }
-                    else
-                    {
-                        textEnd.setString("Game");
-                        textEnd.setFillColor(sf::Color::Black);
-                        textEnd.setPosition(650, 350);
-                        end = true;
-                    }
-                    clock2.restart().asMilliseconds();
-                }
-
-                window.draw(textEnd);
-
-                window.draw(textScore);
-                window.draw(textAmmunition);
-                window.draw(textEndOfTime);
-
-                window.draw(textName);
 
                 if (p1.getSelect() != 1)
                 {
