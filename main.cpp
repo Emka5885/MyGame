@@ -708,6 +708,25 @@ int main()
     recm1h.setPosition(400, 265);
     recm1h.setTexture(&tmouse0h);
 
+    sf::RectangleShape recht;
+    recht.setSize({ 600, 200 });
+    recht.setPosition(300, 550);
+    recht.setOutlineThickness(3);
+    recht.setOutlineColor(sf::Color::Black);
+
+    sf::Text textm11h;
+    textm11h.setFont(font);
+    textm11h.setString("The pointer movement in the game");
+    textm11h.setCharacterSize(25);
+    textm11h.setFillColor(sf::Color::Black);
+    textm11h.setPosition(375, 600);
+    sf::Text textm12h;
+    textm12h.setFont(font);
+    textm12h.setString("corresponds to the mouse movement.");
+    textm12h.setCharacterSize(25);
+    textm12h.setFillColor(sf::Color::Black);
+    textm12h.setPosition(375, 650);
+
     sf::RectangleShape bleft1h;
     bleft1h.setSize({ 20, 30 });
     bleft1h.setTexture(&buttonl);
@@ -2045,7 +2064,18 @@ int main()
                             instruction = false;
                             menu = true;
                         }
-                        //
+                        //r
+                        else if (hcount == 1 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
+                        {
+                            hcount = 2;
+                        }
+                        //l
+                        else if (hcount == 2 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
+                        {
+                            hcount = 1;
+                            recm1h.setPosition(400, 265);
+                            recm0h.setPosition(650, 300);
+                        }
                     }
                     //Player
                     else if (!menu && !settings && select_player && !instruction)
@@ -3372,9 +3402,9 @@ int main()
             switch (hcount)
             {
             case 1:
+                recm1h.setSize({ 100, 125 });
                 if (helpc == 1 && thelp > 1800)
                 {
-                    recm1h.setSize({ 100, 125 });
                     recm1h.setPosition(400, 265);
                     recm0h.setPosition(650, 300);
                     clockHelp.restart().asMilliseconds();
@@ -3382,7 +3412,6 @@ int main()
                 }
                 else if (helpc == 2 && thelp > 1800)
                 {
-                    recm1h.setSize({ 100, 125 });
                     recm1h.setPosition(500, 265);
                     recm0h.setPosition(750, 300);
                     clockHelp.restart().asMilliseconds();
@@ -3390,7 +3419,6 @@ int main()
                 }
                 else if (helpc == 3 && thelp > 1800)
                 {
-                    recm1h.setSize({ 100, 125 });
                     recm1h.setPosition(500, 365);
                     recm0h.setPosition(750, 400);
                     clockHelp.restart().asMilliseconds();
@@ -3398,7 +3426,6 @@ int main()
                 }
                 else if (helpc == 4 && thelp > 1800)
                 {
-                    recm1h.setSize({ 100, 125 });
                     recm1h.setPosition(400, 365);
                     recm0h.setPosition(650, 400);
                     clockHelp.restart().asMilliseconds();
@@ -3407,6 +3434,11 @@ int main()
                 recm1h.setTexture(&tmouse0h);
                 window.draw(recm1h);
                 window.draw(recm0h);
+                window.draw(bright1h);
+
+                window.draw(recht);
+                window.draw(textm11h);
+                window.draw(textm12h);
                 break;
             case 2:
                 recm1h.setSize({ 200, 250 });
@@ -3424,14 +3456,19 @@ int main()
                     helpc = 1;
                 }
                 window.draw(recm1h);
+                window.draw(bright1h);
+                window.draw(bleft1h);
+
+                window.draw(recht);
+
                 break;
             case 3:
                 break;
             }
 
             //if()
-            window.draw(bright1h);
-            window.draw(bleft1h);
+            //window.draw(bright1h);
+            //window.draw(bleft1h);
             /*window.draw(textH);*/
 
 
