@@ -21,7 +21,7 @@ int rate_of_fire = 1200;
 int tv = 200;
 int tv2 = 200;
 int sensitivity = 10;
-int helpc = 1;
+int helpc = 0;
 int hcount = 1;
 bool menu = true;
 bool test = false;
@@ -672,10 +672,102 @@ int main()
         std::cout << "Errortm0h" << std::endl;
         system("PAUSE");
     }
+    sf::Texture tmouse01h;
+    if (!tmouse01h.loadFromFile("Resources/Help/Mouse/mouse01.png"))
+    {
+        std::cout << "Errortm01h" << std::endl;
+        system("PAUSE");
+    }
     sf::Texture tmouse1lh;
     if (!tmouse1lh.loadFromFile("Resources/Help/Mouse/mouse1l.png"))
     {
         std::cout << "Errortm1lh" << std::endl;
+        system("PAUSE");
+    }
+
+    sf::Texture tcontroller0;
+    if (!tcontroller0.loadFromFile("Resources/Help/Controller/controller0.png"))
+    {
+        std::cout << "Errortc0" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tcontroller00;
+    if (!tcontroller00.loadFromFile("Resources/Help/Controller/controller00.png"))
+    {
+        std::cout << "Errortc00" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tcontroller1lj;
+    if (!tcontroller1lj.loadFromFile("Resources/Help/Controller/controller1lj.png"))
+    {
+        std::cout << "Errortc1lj" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tcontroller1rt;
+    if (!tcontroller1rt.loadFromFile("Resources/Help/Controller/controller1rt.png"))
+    {
+        std::cout << "Errortc1rt" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tcontroller1s;
+    if (!tcontroller1s.loadFromFile("Resources/Help/Controller/controller1s.png"))
+    {
+        std::cout << "Errortc1s" << std::endl;
+        system("PAUSE");
+    }
+
+    sf::Texture tkeyboard0;
+    if (!tkeyboard0.loadFromFile("Resources/Help/Keyboard/keyboard0.png"))
+    {
+        std::cout << "Errortk0" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tkeyboard1w;
+    if (!tkeyboard1w.loadFromFile("Resources/Help/Keyboard/keyboard1w.png"))
+    {
+        std::cout << "Errortk1w" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tkeyboard1s;
+    if (!tkeyboard1s.loadFromFile("Resources/Help/Keyboard/keyboard1s.png"))
+    {
+        std::cout << "Errortk1s" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tkeyboard1a;
+    if (!tkeyboard1a.loadFromFile("Resources/Help/Keyboard/keyboard1a.png"))
+    {
+        std::cout << "Errortk1a" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tkeyboard1d;
+    if (!tkeyboard1d.loadFromFile("Resources/Help/Keyboard/keyboard1d.png"))
+    {
+        std::cout << "Errortk1d" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tkeyboard0Space;
+    if (!tkeyboard0Space.loadFromFile("Resources/Help/Keyboard/keyboard0space.png"))
+    {
+        std::cout << "Errortk0space" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tkeyboard1Space;
+    if (!tkeyboard1Space.loadFromFile("Resources/Help/Keyboard/keyboard1space.png"))
+    {
+        std::cout << "Errortk1space" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tkeyboard0Esc;
+    if (!tkeyboard0Esc.loadFromFile("Resources/Help/Keyboard/keyboard0esc.png"))
+    {
+        std::cout << "Errortk0esc" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tkeyboard1Esc;
+    if (!tkeyboard1Esc.loadFromFile("Resources/Help/Keyboard/keyboard1esc.png"))
+    {
+        std::cout << "Errortk1esc" << std::endl;
         system("PAUSE");
     }
 
@@ -709,23 +801,63 @@ int main()
     recm1h.setTexture(&tmouse0h);
 
     sf::RectangleShape recht;
-    recht.setSize({ 600, 200 });
-    recht.setPosition(300, 550);
-    recht.setOutlineThickness(3);
+    recht.setSize({ 596, 196 });
+    recht.setPosition(302, 552);
+    recht.setOutlineThickness(5);
     recht.setOutlineColor(sf::Color::Black);
 
     sf::Text textm11h;
     textm11h.setFont(font);
-    textm11h.setString("The pointer movement in the game");
+    textm11h.setString("Some text");
     textm11h.setCharacterSize(25);
     textm11h.setFillColor(sf::Color::Black);
-    textm11h.setPosition(375, 600);
+    textm11h.setPosition(375, 608);
     sf::Text textm12h;
     textm12h.setFont(font);
-    textm12h.setString("corresponds to the mouse movement.");
+    textm12h.setString("Some text");
     textm12h.setCharacterSize(25);
     textm12h.setFillColor(sf::Color::Black);
-    textm12h.setPosition(375, 650);
+    textm12h.setPosition(375, 658);
+
+    sf::Text textH2;
+    textH2.setFont(font);
+    textH2.setString("Controller player");
+    textH2.setCharacterSize(40);
+    textH2.setFillColor(sf::Color::Black);
+    textH2.setPosition(434, 175);
+
+    sf::RectangleShape recc0h;
+    recc0h.setSize({ 50, 50 });
+    recc0h.setPosition(650, 300);
+    recc0h.setTexture(&tgun01);
+    sf::RectangleShape recc1h;
+    recc1h.setSize({ 190, 125 });
+    recc1h.setPosition(400, 315);
+    recc1h.setTexture(&tcontroller0);
+
+    sf::Text textH3;
+    textH3.setFont(font);
+    textH3.setString("Keyboard player");
+    textH3.setCharacterSize(40);
+    textH3.setFillColor(sf::Color::Black);
+    textH3.setPosition(437, 175);
+
+    sf::RectangleShape reck0h;
+    reck0h.setSize({ 50, 50 });
+    reck0h.setPosition(650, 300);
+    reck0h.setTexture(&tgun03);
+    sf::RectangleShape reck1h;
+    reck1h.setSize({ 240, 150 });
+    reck1h.setPosition(350, 300);
+    reck1h.setTexture(&tkeyboard0);
+    sf::RectangleShape reck2h;
+    reck2h.setSize({ 500, 100 });
+    reck2h.setPosition(350, 350);
+    reck2h.setTexture(&tkeyboard0Space);
+    sf::RectangleShape reck3h;
+    reck3h.setSize({ 200, 200 });
+    reck3h.setPosition(500, 300);
+    reck3h.setTexture(&tkeyboard0Esc);
 
     sf::RectangleShape bleft1h;
     bleft1h.setSize({ 20, 30 });
@@ -1767,7 +1899,11 @@ int main()
                             menu = false;
                             instruction = true;
                             clockHelp.restart().asMilliseconds();
-                            helpc = 1;
+                            hcount = 1;
+                            helpc = 0;
+                            recm1h.setSize({ 100, 125 });
+                            recm1h.setPosition(400, 265);
+                            recm0h.setPosition(650, 300);
                         }
                         //Quit
                         else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730)
@@ -2068,13 +2204,100 @@ int main()
                         else if (hcount == 1 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
                         {
                             hcount = 2;
+                            helpc = 1;
+                            recm1h.setTexture(&tmouse0h);
+                            recm1h.setSize({ 200, 250 });
+                            recm1h.setPosition(500, 265);
+                        }
+                        else if (hcount == 2 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
+                        {
+                            hcount = 3;
+                            helpc = 0;
+                            recc1h.setSize({ 190, 125 });
+                            recc1h.setPosition(400, 315);
+                            recc0h.setPosition(650, 300);
+                            recc1h.setTexture(&tcontroller0);
+                        }
+                        else if (hcount == 3 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
+                        {
+                            hcount = 4;
+                            helpc = 1;
+                            recc1h.setSize({ 380, 250 });
+                            recc1h.setPosition(410, 260);
+                            recc1h.setTexture(&tcontroller00);
+                        }
+                        else if (hcount == 4 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
+                        {
+                            hcount = 5;
+                            helpc = 1;
+                            recc1h.setTexture(&tcontroller0);
+                        }
+                        else if (hcount == 5 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
+                        {
+                            hcount = 6;
+                            helpc = 0;
+                            reck1h.setTexture(&tkeyboard0);
+                        }
+                        else if (hcount == 6 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
+                        {
+                            hcount = 7;
+                            helpc = 1;
+                            reck2h.setTexture(&tkeyboard0Space);
+                        }
+                        else if (hcount == 7 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
+                        {
+                            hcount = 8;
+                            helpc = 1;
+                            reck3h.setTexture(&tkeyboard0Esc);
                         }
                         //l
                         else if (hcount == 2 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
                         {
                             hcount = 1;
+                            helpc = 0;
+                            recm1h.setSize({ 100, 125 });
                             recm1h.setPosition(400, 265);
                             recm0h.setPosition(650, 300);
+                        }
+                        else if (hcount == 3 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
+                        {
+                            hcount = 2;
+                            helpc = 1;
+                            recm1h.setSize({ 200, 250 });
+                            recm1h.setPosition(500, 265);
+                        }
+                        else if (hcount == 4 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
+                        {
+                            hcount = 3;
+                            helpc = 0;
+                            recc1h.setSize({ 190, 125 });
+                            recc1h.setPosition(400, 315);
+                            recc0h.setPosition(650, 300);
+                            recc1h.setTexture(&tcontroller0);
+                        }
+                        else if (hcount == 5 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
+                        {
+                            hcount = 4;
+                            helpc = 1;
+                            recc1h.setTexture(&tcontroller00);
+                        }
+                        else if (hcount == 6 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
+                        {
+                            hcount = 5;
+                            helpc = 1;
+                            recc1h.setTexture(&tcontroller0);
+                        }
+                        else if (hcount == 7 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
+                        {
+                            hcount = 6;
+                            helpc = 0;
+                            reck1h.setTexture(&tkeyboard0);
+                        }
+                        else if (hcount == 8 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
+                        {
+                            hcount = 7;
+                            helpc = 1;
+                            reck2h.setTexture(&tkeyboard0Space);
                         }
                     }
                     //Player
@@ -3394,44 +3617,134 @@ int main()
             window.draw(help_text);
             window.draw(rec0h);
 
-            window.draw(textH1);
-
             sf::Time th = clockHelp.getElapsedTime();
             int thelp = th.asMilliseconds();
 
             switch (hcount)
             {
             case 1:
-                recm1h.setSize({ 100, 125 });
-                if (helpc == 1 && thelp > 1800)
+                window.draw(textH1);
+                if (helpc == 0 && thelp > 2500)
                 {
                     recm1h.setPosition(400, 265);
                     recm0h.setPosition(650, 300);
                     clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                else if (helpc == 1 && thelp > 450)
+                {
+                    recm1h.setTexture(&tmouse01h);
+                    recm1h.setPosition(425, 265);
+                    recm0h.setPosition(675, 300);
+                    clockHelp.restart().asMilliseconds();
                     helpc = 2;
                 }
-                else if (helpc == 2 && thelp > 1800)
+                else if (helpc == 2 && thelp > 450)
+                {
+                    recm1h.setPosition(450, 265);
+                    recm0h.setPosition(700, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 3;
+                }
+                else if (helpc == 3 && thelp > 450)
+                {
+                    recm1h.setPosition(475, 265);
+                    recm0h.setPosition(725, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 4;
+                }
+                else if (helpc == 4 && thelp > 450)
                 {
                     recm1h.setPosition(500, 265);
                     recm0h.setPosition(750, 300);
                     clockHelp.restart().asMilliseconds();
-                    helpc = 3;
+                    helpc = 5;
                 }
-                else if (helpc == 3 && thelp > 1800)
+                else if (helpc == 5 && thelp > 450)
+                {
+                    recm1h.setPosition(500, 290);
+                    recm0h.setPosition(750, 325);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 6;
+                }
+                else if (helpc == 6 && thelp > 450)
+                {
+                    recm1h.setPosition(500, 315);
+                    recm0h.setPosition(750, 350);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 7;
+                }
+                else if (helpc == 7 && thelp > 450)
+                {
+                    recm1h.setPosition(500, 340);
+                    recm0h.setPosition(750, 375);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 8;
+                }
+                else if (helpc == 8 && thelp > 450)
                 {
                     recm1h.setPosition(500, 365);
                     recm0h.setPosition(750, 400);
                     clockHelp.restart().asMilliseconds();
-                    helpc = 4;
+                    helpc = 9;
                 }
-                else if (helpc == 4 && thelp > 1800)
+                else if (helpc == 9 && thelp > 450)
+                {
+                    recm1h.setPosition(475, 365);
+                    recm0h.setPosition(725, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 10;
+                }
+                else if (helpc == 10 && thelp > 450)
+                {
+                    recm1h.setPosition(450, 365);
+                    recm0h.setPosition(700, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 11;
+                }
+                else if (helpc == 11 && thelp > 450)
+                {
+                    recm1h.setPosition(425, 365);
+                    recm0h.setPosition(675, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 12;
+                }
+                else if (helpc == 12 && thelp > 450)
                 {
                     recm1h.setPosition(400, 365);
                     recm0h.setPosition(650, 400);
                     clockHelp.restart().asMilliseconds();
-                    helpc = 1;
+                    helpc = 13;
                 }
-                recm1h.setTexture(&tmouse0h);
+                else if (helpc == 13 && thelp > 450)
+                {
+                    recm1h.setPosition(400, 340);
+                    recm0h.setPosition(650, 375);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 14;
+                }
+                else if (helpc == 14 && thelp > 450)
+                {
+                    recm1h.setPosition(400, 315);
+                    recm0h.setPosition(650, 350);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 15;
+                }
+                else if (helpc == 15 && thelp > 450)
+                {
+                    recm1h.setPosition(400, 290);
+                    recm0h.setPosition(650, 325);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 16;
+                }
+                else if (helpc == 16 && thelp > 450)
+                {
+                    recm1h.setPosition(400, 265);
+                    recm0h.setPosition(650, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 0;
+                    recm1h.setTexture(&tmouse0h);
+                }
                 window.draw(recm1h);
                 window.draw(recm0h);
                 window.draw(bright1h);
@@ -3441,8 +3754,7 @@ int main()
                 window.draw(textm12h);
                 break;
             case 2:
-                recm1h.setSize({ 200, 250 });
-                recm1h.setPosition(500, 265);
+                window.draw(textH1);
                 if (helpc == 1 && thelp > 1500)
                 {
                     recm1h.setTexture(&tmouse0h);
@@ -3463,6 +3775,317 @@ int main()
 
                 break;
             case 3:
+                window.draw(textH2);
+                if (helpc == 0 && thelp > 2500)
+                {
+                    recc0h.setPosition(650, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                if (helpc == 1 && thelp > 450)
+                {
+                    recc1h.setTexture(&tcontroller1lj);
+                    recc0h.setPosition(675, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 2;
+                }
+                else if (helpc == 2 && thelp > 450)
+                {
+                    recc0h.setPosition(700, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 3;
+                }
+                else if (helpc == 3 && thelp > 450)
+                {
+                    recc0h.setPosition(725, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 4;
+                }
+                else if (helpc == 4 && thelp > 450)
+                {
+                    recc0h.setPosition(750, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 5;
+                }
+                else if (helpc == 5 && thelp > 450)
+                {
+                    recc0h.setPosition(750, 325);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 6;
+                }
+                else if (helpc == 6 && thelp > 450)
+                {
+                    recc0h.setPosition(750, 350);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 7;
+                }
+                else if (helpc == 7 && thelp > 450)
+                {
+                    recc0h.setPosition(750, 375);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 8;
+                }
+                else if (helpc == 8 && thelp > 450)
+                {
+                    recc0h.setPosition(750, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 9;
+                }
+                else if (helpc == 9 && thelp > 450)
+                {
+                    recc0h.setPosition(725, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 10;
+                }
+                else if (helpc == 10 && thelp > 450)
+                {
+                    recc0h.setPosition(700, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 11;
+                }
+                else if (helpc == 11 && thelp > 450)
+                {
+                    recc0h.setPosition(675, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 12;
+                }
+                else if (helpc == 12 && thelp > 450)
+                {
+                    recc0h.setPosition(650, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 13;
+                }
+                else if (helpc == 13 && thelp > 450)
+                {
+                    recc0h.setPosition(650, 375);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 14;
+                }
+                else if (helpc == 14 && thelp > 450)
+                {
+                    recc0h.setPosition(650, 350);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 15;
+                }
+                else if (helpc == 15 && thelp > 450)
+                {
+                    recc0h.setPosition(650, 325);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 16;
+                }
+                else if (helpc == 16 && thelp > 450)
+                {
+                    recc0h.setPosition(650, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 0;
+                    recc1h.setTexture(&tcontroller0);
+                }
+                window.draw(recc1h);
+                window.draw(recc0h);
+                window.draw(bright1h);
+                window.draw(bleft1h);
+
+                window.draw(recht);
+                //window.draw(textm11h);
+                //window.draw(textm12h);
+                break;
+            case 4:
+                window.draw(textH2);
+                if (helpc == 1 && thelp > 1500)
+                {
+                    recc1h.setTexture(&tcontroller00);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 2;
+                }
+                else if (helpc == 2 && thelp > 1500)
+                {
+                    recc1h.setTexture(&tcontroller1rt);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                window.draw(recc1h);
+                window.draw(bright1h);
+                window.draw(bleft1h);
+
+                window.draw(recht);
+                break;
+            case 5:
+                window.draw(textH2);
+                if (helpc == 1 && thelp > 1500)
+                {
+                    recc1h.setTexture(&tcontroller0);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 2;
+                }
+                else if (helpc == 2 && thelp > 1500)
+                {
+                    recc1h.setTexture(&tcontroller1s);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                window.draw(recc1h);
+                window.draw(bright1h);
+                window.draw(bleft1h);
+
+                window.draw(recht);
+                break;
+            case 6:
+                window.draw(textH3);
+
+                if (helpc == 0 && thelp > 2500)
+                {
+                    reck0h.setPosition(650, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                if (helpc == 1 && thelp > 450)
+                {
+                    reck1h.setTexture(&tkeyboard1d);
+                    reck0h.setPosition(675, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 2;
+                }
+                else if (helpc == 2 && thelp > 450)
+                {
+                    reck0h.setPosition(700, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 3;
+                }
+                else if (helpc == 3 && thelp > 450)
+                {
+                    reck0h.setPosition(725, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 4;
+                }
+                else if (helpc == 4 && thelp > 450)
+                {
+                    reck0h.setPosition(750, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 5;
+                }
+                else if (helpc == 5 && thelp > 450)
+                {
+                    reck1h.setTexture(&tkeyboard1s);
+                    reck0h.setPosition(750, 325);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 6;
+                }
+                else if (helpc == 6 && thelp > 450)
+                {
+                    reck0h.setPosition(750, 350);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 7;
+                }
+                else if (helpc == 7 && thelp > 450)
+                {
+                    reck0h.setPosition(750, 375);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 8;
+                }
+                else if (helpc == 8 && thelp > 450)
+                {
+                    reck0h.setPosition(750, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 9;
+                }
+                else if (helpc == 9 && thelp > 450)
+                {
+                    reck1h.setTexture(&tkeyboard1a);
+                    reck0h.setPosition(725, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 10;
+                }
+                else if (helpc == 10 && thelp > 450)
+                {
+                    reck0h.setPosition(700, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 11;
+                }
+                else if (helpc == 11 && thelp > 450)
+                {
+                    reck0h.setPosition(675, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 12;
+                }
+                else if (helpc == 12 && thelp > 450)
+                {
+                    reck0h.setPosition(650, 400);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 13;
+                }
+                else if (helpc == 13 && thelp > 450)
+                {
+                    reck1h.setTexture(&tkeyboard1w);
+                    reck0h.setPosition(650, 375);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 14;
+                }
+                else if (helpc == 14 && thelp > 450)
+                {
+                    reck0h.setPosition(650, 350);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 15;
+                }
+                else if (helpc == 15 && thelp > 450)
+                {
+                    reck0h.setPosition(650, 325);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 16;
+                }
+                else if (helpc == 16 && thelp > 450)
+                {
+                    reck0h.setPosition(650, 300);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 0;
+                    reck1h.setTexture(&tkeyboard0);
+                }
+
+                window.draw(reck0h);
+                window.draw(reck1h);
+
+                window.draw(bright1h);
+                window.draw(bleft1h);
+
+                window.draw(recht);
+                break;
+            case 7:
+                window.draw(textH3);
+                if (helpc == 1 && thelp > 1500)
+                {
+                    reck2h.setTexture(&tkeyboard0Space);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 2;
+                }
+                else if (helpc == 2 && thelp > 1500)
+                {
+                    reck2h.setTexture(&tkeyboard1Space);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                window.draw(reck2h);
+                window.draw(bright1h);
+                window.draw(bleft1h);
+
+                window.draw(recht);
+                break;
+            case 8:
+                window.draw(textH3);
+                if (helpc == 1 && thelp > 1500)
+                {
+                    reck3h.setTexture(&tkeyboard0Esc);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 2;
+                }
+                else if (helpc == 2 && thelp > 1500)
+                {
+                    reck3h.setTexture(&tkeyboard1Esc);
+                    clockHelp.restart().asMilliseconds();
+                    helpc = 1;
+                }
+                window.draw(reck3h);
+                window.draw(bleft1h);
+
+                window.draw(recht);
                 break;
             }
 
