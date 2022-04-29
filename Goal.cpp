@@ -38,6 +38,7 @@ void Goal::position()
 
 Goal::Goal(int row, int number, int r)
 {
+	this->stop = false;
 	this->row = row;
 	this->number = number;
 
@@ -262,6 +263,7 @@ void Goal::setTexture(std::vector<sf::Texture>& goalT, bool hit)
 	else
 	{
 		this->body.setTexture(&goalT[11]);
+		this->stop = true;
 	}
 }
 
@@ -1269,4 +1271,9 @@ bool Goal::existence()
 sf::CircleShape Goal::getBody()
 {
 	return this->body;
+}
+
+bool Goal::getStop()
+{
+	return this->stop;
 }

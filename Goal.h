@@ -14,6 +14,7 @@ private:
 	int number;
 	int count;
 	int hight;
+	bool stop;
 
 public:
 	Goal(int row, int number, int r);
@@ -25,4 +26,5 @@ public:
 	void create(sf::RenderWindow& window);
 	bool existence();
 	sf::CircleShape getBody();
+	bool getStop();
 };
