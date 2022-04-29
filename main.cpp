@@ -1262,6 +1262,13 @@ int main()
                         {
                             menu = false;
                             instruction = true;
+                            clockHelp.restart().asMilliseconds();
+                            hcount = 1;
+                            helpc = 0;
+                            recm1h.setTexture(&tmouse0h);
+                            recm1h.setSize({ 100, 125 });
+                            recm1h.setPosition(400, 265);
+                            recm0h.setPosition(650, 300);
                         }
                         //Options
                         else if (((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 390 && p1.getRec().getPosition().y < 490) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 390 && p2.getRec().getPosition().y < 490)))
@@ -2007,6 +2014,7 @@ int main()
                             clockHelp.restart().asMilliseconds();
                             hcount = 1;
                             helpc = 0;
+                            recm1h.setTexture(&tmouse0h);
                             recm1h.setSize({ 100, 125 });
                             recm1h.setPosition(400, 265);
                             recm0h.setPosition(650, 300);
@@ -2744,6 +2752,13 @@ int main()
                             {
                                 menu = false;
                                 instruction = true;
+                                clockHelp.restart().asMilliseconds();
+                                hcount = 1;
+                                helpc = 0;
+                                recm1h.setTexture(&tmouse0h);
+                                recm1h.setSize({ 100, 125 });
+                                recm1h.setPosition(400, 265);
+                                recm0h.setPosition(650, 300);
                             }
                             //Options
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 390 && p1.getRec().getPosition().y < 490) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 390 && p2.getRec().getPosition().y < 490)))
@@ -3036,13 +3051,13 @@ int main()
                         else if (!menu && !settings && !select_player && instruction)
                         {
                             //Back
-                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
+                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)))
                             {
                                 instruction = false;
                                 menu = true;
                             }
                             //r
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 1 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 1 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 1 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 1 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 2;
                                 helpc = 1;
@@ -3050,7 +3065,7 @@ int main()
                                 recm1h.setSize({ 200, 250 });
                                 recm1h.setPosition(500, 265);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 3;
                                 helpc = 0;
@@ -3059,7 +3074,7 @@ int main()
                                 recc0h.setPosition(650, 300);
                                 recc1h.setTexture(&tcontroller0);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 4;
                                 helpc = 1;
@@ -3067,32 +3082,32 @@ int main()
                                 recc1h.setPosition(410, 260);
                                 recc1h.setTexture(&tcontroller00);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 4 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 4 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 5;
                                 helpc = 1;
                                 recc1h.setTexture(&tcontroller0);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 5 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 5 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 6;
                                 helpc = 0;
                                 reck1h.setTexture(&tkeyboard0);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 6 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 6 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 7;
                                 helpc = 1;
                                 reck2h.setTexture(&tkeyboard0Space);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 7 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 7 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 8;
                                 helpc = 1;
                                 reck3h.setTexture(&tkeyboard0Esc);
                             }
                             //l
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 1;
                                 helpc = 0;
@@ -3101,7 +3116,7 @@ int main()
                                 recm1h.setPosition(400, 265);
                                 recm0h.setPosition(650, 300);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 2;
                                 helpc = 1;
@@ -3109,7 +3124,7 @@ int main()
                                 recm1h.setSize({ 200, 250 });
                                 recm1h.setPosition(500, 265);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 4 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 4 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 3;
                                 helpc = 0;
@@ -3118,25 +3133,25 @@ int main()
                                 recc0h.setPosition(650, 300);
                                 recc1h.setTexture(&tcontroller0);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 5 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 5 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 4;
                                 helpc = 1;
                                 recc1h.setTexture(&tcontroller00);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 6 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 6 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 5;
                                 helpc = 1;
                                 recc1h.setTexture(&tcontroller0);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 7 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 7 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 6;
                                 helpc = 0;
                                 reck1h.setTexture(&tkeyboard0);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 8 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 8 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 8 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 8 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 7;
                                 helpc = 1;
