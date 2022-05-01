@@ -28,3 +28,4 @@ public:
 	sf::CircleShape getBody();
 	bool getStop();
 };
+

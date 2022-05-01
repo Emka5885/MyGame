@@ -18,8 +18,8 @@ int ammun = 30;
 int vibrations = 6;
 int speed = 50;
 int rate_of_fire = 1200;
-int tv = 200;
-int tv2 = 200;
+int tv = 1000;
+int tv2 = 1000;
 int sensitivity = 10;
 int helpc = 0;
 int hcount = 1;
@@ -66,7 +66,7 @@ sf::RectangleShape drawRecTenP(int xp, int yp);
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1200, 800), "Title", sf::Style::Close | sf::Style::Titlebar);
+    sf::RenderWindow window(sf::VideoMode(1200, 800), "Young master of aiming", sf::Style::Close | sf::Style::Titlebar);
 
     //Menu
     sf::Font font;
@@ -427,6 +427,7 @@ int main()
         std::cout << "Errorig00" << std::endl;
         system("PAUSE");
     }
+    window.setIcon(igun00.getSize().x, igun00.getSize().y, igun00.getPixelsPtr());
     sf::Texture tgun00;
     if (!tgun00.loadFromFile("Resources/Gun/gun00.png"))
     {
@@ -1050,7 +1051,6 @@ int main()
         window.setMouseCursorVisible(false);
         break;
     }
-    tv = p1.getTimeV();
     std::string p1samu = std::to_string(p1.getAmmunition());
     textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
 

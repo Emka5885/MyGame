@@ -11,4 +11,3 @@ public:
 	~Platform();
 
 	void create(sf::RenderWindow& window);
-};
