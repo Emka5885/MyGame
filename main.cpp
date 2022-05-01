@@ -808,13 +808,13 @@ int main()
 
     sf::Text textm11h;
     textm11h.setFont(font);
-    textm11h.setString("Some text");
+    textm11h.setString("The pointer movement in the game");
     textm11h.setCharacterSize(25);
     textm11h.setFillColor(sf::Color::Black);
     textm11h.setPosition(375, 608);
     sf::Text textm12h;
     textm12h.setFont(font);
-    textm12h.setString("Some text");
+    textm12h.setString("corresponds to the mouse movement.");
     textm12h.setCharacterSize(25);
     textm12h.setFillColor(sf::Color::Black);
     textm12h.setPosition(375, 658);
@@ -1269,6 +1269,9 @@ int main()
                             recm1h.setSize({ 100, 125 });
                             recm1h.setPosition(400, 265);
                             recm0h.setPosition(650, 300);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("The pointer movement in the game");
+                            textm12h.setString("corresponds to the mouse movement.");
                         }
                         //Options
                         else if (((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 390 && p1.getRec().getPosition().y < 490) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 390 && p2.getRec().getPosition().y < 490)))
@@ -1575,6 +1578,8 @@ int main()
                             recm1h.setTexture(&tmouse0h);
                             recm1h.setSize({ 200, 250 });
                             recm1h.setPosition(500, 265);
+                            textm11h.setPosition(375, 632);
+                            textm11h.setString("Click the left mouse button to shoot.");
                         }
                         else if ((hcount == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
@@ -1584,6 +1589,9 @@ int main()
                             recc1h.setPosition(400, 315);
                             recc0h.setPosition(650, 300);
                             recc1h.setTexture(&tcontroller0);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("Use the Left stick on the controller");
+                            textm12h.setString("to move the pointer in the game.");
                         }
                         else if ((hcount == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
@@ -1592,30 +1600,41 @@ int main()
                             recc1h.setSize({ 380, 250 });
                             recc1h.setPosition(410, 260);
                             recc1h.setTexture(&tcontroller00);
+                            textm11h.setString("Click the Right Trigger on the");
+                            textm12h.setString("controller to shoot.");
                         }
                         else if ((hcount == 4 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 5;
                             helpc = 1;
                             recc1h.setTexture(&tcontroller0);
+                            textm11h.setString("Click the Start button on the");
+                            textm12h.setString("controller to return to the main menu.");
                         }
                         else if ((hcount == 5 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 6;
                             helpc = 0;
                             reck1h.setTexture(&tkeyboard0);
+                            textm11h.setString("Use the WSDA buttons to move");
+                            textm12h.setString("the pointer in the game.");
                         }
                         else if ((hcount == 6 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 7;
                             helpc = 1;
                             reck2h.setTexture(&tkeyboard0Space);
+                            textm11h.setPosition(375, 632);
+                            textm11h.setString("Click the Spacebar to shoot.");
                         }
                         else if ((hcount == 7 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 8;
                             helpc = 1;
                             reck3h.setTexture(&tkeyboard0Esc);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("Click the Esc button to return to");
+                            textm12h.setString("the main menu.");
                         }
                         //l
                         else if ((hcount == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
@@ -1626,6 +1645,9 @@ int main()
                             recm1h.setSize({ 100, 125 });
                             recm1h.setPosition(400, 265);
                             recm0h.setPosition(650, 300);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("The pointer movement in the game");
+                            textm12h.setString("corresponds to the mouse movement.");
                         }
                         else if ((hcount == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
@@ -1634,6 +1656,8 @@ int main()
                             recm1h.setTexture(&tmouse0h);
                             recm1h.setSize({ 200, 250 });
                             recm1h.setPosition(500, 265);
+                            textm11h.setPosition(375, 632);
+                            textm11h.setString("Click the left mouse button to shoot.");
                         }
                         else if ((hcount == 4 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
@@ -1643,30 +1667,42 @@ int main()
                             recc1h.setPosition(400, 315);
                             recc0h.setPosition(650, 300);
                             recc1h.setTexture(&tcontroller0);
+                            recc1h.setTexture(&tcontroller0);
+                            textm11h.setString("Use the Left stick on the controller");
+                            textm12h.setString("to move the pointer in the game.");
                         }
                         else if ((hcount == 5 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 4;
                             helpc = 1;
                             recc1h.setTexture(&tcontroller00);
+                            textm11h.setString("Click the Right Trigger on the");
+                            textm12h.setString("controller to shoot.");
                         }
                         else if ((hcount == 6 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 5;
                             helpc = 1;
                             recc1h.setTexture(&tcontroller0);
+                            textm11h.setString("Click the Start button on the");
+                            textm12h.setString("controller to return to the main menu.");
                         }
                         else if ((hcount == 7 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 6;
                             helpc = 0;
                             reck1h.setTexture(&tkeyboard0);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("Use the WSDA buttons to move");
+                            textm12h.setString("the pointer in the game.");
                         }
                         else if ((hcount == 8 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 8 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 7;
                             helpc = 1;
                             reck2h.setTexture(&tkeyboard0Space);
+                            textm11h.setPosition(375, 632);
+                            textm11h.setString("Click the Spacebar to shoot.");
                         }
                     }
                     //Player
@@ -2018,6 +2054,10 @@ int main()
                             recm1h.setSize({ 100, 125 });
                             recm1h.setPosition(400, 265);
                             recm0h.setPosition(650, 300);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("The pointer movement in the game");
+                            textm12h.setString("corresponds to the mouse movement.");
+
                         }
                         //Quit
                         else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730)
@@ -2322,6 +2362,8 @@ int main()
                             recm1h.setTexture(&tmouse0h);
                             recm1h.setSize({ 200, 250 });
                             recm1h.setPosition(500, 265);
+                            textm11h.setPosition(375, 632);
+                            textm11h.setString("Click the left mouse button to shoot.");
                         }
                         else if (hcount == 2 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
                         {
@@ -2331,6 +2373,9 @@ int main()
                             recc1h.setPosition(400, 315);
                             recc0h.setPosition(650, 300);
                             recc1h.setTexture(&tcontroller0);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("Use the Left stick on the controller");
+                            textm12h.setString("to move the pointer in the game.");
                         }
                         else if (hcount == 3 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
                         {
@@ -2339,30 +2384,41 @@ int main()
                             recc1h.setSize({ 380, 250 });
                             recc1h.setPosition(410, 260);
                             recc1h.setTexture(&tcontroller00);
+                            textm11h.setString("Click the Right Trigger on the");
+                            textm12h.setString("controller to shoot.");
                         }
                         else if (hcount == 4 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
                         {
                             hcount = 5;
                             helpc = 1;
                             recc1h.setTexture(&tcontroller0);
+                            textm11h.setString("Click the Start button on the");
+                            textm12h.setString("controller to return to the main menu.");
                         }
                         else if (hcount == 5 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
                         {
                             hcount = 6;
                             helpc = 0;
                             reck1h.setTexture(&tkeyboard0);
+                            textm11h.setString("Use the WSDA buttons to move");
+                            textm12h.setString("the pointer in the game.");
                         }
                         else if (hcount == 6 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
                         {
                             hcount = 7;
                             helpc = 1;
                             reck2h.setTexture(&tkeyboard0Space);
+                            textm11h.setPosition(375, 632);
+                            textm11h.setString("Click the Spacebar to shoot.");
                         }
                         else if (hcount == 7 && cursor_mouse.getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)
                         {
                             hcount = 8;
                             helpc = 1;
                             reck3h.setTexture(&tkeyboard0Esc);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("Click the Esc button to return to");
+                            textm12h.setString("the main menu.");
                         }
                         //l
                         else if (hcount == 2 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
@@ -2373,6 +2429,9 @@ int main()
                             recm1h.setSize({ 100, 125 });
                             recm1h.setPosition(400, 265);
                             recm0h.setPosition(650, 300);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("The pointer movement in the game");
+                            textm12h.setString("corresponds to the mouse movement.");
                         }
                         else if (hcount == 3 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
                         {
@@ -2381,6 +2440,8 @@ int main()
                             recm1h.setTexture(&tmouse0h);
                             recm1h.setSize({ 200, 250 });
                             recm1h.setPosition(500, 265);
+                            textm11h.setPosition(375, 632);
+                            textm11h.setString("Click the left mouse button to shoot.");
                         }
                         else if (hcount == 4 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
                         {
@@ -2390,30 +2451,41 @@ int main()
                             recc1h.setPosition(400, 315);
                             recc0h.setPosition(650, 300);
                             recc1h.setTexture(&tcontroller0);
+                            textm11h.setString("Use the Left stick on the controller");
+                            textm12h.setString("to move the pointer in the game.");
                         }
                         else if (hcount == 5 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
                         {
                             hcount = 4;
                             helpc = 1;
                             recc1h.setTexture(&tcontroller00);
+                            textm11h.setString("Click the Right Trigger on the");
+                            textm12h.setString("controller to shoot.");
                         }
                         else if (hcount == 6 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
                         {
                             hcount = 5;
                             helpc = 1;
                             recc1h.setTexture(&tcontroller0);
+                            textm11h.setString("Click the Start button on the");
+                            textm12h.setString("controller to return to the main menu.");
                         }
                         else if (hcount == 7 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
                         {
                             hcount = 6;
                             helpc = 0;
                             reck1h.setTexture(&tkeyboard0);
+                            textm11h.setPosition(375, 608);
+                            textm11h.setString("Use the WSDA buttons to move");
+                            textm12h.setString("the pointer in the game.");
                         }
                         else if (hcount == 8 && cursor_mouse.getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)
                         {
                             hcount = 7;
                             helpc = 1;
                             reck2h.setTexture(&tkeyboard0Space);
+                            textm11h.setPosition(375, 632);
+                            textm11h.setString("Click the Spacebar to shoot.");
                         }
                     }
                     //Player
@@ -2759,6 +2831,9 @@ int main()
                                 recm1h.setSize({ 100, 125 });
                                 recm1h.setPosition(400, 265);
                                 recm0h.setPosition(650, 300);
+                                textm11h.setPosition(375, 608);
+                                textm11h.setString("The pointer movement in the game");
+                                textm12h.setString("corresponds to the mouse movement.");
                             }
                             //Options
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 390 && p1.getRec().getPosition().y < 490) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 390 && p2.getRec().getPosition().y < 490)))
@@ -3064,6 +3139,8 @@ int main()
                                 recm1h.setTexture(&tmouse0h);
                                 recm1h.setSize({ 200, 250 });
                                 recm1h.setPosition(500, 265);
+                                textm11h.setPosition(375, 632);
+                                textm11h.setString("Click the left mouse button to shoot.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
@@ -3073,6 +3150,9 @@ int main()
                                 recc1h.setPosition(400, 315);
                                 recc0h.setPosition(650, 300);
                                 recc1h.setTexture(&tcontroller0);
+                                textm11h.setPosition(375, 608);
+                                textm11h.setString("Use the Left stick on the controller");
+                                textm12h.setString("to move the pointer in the game.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
@@ -3081,30 +3161,41 @@ int main()
                                 recc1h.setSize({ 380, 250 });
                                 recc1h.setPosition(410, 260);
                                 recc1h.setTexture(&tcontroller00);
+                                textm11h.setString("Click the Right Trigger on the");
+                                textm12h.setString("controller to shoot.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 4 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 5;
                                 helpc = 1;
                                 recc1h.setTexture(&tcontroller0);
+                                textm11h.setString("Click the Start button on the");
+                                textm12h.setString("controller to return to the main menu.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 5 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 6;
                                 helpc = 0;
                                 reck1h.setTexture(&tkeyboard0);
+                                textm11h.setString("Use the WSDA buttons to move");
+                                textm12h.setString("the pointer in the game.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 6 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 7;
                                 helpc = 1;
                                 reck2h.setTexture(&tkeyboard0Space);
+                                textm11h.setPosition(375, 632);
+                                textm11h.setString("Click the Spacebar to shoot.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 7 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
                             {
                                 hcount = 8;
                                 helpc = 1;
                                 reck3h.setTexture(&tkeyboard0Esc);
+                                textm11h.setPosition(375, 608);
+                                textm11h.setString("Click the Esc button to return to");
+                                textm12h.setString("the main menu.");
                             }
                             //l
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
@@ -3115,6 +3206,9 @@ int main()
                                 recm1h.setSize({ 100, 125 });
                                 recm1h.setPosition(400, 265);
                                 recm0h.setPosition(650, 300);
+                                textm11h.setPosition(375, 608);
+                                textm11h.setString("The pointer movement in the game");
+                                textm12h.setString("corresponds to the mouse movement.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
@@ -3123,6 +3217,8 @@ int main()
                                 recm1h.setTexture(&tmouse0h);
                                 recm1h.setSize({ 200, 250 });
                                 recm1h.setPosition(500, 265);
+                                textm11h.setPosition(375, 632);
+                                textm11h.setString("Click the left mouse button to shoot.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 4 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
@@ -3132,30 +3228,41 @@ int main()
                                 recc1h.setPosition(400, 315);
                                 recc0h.setPosition(650, 300);
                                 recc1h.setTexture(&tcontroller0);
+                                textm11h.setString("Use the Left stick on the controller");
+                                textm12h.setString("to move the pointer in the game.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 5 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 4;
                                 helpc = 1;
                                 recc1h.setTexture(&tcontroller00);
+                                textm11h.setString("Click the Right Trigger on the");
+                                textm12h.setString("controller to shoot.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 6 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 5;
                                 helpc = 1;
                                 recc1h.setTexture(&tcontroller0);
+                                textm11h.setString("Click the Start button on the");
+                                textm12h.setString("controller to return to the main menu.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 7 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 6;
                                 helpc = 0;
                                 reck1h.setTexture(&tkeyboard0);
+                                textm11h.setPosition(375, 608);
+                                textm11h.setString("Use the WSDA buttons to move");
+                                textm12h.setString("the pointer in the game.");
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 8 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 8 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
                             {
                                 hcount = 7;
                                 helpc = 1;
                                 reck2h.setTexture(&tkeyboard0Space);
+                                textm11h.setPosition(375, 632);
+                                textm11h.setString("Click the Spacebar to shoot.");
                             }
                         }
                         //Player
@@ -3971,7 +4078,6 @@ int main()
                 window.draw(bright1h);
 
                 window.draw(recht);
-                window.draw(textm11h);
                 window.draw(textm12h);
                 break;
             case 2:
@@ -3993,7 +4099,6 @@ int main()
                 window.draw(bleft1h);
 
                 window.draw(recht);
-
                 break;
             case 3:
                 window.draw(textH2);
@@ -4107,6 +4212,7 @@ int main()
                 window.draw(bleft1h);
 
                 window.draw(recht);
+                window.draw(textm12h);
                 break;
             case 4:
                 window.draw(textH2);
@@ -4127,6 +4233,7 @@ int main()
                 window.draw(bleft1h);
 
                 window.draw(recht);
+                window.draw(textm12h);
                 break;
             case 5:
                 window.draw(textH2);
@@ -4147,6 +4254,7 @@ int main()
                 window.draw(bleft1h);
 
                 window.draw(recht);
+                window.draw(textm12h);
                 break;
             case 6:
                 window.draw(textH3);
@@ -4266,6 +4374,7 @@ int main()
                 window.draw(bleft1h);
 
                 window.draw(recht);
+                window.draw(textm12h);
                 break;
             case 7:
                 window.draw(textH3);
@@ -4305,8 +4414,10 @@ int main()
                 window.draw(bleft1h);
 
                 window.draw(recht);
+                window.draw(textm12h);
                 break;
             }
+            window.draw(textm11h);
 
             window.draw(textName);
 
@@ -4328,26 +4439,26 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.001, m.y * 0.001);
+                    p1.getRec().move(m.x * 0.01, m.y * 0.01);
                 }
             }
             else if (p1.getSelect() == 3)
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.001, 0);
+                    p1.getRec().move(-100 * 0.01, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.001, 0);
+                    p1.getRec().move(100 * 0.01, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.001);
+                    p1.getRec().move(0, -100 * 0.01);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.001);
+                    p1.getRec().move(0, 100 * 0.01);
                 }
             }
             if (p2_exists)
@@ -4357,26 +4468,26 @@ int main()
                     if (event.type == sf::Event::JoystickMoved)
                     {
                         sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p2.getRec().move(m.x * 0.001, m.y * 0.001);
+                        p2.getRec().move(m.x * 0.01, m.y * 0.01);
                     }
                 }
                 else if (p2.getSelect() == 3)
                 {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                     {
-                        p2.getRec().move(-100 * 0.001, 0);
+                        p2.getRec().move(-100 * 0.01, 0);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                     {
-                        p2.getRec().move(100 * 0.001, 0);
+                        p2.getRec().move(100 * 0.01, 0);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                     {
-                        p2.getRec().move(0, -100 * 0.001);
+                        p2.getRec().move(0, -100 * 0.01);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                     {
-                        p2.getRec().move(0, 100 * 0.001);
+                        p2.getRec().move(0, 100 * 0.01);
                     }
                 }
             }
