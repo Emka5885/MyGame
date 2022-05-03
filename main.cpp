@@ -1,4 +1,4 @@
-//My first game :)
+//My first game :)          (Young master of aiming)
 
 #include <iostream>
 #include <ctime>
@@ -1102,7 +1102,7 @@ int main()
     textName.setCharacterSize(15);
     textName.setFillColor(sf::Color::Black);
     textName.setPosition(1060, 765);
-    textName.setString("© Emilia Masiak");
+    textName.setString("Â© Emilia Masiak");
 
     while (window.isOpen())
     {
