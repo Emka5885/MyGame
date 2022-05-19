@@ -99,6 +99,11 @@ sf::RectangleShape& Player::getRec()
 	return this->rec;
 }
 
+void Player::setRecPos(sf::Vector2f Position)
+{
+	this->rec.setPosition(Position);
+}
+
 sf::RectangleShape& Player::getSB()
 {
 	switch (select)

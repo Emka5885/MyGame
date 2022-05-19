@@ -32,6 +32,7 @@ public:
 	int getTimeV();
 	int getSelect();
 	sf::RectangleShape& getRec();
+	void setRecPos(sf::Vector2f Position);
 	sf::RectangleShape& getSB();
 	void setImage(sf::Image& nimage, sf::RenderWindow& win);
 	void setAmmunition(int ammunition);
