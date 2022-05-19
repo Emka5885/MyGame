@@ -3496,19 +3496,19 @@ int main()
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.005 * dt * multiplier, 0);
+                    p1.getRec().move(-100 * 0.003 * dt * multiplier, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.005 * dt * multiplier, 0);
+                    p1.getRec().move(100 * 0.003 * dt * multiplier, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.005 * dt * multiplier);
+                    p1.getRec().move(0, -100 * 0.003 * dt * multiplier);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.005 * dt * multiplier);
+                    p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
                 }
             }
             if (p2_exists)
@@ -3525,19 +3525,19 @@ int main()
                 {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                     {
-                        p2.getRec().move(-100 * 0.005 * dt * multiplier, 0);
+                        p2.getRec().move(-100 * 0.003 * dt * multiplier, 0);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                     {
-                        p2.getRec().move(100 * 0.005 * dt * multiplier, 0);
+                        p2.getRec().move(100 * 0.003 * dt * multiplier, 0);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                     {
-                        p2.getRec().move(0, -100 * 0.005 * dt * multiplier);
+                        p2.getRec().move(0, -100 * 0.003 * dt * multiplier);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                     {
-                        p2.getRec().move(0, 100 * 0.005 * dt * multiplier);
+                        p2.getRec().move(0, 100 * 0.003 * dt * multiplier);
                     }
                 }
             }
@@ -3609,19 +3609,19 @@ int main()
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.005 * dt * multiplier, 0);
+                    p1.getRec().move(-100 * 0.003 * dt * multiplier, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.005 * dt * multiplier, 0);
+                    p1.getRec().move(100 * 0.003 * dt * multiplier, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.005 * dt * multiplier);
+                    p1.getRec().move(0, -100 * 0.003 * dt * multiplier);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.005 * dt * multiplier);
+                    p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
                 }
             }
             if (p2_exists)
@@ -3638,19 +3638,19 @@ int main()
                 {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                     {
-                        p2.getRec().move(-100 * 0.005 * dt * multiplier, 0);
+                        p2.getRec().move(-100 * 0.003 * dt * multiplier, 0);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                     {
-                        p2.getRec().move(100 * 0.005 * dt * multiplier, 0);
+                        p2.getRec().move(100 * 0.003 * dt * multiplier, 0);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                     {
-                        p2.getRec().move(0, -100 * 0.005 * dt * multiplier);
+                        p2.getRec().move(0, -100 * 0.003 * dt * multiplier);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                     {
-                        p2.getRec().move(0, 100 * 0.005 * dt * multiplier);
+                        p2.getRec().move(0, 100 * 0.003 * dt * multiplier);
                     }
                 }
             }
@@ -3735,19 +3735,19 @@ int main()
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.005 * dt * multiplier, 0);
+                    p1.getRec().move(-100 * 0.003 * dt * multiplier, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.005 * dt * multiplier, 0);
+                    p1.getRec().move(100 * 0.003 * dt * multiplier, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.005 * dt * multiplier);
+                    p1.getRec().move(0, -100 * 0.003 * dt * multiplier);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.005 * dt * multiplier);
+                    p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
                 }
             }
             if (p2_exists)
@@ -3764,19 +3764,19 @@ int main()
                 {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                     {
-                        p2.getRec().move(-100 * 0.005 * dt * multiplier, 0);
+                        p2.getRec().move(-100 * 0.003 * dt * multiplier, 0);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                     {
-                        p2.getRec().move(100 * 0.005 * dt * multiplier, 0);
+                        p2.getRec().move(100 * 0.003 * dt * multiplier, 0);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                     {
-                        p2.getRec().move(0, -100 * 0.005 * dt * multiplier);
+                        p2.getRec().move(0, -100 * 0.003 * dt * multiplier);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                     {
-                        p2.getRec().move(0, 100 * 0.005 * dt * multiplier);
+                        p2.getRec().move(0, 100 * 0.003 * dt * multiplier);
                     }
                 }
             }
@@ -3898,19 +3898,19 @@ int main()
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.005 * dt * multiplier, 0);
+                    p1.getRec().move(-100 * 0.003 * dt * multiplier, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.005 * dt * multiplier, 0);
+                    p1.getRec().move(100 * 0.003 * dt * multiplier, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.005 * dt * multiplier);
+                    p1.getRec().move(0, -100 * 0.003 * dt * multiplier);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.005 * dt * multiplier);
+                    p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
                 }
             }
             if (p2_exists)
@@ -3927,19 +3927,19 @@ int main()
                 {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                     {
-                        p2.getRec().move(-100 * 0.005 * dt * multiplier, 0);
+                        p2.getRec().move(-100 * 0.003 * dt * multiplier, 0);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                     {
-                        p2.getRec().move(100 * 0.005 * dt * multiplier, 0);
+                        p2.getRec().move(100 * 0.003 * dt * multiplier, 0);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                     {
-                        p2.getRec().move(0, -100 * 0.005 * dt * multiplier);
+                        p2.getRec().move(0, -100 * 0.003 * dt * multiplier);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                     {
-                        p2.getRec().move(0, 100 * 0.005 * dt * multiplier);
+                        p2.getRec().move(0, 100 * 0.003 * dt * multiplier);
                     }
                 }
             }
