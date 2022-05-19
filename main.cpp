@@ -20,7 +20,7 @@ int speed = 50;
 int rate_of_fire = 1200;
 int tv = 1000;
 int tv2 = 1000;
-int sensitivity = 10;
+int sensitivity = 20;
 int helpc = 0;
 int hcount = 1;
 bool menu = true;
@@ -46,7 +46,6 @@ bool select_player = false;
 bool change = false;
 bool resetrof = false;
 int selectmjk = 1;
-int selectmjk0 = 3;
 int selectmjk1 = 1;
 int selectmjk2 = 3;
 bool stop = true;
@@ -59,10 +58,8 @@ sf::Time speedb = sf::milliseconds(rate_of_fire);
 sf::Time speedb2 = sf::milliseconds(rate_of_fire);
 sf::Cursor c;
 sf::CircleShape cursor_mouse(2);
-sf::CircleShape cursor_mouse2(2);
 
 void score(int& s, int row);
-sf::RectangleShape drawRecTenP(int xp, int yp);
 
 int main()
 {
@@ -1263,9 +1260,12 @@ int main()
                         //Player
                         else if ((game == false) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
                         {
-                            std::cout << "d " << std::endl;
                             menu = false;
                             select_player = true;
+                            if (p1.getSelect() == 1)
+                                window.setMouseCursorVisible(true);
+                            else
+                                window.setMouseCursorVisible(false);
                         }
                         //Help
                         else if (((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 510 && p1.getRec().getPosition().y < 610) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 510 && p2.getRec().getPosition().y < 610)))
@@ -1326,7 +1326,7 @@ int main()
                             rate_of_fire = 1200;
                             rof_text.setString(std::to_string(rate_of_fire));
                             rof_text.setPosition(838, 565);
-                            sensitivity = 10;
+                            sensitivity = 20;
                             s_text.setString(std::to_string(sensitivity));
                             s_text.setPosition(858, 665);
                             p1.setTimeV(tv);
@@ -1541,7 +1541,7 @@ int main()
                             speedbar = true;
                             speedbar2 = true;
                         }
-                        //Vibration speed
+                        //Sensitivity
                         else if (((p1.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p1.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p1.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p1.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2) || (p2.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p2.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p2.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p2.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)))
                         {
                             if (sensitivity == 10)
@@ -1564,7 +1564,7 @@ int main()
                                 s_text.setString(std::to_string(sensitivity));
                                 s_text.setPosition(858, 665);
                             }
-                            else if (sensitivity != 40)
+                            else if (sensitivity != 99)
                             {
                                 sensitivity++;
                                 s_text.setString(std::to_string(sensitivity));
@@ -1723,43 +1723,41 @@ int main()
                         {
                             select_player = false;
                             menu = true;
+                            window.setMouseCursorVisible(true);
                         }
                         //rl1
-                        else if ((selectmjk == 1) && ((p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
+                        else if (!p2_exists)
                         {
-                            selectmjk = 2;
+                            if (selectmjk == 1 && (p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2))
+                            {
+                                selectmjk = 2;
+                            }
+                            else if (selectmjk == 2 && (p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2))
+                            {
+                                selectmjk = 1;
+                            }
+                            else if (selectmjk == 2 && (p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2))
+                            {
+                                selectmjk = 3;
+                            }
+                            else if (selectmjk == 3 && (p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2))
+                            {
+                                selectmjk = 2;
+                            }
                         }
-                        else if ((selectmjk == 2) && ((p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
+                        else if (p1.getSelect() == 3)
                         {
-                            selectmjk = 1;
-                        }
-                        else if ((selectmjk == 2) && ((p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
-                        {
-                            selectmjk = 3;
-                        }
-                        else if ((selectmjk == 3) && ((p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
-                        {
-                            selectmjk = 2;
-                        }
-                        //rl2
-                        else if ((selectmjk0 == 1) && ((p2.getRec().getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && p2.getRec().getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && p2.getRec().getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && p2.getRec().getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2) || (p1.getRec().getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && p1.getRec().getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && p1.getRec().getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && p1.getRec().getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2)))
-                        {
-                            selectmjk0 = 2;
-                        }
-                        else if ((selectmjk0 == 2) && ((p2.getRec().getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2) || (p1.getRec().getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2)))
-                        {
-                            selectmjk0 = 1;
-                        }
-                        else if ((selectmjk0 == 2) && ((p2.getRec().getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && p2.getRec().getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && p2.getRec().getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && p2.getRec().getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2) || (p1.getRec().getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && p1.getRec().getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && p1.getRec().getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && p1.getRec().getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2)))
-                        {
-                            selectmjk0 = 3;
-                        }
-                        else if ((selectmjk0 == 3) && ((p2.getRec().getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2) || (p1.getRec().getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2)))
-                        {
-                            selectmjk0 = 2;
+                            if ((selectmjk == 1 && (p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)) || (selectmjk == 1 && (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
+                            {
+                                selectmjk = 3;
+                            }
+                            else if ((selectmjk == 3 && (p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)) || (selectmjk == 3 && (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
+                            {
+                                selectmjk = 1;
+                            }
                         }
                         //Select
-                        else if ((selectmjk1 != selectmjk) && ((p1.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p1.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p1.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p1.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2) || (p2.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p2.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p2.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p2.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2)))
+                        if ((p1.getSelect() == 3) && (selectmjk1 != selectmjk) && ((p1.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p1.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p1.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p1.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2) || (p2.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p2.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p2.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p2.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2)))
                         {
                             if (!p2_exists)
                             {
@@ -1780,21 +1778,15 @@ int main()
                                         choosep12.setFillColor(sf::Color::White);
                                         choosep13.setFillColor(sf::Color::White);
                                         choosep21.setFillColor(sf::Color::White);
-                                        choosep22.setFillColor(sf::Color::White);
                                         choosep23.setFillColor(sf::Color(210, 210, 210));
                                         text1.setString("M");
                                         text2.setString("K");
                                         break;
                                     case 2:
-                                        selectmjk2 = 3;
                                         choosep11.setFillColor(sf::Color::White);
                                         choosep12.setFillColor(sf::Color(210, 210, 210));
                                         choosep13.setFillColor(sf::Color::White);
-                                        choosep21.setFillColor(sf::Color::White);
-                                        choosep22.setFillColor(sf::Color::White);
-                                        choosep23.setFillColor(sf::Color(210, 210, 210));
                                         text1.setString("C");
-                                        text2.setString("K");
                                         break;
                                     case 3:
                                         selectmjk2 = 1;
@@ -1802,7 +1794,6 @@ int main()
                                         choosep12.setFillColor(sf::Color::White);
                                         choosep13.setFillColor(sf::Color(210, 210, 210));
                                         choosep21.setFillColor(sf::Color(210, 210, 210));
-                                        choosep22.setFillColor(sf::Color::White);
                                         choosep23.setFillColor(sf::Color::White);
                                         text1.setString("K");
                                         text2.setString("M");
@@ -1811,11 +1802,12 @@ int main()
                                     p2.setSelect(selectmjk2);
                                 }
                             }
-                            else if (selectmjk != selectmjk2)
+                            else
                             {
-                                if (stop && (selectmjk == 2))
+                                if (selectmjk == 2)
                                 {
-                                    std::cout << "Joystick is Disconnected" << std::endl;
+                                    selectmjk = 1;
+                                    selectmjk1 = selectmjk;
                                 }
                                 else
                                 {
@@ -1829,53 +1821,21 @@ int main()
                                         choosep12.setFillColor(sf::Color::White);
                                         choosep13.setFillColor(sf::Color::White);
                                         text1.setString("M");
-                                        break;
-                                    case 2:
-                                        choosep11.setFillColor(sf::Color::White);
-                                        choosep12.setFillColor(sf::Color(210, 210, 210));
-                                        choosep13.setFillColor(sf::Color::White);
-                                        text1.setString("C");
+                                        choosep21.setFillColor(sf::Color::White);
+                                        choosep23.setFillColor(sf::Color(210, 210, 210));
+                                        text2.setString("K");
+                                        selectmjk2 = 3;
+                                        p2.setSelect(selectmjk2);
+                                        window.setMouseCursorVisible(true);
                                         break;
                                     case 3:
+                                        selectmjk2 = 1;
+                                        p2.setSelect(selectmjk2);
                                         choosep11.setFillColor(sf::Color::White);
                                         choosep12.setFillColor(sf::Color::White);
                                         choosep13.setFillColor(sf::Color(210, 210, 210));
                                         text1.setString("K");
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        else if ((p2_exists) && (selectmjk2 != selectmjk0) && ((p1.getRec().getPosition().x >= choosep21.getPosition().x - choosep21.getSize().x / 2 && p1.getRec().getPosition().x <= choosep21.getPosition().x + choosep21.getSize().x / 2 && p1.getRec().getPosition().y >= choosep21.getPosition().y - choosep21.getSize().y / 2 && p1.getRec().getPosition().y <= choosep21.getPosition().y + choosep21.getSize().y / 2) || (p2.getRec().getPosition().x >= choosep21.getPosition().x - choosep21.getSize().x / 2 && p2.getRec().getPosition().x <= choosep21.getPosition().x + choosep21.getSize().x / 2 && p2.getRec().getPosition().y >= choosep21.getPosition().y - choosep21.getSize().y / 2 && p2.getRec().getPosition().y <= choosep21.getPosition().y + choosep21.getSize().y / 2)))
-                        {
-                            if (selectmjk0 != selectmjk1)
-                            {
-                                if (stop && (selectmjk0 == 2))
-                                {
-                                    std::cout << "Joystick is Disconnected" << std::endl;
-                                }
-                                else
-                                {
-                                    selectmjk2 = selectmjk0;
-                                    p2.setSelect(selectmjk2);
-                                    p2.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
-                                    switch (selectmjk2)
-                                    {
-                                    case 2:
-                                        choosep21.setFillColor(sf::Color::White);
-                                        choosep22.setFillColor(sf::Color(210, 210, 210));
-                                        choosep23.setFillColor(sf::Color::White);
-                                        text2.setString("C");
-                                        break;
-                                    case 3:
-                                        choosep21.setFillColor(sf::Color::White);
-                                        choosep22.setFillColor(sf::Color::White);
-                                        choosep23.setFillColor(sf::Color(210, 210, 210));
-                                        text2.setString("K");
-                                        break;
-                                    case 1:
                                         choosep21.setFillColor(sf::Color(210, 210, 210));
-                                        choosep22.setFillColor(sf::Color::White);
                                         choosep23.setFillColor(sf::Color::White);
                                         text2.setString("M");
                                         break;
@@ -1884,15 +1844,42 @@ int main()
                             }
                         }
                         //Click
-                        if (((p1.getRec().getPosition().x >= rec4p.getPosition().x - rec4p.getSize().x / 2 && p1.getRec().getPosition().x <= rec4p.getPosition().x + rec4p.getSize().x / 2 && p1.getRec().getPosition().y >= rec4p.getPosition().y - rec4p.getSize().y / 2 && p1.getRec().getPosition().y <= rec4p.getPosition().y + rec4p.getSize().y / 2) || (p2.getRec().getPosition().x >= rec4p.getPosition().x - rec4p.getSize().x / 2 && p2.getRec().getPosition().x <= rec4p.getPosition().x + rec4p.getSize().x / 2 && p2.getRec().getPosition().y >= rec4p.getPosition().y - rec4p.getSize().y / 2 && p2.getRec().getPosition().y <= rec4p.getPosition().y + rec4p.getSize().y / 2)))
+                        if (selectmjk1 != 2 && p1.getSelect() == 3)
                         {
-                            p2_exists = true;
-                            textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
-                        }
-                        if (((p1.getRec().getPosition().x >= Offr.getPosition().x - Offr.getSize().x / 2 && p1.getRec().getPosition().x <= Offr.getPosition().x + Offr.getSize().x / 2 && p1.getRec().getPosition().y >= Offr.getPosition().y - Offr.getSize().y / 2 && p1.getRec().getPosition().y <= Offr.getPosition().y + Offr.getSize().y / 2) || (p2.getRec().getPosition().x >= Offr.getPosition().x - Offr.getSize().x / 2 && p2.getRec().getPosition().x <= Offr.getPosition().x + Offr.getSize().x / 2 && p2.getRec().getPosition().y >= Offr.getPosition().y - Offr.getSize().y / 2 && p2.getRec().getPosition().y <= Offr.getPosition().y + Offr.getSize().y / 2)))
-                        {
-                            p2_exists = false;
-                            textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
+                            if (((p1.getRec().getPosition().x >= rec4p.getPosition().x - rec4p.getSize().x / 2 && p1.getRec().getPosition().x <= rec4p.getPosition().x + rec4p.getSize().x / 2 && p1.getRec().getPosition().y >= rec4p.getPosition().y - rec4p.getSize().y / 2 && p1.getRec().getPosition().y <= rec4p.getPosition().y + rec4p.getSize().y / 2) || (p2.getRec().getPosition().x >= rec4p.getPosition().x - rec4p.getSize().x / 2 && p2.getRec().getPosition().x <= rec4p.getPosition().x + rec4p.getSize().x / 2 && p2.getRec().getPosition().y >= rec4p.getPosition().y - rec4p.getSize().y / 2 && p2.getRec().getPosition().y <= rec4p.getPosition().y + rec4p.getSize().y / 2)))
+                            {
+                                p2_exists = true;
+                                selectmjk1 = 3;
+                                selectmjk2 = 1;
+                                selectmjk = 3;
+                                choosep13.setFillColor(sf::Color(210, 210, 210));
+                                choosep12.setFillColor(sf::Color::White);
+                                choosep11.setFillColor(sf::Color::White);
+                                choosep23.setFillColor(sf::Color::White);
+                                choosep21.setFillColor(sf::Color(210, 210, 210));
+                                text2.setString("M");
+                                text1.setString("K");
+                                p1.setSelect(selectmjk1);
+                                p2.setSelect(selectmjk2);
+                                textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
+                            }
+                            if (((p1.getRec().getPosition().x >= Offr.getPosition().x - Offr.getSize().x / 2 && p1.getRec().getPosition().x <= Offr.getPosition().x + Offr.getSize().x / 2 && p1.getRec().getPosition().y >= Offr.getPosition().y - Offr.getSize().y / 2 && p1.getRec().getPosition().y <= Offr.getPosition().y + Offr.getSize().y / 2) || (p2.getRec().getPosition().x >= Offr.getPosition().x - Offr.getSize().x / 2 && p2.getRec().getPosition().x <= Offr.getPosition().x + Offr.getSize().x / 2 && p2.getRec().getPosition().y >= Offr.getPosition().y - Offr.getSize().y / 2 && p2.getRec().getPosition().y <= Offr.getPosition().y + Offr.getSize().y / 2)))
+                            {
+                                p2_exists = false;
+                                selectmjk1 = 3;
+                                selectmjk2 = 1;
+                                selectmjk = 3;
+                                choosep13.setFillColor(sf::Color(210, 210, 210));
+                                choosep12.setFillColor(sf::Color::White);
+                                choosep11.setFillColor(sf::Color::White);
+                                choosep23.setFillColor(sf::Color::White);
+                                choosep21.setFillColor(sf::Color(210, 210, 210));
+                                text2.setString("M");
+                                text1.setString("K");
+                                p1.setSelect(selectmjk1);
+                                p2.setSelect(selectmjk2);
+                                textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
+                            }
                         }
                     }
                     stopClick.restart().asMilliseconds();
@@ -2045,6 +2032,10 @@ int main()
                         {
                             menu = false;
                             select_player = true;
+                            if (p1.getSelect() == 1)
+                                window.setMouseCursorVisible(true);
+                            else
+                                window.setMouseCursorVisible(false);
                         }
                         //Options
                         else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 390 && cursor_mouse.getPosition().y < 490)
@@ -2108,7 +2099,7 @@ int main()
                             rate_of_fire = 1200;
                             rof_text.setString(std::to_string(rate_of_fire));
                             rof_text.setPosition(838, 565);
-                            sensitivity = 10;
+                            sensitivity = 20;
                             s_text.setString(std::to_string(sensitivity));
                             s_text.setPosition(858, 665);
                             p1.setTimeV(tv);
@@ -2323,7 +2314,7 @@ int main()
                             speedbar = true;
                             speedbar2 = true;
                         }
-                        //Vibration speed
+                        //Sensitivity
                         else if (cursor_mouse.getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && cursor_mouse.getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && cursor_mouse.getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && cursor_mouse.getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)
                         {
                             if (sensitivity == 10)
@@ -2346,7 +2337,7 @@ int main()
                                 s_text.setString(std::to_string(sensitivity));
                                 s_text.setPosition(858, 665);
                             }
-                            else if (sensitivity != 40)
+                            else if (sensitivity != 99)
                             {
                                 sensitivity++;
                                 s_text.setString(std::to_string(sensitivity));
@@ -2508,43 +2499,41 @@ int main()
                         {
                             select_player = false;
                             menu = true;
+                            window.setMouseCursorVisible(true);
                         }
                         //rl1
-                        else if (selectmjk == 1 && cursor_mouse.getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)
+                        else if (!p2_exists)
                         {
-                            selectmjk = 2;
+                            if (selectmjk == 1 && cursor_mouse.getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)
+                            {
+                                selectmjk = 2;
+                            }
+                            else if (selectmjk == 2 && cursor_mouse.getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)
+                            {
+                                selectmjk = 1;
+                            }
+                            else if (selectmjk == 2 && cursor_mouse.getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)
+                            {
+                                selectmjk = 3;
+                            }
+                            else if (selectmjk == 3 && cursor_mouse.getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)
+                            {
+                                selectmjk = 2;
+                            }
                         }
-                        else if (selectmjk == 2 && cursor_mouse.getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)
+                        else if (p1.getSelect() == 1)
                         {
-                            selectmjk = 1;
-                        }
-                        else if (selectmjk == 2 && cursor_mouse.getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)
-                        {
-                            selectmjk = 3;
-                        }
-                        else if (selectmjk == 3 && cursor_mouse.getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)
-                        {
-                            selectmjk = 2;
-                        }
-                        //rl2
-                        else if (selectmjk0 == 3 && cursor_mouse.getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2)
-                        {
-                            selectmjk0 = 2;
-                        }
-                        else if (selectmjk0 == 2 && cursor_mouse.getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2)
-                        {
-                            selectmjk0 = 1;
-                        }
-                        else if (selectmjk0 == 2 && cursor_mouse.getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && cursor_mouse.getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && cursor_mouse.getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && cursor_mouse.getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2)
-                        {
-                            selectmjk0 = 3;
-                        }
-                        else if (selectmjk0 == 1 && cursor_mouse.getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && cursor_mouse.getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && cursor_mouse.getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && cursor_mouse.getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2)
-                        {
-                            selectmjk0 = 2;
+                            if (selectmjk == 1 && cursor_mouse.getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)
+                            {
+                                selectmjk = 3;
+                            }
+                            else if (selectmjk == 3 && cursor_mouse.getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && cursor_mouse.getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && cursor_mouse.getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && cursor_mouse.getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)
+                            {
+                                selectmjk = 1;
+                            }
                         }
                         //Select
-                        else if (selectmjk1 != selectmjk && cursor_mouse.getPosition().x >= choosep12.getPosition().x - choosep12.getSize().x / 2 && cursor_mouse.getPosition().x <= choosep12.getPosition().x + choosep12.getSize().x / 2 && cursor_mouse.getPosition().y >= choosep12.getPosition().y - choosep12.getSize().y / 2 && cursor_mouse.getPosition().y <= choosep12.getPosition().y + choosep12.getSize().y / 2)
+                        if (p1.getSelect() == 1 && selectmjk1 != selectmjk && cursor_mouse.getPosition().x >= choosep12.getPosition().x - choosep12.getSize().x / 2 && cursor_mouse.getPosition().x <= choosep12.getPosition().x + choosep12.getSize().x / 2 && cursor_mouse.getPosition().y >= choosep12.getPosition().y - choosep12.getSize().y / 2 && cursor_mouse.getPosition().y <= choosep12.getPosition().y + choosep12.getSize().y / 2)
                         {
                             if (!p2_exists)
                             {
@@ -2565,21 +2554,15 @@ int main()
                                         choosep12.setFillColor(sf::Color::White);
                                         choosep13.setFillColor(sf::Color::White);
                                         choosep21.setFillColor(sf::Color::White);
-                                        choosep22.setFillColor(sf::Color::White);
                                         choosep23.setFillColor(sf::Color(210, 210, 210));
                                         text1.setString("M");
                                         text2.setString("K");
                                         break;
                                     case 2:
-                                        selectmjk2 = 3;
                                         choosep11.setFillColor(sf::Color::White);
                                         choosep12.setFillColor(sf::Color(210, 210, 210));
                                         choosep13.setFillColor(sf::Color::White);
-                                        choosep21.setFillColor(sf::Color::White);
-                                        choosep22.setFillColor(sf::Color::White);
-                                        choosep23.setFillColor(sf::Color(210, 210, 210));
                                         text1.setString("C");
-                                        text2.setString("K");
                                         break;
                                     case 3:
                                         selectmjk2 = 1;
@@ -2587,7 +2570,6 @@ int main()
                                         choosep12.setFillColor(sf::Color::White);
                                         choosep13.setFillColor(sf::Color(210, 210, 210));
                                         choosep21.setFillColor(sf::Color(210, 210, 210));
-                                        choosep22.setFillColor(sf::Color::White);
                                         choosep23.setFillColor(sf::Color::White);
                                         text1.setString("K");
                                         text2.setString("M");
@@ -2596,11 +2578,12 @@ int main()
                                     p2.setSelect(selectmjk2);
                                 }
                             }
-                            else if (selectmjk != selectmjk2)
+                            else
                             {
-                                if (stop && (selectmjk == 2))
+                                if (selectmjk == 2)
                                 {
-                                    std::cout << "Joystick is Disconnected" << std::endl;
+                                    selectmjk = 1;
+                                    selectmjk1 = selectmjk;
                                 }
                                 else
                                 {
@@ -2614,70 +2597,66 @@ int main()
                                         choosep12.setFillColor(sf::Color::White);
                                         choosep13.setFillColor(sf::Color::White);
                                         text1.setString("M");
-                                        break;
-                                    case 2:
-                                        choosep11.setFillColor(sf::Color::White);
-                                        choosep12.setFillColor(sf::Color(210, 210, 210));
-                                        choosep13.setFillColor(sf::Color::White);
-                                        text1.setString("C");
+                                        choosep21.setFillColor(sf::Color::White);
+                                        choosep23.setFillColor(sf::Color(210, 210, 210));
+                                        text2.setString("K");
+                                        selectmjk2 = 3;
+                                        p2.setSelect(selectmjk2);
                                         break;
                                     case 3:
+                                        selectmjk2 = 1;
+                                        p2.setSelect(selectmjk2);
                                         choosep11.setFillColor(sf::Color::White);
                                         choosep12.setFillColor(sf::Color::White);
                                         choosep13.setFillColor(sf::Color(210, 210, 210));
                                         text1.setString("K");
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        else if (p2_exists && selectmjk2 != selectmjk0 && cursor_mouse.getPosition().x >= choosep21.getPosition().x - choosep21.getSize().x / 2 && cursor_mouse.getPosition().x <= choosep21.getPosition().x + choosep21.getSize().x / 2 && cursor_mouse.getPosition().y >= choosep21.getPosition().y - choosep21.getSize().y / 2 && cursor_mouse.getPosition().y <= choosep21.getPosition().y + choosep21.getSize().y / 2)
-                        {
-                            if (selectmjk0 != selectmjk1)
-                            {
-                                if (stop && (selectmjk0 == 2))
-                                {
-                                    std::cout << "Joystick is Disconnected" << std::endl;
-                                }
-                                else
-                                {
-                                    selectmjk2 = selectmjk0;
-                                    p2.setSelect(selectmjk2);
-                                    p2.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
-                                    switch (selectmjk2)
-                                    {
-                                    case 2:
-                                        choosep21.setFillColor(sf::Color::White);
-                                        choosep22.setFillColor(sf::Color(210, 210, 210));
-                                        choosep23.setFillColor(sf::Color::White);
-                                        text2.setString("C");
-                                        break;
-                                    case 3:
-                                        choosep21.setFillColor(sf::Color::White);
-                                        choosep22.setFillColor(sf::Color::White);
-                                        choosep23.setFillColor(sf::Color(210, 210, 210));
-                                        text2.setString("K");
-                                        break;
-                                    case 1:
                                         choosep21.setFillColor(sf::Color(210, 210, 210));
-                                        choosep22.setFillColor(sf::Color::White);
                                         choosep23.setFillColor(sf::Color::White);
                                         text2.setString("M");
+                                        window.setMouseCursorVisible(false);
                                         break;
                                     }
                                 }
                             }
                         }
                         //Click
-                        if (cursor_mouse.getPosition().x >= rec4p.getPosition().x - rec4p.getSize().x / 2 && cursor_mouse.getPosition().x <= rec4p.getPosition().x + rec4p.getSize().x / 2 && cursor_mouse.getPosition().y >= rec4p.getPosition().y - rec4p.getSize().y / 2 && cursor_mouse.getPosition().y <= rec4p.getPosition().y + rec4p.getSize().y / 2)
+                        if (selectmjk1 != 2 && p1.getSelect() == 1)
                         {
-                            p2_exists = true;
-                            textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
-                        }
-                        if (cursor_mouse.getPosition().x >= Offr.getPosition().x - Offr.getSize().x / 2 && cursor_mouse.getPosition().x <= Offr.getPosition().x + Offr.getSize().x / 2 && cursor_mouse.getPosition().y >= Offr.getPosition().y - Offr.getSize().y / 2 && cursor_mouse.getPosition().y <= Offr.getPosition().y + Offr.getSize().y / 2)
-                        {
-                            p2_exists = false;
-                            textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
+                            if (cursor_mouse.getPosition().x >= rec4p.getPosition().x - rec4p.getSize().x / 2 && cursor_mouse.getPosition().x <= rec4p.getPosition().x + rec4p.getSize().x / 2 && cursor_mouse.getPosition().y >= rec4p.getPosition().y - rec4p.getSize().y / 2 && cursor_mouse.getPosition().y <= rec4p.getPosition().y + rec4p.getSize().y / 2)
+                            {
+                                p2_exists = true;
+                                selectmjk1 = 1;
+                                selectmjk2 = 3;
+                                selectmjk = 1;
+                                choosep11.setFillColor(sf::Color(210, 210, 210));
+                                choosep12.setFillColor(sf::Color::White);
+                                choosep13.setFillColor(sf::Color::White);
+                                choosep21.setFillColor(sf::Color::White);
+                                choosep23.setFillColor(sf::Color(210, 210, 210));
+                                text1.setString("M");
+                                text2.setString("K");
+                                p1.setSelect(selectmjk1);
+                                p2.setSelect(selectmjk2);
+                                textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
+                                window.setMouseCursorVisible(true);
+                            }
+                            if (cursor_mouse.getPosition().x >= Offr.getPosition().x - Offr.getSize().x / 2 && cursor_mouse.getPosition().x <= Offr.getPosition().x + Offr.getSize().x / 2 && cursor_mouse.getPosition().y >= Offr.getPosition().y - Offr.getSize().y / 2 && cursor_mouse.getPosition().y <= Offr.getPosition().y + Offr.getSize().y / 2)
+                            {
+                                p2_exists = false;
+                                selectmjk1 = 1;
+                                selectmjk2 = 3;
+                                selectmjk = 1;
+                                choosep11.setFillColor(sf::Color(210, 210, 210));
+                                choosep12.setFillColor(sf::Color::White);
+                                choosep13.setFillColor(sf::Color::White);
+                                choosep21.setFillColor(sf::Color::White);
+                                choosep23.setFillColor(sf::Color(210, 210, 210));
+                                text1.setString("M");
+                                text2.setString("K");
+                                p1.setSelect(selectmjk1);
+                                p2.setSelect(selectmjk2);
+                                textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
+                            }
                         }
                     }
                 }
@@ -2888,7 +2867,7 @@ int main()
                                 rate_of_fire = 1200;
                                 rof_text.setString(std::to_string(rate_of_fire));
                                 rof_text.setPosition(838, 565);
-                                sensitivity = 10;
+                                sensitivity = 20;
                                 s_text.setString(std::to_string(sensitivity));
                                 s_text.setPosition(858, 665);
                                 p1.setTimeV(tv);
@@ -3102,7 +3081,7 @@ int main()
                                 speedbar = true;
                                 speedbar2 = true;
                             }
-                            //Vibration speed
+                            //Sensitivity
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p1.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p1.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p1.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2) || (p2.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p2.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p2.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p2.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)))
                             {
                                 if (sensitivity == 10)
@@ -3125,7 +3104,7 @@ int main()
                                     s_text.setString(std::to_string(sensitivity));
                                     s_text.setPosition(858, 665);
                                 }
-                                else if (sensitivity != 40)
+                                else if (sensitivity != 99)
                                 {
                                     sensitivity++;
                                     s_text.setString(std::to_string(sensitivity));
@@ -3285,41 +3264,27 @@ int main()
                                 menu = true;
                             }
                             //rl1
-                            else if ((selectmjk == 1) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
+                            else if (!p2_exists)
                             {
-                                selectmjk = 2;
-                            }
-                            else if ((selectmjk == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
-                            {
-                                selectmjk = 1;
-                            }
-                            else if ((selectmjk == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
-                            {
-                                selectmjk = 3;
-                            }
-                            else if ((selectmjk == 3) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
-                            {
-                                selectmjk = 2;
-                            }
-                            //rl2
-                            else if ((selectmjk0 == 1) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p2.getRec().getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && p2.getRec().getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && p2.getRec().getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && p2.getRec().getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2) || (p1.getRec().getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && p1.getRec().getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && p1.getRec().getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && p1.getRec().getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2)))
-                            {
-                                selectmjk0 = 2;
-                            }
-                            else if ((selectmjk0 == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p2.getRec().getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2) || (p1.getRec().getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2)))
-                            {
-                                selectmjk0 = 1;
-                            }
-                            else if ((selectmjk0 == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p2.getRec().getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && p2.getRec().getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && p2.getRec().getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && p2.getRec().getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2) || (p1.getRec().getPosition().x >= bright2p.getPosition().x - bright2p.getSize().x / 2 && p1.getRec().getPosition().x <= bright2p.getPosition().x + bright2p.getSize().x / 2 && p1.getRec().getPosition().y >= bright2p.getPosition().y - bright2p.getSize().y / 2 && p1.getRec().getPosition().y <= bright2p.getPosition().y + bright2p.getSize().y / 2)))
-                            {
-                                selectmjk0 = 3;
-                            }
-                            else if ((selectmjk0 == 3) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p2.getRec().getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2) || (p1.getRec().getPosition().x >= bleft2p.getPosition().x - bleft2p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft2p.getPosition().x + bleft2p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft2p.getPosition().y - bleft2p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft2p.getPosition().y + bleft2p.getSize().y / 2)))
-                            {
-                                selectmjk0 = 2;
+                                if ((selectmjk == 1) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
+                                {
+                                    selectmjk = 2;
+                                }
+                                else if ((selectmjk == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
+                                {
+                                    selectmjk = 1;
+                                }
+                                else if ((selectmjk == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
+                                {
+                                    selectmjk = 3;
+                                }
+                                else if ((selectmjk == 3) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
+                                {
+                                    selectmjk = 2;
+                                }
                             }
                             //Select
-                            else if ((selectmjk1 != selectmjk) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p1.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p1.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p1.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2) || (p2.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p2.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p2.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p2.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2)))
+                            if ((selectmjk1 != selectmjk) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p1.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p1.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p1.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2) || (p2.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p2.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p2.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p2.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2)))
                             {
                                 if (!p2_exists)
                                 {
@@ -3340,21 +3305,15 @@ int main()
                                             choosep12.setFillColor(sf::Color::White);
                                             choosep13.setFillColor(sf::Color::White);
                                             choosep21.setFillColor(sf::Color::White);
-                                            choosep22.setFillColor(sf::Color::White);
                                             choosep23.setFillColor(sf::Color(210, 210, 210));
                                             text1.setString("M");
                                             text2.setString("K");
                                             break;
                                         case 2:
-                                            selectmjk2 = 3;
                                             choosep11.setFillColor(sf::Color::White);
                                             choosep12.setFillColor(sf::Color(210, 210, 210));
                                             choosep13.setFillColor(sf::Color::White);
-                                            choosep21.setFillColor(sf::Color::White);
-                                            choosep22.setFillColor(sf::Color::White);
-                                            choosep23.setFillColor(sf::Color(210, 210, 210));
                                             text1.setString("C");
-                                            text2.setString("K");
                                             break;
                                         case 3:
                                             selectmjk2 = 1;
@@ -3362,7 +3321,6 @@ int main()
                                             choosep12.setFillColor(sf::Color::White);
                                             choosep13.setFillColor(sf::Color(210, 210, 210));
                                             choosep21.setFillColor(sf::Color(210, 210, 210));
-                                            choosep22.setFillColor(sf::Color::White);
                                             choosep23.setFillColor(sf::Color::White);
                                             text1.setString("K");
                                             text2.setString("M");
@@ -3371,88 +3329,6 @@ int main()
                                         p2.setSelect(selectmjk2);
                                     }
                                 }
-                                else if (selectmjk != selectmjk2)
-                                {
-                                    if (stop && (selectmjk == 2))
-                                    {
-                                        std::cout << "Joystick is Disconnected" << std::endl;
-                                    }
-                                    else
-                                    {
-                                        selectmjk1 = selectmjk;
-                                        p1.setSelect(selectmjk1);
-                                        p1.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
-                                        switch (selectmjk1)
-                                        {
-                                        case 1:
-                                            choosep11.setFillColor(sf::Color(210, 210, 210));
-                                            choosep12.setFillColor(sf::Color::White);
-                                            choosep13.setFillColor(sf::Color::White);
-                                            text1.setString("M");
-                                            break;
-                                        case 2:
-                                            choosep11.setFillColor(sf::Color::White);
-                                            choosep12.setFillColor(sf::Color(210, 210, 210));
-                                            choosep13.setFillColor(sf::Color::White);
-                                            text1.setString("C");
-                                            break;
-                                        case 3:
-                                            choosep11.setFillColor(sf::Color::White);
-                                            choosep12.setFillColor(sf::Color::White);
-                                            choosep13.setFillColor(sf::Color(210, 210, 210));
-                                            text1.setString("K");
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            else if ((p2_exists) && (selectmjk2 != selectmjk0) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= choosep21.getPosition().x - choosep21.getSize().x / 2 && p1.getRec().getPosition().x <= choosep21.getPosition().x + choosep21.getSize().x / 2 && p1.getRec().getPosition().y >= choosep21.getPosition().y - choosep21.getSize().y / 2 && p1.getRec().getPosition().y <= choosep21.getPosition().y + choosep21.getSize().y / 2) || (p2.getRec().getPosition().x >= choosep21.getPosition().x - choosep21.getSize().x / 2 && p2.getRec().getPosition().x <= choosep21.getPosition().x + choosep21.getSize().x / 2 && p2.getRec().getPosition().y >= choosep21.getPosition().y - choosep21.getSize().y / 2 && p2.getRec().getPosition().y <= choosep21.getPosition().y + choosep21.getSize().y / 2)))
-                            {
-                                if (selectmjk0 != selectmjk1)
-                                {
-                                    if (stop && (selectmjk0 == 2))
-                                    {
-                                        std::cout << "Joystick is Disconnected" << std::endl;
-                                    }
-                                    else
-                                    {
-                                        selectmjk2 = selectmjk0;
-                                        p2.setSelect(selectmjk2);
-                                        p2.getRec().setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
-                                        switch (selectmjk2)
-                                        {
-                                        case 2:
-                                            choosep21.setFillColor(sf::Color::White);
-                                            choosep22.setFillColor(sf::Color(210, 210, 210));
-                                            choosep23.setFillColor(sf::Color::White);
-                                            text2.setString("C");
-                                            break;
-                                        case 3:
-                                            choosep21.setFillColor(sf::Color::White);
-                                            choosep22.setFillColor(sf::Color::White);
-                                            choosep23.setFillColor(sf::Color(210, 210, 210));
-                                            text2.setString("K");
-                                            break;
-                                        case 1:
-                                            choosep21.setFillColor(sf::Color(210, 210, 210));
-                                            choosep22.setFillColor(sf::Color::White);
-                                            choosep23.setFillColor(sf::Color::White);
-                                            text2.setString("M");
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            //Click
-                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= rec4p.getPosition().x - rec4p.getSize().x / 2 && p1.getRec().getPosition().x <= rec4p.getPosition().x + rec4p.getSize().x / 2 && p1.getRec().getPosition().y >= rec4p.getPosition().y - rec4p.getSize().y / 2 && p1.getRec().getPosition().y <= rec4p.getPosition().y + rec4p.getSize().y / 2) || (p2.getRec().getPosition().x >= rec4p.getPosition().x - rec4p.getSize().x / 2 && p2.getRec().getPosition().x <= rec4p.getPosition().x + rec4p.getSize().x / 2 && p2.getRec().getPosition().y >= rec4p.getPosition().y - rec4p.getSize().y / 2 && p2.getRec().getPosition().y <= rec4p.getPosition().y + rec4p.getSize().y / 2)))
-                            {
-                                p2_exists = true;
-                                textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
-                            }
-                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= Offr.getPosition().x - Offr.getSize().x / 2 && p1.getRec().getPosition().x <= Offr.getPosition().x + Offr.getSize().x / 2 && p1.getRec().getPosition().y >= Offr.getPosition().y - Offr.getSize().y / 2 && p1.getRec().getPosition().y <= Offr.getPosition().y + Offr.getSize().y / 2) || (p2.getRec().getPosition().x >= Offr.getPosition().x - Offr.getSize().x / 2 && p2.getRec().getPosition().x <= Offr.getPosition().x + Offr.getSize().x / 2 && p2.getRec().getPosition().y >= Offr.getPosition().y - Offr.getSize().y / 2 && p2.getRec().getPosition().y <= Offr.getPosition().y + Offr.getSize().y / 2)))
-                            {
-                                p2_exists = false;
-                                textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
                             }
                         }
                         stopClick.restart().asMilliseconds();
@@ -3469,21 +3345,12 @@ int main()
             stop = false;
         }
 
-        if (p2_exists && (p1.getSelect() == 1 || p2.getSelect() == 1))
+        if (!p2_exists)
         {
-            window.setMouseCursorVisible(true);
-        }
-        else if (p2_exists && p1.getSelect() != 1 && p2.getSelect() != 1)
-        {
-            window.setMouseCursorVisible(false);
-        }
-        else if (p1.getSelect() != 1)
-        {
-            window.setMouseCursorVisible(false);
-        }
-        else
-        {
-            window.setMouseCursorVisible(true);
+            if (p1.getSelect() != 1)
+                window.setMouseCursorVisible(false);
+            else
+                window.setMouseCursorVisible(true);
         }
 
         if (p1.getRec().getPosition().x < 0 + p1.getRec().getSize().x)
@@ -3757,7 +3624,7 @@ int main()
                     p1.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
                 }
             }
-            else if (p1.getSelect() == 3)
+            if (p1.getSelect() == 3)
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
@@ -3776,36 +3643,6 @@ int main()
                     p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
                 }
             }
-            if (p2_exists)
-            {
-                if (p2.getSelect() == 2)
-                {
-                    if (event.type == sf::Event::JoystickMoved)
-                    {
-                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p2.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
-                    }
-                }
-                else if (p2.getSelect() == 3)
-                {
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-                    {
-                        p2.getRec().move(-100 * 0.003 * dt * multiplier, 0);
-                    }
-                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-                    {
-                        p2.getRec().move(100 * 0.003 * dt * multiplier, 0);
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-                    {
-                        p2.getRec().move(0, -100 * 0.003 * dt * multiplier);
-                    }
-                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-                    {
-                        p2.getRec().move(0, 100 * 0.003 * dt * multiplier);
-                    }
-                }
-            }
 
             window.clear(sf::Color::White);
 
@@ -3822,79 +3659,109 @@ int main()
             window.draw(player2);
             window.draw(rec4p);
 
-            switch (selectmjk)
+            if (!p2_exists)
             {
-            case 1:
-                window.draw(recmp);
-                window.draw(mousep);
-                window.draw(bright1p);
-                window.draw(choosep11);
-                select1_text.setPosition(292, 572);
-                window.draw(select1_text);
-                break;
-            case 2:
-                window.draw(reccp);
-                window.draw(controllerp);
-                window.draw(bleft1p);
-                window.draw(bright1p);
-                window.draw(choosep12);
-                select2_text.setPosition(292, 572);
-                window.draw(select2_text);
-                break;
-            case 3:
-                window.draw(reckp);
-                window.draw(keyboardp);
-                window.draw(bleft1p);
-                window.draw(choosep13);
-                select3_text.setPosition(292, 572);
-                window.draw(select3_text);
-                break;
+                if (selectmjk1 != 2)
+                {
+                    switch (selectmjk)
+                    {
+                    case 1:
+                        window.draw(recmp);
+                        window.draw(mousep);
+                        window.draw(bright1p);
+                        window.draw(choosep11);
+                        select1_text.setPosition(292, 572);
+                        window.draw(select1_text);
+                        window.draw(On_text);
+                        break;
+                    case 2:
+                        window.draw(reccp);
+                        window.draw(controllerp);
+                        window.draw(bleft1p);
+                        window.draw(bright1p);
+                        window.draw(choosep12);
+                        select2_text.setPosition(292, 572);
+                        window.draw(select2_text);
+                        window.draw(On_text);
+                        break;
+                    case 3:
+                        window.draw(reckp);
+                        window.draw(keyboardp);
+                        window.draw(bleft1p);
+                        window.draw(choosep13);
+                        select3_text.setPosition(292, 572);
+                        window.draw(select3_text);
+                        window.draw(On_text);
+                        break;
+                    }
+                }
+                else
+                {
+                    switch (selectmjk)
+                    {
+                    case 1:
+                        window.draw(recmp);
+                        window.draw(mousep);
+                        window.draw(bright1p);
+                        window.draw(choosep11);
+                        select1_text.setPosition(292, 572);
+                        window.draw(select1_text);
+                        break;
+                    case 2:
+                        window.draw(reccp);
+                        window.draw(controllerp);
+                        window.draw(bleft1p);
+                        window.draw(bright1p);
+                        window.draw(choosep12);
+                        select2_text.setPosition(292, 572);
+                        window.draw(select2_text);
+                        break;
+                    case 3:
+                        window.draw(reckp);
+                        window.draw(keyboardp);
+                        window.draw(bleft1p);
+                        window.draw(choosep13);
+                        select3_text.setPosition(292, 572);
+                        window.draw(select3_text);
+                        break;
+                    }
+                }
             }
-
-
-            if (p2_exists)
+            else
             {
-                switch (selectmjk0)
+                switch (selectmjk)
                 {
                 case 1:
-                    window.draw(Offr);
-                    window.draw(Off_text);
-
-                    window.draw(recm2p);
-                    window.draw(mouse2p);
-                    window.draw(bright2p);
-                    window.draw(choosep21);
-                    select1_text.setPosition(792, 572);
+                    window.draw(recmp);
+                    window.draw(mousep);
+                    window.draw(bright1p);
+                    window.draw(choosep11);
+                    select1_text.setPosition(292, 572);
                     window.draw(select1_text);
-                    break;
-                case 2:
-                    window.draw(Offr);
-                    window.draw(Off_text);
 
-                    window.draw(recc2p);
-                    window.draw(controller2p);
-                    window.draw(bleft2p);
-                    window.draw(bright2p);
-                    window.draw(choosep22);
-                    select2_text.setPosition(792, 572);
-                    window.draw(select2_text);
-                    break;
-                case 3:
                     window.draw(Offr);
                     window.draw(Off_text);
 
                     window.draw(reck2p);
                     window.draw(keyboard2p);
-                    window.draw(bleft2p);
                     window.draw(choosep23);
-                    select3_text.setPosition(792, 572);
+                    break;
+                case 3:
+                    window.draw(reckp);
+                    window.draw(keyboardp);
+                    window.draw(bleft1p);
+                    window.draw(choosep13);
+                    select3_text.setPosition(292, 572);
                     window.draw(select3_text);
+
+                    window.draw(Offr);
+                    window.draw(Off_text);
+
+                    window.draw(recm2p);
+                    window.draw(mouse2p);
+                    window.draw(choosep21);
                     break;
                 }
-            }
-            else
-            {
-                window.draw(On_text);
             }
 
             window.draw(textName);
@@ -3902,10 +3769,6 @@ int main()
             if (p1.getSelect() != 1)
             {
                 window.draw(p1.getRec());
-            }
-            if (p2_exists && p2.getSelect() != 1)
-            {
-                window.draw(p2.getRec());
             }
 
             window.display();
@@ -4859,7 +4722,7 @@ int main()
                 }
                 else if (tv != 0 && ((p1.getSelect() == 1 && focus) || (p1.getSelect() == 2 || p1.getSelect() == 3)))
                 {
-                    tv--;
+                    tv -= tv * dt;
                 }
 
                 if (tv2 == 0 && ((p2_exists && p2.getSelect() == 1 && focus) || (p2_exists && p2.getSelect() == 2 || p2_exists && p2.getSelect() == 3)))
@@ -4889,7 +4752,7 @@ int main()
                 }
                 else if (tv2 != 0 && ((p2_exists && p2.getSelect() == 1 && focus) || (p2_exists && p2.getSelect() == 2 || p2_exists && p2.getSelect() == 3)))
                 {
-                    tv2--;
+                    tv2 -= tv2 * dt;
                 }
 
                 if (b1 && !pla2)
