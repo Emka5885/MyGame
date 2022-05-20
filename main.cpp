@@ -3357,8 +3357,8 @@ int main()
             p1.setRecPos(sf::Vector2f{ 0 + p1.getRec().getSize().x, p1.getRec().getPosition().y });
         else if (p1.getRec().getPosition().x > window.getSize().x - p1.getRec().getSize().x)
             p1.setRecPos(sf::Vector2f{ window.getSize().x - p1.getRec().getSize().x, p1.getRec().getPosition().y });
-        if (p1.getRec().getPosition().y < 0 + p1.getRec().getSize().y)
-            p1.setRecPos(sf::Vector2f{ p1.getRec().getPosition().x, 0 + p1.getRec().getSize().y });
+        if (p1.getRec().getPosition().y < 0 + 1.5 * p1.getRec().getSize().y)
+            p1.setRecPos(sf::Vector2f{ p1.getRec().getPosition().x, 0 + float(1.5 * p1.getRec().getSize().y) });
         else if (p1.getRec().getPosition().y > window.getSize().y - p1.getRec().getSize().y)
             p1.setRecPos(sf::Vector2f{ p1.getRec().getPosition().x, window.getSize().y - p1.getRec().getSize().y });
         if (p2_exists)
@@ -3367,8 +3367,8 @@ int main()
                 p2.setRecPos(sf::Vector2f{ 0 + p2.getRec().getSize().x, p2.getRec().getPosition().y });
             else if (p2.getRec().getPosition().x > window.getSize().x - p2.getRec().getSize().x)
                 p2.setRecPos(sf::Vector2f{ window.getSize().x - p2.getRec().getSize().x, p2.getRec().getPosition().y });
-            if (p2.getRec().getPosition().y < 0 + p2.getRec().getSize().y)
-                p2.setRecPos(sf::Vector2f{ p2.getRec().getPosition().x, 0 + p1.getRec().getSize().y });
+            if (p2.getRec().getPosition().y < 0 + 1.5 * p2.getRec().getSize().y)
+                p2.setRecPos(sf::Vector2f{ p2.getRec().getPosition().x, 0 + float(1.5 * p2.getRec().getSize().y) });
             else if (p2.getRec().getPosition().y > window.getSize().y - p2.getRec().getSize().y)
                 p2.setRecPos(sf::Vector2f{ p2.getRec().getPosition().x, window.getSize().y - p2.getRec().getSize().y });
         }
@@ -4447,6 +4447,15 @@ int main()
         }
         else
         {
+            if (sf::Mouse::getPosition(window).x < 0 + 0.5 * igun00.getSize().x)
+                sf::Mouse::setPosition(sf::Vector2i((0 + 0.5 * igun00.getSize().x), (sf::Mouse::getPosition(window).y)), window);
+            else if (sf::Mouse::getPosition(window).x > window.getSize().x - 1.5 * igun00.getSize().x)
+                sf::Mouse::setPosition(sf::Vector2i((window.getSize().x - 1.5 * igun00.getSize().x), (sf::Mouse::getPosition(window).y)), window);
+            if (sf::Mouse::getPosition(window).y < 0 + igun00.getSize().y)
+                sf::Mouse::setPosition(sf::Vector2i((sf::Mouse::getPosition(window).x), (0 + igun00.getSize().y)), window);
+            else if (sf::Mouse::getPosition(window).y > window.getSize().y - 1.5 * igun00.getSize().y)
+                sf::Mouse::setPosition(sf::Vector2i((sf::Mouse::getPosition(window).x), (window.getSize().y - 1.5 * igun00.getSize().y)), window);
+
             if (p1.getSelect() == 3 || (p2_exists && p2.getSelect() == 3))
             {
                 direction = sf::Vector2f(0.f, 0.f);
