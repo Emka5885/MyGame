@@ -1056,13 +1056,13 @@ int main()
 
     sf::Clock dtime;
     float dt;
-    float multiplier = 2000.f;
+    float multiplier = 500.f;
 
     sf::Vector2f currentVelocity;
     sf::Vector2f direction;
     float maxVelocity = 25.f;
     float acceleration = 1.f;
-    float drag = 0.5f;
+    float drag = 0.125f;
 
     sf::Clock clock;
     clock.restart().asMilliseconds();
@@ -3382,55 +3382,47 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
+                    p1.getRec().move(m.x * 0.01 * dt * multiplier, m.y * 0.01 * dt * multiplier);
                 }
             }
             else if (p1.getSelect() == 3)
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.003 * dt * multiplier, 0);
+                    p1.getRec().move(-100 * 0.01 * dt * multiplier, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.003 * dt * multiplier, 0);
+                    p1.getRec().move(100 * 0.01 * dt * multiplier, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.003 * dt * multiplier);
+                    p1.getRec().move(0, -100 * 0.01 * dt * multiplier);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
+                    p1.getRec().move(0, 100 * 0.01 * dt * multiplier);
                 }
             }
             if (p2_exists)
             {
-                if (p2.getSelect() == 2)
-                {
-                    if (event.type == sf::Event::JoystickMoved)
-                    {
-                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p2.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
-                    }
-                }
-                else if (p2.getSelect() == 3)
+                if (p2.getSelect() == 3)
                 {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                     {
-                        p2.getRec().move(-100 * 0.003 * dt * multiplier, 0);
+                        p2.getRec().move(-100 * 0.01 * dt * multiplier, 0);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                     {
-                        p2.getRec().move(100 * 0.003 * dt * multiplier, 0);
+                        p2.getRec().move(100 * 0.01 * dt * multiplier, 0);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                     {
-                        p2.getRec().move(0, -100 * 0.003 * dt * multiplier);
+                        p2.getRec().move(0, -100 * 0.01 * dt * multiplier);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                     {
-                        p2.getRec().move(0, 100 * 0.003 * dt * multiplier);
+                        p2.getRec().move(0, 100 * 0.01 * dt * multiplier);
                     }
                 }
             }
@@ -3495,55 +3487,47 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
+                    p1.getRec().move(m.x * 0.01 * dt * multiplier, m.y * 0.01 * dt * multiplier);
                 }
             }
             else if (p1.getSelect() == 3)
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.003 * dt * multiplier, 0);
+                    p1.getRec().move(-100 * 0.01 * dt * multiplier, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.003 * dt * multiplier, 0);
+                    p1.getRec().move(100 * 0.01 * dt * multiplier, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.003 * dt * multiplier);
+                    p1.getRec().move(0, -100 * 0.01 * dt * multiplier);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
+                    p1.getRec().move(0, 100 * 0.01 * dt * multiplier);
                 }
             }
             if (p2_exists)
             {
-                if (p2.getSelect() == 2)
-                {
-                    if (event.type == sf::Event::JoystickMoved)
-                    {
-                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p2.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
-                    }
-                }
-                else if (p2.getSelect() == 3)
+                if (p2.getSelect() == 3)
                 {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                     {
-                        p2.getRec().move(-100 * 0.003 * dt * multiplier, 0);
+                        p2.getRec().move(-100 * 0.01 * dt * multiplier, 0);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                     {
-                        p2.getRec().move(100 * 0.003 * dt * multiplier, 0);
+                        p2.getRec().move(100 * 0.01 * dt * multiplier, 0);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                     {
-                        p2.getRec().move(0, -100 * 0.003 * dt * multiplier);
+                        p2.getRec().move(0, -100 * 0.01 * dt * multiplier);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                     {
-                        p2.getRec().move(0, 100 * 0.003 * dt * multiplier);
+                        p2.getRec().move(0, 100 * 0.01 * dt * multiplier);
                     }
                 }
             }
@@ -3621,26 +3605,26 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
+                    p1.getRec().move(m.x * 0.01 * dt * multiplier, m.y * 0.01 * dt * multiplier);
                 }
             }
             if (p1.getSelect() == 3)
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.003 * dt * multiplier, 0);
+                    p1.getRec().move(-100 * 0.01 * dt * multiplier, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.003 * dt * multiplier, 0);
+                    p1.getRec().move(100 * 0.01 * dt * multiplier, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.003 * dt * multiplier);
+                    p1.getRec().move(0, -100 * 0.01 * dt * multiplier);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
+                    p1.getRec().move(0, 100 * 0.01 * dt * multiplier);
                 }
             }
 
@@ -3780,55 +3764,47 @@ int main()
                 if (event.type == sf::Event::JoystickMoved)
                 {
                     sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
+                    p1.getRec().move(m.x * 0.01 * dt * multiplier, m.y * 0.01 * dt * multiplier);
                 }
             }
             else if (p1.getSelect() == 3)
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                 {
-                    p1.getRec().move(-100 * 0.003 * dt * multiplier, 0);
+                    p1.getRec().move(-100 * 0.01 * dt * multiplier, 0);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    p1.getRec().move(100 * 0.003 * dt * multiplier, 0);
+                    p1.getRec().move(100 * 0.01 * dt * multiplier, 0);
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                 {
-                    p1.getRec().move(0, -100 * 0.003 * dt * multiplier);
+                    p1.getRec().move(0, -100 * 0.01 * dt * multiplier);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                 {
-                    p1.getRec().move(0, 100 * 0.003 * dt * multiplier);
+                    p1.getRec().move(0, 100 * 0.01 * dt * multiplier);
                 }
             }
             if (p2_exists)
             {
-                if (p2.getSelect() == 2)
-                {
-                    if (event.type == sf::Event::JoystickMoved)
-                    {
-                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p2.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
-                    }
-                }
-                else if (p2.getSelect() == 3)
+                if (p2.getSelect() == 3)
                 {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
                     {
-                        p2.getRec().move(-100 * 0.003 * dt * multiplier, 0);
+                        p2.getRec().move(-100 * 0.01 * dt * multiplier, 0);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                     {
-                        p2.getRec().move(100 * 0.003 * dt * multiplier, 0);
+                        p2.getRec().move(100 * 0.01 * dt * multiplier, 0);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
                     {
-                        p2.getRec().move(0, -100 * 0.003 * dt * multiplier);
+                        p2.getRec().move(0, -100 * 0.01 * dt * multiplier);
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
                     {
-                        p2.getRec().move(0, 100 * 0.003 * dt * multiplier);
+                        p2.getRec().move(0, 100 * 0.01 * dt * multiplier);
                     }
                 }
             }
@@ -4330,64 +4306,6 @@ int main()
         }
         else if (end_of_time || endg)
         {
-            if (p1.getSelect() == 2)
-            {
-                if (event.type == sf::Event::JoystickMoved)
-                {
-                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                    p1.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
-                }
-            }
-            else if (p1.getSelect() == 3)
-            {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-                {
-                    p1.getRec().move(-100 * 0.005 * dt * multiplier, 0);
-                }
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-                {
-                    p1.getRec().move(100 * 0.005 * dt * multiplier, 0);
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-                {
-                    p1.getRec().move(0, -100 * 0.005 * dt * multiplier);
-                }
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-                {
-                    p1.getRec().move(0, 100 * 0.005 * dt * multiplier);
-                }
-            }
-            if (p2_exists)
-            {
-                if (p2.getSelect() == 2)
-                {
-                    if (event.type == sf::Event::JoystickMoved)
-                    {
-                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
-                        p2.getRec().move(m.x * 0.005 * dt * multiplier, m.y * 0.005 * dt * multiplier);
-                    }
-                }
-                else if (p2.getSelect() == 3)
-                {
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-                    {
-                        p2.getRec().move(-100 * 0.005 * dt * multiplier, 0);
-                    }
-                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-                    {
-                        p2.getRec().move(100 * 0.005 * dt * multiplier, 0);
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-                    {
-                        p2.getRec().move(0, -100 * 0.005 * dt * multiplier);
-                    }
-                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-                    {
-                        p2.getRec().move(0, 100 * 0.005 * dt * multiplier);
-                    }
-                }
-            }
-
             if (cursorEndGame)
             {
                 window.setMouseCursor(c);
@@ -4397,6 +4315,56 @@ int main()
                 p2.getRec().setTexture(&tgun02);
                 end_of_time1 = false;
                 game = false;
+            }
+
+            if (p1.getSelect() == 2)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.01 * dt * multiplier, m.y * 0.01 * dt * multiplier);
+                }
+            }
+            else if (p1.getSelect() == 3)
+            {
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+                {
+                    p1.getRec().move(-100 * 0.01 * dt * multiplier, 0);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+                {
+                    p1.getRec().move(100 * 0.01 * dt * multiplier, 0);
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+                {
+                    p1.getRec().move(0, -100 * 0.01 * dt * multiplier);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+                {
+                    p1.getRec().move(0, 100 * 0.01 * dt * multiplier);
+                }
+            }
+            if (p2_exists)
+            {
+                if (p2.getSelect() == 3)
+                {
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+                    {
+                        p2.getRec().move(-100 * 0.01 * dt * multiplier, 0);
+                    }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+                    {
+                        p2.getRec().move(100 * 0.01 * dt * multiplier, 0);
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+                    {
+                        p2.getRec().move(0, -100 * 0.01 * dt * multiplier);
+                    }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+                    {
+                        p2.getRec().move(0, 100 * 0.01 * dt * multiplier);
+                    }
+                }
             }
 
             window.clear(sf::Color::White);
@@ -4604,6 +4572,96 @@ int main()
                 textEndOfTime.setString("Time: 0s");
             }
 
+            if (p1.getSelect() == 3 || (p2_exists && p2.getSelect() == 3))
+            {
+                direction = sf::Vector2f(0.f, 0.f);
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+                {
+                    direction.x = -1.f;
+
+                    if (currentVelocity.x > -maxVelocity)
+                        currentVelocity.x += acceleration * direction.x * dt * multiplier;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+                {
+                    direction.x = 1.f;
+
+                    if (currentVelocity.x < maxVelocity)
+                        currentVelocity.x += acceleration * direction.x * dt * multiplier;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+                {
+                    direction.y = -1.f;
+
+                    if (currentVelocity.y > -maxVelocity)
+                        currentVelocity.y += acceleration * direction.y * dt * multiplier;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+                {
+                    direction.y = 1.f;
+
+                    if (currentVelocity.y < maxVelocity)
+                        currentVelocity.y += acceleration * direction.y * dt * multiplier;
+                }
+            }
+
+            if (currentVelocity.x > 0.f)
+            {
+                currentVelocity.x -= drag * dt * multiplier;
+
+                if (currentVelocity.x < 0.f)
+                    currentVelocity.x = 0.f;
+            }
+            else if (currentVelocity.x < 0.f)
+            {
+                currentVelocity.x += drag * dt * multiplier;
+
+                if (currentVelocity.x > 0.f)
+                    currentVelocity.x = 0.f;
+            }
+            if (currentVelocity.y > 0.f)
+            {
+                currentVelocity.y -= drag * dt * multiplier;
+
+                if (currentVelocity.y < 0.f)
+                    currentVelocity.y = 0.f;
+            }
+            else if (currentVelocity.y < 0.f)
+            {
+                currentVelocity.y += drag * dt * multiplier;
+
+                if (currentVelocity.y > 0.f)
+                    currentVelocity.y = 0.f;
+            }
+
+            if (p1.getSelect() == 2)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.0001 * sensitivity * dt * multiplier, m.y * 0.0001 * sensitivity * dt * multiplier);
+                }
+            }
+            else if (p1.getSelect() == 3)
+            {
+                p1.getRec().move(0.0015 * sensitivity * currentVelocity.x * dt * multiplier, 0.0015 * sensitivity * currentVelocity.y * dt * multiplier);
+            }
+            if (p2_exists)
+            {
+                if (p2.getSelect() == 2)
+                {
+                    if (event.type == sf::Event::JoystickMoved)
+                    {
+                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                        p2.getRec().move(m.x * 0.0001 * sensitivity * dt * multiplier, m.y * 0.0001 * sensitivity * dt * multiplier);
+                    }
+                }
+                else if (p2.getSelect() == 3)
+                {
+                    p2.getRec().move(0.0015 * sensitivity * currentVelocity.x * dt * multiplier, 0.0015 * sensitivity * currentVelocity.y * dt * multiplier);
+                }
+            }
+
             if (test || test2)
             {
                 if (p2_exists && p2.getSelect() == 1 && test2)
@@ -4698,9 +4756,103 @@ int main()
                 b1 = true;
             }
 
-            if ((p2.getAmmunition() > 0 || p1.getAmmunition() > 0) && !end_of_time && !endg)
+            if (p1.getSelect() == 3 || (p2_exists && p2.getSelect() == 3))
+            {
+                direction = sf::Vector2f(0.f, 0.f);
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+                {
+                    direction.x = -1.f;
+
+                    if (currentVelocity.x > -maxVelocity)
+                        currentVelocity.x += acceleration * direction.x * dt * multiplier;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+                {
+                    direction.x = 1.f;
+
+                    if (currentVelocity.x < maxVelocity)
+                        currentVelocity.x += acceleration * direction.x * dt * multiplier;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+                {
+                    direction.y = -1.f;
+
+                    if (currentVelocity.y > -maxVelocity)
+                        currentVelocity.y += acceleration * direction.y * dt * multiplier;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+                {
+                    direction.y = 1.f;
+
+                    if (currentVelocity.y < maxVelocity)
+                        currentVelocity.y += acceleration * direction.y * dt * multiplier;
+                }
+            }
+
+            if (currentVelocity.x > 0.f)
+            {
+                currentVelocity.x -= drag * dt * multiplier;
+
+                if (currentVelocity.x < 0.f)
+                    currentVelocity.x = 0.f;
+            }
+            else if (currentVelocity.x < 0.f)
+            {
+                currentVelocity.x += drag * dt * multiplier;
+
+                if (currentVelocity.x > 0.f)
+                    currentVelocity.x = 0.f;
+            }
+            if (currentVelocity.y > 0.f)
+            {
+                currentVelocity.y -= drag * dt * multiplier;
+
+                if (currentVelocity.y < 0.f)
+                    currentVelocity.y = 0.f;
+            }
+            else if (currentVelocity.y < 0.f)
+            {
+                currentVelocity.y += drag * dt * multiplier;
+
+                if (currentVelocity.y > 0.f)
+                    currentVelocity.y = 0.f;
+            }
+
+            if (p1.getSelect() == 2)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.0001 * sensitivity * dt * multiplier, m.y * 0.0001 * sensitivity * dt * multiplier);
+                }
+            }
+            else if (p1.getSelect() == 3)
+            {
+                p1.getRec().move(0.0015 * sensitivity * currentVelocity.x * dt * multiplier, 0.0015 * sensitivity * currentVelocity.y * dt * multiplier);
+            }
+            if (p2_exists)
+            {
+                if (p2.getSelect() == 2)
+                {
+                    if (event.type == sf::Event::JoystickMoved)
+                    {
+                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                        p2.getRec().move(m.x * 0.0001 * sensitivity * dt * multiplier, m.y * 0.0001 * sensitivity * dt * multiplier);
+                    }
+                }
+                else if (p2.getSelect() == 3)
+                {
+                    p2.getRec().move(0.0015 * sensitivity * currentVelocity.x * dt * multiplier, 0.0015 * sensitivity * currentVelocity.y * dt * multiplier);
+                }
+            }
+
+            if ((p2.getAmmunition() >= 0 || p1.getAmmunition() >= 0) && !end_of_time && !endg)
             {
                 if (!p2_exists && p1.getAmmunition() == 0)
+                {
+                    endg = true;
+                }
+                else if (p2_exists && p1.getAmmunition() == 0 && p2.getAmmunition() == 0)
                 {
                     endg = true;
                 }
@@ -4805,6 +4957,96 @@ int main()
                     goal2->move(hit);
                     goal3->move(hit);
                     clock2.restart().asMilliseconds();
+                }
+
+                if (p1.getSelect() == 3 || (p2_exists && p2.getSelect() == 3))
+                {
+                    direction = sf::Vector2f(0.f, 0.f);
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+                    {
+                        direction.x = -1.f;
+
+                        if (currentVelocity.x > -maxVelocity)
+                            currentVelocity.x += acceleration * direction.x * dt * multiplier;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+                    {
+                        direction.x = 1.f;
+
+                        if (currentVelocity.x < maxVelocity)
+                            currentVelocity.x += acceleration * direction.x * dt * multiplier;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+                    {
+                        direction.y = -1.f;
+
+                        if (currentVelocity.y > -maxVelocity)
+                            currentVelocity.y += acceleration * direction.y * dt * multiplier;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+                    {
+                        direction.y = 1.f;
+
+                        if (currentVelocity.y < maxVelocity)
+                            currentVelocity.y += acceleration * direction.y * dt * multiplier;
+                    }
+                }
+
+                if (currentVelocity.x > 0.f)
+                {
+                    currentVelocity.x -= drag * dt * multiplier;
+
+                    if (currentVelocity.x < 0.f)
+                        currentVelocity.x = 0.f;
+                }
+                else if (currentVelocity.x < 0.f)
+                {
+                    currentVelocity.x += drag * dt * multiplier;
+
+                    if (currentVelocity.x > 0.f)
+                        currentVelocity.x = 0.f;
+                }
+                if (currentVelocity.y > 0.f)
+                {
+                    currentVelocity.y -= drag * dt * multiplier;
+
+                    if (currentVelocity.y < 0.f)
+                        currentVelocity.y = 0.f;
+                }
+                else if (currentVelocity.y < 0.f)
+                {
+                    currentVelocity.y += drag * dt * multiplier;
+
+                    if (currentVelocity.y > 0.f)
+                        currentVelocity.y = 0.f;
+                }
+
+                if (p1.getSelect() == 2)
+                {
+                    if (event.type == sf::Event::JoystickMoved)
+                    {
+                        sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                        p1.getRec().move(m.x * 0.0001 * sensitivity * dt * multiplier, m.y * 0.0001 * sensitivity * dt * multiplier);
+                    }
+                }
+                else if (p1.getSelect() == 3)
+                {
+                    p1.getRec().move(0.0015 * sensitivity * currentVelocity.x * dt * multiplier, 0.0015 * sensitivity * currentVelocity.y * dt * multiplier);
+                }
+                if (p2_exists)
+                {
+                    if (p2.getSelect() == 2)
+                    {
+                        if (event.type == sf::Event::JoystickMoved)
+                        {
+                            sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                            p2.getRec().move(m.x * 0.0001 * sensitivity * dt * multiplier, m.y * 0.0001 * sensitivity * dt * multiplier);
+                        }
+                    }
+                    else if (p2.getSelect() == 3)
+                    {
+                        p2.getRec().move(0.0015 * sensitivity * currentVelocity.x * dt * multiplier, 0.0015 * sensitivity * currentVelocity.y * dt * multiplier);
+                    }
                 }
 
                 window.clear();
