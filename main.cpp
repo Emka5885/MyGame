@@ -4883,7 +4883,7 @@ int main()
                 }
                 else if (tv != 0 && ((p1.getSelect() == 1 && focus) || (p1.getSelect() == 2 || p1.getSelect() == 3)))
                 {
-                    tv -= tv * dt;
+                    tv -= tv * dt * 0.8;
                 }
 
                 if (tv2 == 0 && ((p2_exists && p2.getSelect() == 1 && focus) || (p2_exists && p2.getSelect() == 2 || p2_exists && p2.getSelect() == 3)))
@@ -4913,7 +4913,7 @@ int main()
                 }
                 else if (tv2 != 0 && ((p2_exists && p2.getSelect() == 1 && focus) || (p2_exists && p2.getSelect() == 2 || p2_exists && p2.getSelect() == 3)))
                 {
-                    tv2 -= tv2 * dt;
+                    tv2 -= tv2 * dt * 0.8;
                 }
 
                 if (b1 && !pla2)
