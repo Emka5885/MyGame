@@ -146,6 +146,25 @@ int main()
     quit.setFillColor(sf::Color::Black);
     quit.setPosition(533, 640);
 
+    //Note
+    sf::Texture note;
+    if (!note.loadFromFile("Resources/Music/note.png"))
+    {
+        std::cout << "ErrorMN" << std::endl;
+        system("PAUSE");
+    }
+    sf::RectangleShape rec6;
+    rec6.setSize({ 50, 50 });
+    rec6.setOrigin(rec6.getSize().x / 2, rec6.getSize().y / 2);
+    rec6.setPosition(925, 705);
+    rec6.setOutlineThickness(1.5);
+    rec6.setOutlineColor(sf::Color::Black);
+    sf::RectangleShape rec7;
+    rec7.setSize({ 40, 40 });
+    rec7.setTexture(&note);
+    rec7.setOrigin(rec7.getSize().x / 2, rec7.getSize().y / 2);
+    rec7.setPosition(925, 705);
+
     //Options
     sf::Texture buttonl;
     if (!buttonl.loadFromFile("Resources/Button/Left.png"))
@@ -2065,6 +2084,11 @@ int main()
                         {
                             window.close();
                         }
+                        //Note
+                        else if (cursor_mouse.getPosition().x > 900 && cursor_mouse.getPosition().x < 950 && cursor_mouse.getPosition().y > 680 && cursor_mouse.getPosition().y < 730)
+                        {
+                            std::cout << "music" << std::endl;
+                        }
                     }
                     //Settings
                     else if (!menu && settings && !select_player && !instruction)
@@ -3441,6 +3465,8 @@ int main()
 
             window.draw(rec1);
             window.draw(n_game);
+            window.draw(rec6);
+            window.draw(rec7);
 
             if (game && !change)
             {
