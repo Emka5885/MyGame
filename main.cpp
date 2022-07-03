@@ -24,6 +24,7 @@ int sensitivity = 20;
 int helpc = 0;
 int hcount = 1;
 bool menu = true;
+bool music = false;
 bool test = false;
 bool test2 = false;
 bool b1 = false;
@@ -887,13 +888,14 @@ int main()
     bright1h.setOrigin(b1right.getSize().x / 2, b1right.getSize().y / 2);
     bright1h.setPosition(945, 435);
 
+    //Music
+    sf::Text music_text;
+    music_text.setFont(font);
+    music_text.setString("Music");
+    music_text.setCharacterSize(100);
+    music_text.setFillColor(sf::Color::Black);
+    music_text.setPosition(450, 5);
 
-    sf::Text textH;
-    textH.setFont(font);
-    textH.setString("Here will be HELP...");
-    textH.setCharacterSize(50);
-    textH.setFillColor(sf::Color::Black);
-    textH.setPosition(375, 450);
 
     //Tekstury do animacji celu
     std::vector<sf::Texture> goalTextures;
@@ -1155,7 +1157,7 @@ int main()
                 if (sf::Keyboard::Space == event.key.code && (selectmjk1 == 3 || selectmjk2 == 3))
                 {
                     //In Game
-                    if (!menu && !settings && !select_player && !instruction)
+                    if (!menu && !settings && !select_player && !instruction && !music)
                     {
                         if (!goal1->getStop() && !goal2->getStop() && !goal3->getStop())
                         {
@@ -1216,10 +1218,10 @@ int main()
                         }
                     }
                     //Main menu
-                    else if (menu && !settings && !select_player && !instruction)
+                    else if (menu && !settings && !select_player && !instruction && !music)
                     {
                         //New Game
-                        if (((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 150 && p1.getRec().getPosition().y < 250) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 150 && p2.getRec().getPosition().y < 250)))
+                        if (((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 150 && p1.getRec().getPosition().y < 250) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 150 && p2.getRec().getPosition().y < 250)))
                         {
                             menu = false;
                             textName.setFillColor(sf::Color::White);
@@ -1254,7 +1256,7 @@ int main()
                             clock4.restart().asSeconds();
                         }
                         //Continue
-                        else if ((game == true) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
+                        else if ((game == true) && ((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
                         {
                             menu = false;
                             textName.setFillColor(sf::Color::White);
@@ -1277,7 +1279,7 @@ int main()
                                 p1.getRec().setPosition(window.getSize().x / 2, window.getSize().y / 2);
                         }
                         //Player
-                        else if ((game == false) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
+                        else if ((game == false) && ((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
                         {
                             menu = false;
                             select_player = true;
@@ -1287,7 +1289,7 @@ int main()
                                 window.setMouseCursorVisible(false);
                         }
                         //Help
-                        else if (((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 510 && p1.getRec().getPosition().y < 610) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 510 && p2.getRec().getPosition().y < 610)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 510 && p1.getRec().getPosition().y < 610) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 510 && p2.getRec().getPosition().y < 610)))
                         {
                             menu = false;
                             instruction = true;
@@ -1302,29 +1304,35 @@ int main()
                             textm11h.setString("The pointer movement in the game");
                             textm12h.setString("corresponds to the mouse movement.");
                         }
+                        //Note
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x > 900 && p1.getRec().getPosition().x < 950 && p1.getRec().getPosition().y > 680 && p1.getRec().getPosition().y < 730) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 900 && p2.getRec().getPosition().x < 950 && p2.getRec().getPosition().y > 680 && p2.getRec().getPosition().y < 730)))
+                        {
+                            menu = false;
+                            music = true;
+                        }
                         //Options
-                        else if (((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 390 && p1.getRec().getPosition().y < 490) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 390 && p2.getRec().getPosition().y < 490)))
+                        else if ((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 390 && p1.getRec().getPosition().y < 490) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 390 && p2.getRec().getPosition().y < 490))
                         {
                             menu = false;
                             settings = true;
                         }
                         //Quit
-                        if (((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 630 && p1.getRec().getPosition().y < 730) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 630 && p2.getRec().getPosition().y < 730)))
+                        if (((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 630 && p1.getRec().getPosition().y < 730) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 630 && p2.getRec().getPosition().y < 730)))
                         {
                             window.close();
                         }
                     }
                     //Settings
-                    else if (!menu && settings && !select_player && !instruction)
+                    else if (!menu && settings && !select_player && !instruction && !music)
                     {
                         //Back
-                        if (((p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)))
+                        if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)))
                         {
                             settings = false;
                             menu = true;
                         }
                         //Default
-                        else if (((p1.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p1.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p1.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p1.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2) || (p2.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p2.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p2.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p2.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p1.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p1.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p1.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p2.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p2.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p2.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2)))
                         {
                             ammun = 30;
                             ammun_text.setString(std::to_string(ammun));
@@ -1368,7 +1376,7 @@ int main()
                             speedbar2 = true;
                         }
                         //Ammunition
-                        else if (((p1.getRec().getPosition().x >= b1left.getPosition().x - b1left.getSize().x / 2 && p1.getRec().getPosition().x <= b1left.getPosition().x + b1left.getSize().x / 2 && p1.getRec().getPosition().y >= b1left.getPosition().y - b1left.getSize().y / 2 && p1.getRec().getPosition().y <= b1left.getPosition().y + b1left.getSize().y / 2) || (p2.getRec().getPosition().x >= b1left.getPosition().x - b1left.getSize().x / 2 && p2.getRec().getPosition().x <= b1left.getPosition().x + b1left.getSize().x / 2 && p2.getRec().getPosition().y >= b1left.getPosition().y - b1left.getSize().y / 2 && p2.getRec().getPosition().y <= b1left.getPosition().y + b1left.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b1left.getPosition().x - b1left.getSize().x / 2 && p1.getRec().getPosition().x <= b1left.getPosition().x + b1left.getSize().x / 2 && p1.getRec().getPosition().y >= b1left.getPosition().y - b1left.getSize().y / 2 && p1.getRec().getPosition().y <= b1left.getPosition().y + b1left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b1left.getPosition().x - b1left.getSize().x / 2 && p2.getRec().getPosition().x <= b1left.getPosition().x + b1left.getSize().x / 2 && p2.getRec().getPosition().y >= b1left.getPosition().y - b1left.getSize().y / 2 && p2.getRec().getPosition().y <= b1left.getPosition().y + b1left.getSize().y / 2)))
                         {
                             if (ammun == 10)
                             {
@@ -1393,7 +1401,7 @@ int main()
                                 textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                             }
                         }
-                        else if (((p1.getRec().getPosition().x >= b1right.getPosition().x - b1right.getSize().x / 2 && p1.getRec().getPosition().x <= b1right.getPosition().x + b1right.getSize().x / 2 && p1.getRec().getPosition().y >= b1right.getPosition().y - b1right.getSize().y / 2 && p1.getRec().getPosition().y <= b1right.getPosition().y + b1right.getSize().y / 2) || (p2.getRec().getPosition().x >= b1right.getPosition().x - b1right.getSize().x / 2 && p2.getRec().getPosition().x <= b1right.getPosition().x + b1right.getSize().x / 2 && p2.getRec().getPosition().y >= b1right.getPosition().y - b1right.getSize().y / 2 && p2.getRec().getPosition().y <= b1right.getPosition().y + b1right.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b1right.getPosition().x - b1right.getSize().x / 2 && p1.getRec().getPosition().x <= b1right.getPosition().x + b1right.getSize().x / 2 && p1.getRec().getPosition().y >= b1right.getPosition().y - b1right.getSize().y / 2 && p1.getRec().getPosition().y <= b1right.getPosition().y + b1right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b1right.getPosition().x - b1right.getSize().x / 2 && p2.getRec().getPosition().x <= b1right.getPosition().x + b1right.getSize().x / 2 && p2.getRec().getPosition().y >= b1right.getPosition().y - b1right.getSize().y / 2 && p2.getRec().getPosition().y <= b1right.getPosition().y + b1right.getSize().y / 2)))
                         {
                             if (ammun == 9)
                             {
@@ -1419,7 +1427,7 @@ int main()
                             }
                         }
                         //Time
-                        else if (((p1.getRec().getPosition().x >= b2left.getPosition().x - b2left.getSize().x / 2 && p1.getRec().getPosition().x <= b2left.getPosition().x + b2left.getSize().x / 2 && p1.getRec().getPosition().y >= b2left.getPosition().y - b2left.getSize().y / 2 && p1.getRec().getPosition().y <= b2left.getPosition().y + b2left.getSize().y / 2) || (p2.getRec().getPosition().x >= b2left.getPosition().x - b2left.getSize().x / 2 && p2.getRec().getPosition().x <= b2left.getPosition().x + b2left.getSize().x / 2 && p2.getRec().getPosition().y >= b2left.getPosition().y - b2left.getSize().y / 2 && p2.getRec().getPosition().y <= b2left.getPosition().y + b2left.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b2left.getPosition().x - b2left.getSize().x / 2 && p1.getRec().getPosition().x <= b2left.getPosition().x + b2left.getSize().x / 2 && p1.getRec().getPosition().y >= b2left.getPosition().y - b2left.getSize().y / 2 && p1.getRec().getPosition().y <= b2left.getPosition().y + b2left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b2left.getPosition().x - b2left.getSize().x / 2 && p2.getRec().getPosition().x <= b2left.getPosition().x + b2left.getSize().x / 2 && p2.getRec().getPosition().y >= b2left.getPosition().y - b2left.getSize().y / 2 && p2.getRec().getPosition().y <= b2left.getPosition().y + b2left.getSize().y / 2)))
                         {
                             if (times == 120)
                             {
@@ -1437,7 +1445,7 @@ int main()
                             seconds = ts.asSeconds();
                             textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
                         }
-                        else if (((p1.getRec().getPosition().x >= b2right.getPosition().x - b2right.getSize().x / 2 && p1.getRec().getPosition().x <= b2right.getPosition().x + b2right.getSize().x / 2 && p1.getRec().getPosition().y >= b2right.getPosition().y - b2right.getSize().y / 2 && p1.getRec().getPosition().y <= b2right.getPosition().y + b2right.getSize().y / 2) || (p2.getRec().getPosition().x >= b2right.getPosition().x - b2right.getSize().x / 2 && p2.getRec().getPosition().x <= b2right.getPosition().x + b2right.getSize().x / 2 && p2.getRec().getPosition().y >= b2right.getPosition().y - b2right.getSize().y / 2 && p2.getRec().getPosition().y <= b2right.getPosition().y + b2right.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b2right.getPosition().x - b2right.getSize().x / 2 && p1.getRec().getPosition().x <= b2right.getPosition().x + b2right.getSize().x / 2 && p1.getRec().getPosition().y >= b2right.getPosition().y - b2right.getSize().y / 2 && p1.getRec().getPosition().y <= b2right.getPosition().y + b2right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b2right.getPosition().x - b2right.getSize().x / 2 && p2.getRec().getPosition().x <= b2right.getPosition().x + b2right.getSize().x / 2 && p2.getRec().getPosition().y >= b2right.getPosition().y - b2right.getSize().y / 2 && p2.getRec().getPosition().y <= b2right.getPosition().y + b2right.getSize().y / 2)))
                         {
                             if (times == 120)
                             {
@@ -1456,7 +1464,7 @@ int main()
                             textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
                         }
                         //Vibrations
-                        else if (((p1.getRec().getPosition().x >= b3left.getPosition().x - b3left.getSize().x / 2 && p1.getRec().getPosition().x <= b3left.getPosition().x + b3left.getSize().x / 2 && p1.getRec().getPosition().y >= b3left.getPosition().y - b3left.getSize().y / 2 && p1.getRec().getPosition().y <= b3left.getPosition().y + b3left.getSize().y / 2) || (p2.getRec().getPosition().x >= b3left.getPosition().x - b3left.getSize().x / 2 && p2.getRec().getPosition().x <= b3left.getPosition().x + b3left.getSize().x / 2 && p2.getRec().getPosition().y >= b3left.getPosition().y - b3left.getSize().y / 2 && p2.getRec().getPosition().y <= b3left.getPosition().y + b3left.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b3left.getPosition().x - b3left.getSize().x / 2 && p1.getRec().getPosition().x <= b3left.getPosition().x + b3left.getSize().x / 2 && p1.getRec().getPosition().y >= b3left.getPosition().y - b3left.getSize().y / 2 && p1.getRec().getPosition().y <= b3left.getPosition().y + b3left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b3left.getPosition().x - b3left.getSize().x / 2 && p2.getRec().getPosition().x <= b3left.getPosition().x + b3left.getSize().x / 2 && p2.getRec().getPosition().y >= b3left.getPosition().y - b3left.getSize().y / 2 && p2.getRec().getPosition().y <= b3left.getPosition().y + b3left.getSize().y / 2)))
                         {
                             if (vibrations == 10)
                             {
@@ -1472,7 +1480,7 @@ int main()
                             p1.setVibrations(vibrations);
                             p2.setVibrations(vibrations);
                         }
-                        else if (((p1.getRec().getPosition().x >= b3right.getPosition().x - b3right.getSize().x / 2 && p1.getRec().getPosition().x <= b3right.getPosition().x + b3right.getSize().x / 2 && p1.getRec().getPosition().y >= b3right.getPosition().y - b3right.getSize().y / 2 && p1.getRec().getPosition().y <= b3right.getPosition().y + b3right.getSize().y / 2) || (p2.getRec().getPosition().x >= b3right.getPosition().x - b3right.getSize().x / 2 && p2.getRec().getPosition().x <= b3right.getPosition().x + b3right.getSize().x / 2 && p2.getRec().getPosition().y >= b3right.getPosition().y - b3right.getSize().y / 2 && p2.getRec().getPosition().y <= b3right.getPosition().y + b3right.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b3right.getPosition().x - b3right.getSize().x / 2 && p1.getRec().getPosition().x <= b3right.getPosition().x + b3right.getSize().x / 2 && p1.getRec().getPosition().y >= b3right.getPosition().y - b3right.getSize().y / 2 && p1.getRec().getPosition().y <= b3right.getPosition().y + b3right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b3right.getPosition().x - b3right.getSize().x / 2 && p2.getRec().getPosition().x <= b3right.getPosition().x + b3right.getSize().x / 2 && p2.getRec().getPosition().y >= b3right.getPosition().y - b3right.getSize().y / 2 && p2.getRec().getPosition().y <= b3right.getPosition().y + b3right.getSize().y / 2)))
                         {
                             if (vibrations == 9)
                             {
@@ -1489,7 +1497,7 @@ int main()
                             p2.setVibrations(vibrations);
                         }
                         //Speed of targets
-                        else if (((p1.getRec().getPosition().x >= b4left.getPosition().x - b4left.getSize().x / 2 && p1.getRec().getPosition().x <= b4left.getPosition().x + b4left.getSize().x / 2 && p1.getRec().getPosition().y >= b4left.getPosition().y - b4left.getSize().y / 2 && p1.getRec().getPosition().y <= b4left.getPosition().y + b4left.getSize().y / 2) || (p2.getRec().getPosition().x >= b4left.getPosition().x - b4left.getSize().x / 2 && p2.getRec().getPosition().x <= b4left.getPosition().x + b4left.getSize().x / 2 && p2.getRec().getPosition().y >= b4left.getPosition().y - b4left.getSize().y / 2 && p2.getRec().getPosition().y <= b4left.getPosition().y + b4left.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b4left.getPosition().x - b4left.getSize().x / 2 && p1.getRec().getPosition().x <= b4left.getPosition().x + b4left.getSize().x / 2 && p1.getRec().getPosition().y >= b4left.getPosition().y - b4left.getSize().y / 2 && p1.getRec().getPosition().y <= b4left.getPosition().y + b4left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b4left.getPosition().x - b4left.getSize().x / 2 && p2.getRec().getPosition().x <= b4left.getPosition().x + b4left.getSize().x / 2 && p2.getRec().getPosition().y >= b4left.getPosition().y - b4left.getSize().y / 2 && p2.getRec().getPosition().y <= b4left.getPosition().y + b4left.getSize().y / 2)))
                         {
                             if (speed == 100)
                             {
@@ -1505,7 +1513,7 @@ int main()
                             change = true;
                             tspeed = sf::milliseconds(speed);
                         }
-                        else if (((p1.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p1.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p1.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p1.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2) || (p2.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p2.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p2.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p2.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p1.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p1.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p1.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p2.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p2.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p2.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2)))
                         {
                             if (speed == 90)
                             {
@@ -1522,7 +1530,7 @@ int main()
                             tspeed = sf::milliseconds(speed);
                         }
                         //Rate of fire
-                        else if (((p1.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p1.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p1.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p1.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2) || (p2.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p2.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p2.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p2.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p1.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p1.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p1.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p2.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p2.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p2.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2)))
                         {
                             if (rate_of_fire == 1000)
                             {
@@ -1541,7 +1549,7 @@ int main()
                             speedbar = true;
                             speedbar2 = true;
                         }
-                        else if (((p1.getRec().getPosition().x >= b5right.getPosition().x - b5right.getSize().x / 2 && p1.getRec().getPosition().x <= b5right.getPosition().x + b5right.getSize().x / 2 && p1.getRec().getPosition().y >= b5right.getPosition().y - b5right.getSize().y / 2 && p1.getRec().getPosition().y <= b5right.getPosition().y + b5right.getSize().y / 2) || (p2.getRec().getPosition().x >= b5right.getPosition().x - b5right.getSize().x / 2 && p2.getRec().getPosition().x <= b5right.getPosition().x + b5right.getSize().x / 2 && p2.getRec().getPosition().y >= b5right.getPosition().y - b5right.getSize().y / 2 && p2.getRec().getPosition().y <= b5right.getPosition().y + b5right.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b5right.getPosition().x - b5right.getSize().x / 2 && p1.getRec().getPosition().x <= b5right.getPosition().x + b5right.getSize().x / 2 && p1.getRec().getPosition().y >= b5right.getPosition().y - b5right.getSize().y / 2 && p1.getRec().getPosition().y <= b5right.getPosition().y + b5right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b5right.getPosition().x - b5right.getSize().x / 2 && p2.getRec().getPosition().x <= b5right.getPosition().x + b5right.getSize().x / 2 && p2.getRec().getPosition().y >= b5right.getPosition().y - b5right.getSize().y / 2 && p2.getRec().getPosition().y <= b5right.getPosition().y + b5right.getSize().y / 2)))
                         {
                             if (rate_of_fire == 900)
                             {
@@ -1561,7 +1569,7 @@ int main()
                             speedbar2 = true;
                         }
                         //Sensitivity
-                        else if (((p1.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p1.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p1.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p1.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2) || (p2.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p2.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p2.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p2.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p1.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p1.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p1.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p2.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p2.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p2.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)))
                         {
                             if (sensitivity == 10)
                             {
@@ -1575,7 +1583,7 @@ int main()
                                 s_text.setString(std::to_string(sensitivity));
                             }
                         }
-                        else if (((p1.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p1.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p1.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p1.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2) || (p2.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p2.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p2.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p2.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2)))
+                        else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p1.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p1.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p1.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p2.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p2.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p2.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2)))
                         {
                             if (sensitivity == 9)
                             {
@@ -1591,16 +1599,16 @@ int main()
                         }
                     }
                     //Help
-                    else if (!menu && !settings && !select_player && instruction)
+                    else if (!menu && !settings && !select_player && instruction && !music)
                     {
                         //Back
-                        if ((p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
+                        if ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
                         {
                             instruction = false;
                             menu = true;
                         }
                         //r
-                        else if ((hcount == 1 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 1 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                        else if ((hcount == 1 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 1 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 2;
                             helpc = 1;
@@ -1610,7 +1618,7 @@ int main()
                             textm11h.setPosition(375, 632);
                             textm11h.setString("Click the left mouse button to shoot.");
                         }
-                        else if ((hcount == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                        else if ((hcount == 2 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 2 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 3;
                             helpc = 0;
@@ -1622,7 +1630,7 @@ int main()
                             textm11h.setString("Use the Left stick on the controller");
                             textm12h.setString("to move the pointer in the game.");
                         }
-                        else if ((hcount == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                        else if ((hcount == 3 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 3 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 4;
                             helpc = 1;
@@ -1632,7 +1640,7 @@ int main()
                             textm11h.setString("Click the Right Trigger on the");
                             textm12h.setString("controller to shoot.");
                         }
-                        else if ((hcount == 4 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                        else if ((hcount == 4 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 4 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 5;
                             helpc = 1;
@@ -1640,7 +1648,7 @@ int main()
                             textm11h.setString("Click the Start button on the");
                             textm12h.setString("controller to return to the main menu.");
                         }
-                        else if ((hcount == 5 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                        else if ((hcount == 5 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 5 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 6;
                             helpc = 0;
@@ -1648,7 +1656,7 @@ int main()
                             textm11h.setString("Use the WSDA buttons to move");
                             textm12h.setString("the pointer in the game.");
                         }
-                        else if ((hcount == 6 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                        else if ((hcount == 6 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 6 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 7;
                             helpc = 1;
@@ -1656,7 +1664,7 @@ int main()
                             textm11h.setPosition(375, 632);
                             textm11h.setString("Click the Spacebar to shoot.");
                         }
-                        else if ((hcount == 7 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
+                        else if ((hcount == 7 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 7 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                         {
                             hcount = 8;
                             helpc = 1;
@@ -1666,7 +1674,7 @@ int main()
                             textm12h.setString("the main menu.");
                         }
                         //l
-                        else if ((hcount == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                        else if ((hcount == 2 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 2 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 1;
                             helpc = 0;
@@ -1678,7 +1686,7 @@ int main()
                             textm11h.setString("The pointer movement in the game");
                             textm12h.setString("corresponds to the mouse movement.");
                         }
-                        else if ((hcount == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                        else if ((hcount == 3 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 3 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 2;
                             helpc = 1;
@@ -1688,7 +1696,7 @@ int main()
                             textm11h.setPosition(375, 632);
                             textm11h.setString("Click the left mouse button to shoot.");
                         }
-                        else if ((hcount == 4 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                        else if ((hcount == 4 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 4 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 3;
                             helpc = 0;
@@ -1700,7 +1708,7 @@ int main()
                             textm11h.setString("Use the Left stick on the controller");
                             textm12h.setString("to move the pointer in the game.");
                         }
-                        else if ((hcount == 5 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                        else if ((hcount == 5 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 5 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 4;
                             helpc = 1;
@@ -1708,7 +1716,7 @@ int main()
                             textm11h.setString("Click the Right Trigger on the");
                             textm12h.setString("controller to shoot.");
                         }
-                        else if ((hcount == 6 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                        else if ((hcount == 6 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 6 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 5;
                             helpc = 1;
@@ -1716,7 +1724,7 @@ int main()
                             textm11h.setString("Click the Start button on the");
                             textm12h.setString("controller to return to the main menu.");
                         }
-                        else if ((hcount == 7 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                        else if ((hcount == 7 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 7 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 6;
                             helpc = 0;
@@ -1725,7 +1733,7 @@ int main()
                             textm11h.setString("Use the WSDA buttons to move");
                             textm12h.setString("the pointer in the game.");
                         }
-                        else if ((hcount == 8 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 8 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
+                        else if ((hcount == 8 && p1.getSelect() == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 8 && p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                         {
                             hcount = 7;
                             helpc = 1;
@@ -1734,8 +1742,18 @@ int main()
                             textm11h.setString("Click the Spacebar to shoot.");
                         }
                     }
+                    //Music
+                    else if (!menu && !settings && !select_player && !instruction && music)
+                    {
+                        //Back
+                        if ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
+                        {
+                            music = false;
+                            menu = true;
+                        }
+                    }
                     //Player
-                    else if (!menu && !settings && select_player && !instruction)
+                    else if (!menu && !settings && select_player && !instruction && !music)
                     {
                         //Back
                         if (((p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)))
@@ -1923,7 +1941,7 @@ int main()
                 if (selectmjk1 == 1 || selectmjk2 == 1)
                 {
                     //In Game
-                    if (!menu && !settings && !select_player && !instruction)
+                    if (!menu && !settings && !select_player && !instruction && !music)
                     {
                         if (!goal1->getStop() && !goal2->getStop() && !goal3->getStop())
                         {
@@ -1984,7 +2002,7 @@ int main()
                         }
                     }
                     //Main menu
-                    else if (menu && !settings && !select_player && !instruction)
+                    else if (menu && !settings && !select_player && !instruction && !music)
                     {
                         cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                         cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
@@ -2079,19 +2097,21 @@ int main()
                             textm12h.setString("corresponds to the mouse movement.");
 
                         }
+                        //Note
+                        else if (cursor_mouse.getPosition().x > 900 && cursor_mouse.getPosition().x < 950 && cursor_mouse.getPosition().y > 680 && cursor_mouse.getPosition().y < 730)
+                        {
+                            std::cout << "music" << std::endl;
+                            menu = false;
+                            music = true;
+                        }
                         //Quit
                         else if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 630 && cursor_mouse.getPosition().y < 730)
                         {
                             window.close();
                         }
-                        //Note
-                        else if (cursor_mouse.getPosition().x > 900 && cursor_mouse.getPosition().x < 950 && cursor_mouse.getPosition().y > 680 && cursor_mouse.getPosition().y < 730)
-                        {
-                            std::cout << "music" << std::endl;
-                        }
                     }
                     //Settings
-                    else if (!menu && settings && !select_player && !instruction)
+                    else if (!menu && settings && !select_player && !instruction && !music)
                     {
                         cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                         cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
@@ -2369,7 +2389,7 @@ int main()
                         }
                     }
                     //Help
-                    else if (!menu && !settings && !select_player && instruction)
+                    else if (!menu && !settings && !select_player && instruction && !music)
                     {
                         cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                         cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
@@ -2513,8 +2533,20 @@ int main()
                             textm11h.setString("Click the Spacebar to shoot.");
                         }
                     }
+                    //Music
+                    else if (!menu && !settings && !select_player && !instruction && music)
+                    {
+                        cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
+                        cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
+                        //Back
+                        if (cursor_mouse.getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && cursor_mouse.getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && cursor_mouse.getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && cursor_mouse.getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)
+                        {
+                            music = false;
+                            menu = true;
+                        }
+                    }
                     //Player
-                    else if (!menu && !settings && select_player && !instruction)
+                    else if (!menu && !settings && select_player && !instruction && !music)
                     {
                         cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                         cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
@@ -2701,11 +2733,11 @@ int main()
                 }
                 break;
             case sf::Event::JoystickMoved:
-                if (selectmjk1 == 2 || selectmjk2 == 2)
+                if (selectmjk1 == 2 && !p2_exists)
                 {
                     if (stopClick.getElapsedTime().asMilliseconds() >= 250)
                     {
-                        if (!menu && !settings && !select_player && !instruction)
+                        if (!menu && !settings && !select_player && !instruction && !music)
                         {
                             if (!goal1->getStop() && !goal2->getStop() && !goal3->getStop())
                             {
@@ -2766,10 +2798,10 @@ int main()
                             }
                         }
                         //Main menu
-                        else if (menu && !settings && !select_player && !instruction)
+                        else if (menu && !settings && !select_player && !instruction && !music)
                         {
                             //New Game
-                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 150 && p1.getRec().getPosition().y < 250) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 150 && p2.getRec().getPosition().y < 250)))
+                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 150 && p1.getRec().getPosition().y < 250))
                             {
                                 menu = false;
                                 textName.setFillColor(sf::Color::White);
@@ -2804,7 +2836,7 @@ int main()
                                 clock4.restart().asSeconds();
                             }
                             //Continue
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (game == true) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (game == true) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370))
                             {
                                 menu = false;
                                 textName.setFillColor(sf::Color::White);
@@ -2827,13 +2859,13 @@ int main()
                                     p1.getRec().setPosition(window.getSize().x / 2, window.getSize().y / 2);
                             }
                             //Player
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (game == false) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (game == false) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370))
                             {
                                 menu = false;
                                 select_player = true;
                             }
                             //Help
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 510 && p1.getRec().getPosition().y < 610) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 510 && p2.getRec().getPosition().y < 610)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 510 && p1.getRec().getPosition().y < 610))
                             {
                                 menu = false;
                                 instruction = true;
@@ -2848,29 +2880,35 @@ int main()
                                 textm11h.setString("The pointer movement in the game");
                                 textm12h.setString("corresponds to the mouse movement.");
                             }
+                            //Note
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 900 && p1.getRec().getPosition().x < 950 && p1.getRec().getPosition().y > 680 && p1.getRec().getPosition().y < 730))
+                            {
+                                menu = false;
+                                music = true;
+                            }
                             //Options
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 390 && p1.getRec().getPosition().y < 490) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 390 && p2.getRec().getPosition().y < 490)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 390 && p1.getRec().getPosition().y < 490))
                             {
                                 menu = false;
                                 settings = true;
                             }
                             //Quit
-                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 630 && p1.getRec().getPosition().y < 730) || (p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 630 && p2.getRec().getPosition().y < 730)))
+                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 630 && p1.getRec().getPosition().y < 730))
                             {
                                 window.close();
                             }
                         }
                         //Settings
-                        else if (!menu && settings && !select_player && !instruction)
+                        else if (!menu && settings && !select_player && !instruction && !music)
                         {
                             //Back
-                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)))
+                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
                             {
                                 settings = false;
                                 menu = true;
                             }
                             //Default
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p1.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p1.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p1.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2) || (p2.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p2.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p2.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p2.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p1.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p1.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p1.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2))
                             {
                                 ammun = 30;
                                 ammun_text.setString(std::to_string(ammun));
@@ -2914,7 +2952,7 @@ int main()
                                 speedbar2 = true;
                             }
                             //Ammunition
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b1left.getPosition().x - b1left.getSize().x / 2 && p1.getRec().getPosition().x <= b1left.getPosition().x + b1left.getSize().x / 2 && p1.getRec().getPosition().y >= b1left.getPosition().y - b1left.getSize().y / 2 && p1.getRec().getPosition().y <= b1left.getPosition().y + b1left.getSize().y / 2) || (p2.getRec().getPosition().x >= b1left.getPosition().x - b1left.getSize().x / 2 && p2.getRec().getPosition().x <= b1left.getPosition().x + b1left.getSize().x / 2 && p2.getRec().getPosition().y >= b1left.getPosition().y - b1left.getSize().y / 2 && p2.getRec().getPosition().y <= b1left.getPosition().y + b1left.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b1left.getPosition().x - b1left.getSize().x / 2 && p1.getRec().getPosition().x <= b1left.getPosition().x + b1left.getSize().x / 2 && p1.getRec().getPosition().y >= b1left.getPosition().y - b1left.getSize().y / 2 && p1.getRec().getPosition().y <= b1left.getPosition().y + b1left.getSize().y / 2))
                             {
                                 if (ammun == 10)
                                 {
@@ -2939,7 +2977,7 @@ int main()
                                     textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                                 }
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b1right.getPosition().x - b1right.getSize().x / 2 && p1.getRec().getPosition().x <= b1right.getPosition().x + b1right.getSize().x / 2 && p1.getRec().getPosition().y >= b1right.getPosition().y - b1right.getSize().y / 2 && p1.getRec().getPosition().y <= b1right.getPosition().y + b1right.getSize().y / 2) || (p2.getRec().getPosition().x >= b1right.getPosition().x - b1right.getSize().x / 2 && p2.getRec().getPosition().x <= b1right.getPosition().x + b1right.getSize().x / 2 && p2.getRec().getPosition().y >= b1right.getPosition().y - b1right.getSize().y / 2 && p2.getRec().getPosition().y <= b1right.getPosition().y + b1right.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b1right.getPosition().x - b1right.getSize().x / 2 && p1.getRec().getPosition().x <= b1right.getPosition().x + b1right.getSize().x / 2 && p1.getRec().getPosition().y >= b1right.getPosition().y - b1right.getSize().y / 2 && p1.getRec().getPosition().y <= b1right.getPosition().y + b1right.getSize().y / 2))
                             {
                                 if (ammun == 9)
                                 {
@@ -2965,7 +3003,7 @@ int main()
                                 }
                             }
                             //Time
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b2left.getPosition().x - b2left.getSize().x / 2 && p1.getRec().getPosition().x <= b2left.getPosition().x + b2left.getSize().x / 2 && p1.getRec().getPosition().y >= b2left.getPosition().y - b2left.getSize().y / 2 && p1.getRec().getPosition().y <= b2left.getPosition().y + b2left.getSize().y / 2) || (p2.getRec().getPosition().x >= b2left.getPosition().x - b2left.getSize().x / 2 && p2.getRec().getPosition().x <= b2left.getPosition().x + b2left.getSize().x / 2 && p2.getRec().getPosition().y >= b2left.getPosition().y - b2left.getSize().y / 2 && p2.getRec().getPosition().y <= b2left.getPosition().y + b2left.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b2left.getPosition().x - b2left.getSize().x / 2 && p1.getRec().getPosition().x <= b2left.getPosition().x + b2left.getSize().x / 2 && p1.getRec().getPosition().y >= b2left.getPosition().y - b2left.getSize().y / 2 && p1.getRec().getPosition().y <= b2left.getPosition().y + b2left.getSize().y / 2))
                             {
                                 if (times == 120)
                                 {
@@ -2983,7 +3021,7 @@ int main()
                                 seconds = ts.asSeconds();
                                 textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b2right.getPosition().x - b2right.getSize().x / 2 && p1.getRec().getPosition().x <= b2right.getPosition().x + b2right.getSize().x / 2 && p1.getRec().getPosition().y >= b2right.getPosition().y - b2right.getSize().y / 2 && p1.getRec().getPosition().y <= b2right.getPosition().y + b2right.getSize().y / 2) || (p2.getRec().getPosition().x >= b2right.getPosition().x - b2right.getSize().x / 2 && p2.getRec().getPosition().x <= b2right.getPosition().x + b2right.getSize().x / 2 && p2.getRec().getPosition().y >= b2right.getPosition().y - b2right.getSize().y / 2 && p2.getRec().getPosition().y <= b2right.getPosition().y + b2right.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b2right.getPosition().x - b2right.getSize().x / 2 && p1.getRec().getPosition().x <= b2right.getPosition().x + b2right.getSize().x / 2 && p1.getRec().getPosition().y >= b2right.getPosition().y - b2right.getSize().y / 2 && p1.getRec().getPosition().y <= b2right.getPosition().y + b2right.getSize().y / 2))
                             {
                                 if (times == 120)
                                 {
@@ -3002,7 +3040,7 @@ int main()
                                 textEndOfTime.setString("Time: " + std::to_string(seconds) + "s");
                             }
                             //Vibrations
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b3left.getPosition().x - b3left.getSize().x / 2 && p1.getRec().getPosition().x <= b3left.getPosition().x + b3left.getSize().x / 2 && p1.getRec().getPosition().y >= b3left.getPosition().y - b3left.getSize().y / 2 && p1.getRec().getPosition().y <= b3left.getPosition().y + b3left.getSize().y / 2) || (p2.getRec().getPosition().x >= b3left.getPosition().x - b3left.getSize().x / 2 && p2.getRec().getPosition().x <= b3left.getPosition().x + b3left.getSize().x / 2 && p2.getRec().getPosition().y >= b3left.getPosition().y - b3left.getSize().y / 2 && p2.getRec().getPosition().y <= b3left.getPosition().y + b3left.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b3left.getPosition().x - b3left.getSize().x / 2 && p1.getRec().getPosition().x <= b3left.getPosition().x + b3left.getSize().x / 2 && p1.getRec().getPosition().y >= b3left.getPosition().y - b3left.getSize().y / 2 && p1.getRec().getPosition().y <= b3left.getPosition().y + b3left.getSize().y / 2))
                             {
                                 if (vibrations == 10)
                                 {
@@ -3018,7 +3056,7 @@ int main()
                                 p1.setVibrations(vibrations);
                                 p2.setVibrations(vibrations);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b3right.getPosition().x - b3right.getSize().x / 2 && p1.getRec().getPosition().x <= b3right.getPosition().x + b3right.getSize().x / 2 && p1.getRec().getPosition().y >= b3right.getPosition().y - b3right.getSize().y / 2 && p1.getRec().getPosition().y <= b3right.getPosition().y + b3right.getSize().y / 2) || (p2.getRec().getPosition().x >= b3right.getPosition().x - b3right.getSize().x / 2 && p2.getRec().getPosition().x <= b3right.getPosition().x + b3right.getSize().x / 2 && p2.getRec().getPosition().y >= b3right.getPosition().y - b3right.getSize().y / 2 && p2.getRec().getPosition().y <= b3right.getPosition().y + b3right.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b3right.getPosition().x - b3right.getSize().x / 2 && p1.getRec().getPosition().x <= b3right.getPosition().x + b3right.getSize().x / 2 && p1.getRec().getPosition().y >= b3right.getPosition().y - b3right.getSize().y / 2 && p1.getRec().getPosition().y <= b3right.getPosition().y + b3right.getSize().y / 2))
                             {
                                 if (vibrations == 9)
                                 {
@@ -3035,7 +3073,7 @@ int main()
                                 p2.setVibrations(vibrations);
                             }
                             //Speed of targets
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b4left.getPosition().x - b4left.getSize().x / 2 && p1.getRec().getPosition().x <= b4left.getPosition().x + b4left.getSize().x / 2 && p1.getRec().getPosition().y >= b4left.getPosition().y - b4left.getSize().y / 2 && p1.getRec().getPosition().y <= b4left.getPosition().y + b4left.getSize().y / 2) || (p2.getRec().getPosition().x >= b4left.getPosition().x - b4left.getSize().x / 2 && p2.getRec().getPosition().x <= b4left.getPosition().x + b4left.getSize().x / 2 && p2.getRec().getPosition().y >= b4left.getPosition().y - b4left.getSize().y / 2 && p2.getRec().getPosition().y <= b4left.getPosition().y + b4left.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b4left.getPosition().x - b4left.getSize().x / 2 && p1.getRec().getPosition().x <= b4left.getPosition().x + b4left.getSize().x / 2 && p1.getRec().getPosition().y >= b4left.getPosition().y - b4left.getSize().y / 2 && p1.getRec().getPosition().y <= b4left.getPosition().y + b4left.getSize().y / 2))
                             {
                                 if (speed == 100)
                                 {
@@ -3051,7 +3089,7 @@ int main()
                                 change = true;
                                 tspeed = sf::milliseconds(speed);
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p1.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p1.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p1.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2) || (p2.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p2.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p2.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p2.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p1.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p1.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p1.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2))
                             {
                                 if (speed == 90)
                                 {
@@ -3068,7 +3106,7 @@ int main()
                                 tspeed = sf::milliseconds(speed);
                             }
                             //Rate of fire
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p1.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p1.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p1.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2) || (p2.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p2.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p2.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p2.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p1.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p1.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p1.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2))
                             {
                                 if (rate_of_fire == 1000)
                                 {
@@ -3087,7 +3125,7 @@ int main()
                                 speedbar = true;
                                 speedbar2 = true;
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b5right.getPosition().x - b5right.getSize().x / 2 && p1.getRec().getPosition().x <= b5right.getPosition().x + b5right.getSize().x / 2 && p1.getRec().getPosition().y >= b5right.getPosition().y - b5right.getSize().y / 2 && p1.getRec().getPosition().y <= b5right.getPosition().y + b5right.getSize().y / 2) || (p2.getRec().getPosition().x >= b5right.getPosition().x - b5right.getSize().x / 2 && p2.getRec().getPosition().x <= b5right.getPosition().x + b5right.getSize().x / 2 && p2.getRec().getPosition().y >= b5right.getPosition().y - b5right.getSize().y / 2 && p2.getRec().getPosition().y <= b5right.getPosition().y + b5right.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b5right.getPosition().x - b5right.getSize().x / 2 && p1.getRec().getPosition().x <= b5right.getPosition().x + b5right.getSize().x / 2 && p1.getRec().getPosition().y >= b5right.getPosition().y - b5right.getSize().y / 2 && p1.getRec().getPosition().y <= b5right.getPosition().y + b5right.getSize().y / 2))
                             {
                                 if (rate_of_fire == 900)
                                 {
@@ -3106,7 +3144,7 @@ int main()
                                 speedbar2 = true;
                             }
                             //Sensitivity
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p1.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p1.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p1.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2) || (p2.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p2.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p2.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p2.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b6left.getPosition().x - b6left.getSize().x / 2 && p1.getRec().getPosition().x <= b6left.getPosition().x + b6left.getSize().x / 2 && p1.getRec().getPosition().y >= b6left.getPosition().y - b6left.getSize().y / 2 && p1.getRec().getPosition().y <= b6left.getPosition().y + b6left.getSize().y / 2))
                             {
                                 if (sensitivity == 10)
                                 {
@@ -3120,7 +3158,7 @@ int main()
                                     s_text.setString(std::to_string(sensitivity));
                                 }
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p1.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p1.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p1.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2) || (p2.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p2.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p2.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p2.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b6right.getPosition().x - b6right.getSize().x / 2 && p1.getRec().getPosition().x <= b6right.getPosition().x + b6right.getSize().x / 2 && p1.getRec().getPosition().y >= b6right.getPosition().y - b6right.getSize().y / 2 && p1.getRec().getPosition().y <= b6right.getPosition().y + b6right.getSize().y / 2))
                             {
                                 if (sensitivity == 9)
                                 {
@@ -3136,16 +3174,16 @@ int main()
                             }
                         }
                         //Help
-                        else if (!menu && !settings && !select_player && instruction)
+                        else if (!menu && !settings && !select_player && instruction && !music)
                         {
                             //Back
-                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)))
+                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
                             {
                                 instruction = false;
                                 menu = true;
                             }
                             //r
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 1 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 1 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 1 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                             {
                                 hcount = 2;
                                 helpc = 1;
@@ -3155,7 +3193,7 @@ int main()
                                 textm11h.setPosition(375, 632);
                                 textm11h.setString("Click the left mouse button to shoot.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 2 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                             {
                                 hcount = 3;
                                 helpc = 0;
@@ -3167,7 +3205,7 @@ int main()
                                 textm11h.setString("Use the Left stick on the controller");
                                 textm12h.setString("to move the pointer in the game.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 3 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 3 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                             {
                                 hcount = 4;
                                 helpc = 1;
@@ -3177,7 +3215,7 @@ int main()
                                 textm11h.setString("Click the Right Trigger on the");
                                 textm12h.setString("controller to shoot.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 4 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 4 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                             {
                                 hcount = 5;
                                 helpc = 1;
@@ -3185,7 +3223,7 @@ int main()
                                 textm11h.setString("Click the Start button on the");
                                 textm12h.setString("controller to return to the main menu.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 5 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 5 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                             {
                                 hcount = 6;
                                 helpc = 0;
@@ -3193,7 +3231,7 @@ int main()
                                 textm11h.setString("Use the WSDA buttons to move");
                                 textm12h.setString("the pointer in the game.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 6 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 6 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                             {
                                 hcount = 7;
                                 helpc = 1;
@@ -3201,7 +3239,7 @@ int main()
                                 textm11h.setPosition(375, 632);
                                 textm11h.setString("Click the Spacebar to shoot.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 7 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p2.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p2.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p2.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 7 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1h.getPosition().x - bright1h.getSize().x / 2 && p1.getRec().getPosition().x <= bright1h.getPosition().x + bright1h.getSize().x / 2 && p1.getRec().getPosition().y >= bright1h.getPosition().y - bright1h.getSize().y / 2 && p1.getRec().getPosition().y <= bright1h.getPosition().y + bright1h.getSize().y / 2))
                             {
                                 hcount = 8;
                                 helpc = 1;
@@ -3211,7 +3249,7 @@ int main()
                                 textm12h.setString("the main menu.");
                             }
                             //l
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 2 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                             {
                                 hcount = 1;
                                 helpc = 0;
@@ -3223,7 +3261,7 @@ int main()
                                 textm11h.setString("The pointer movement in the game");
                                 textm12h.setString("corresponds to the mouse movement.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 3 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 3 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 3 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                             {
                                 hcount = 2;
                                 helpc = 1;
@@ -3233,7 +3271,7 @@ int main()
                                 textm11h.setPosition(375, 632);
                                 textm11h.setString("Click the left mouse button to shoot.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 4 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 4 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 4 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                             {
                                 hcount = 3;
                                 helpc = 0;
@@ -3244,7 +3282,7 @@ int main()
                                 textm11h.setString("Use the Left stick on the controller");
                                 textm12h.setString("to move the pointer in the game.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 5 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 5 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 5 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                             {
                                 hcount = 4;
                                 helpc = 1;
@@ -3252,7 +3290,7 @@ int main()
                                 textm11h.setString("Click the Right Trigger on the");
                                 textm12h.setString("controller to shoot.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 6 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 6 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 6 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                             {
                                 hcount = 5;
                                 helpc = 1;
@@ -3260,7 +3298,7 @@ int main()
                                 textm11h.setString("Click the Start button on the");
                                 textm12h.setString("controller to return to the main menu.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 7 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 7 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 7 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                             {
                                 hcount = 6;
                                 helpc = 0;
@@ -3269,7 +3307,7 @@ int main()
                                 textm11h.setString("Use the WSDA buttons to move");
                                 textm12h.setString("the pointer in the game.");
                             }
-                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((hcount == 8 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2) || (hcount == 8 && p2.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2)))
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (hcount == 8 && p1.getSelect() == 2 && p1.getRec().getPosition().x >= bleft1h.getPosition().x - bleft1h.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1h.getPosition().x + bleft1h.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1h.getPosition().y - bleft1h.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1h.getPosition().y + bleft1h.getSize().y / 2))
                             {
                                 hcount = 7;
                                 helpc = 1;
@@ -3278,11 +3316,21 @@ int main()
                                 textm11h.setString("Click the Spacebar to shoot.");
                             }
                         }
-                        //Player
-                        else if (!menu && !settings && select_player && !instruction)
+                        //Music
+                        else if (!menu && !settings && !select_player && !instruction && music)
                         {
                             //Back
-                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)))
+                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
+                            {
+                                music = false;
+                                menu = true;
+                            }
+                        }
+                        //Player
+                        else if (!menu && !settings && select_player && !instruction && !music)
+                        {
+                            //Back
+                            if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
                             {
                                 select_player = false;
                                 menu = true;
@@ -3290,25 +3338,25 @@ int main()
                             //rl1
                             else if (!p2_exists)
                             {
-                                if ((selectmjk == 1) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
+                                if ((selectmjk == 1) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2))
                                 {
                                     selectmjk = 2;
                                 }
-                                else if ((selectmjk == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
+                                else if ((selectmjk == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2))
                                 {
                                     selectmjk = 1;
                                 }
-                                else if ((selectmjk == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p2.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p2.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p2.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2)))
+                                else if ((selectmjk == 2) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bright1p.getPosition().x - bright1p.getSize().x / 2 && p1.getRec().getPosition().x <= bright1p.getPosition().x + bright1p.getSize().x / 2 && p1.getRec().getPosition().y >= bright1p.getPosition().y - bright1p.getSize().y / 2 && p1.getRec().getPosition().y <= bright1p.getPosition().y + bright1p.getSize().y / 2))
                                 {
                                     selectmjk = 3;
                                 }
-                                else if ((selectmjk == 3) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2) || (p2.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p2.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p2.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p2.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2)))
+                                else if ((selectmjk == 3) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bleft1p.getPosition().x - bleft1p.getSize().x / 2 && p1.getRec().getPosition().x <= bleft1p.getPosition().x + bleft1p.getSize().x / 2 && p1.getRec().getPosition().y >= bleft1p.getPosition().y - bleft1p.getSize().y / 2 && p1.getRec().getPosition().y <= bleft1p.getPosition().y + bleft1p.getSize().y / 2))
                                 {
                                     selectmjk = 2;
                                 }
                             }
                             //Select
-                            if ((selectmjk1 != selectmjk) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && ((p1.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p1.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p1.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p1.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2) || (p2.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p2.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p2.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p2.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2)))
+                            if ((selectmjk1 != selectmjk) && (sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= choosep11.getPosition().x - choosep11.getSize().x / 2 && p1.getRec().getPosition().x <= choosep11.getPosition().x + choosep11.getSize().x / 2 && p1.getRec().getPosition().y >= choosep11.getPosition().y - choosep11.getSize().y / 2 && p1.getRec().getPosition().y <= choosep11.getPosition().y + choosep11.getSize().y / 2))
                             {
                                 if (!p2_exists)
                                 {
@@ -4316,6 +4364,80 @@ int main()
                 break;
             }
             window.draw(textm11h);
+
+            window.draw(textName);
+
+            if (p1.getSelect() != 1)
+            {
+                window.draw(p1.getRec());
+            }
+            if (p2_exists && p2.getSelect() != 1)
+            {
+                window.draw(p2.getRec());
+            }
+
+            window.display();
+        }
+        else if (music)
+        {
+            if (p1.getSelect() == 2)
+            {
+                if (event.type == sf::Event::JoystickMoved)
+                {
+                    sf::Vector2f m = sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));
+                    p1.getRec().move(m.x * 0.01 * dt * multiplier, m.y * 0.01 * dt * multiplier);
+                }
+            }
+            else if (p1.getSelect() == 3)
+            {
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+                {
+                    p1.getRec().move(-100 * 0.01 * dt * multiplier, 0);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+                {
+                    p1.getRec().move(100 * 0.01 * dt * multiplier, 0);
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+                {
+                    p1.getRec().move(0, -100 * 0.01 * dt * multiplier);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+                {
+                    p1.getRec().move(0, 100 * 0.01 * dt * multiplier);
+                }
+            }
+            if (p2_exists)
+            {
+                if (p2.getSelect() == 3)
+                {
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+                    {
+                        p2.getRec().move(-100 * 0.01 * dt * multiplier, 0);
+                    }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+                    {
+                        p2.getRec().move(100 * 0.01 * dt * multiplier, 0);
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+                    {
+                        p2.getRec().move(0, -100 * 0.01 * dt * multiplier);
+                    }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+                    {
+                        p2.getRec().move(0, 100 * 0.01 * dt * multiplier);
+                    }
+                }
+            }
+
+            window.clear(sf::Color::White);
+
+            window.draw(music_text);
+
+            window.draw(rec0o);
+            window.draw(back_text);
+
+
 
             window.draw(textName);
 
