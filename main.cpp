@@ -896,6 +896,18 @@ int main()
     music_text.setFillColor(sf::Color::Black);
     music_text.setPosition(450, 5);
 
+    sf::RectangleShape rec0n;
+    rec0n.setSize({ 400, 200 });
+    rec0n.setPosition(400, 300);
+    rec0n.setOutlineThickness(10);
+    rec0n.setOutlineColor(sf::Color::Black);
+    sf::Text NoteOn;
+    NoteOn.setFont(font);
+    NoteOn.setString("On");
+    NoteOn.setCharacterSize(65);
+    NoteOn.setFillColor(sf::Color::Black);
+    NoteOn.setPosition(557, 358);
+
 
     //Tekstury do animacji celu
     std::vector<sf::Texture> goalTextures;
@@ -4436,6 +4448,9 @@ int main()
 
             window.draw(rec0o);
             window.draw(back_text);
+
+            window.draw(rec0n);
+            window.draw(NoteOn);
 
 
 
