@@ -25,6 +25,7 @@ int helpc = 0;
 int hcount = 1;
 bool menu = true;
 bool music = false;
+bool musicOn = true;
 bool test = false;
 bool test2 = false;
 bool b1 = false;
@@ -925,7 +926,7 @@ int main()
     musicDash.setString("-");
     musicDash.setCharacterSize(38);
     musicDash.setFillColor(sf::Color::Black);
-    musicDash.setPosition(598, 170);
+    musicDash.setPosition(610, 170);
     sf::RectangleShape bn1left;
     bn1left.setSize({ 20, 30 });
     bn1left.setTexture(&buttonl);
@@ -936,6 +937,12 @@ int main()
     bn1right.setTexture(&buttonr);
     bn1right.setOrigin(bn1right.getSize().x / 2, bn1right.getSize().y / 2);
     bn1right.setPosition(1005, 192);
+    sf::Text MusicNT;
+    MusicNT.setFont(font);
+    MusicNT.setString("1");
+    MusicNT.setCharacterSize(38);
+    MusicNT.setFillColor(sf::Color::Black);
+    MusicNT.setPosition(868, 165);
 
     sf::RectangleShape rec2n;
     rec2n.setSize({ 900, 80 });
@@ -953,7 +960,7 @@ int main()
     soundsDash.setString("-");
     soundsDash.setCharacterSize(38);
     soundsDash.setFillColor(sf::Color::Black);
-    soundsDash.setPosition(598, 270);
+    soundsDash.setPosition(610, 270);
     sf::RectangleShape bn2left;
     bn2left.setSize({ 20, 30 });
     bn2left.setTexture(&buttonl);
@@ -964,10 +971,16 @@ int main()
     bn2right.setTexture(&buttonr);
     bn2right.setOrigin(bn2right.getSize().x / 2, bn2right.getSize().y / 2);
     bn2right.setPosition(1005, 292);
+    sf::Text SoundsNT;
+    SoundsNT.setFont(font);
+    SoundsNT.setString("2");
+    SoundsNT.setCharacterSize(38);
+    SoundsNT.setFillColor(sf::Color::Black);
+    SoundsNT.setPosition(868, 265);
 
     sf::RectangleShape rec21n;
     rec21n.setSize({ 900, 80 });
-    rec21n.setPosition(150, 250);
+    rec21n.setPosition(150, 350);
     rec21n.setOutlineThickness(3);
     rec21n.setOutlineColor(sf::Color::Black);
     sf::Text SoundsN1;
@@ -975,27 +988,33 @@ int main()
     SoundsN1.setString("Sounds (Game)");
     SoundsN1.setCharacterSize(38);
     SoundsN1.setFillColor(sf::Color::Black);
-    SoundsN1.setPosition(180, 265);
+    SoundsN1.setPosition(180, 365);
     sf::Text soundsDash1;
     soundsDash1.setFont(font);
     soundsDash1.setString("-");
     soundsDash1.setCharacterSize(38);
     soundsDash1.setFillColor(sf::Color::Black);
-    soundsDash1.setPosition(598, 270);
+    soundsDash1.setPosition(610, 370);
     sf::RectangleShape bn21left;
     bn21left.setSize({ 20, 30 });
     bn21left.setTexture(&buttonl);
     bn21left.setOrigin(bn21left.getSize().x / 2, bn21left.getSize().y / 2);
-    bn21left.setPosition(750, 292);
+    bn21left.setPosition(750, 392);
     sf::RectangleShape bn21right;
     bn21right.setSize({ 20, 30 });
     bn21right.setTexture(&buttonr);
     bn21right.setOrigin(bn21right.getSize().x / 2, bn21right.getSize().y / 2);
-    bn21right.setPosition(1005, 292);
+    bn21right.setPosition(1005, 392);
+    sf::Text SoundsN1T;
+    SoundsN1T.setFont(font);
+    SoundsN1T.setString("3");
+    SoundsN1T.setCharacterSize(38);
+    SoundsN1T.setFillColor(sf::Color::Black);
+    SoundsN1T.setPosition(868, 365);
 
     sf::RectangleShape rec3n;
     rec3n.setSize({ 900, 80 });
-    rec3n.setPosition(150, 350);
+    rec3n.setPosition(150, 450);
     rec3n.setOutlineThickness(3);
     rec3n.setOutlineColor(sf::Color::Black);
     sf::Text sMucicN;
@@ -1003,27 +1022,33 @@ int main()
     sMucicN.setString("Select Music");
     sMucicN.setCharacterSize(38);
     sMucicN.setFillColor(sf::Color::Black);
-    sMucicN.setPosition(180, 365);
+    sMucicN.setPosition(180, 465);
     sf::Text smndash;
     smndash.setFont(font);
     smndash.setString("-");
     smndash.setCharacterSize(38);
     smndash.setFillColor(sf::Color::Black);
-    smndash.setPosition(598, 370);
+    smndash.setPosition(610, 470);
     sf::RectangleShape bn3left;
     bn3left.setSize({ 20, 30 });
     bn3left.setTexture(&buttonl);
     bn3left.setOrigin(bn3left.getSize().x / 2, bn3left.getSize().y / 2);
-    bn3left.setPosition(750, 392);
+    bn3left.setPosition(750, 492);
     sf::RectangleShape bn3right;
     bn3right.setSize({ 20, 30 });
     bn3right.setTexture(&buttonr);
     bn3right.setOrigin(bn3right.getSize().x / 2, bn3right.getSize().y / 2);
-    bn3right.setPosition(1005, 392);
+    bn3right.setPosition(1005, 492);
+    sf::Text sMucicNT;
+    sMucicNT.setFont(font);
+    sMucicNT.setString("4");
+    sMucicNT.setCharacterSize(38);
+    sMucicNT.setFillColor(sf::Color::Black);
+    sMucicNT.setPosition(868, 465);
 
     sf::RectangleShape rec4n;
     rec4n.setSize({ 900, 80 });
-    rec4n.setPosition(150, 450);
+    rec4n.setPosition(150, 550);
     rec4n.setOutlineThickness(3);
     rec4n.setOutlineColor(sf::Color::Black);
     sf::Text sSoundsN;
@@ -1031,27 +1056,33 @@ int main()
     sSoundsN.setString("Select Sounds (Menu)");
     sSoundsN.setCharacterSize(38);
     sSoundsN.setFillColor(sf::Color::Black);
-    sSoundsN.setPosition(180, 465);
+    sSoundsN.setPosition(180, 565);
     sf::Text ssndash;
     ssndash.setFont(font);
     ssndash.setString("-");
     ssndash.setCharacterSize(38);
     ssndash.setFillColor(sf::Color::Black);
-    ssndash.setPosition(598, 470);
+    ssndash.setPosition(610, 570);
     sf::RectangleShape bn4left;
     bn4left.setSize({ 20, 30 });
     bn4left.setTexture(&buttonl);
     bn4left.setOrigin(bn4left.getSize().x / 2, bn4left.getSize().y / 2);
-    bn4left.setPosition(750, 492);
+    bn4left.setPosition(750, 592);
     sf::RectangleShape bn4right;
     bn4right.setSize({ 20, 30 });
     bn4right.setTexture(&buttonr);
     bn4right.setOrigin(bn4right.getSize().x / 2, bn4right.getSize().y / 2);
-    bn4right.setPosition(1005, 492);
+    bn4right.setPosition(1005, 592);
+    sf::Text sSoundsNT;
+    sSoundsNT.setFont(font);
+    sSoundsNT.setString("5");
+    sSoundsNT.setCharacterSize(38);
+    sSoundsNT.setFillColor(sf::Color::Black);
+    sSoundsNT.setPosition(868, 565);
 
     sf::RectangleShape rec41n;
     rec41n.setSize({ 900, 80 });
-    rec41n.setPosition(150, 450);
+    rec41n.setPosition(150, 650);
     rec41n.setOutlineThickness(3);
     rec41n.setOutlineColor(sf::Color::Black);
     sf::Text sSoundsN1;
@@ -1059,23 +1090,29 @@ int main()
     sSoundsN1.setString("Select Sounds (Game)");
     sSoundsN1.setCharacterSize(38);
     sSoundsN1.setFillColor(sf::Color::Black);
-    sSoundsN1.setPosition(180, 465);
+    sSoundsN1.setPosition(180, 665);
     sf::Text ssndash1;
     ssndash1.setFont(font);
     ssndash1.setString("-");
     ssndash1.setCharacterSize(38);
     ssndash1.setFillColor(sf::Color::Black);
-    ssndash1.setPosition(598, 470);
+    ssndash1.setPosition(610, 670);
     sf::RectangleShape bn41left;
     bn41left.setSize({ 20, 30 });
     bn41left.setTexture(&buttonl);
     bn41left.setOrigin(bn41left.getSize().x / 2, bn41left.getSize().y / 2);
-    bn41left.setPosition(750, 492);
+    bn41left.setPosition(750, 692);
     sf::RectangleShape bn41right;
     bn41right.setSize({ 20, 30 });
     bn41right.setTexture(&buttonr);
     bn41right.setOrigin(bn41right.getSize().x / 2, bn41right.getSize().y / 2);
-    bn41right.setPosition(1005, 492);
+    bn41right.setPosition(1005, 692);
+    sf::Text sSoundsN1T;
+    sSoundsN1T.setFont(font);
+    sSoundsN1T.setString("6");
+    sSoundsN1T.setCharacterSize(38);
+    sSoundsN1T.setFillColor(sf::Color::Black);
+    sSoundsN1T.setPosition(868, 665);
 
 
 
@@ -4619,8 +4656,55 @@ int main()
             window.draw(rec0o);
             window.draw(back_text);
 
-            window.draw(rec0n);
-            window.draw(NoteOn);
+            if (musicOn)
+            {
+                window.draw(rec1n);
+                window.draw(MusicN);
+                window.draw(musicDash);
+                window.draw(bn1left);
+                window.draw(bn1right);
+                window.draw(MusicNT);
+
+                window.draw(rec2n);
+                window.draw(SoundsN);
+                window.draw(soundsDash);
+                window.draw(bn2left);
+                window.draw(bn2right);
+                window.draw(SoundsNT);
+
+                window.draw(rec21n);
+                window.draw(SoundsN1);
+                window.draw(soundsDash1);
+                window.draw(bn21left);
+                window.draw(bn21right);
+                window.draw(SoundsN1T);
+
+                window.draw(rec3n);
+                window.draw(sMucicN);
+                window.draw(smndash);
+                window.draw(bn3left);
+                window.draw(bn3right);
+                window.draw(sMucicNT);
+
+                window.draw(rec4n);
+                window.draw(sSoundsN);
+                window.draw(ssndash);
+                window.draw(bn4left);
+                window.draw(bn4right);
+                window.draw(sSoundsNT);
+
+                window.draw(rec41n);
+                window.draw(sSoundsN1);
+                window.draw(ssndash1);
+                window.draw(bn41left);
+                window.draw(bn41right);
+                window.draw(sSoundsN1T);
+            }
+            else
+            {
+                window.draw(rec0n);
+                window.draw(NoteOn);
+            }
 
 
 
