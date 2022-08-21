@@ -954,7 +954,7 @@ int main()
     rec2n.setOutlineColor(sf::Color::Black);
     sf::Text SoundsN;
     SoundsN.setFont(font);
-    SoundsN.setString("Sounds (Menu)");
+    SoundsN.setString("Sounds");
     SoundsN.setCharacterSize(38);
     SoundsN.setFillColor(sf::Color::Black);
     SoundsN.setPosition(180, 265);
@@ -988,7 +988,7 @@ int main()
     rec21n.setOutlineColor(sf::Color::Black);
     sf::Text SoundsN1;
     SoundsN1.setFont(font);
-    SoundsN1.setString("Sounds (Game)");
+    SoundsN1.setString("Hit sound  \t\t(P1)");
     SoundsN1.setCharacterSize(38);
     SoundsN1.setFillColor(sf::Color::Black);
     SoundsN1.setPosition(180, 365);
@@ -1022,7 +1022,7 @@ int main()
     rec3n.setOutlineColor(sf::Color::Black);
     sf::Text sMucicN;
     sMucicN.setFont(font);
-    sMucicN.setString("Select Music");
+    sMucicN.setString("Reload sound\t(P1)");
     sMucicN.setCharacterSize(38);
     sMucicN.setFillColor(sf::Color::Black);
     sMucicN.setPosition(180, 465);
@@ -1056,7 +1056,7 @@ int main()
     rec4n.setOutlineColor(sf::Color::Black);
     sf::Text sSoundsN;
     sSoundsN.setFont(font);
-    sSoundsN.setString("Select Sounds (Menu)");
+    sSoundsN.setString("Hit sound  \t\t(P2)");
     sSoundsN.setCharacterSize(38);
     sSoundsN.setFillColor(sf::Color::Black);
     sSoundsN.setPosition(180, 565);
@@ -1090,7 +1090,7 @@ int main()
     rec41n.setOutlineColor(sf::Color::Black);
     sf::Text sSoundsN1;
     sSoundsN1.setFont(font);
-    sSoundsN1.setString("Select Sounds (Game)");
+    sSoundsN1.setString("Reload sound\t(P2)");
     sSoundsN1.setCharacterSize(38);
     sSoundsN1.setFillColor(sf::Color::Black);
     sSoundsN1.setPosition(180, 665);
@@ -1760,7 +1760,7 @@ int main()
                                 rof_text.setString(std::to_string(rate_of_fire));
                                 rof_text.setPosition(848, 565);
                             }
-                            else if (rate_of_fire != 100)
+                            else if (rate_of_fire != 800)
                             {
                                 rate_of_fire -= 100;
                                 rof_text.setString(std::to_string(rate_of_fire));
@@ -2550,7 +2550,7 @@ int main()
                                 rof_text.setString(std::to_string(rate_of_fire));
                                 rof_text.setPosition(848, 565);
                             }
-                            else if (rate_of_fire != 100)
+                            else if (rate_of_fire != 800)
                             {
                                 rate_of_fire -= 100;
                                 rof_text.setString(std::to_string(rate_of_fire));
@@ -2775,10 +2775,10 @@ int main()
                             musicOn = true;
                             mOn = true;
                             MusicNT.setString("On");
-                            sgOn = true;
+                            /*sgOn = true;*/
                             SoundsNT.setString("On");
                             smOn = true;
-                            SoundsN1T.setString("On");
+                            /*SoundsN1T.setString("On");*/
                         }
                         else if (musicOn && mOn && ((cursor_mouse.getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2)))
                         {
@@ -2790,27 +2790,27 @@ int main()
                             MusicNT.setString("On");
                             mOn = true;
                         }
-                        else if (musicOn && sgOn && ((cursor_mouse.getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2)))
+                        else if (musicOn && smOn && ((cursor_mouse.getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2)))
                         {
                             SoundsNT.setString("Off");
-                            sgOn = false;
-                        }
-                        else if (musicOn && !sgOn && ((cursor_mouse.getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2)))
-                        {
-                            SoundsNT.setString("On");
-                            sgOn = true;
-                        }
-                        else if (musicOn && smOn && ((cursor_mouse.getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn21right.getPosition().x - bn21right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21right.getPosition().x + bn21right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21right.getPosition().y - bn21right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21right.getPosition().y + bn21right.getSize().y / 2)))
-                        {
-                            SoundsN1T.setString("Off");
                             smOn = false;
                         }
-                        else if (musicOn && !smOn && ((cursor_mouse.getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn21right.getPosition().x - bn21right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21right.getPosition().x + bn21right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21right.getPosition().y - bn21right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21right.getPosition().y + bn21right.getSize().y / 2)))
+                        else if (musicOn && !smOn && ((cursor_mouse.getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2)))
                         {
-                            SoundsN1T.setString("On");
+                            SoundsNT.setString("On");
                             smOn = true;
                         }
-                        if (!mOn && !sgOn && !smOn)
+                        /*else if (musicOn && sgOn && ((cursor_mouse.getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn21right.getPosition().x - bn21right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21right.getPosition().x + bn21right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21right.getPosition().y - bn21right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21right.getPosition().y + bn21right.getSize().y / 2)))
+                        {
+                            SoundsN1T.setString("Off");
+                            sgOn = false;
+                        }
+                        else if (musicOn && !sgOn && ((cursor_mouse.getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn21right.getPosition().x - bn21right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21right.getPosition().x + bn21right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21right.getPosition().y - bn21right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21right.getPosition().y + bn21right.getSize().y / 2)))
+                        {
+                            SoundsN1T.setString("On");
+                            sgOn = true;
+                        }*/
+                        if (!mOn /*&& !sgOn*/ && !smOn)
                         {
                             musicOn = false;
                         }
@@ -3384,7 +3384,7 @@ int main()
                                     rof_text.setString(std::to_string(rate_of_fire));
                                     rof_text.setPosition(848, 565);
                                 }
-                                else if (rate_of_fire != 100)
+                                else if (rate_of_fire != 800)
                                 {
                                     rate_of_fire -= 100;
                                     rof_text.setString(std::to_string(rate_of_fire));
@@ -4726,41 +4726,38 @@ int main()
                 window.draw(bn2right);
                 window.draw(SoundsNT);
 
-                window.draw(rec21n);
-                window.draw(SoundsN1);
-                window.draw(soundsDash1);
-                window.draw(bn21left);
-                window.draw(bn21right);
-                window.draw(SoundsN1T);
-
-                if (mOn)
+                if (smOn)
                 {
+                    window.draw(rec21n);
+                    window.draw(SoundsN1);
+                    window.draw(soundsDash1);
+                    window.draw(bn21left);
+                    window.draw(bn21right);
+                    window.draw(SoundsN1T);
+
                     window.draw(rec3n);
                     window.draw(sMucicN);
                     window.draw(smndash);
                     window.draw(bn3left);
                     window.draw(bn3right);
                     window.draw(sMucicNT);
-                }
 
-                if (sgOn)
-                {
-                    window.draw(rec4n);
-                    window.draw(sSoundsN);
-                    window.draw(ssndash);
-                    window.draw(bn4left);
-                    window.draw(bn4right);
-                    window.draw(sSoundsNT);
-                }
+                    if (p2_exists)
+                    {
+                        window.draw(rec4n);
+                        window.draw(sSoundsN);
+                        window.draw(ssndash);
+                        window.draw(bn4left);
+                        window.draw(bn4right);
+                        window.draw(sSoundsNT);
 
-                if (smOn)
-                {
-                    window.draw(rec41n);
-                    window.draw(sSoundsN1);
-                    window.draw(ssndash1);
-                    window.draw(bn41left);
-                    window.draw(bn41right);
-                    window.draw(sSoundsN1T);
+                        window.draw(rec41n);
+                        window.draw(sSoundsN1);
+                        window.draw(ssndash1);
+                        window.draw(bn41left);
+                        window.draw(bn41right);
+                        window.draw(sSoundsN1T);
+                    }
                 }
             }
             else
