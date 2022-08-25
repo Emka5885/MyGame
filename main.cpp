@@ -61,6 +61,7 @@ bool stop = true;
 bool p2_exists = false;
 bool pla2;
 int times = 60;
+int randMusic = 1;
 sf::Time ts = sf::seconds(times);
 sf::Time tspeed = sf::milliseconds(speed);
 sf::Time speedb = sf::milliseconds(rate_of_fire);
@@ -87,6 +88,17 @@ sf::Sound hit2Sound;
 sf::Sound reload1Sound;
 sf::Sound reload2Sound;
 sf::Sound menuSound;
+
+sf::Music music_01;
+sf::Music music_02;
+sf::Music music_03;
+sf::Music music_04;
+sf::Music music_05;
+sf::Music music_06;
+sf::Music music_07;
+sf::Music music_08;
+sf::Music music_09;
+
 
 void score(int& s, int row);
 
@@ -941,23 +953,23 @@ int main()
     {
         std::cout << "Errorsbh01" << std::endl;
     }
-    else if (!hit02SoundBuffer.loadFromFile("Resources/Sounds/hit_02.wav"))
+    if (!hit02SoundBuffer.loadFromFile("Resources/Sounds/hit_02.wav"))
     {
         std::cout << "Errorsbh02" << std::endl;
     }
-    else if (!hit03SoundBuffer.loadFromFile("Resources/Sounds/hit_03.wav"))
+    if (!hit03SoundBuffer.loadFromFile("Resources/Sounds/hit_03.wav"))
     {
         std::cout << "Errorsbh03" << std::endl;
     }
-    else if (!hit04SoundBuffer.loadFromFile("Resources/Sounds/hit_04.wav"))
+    if (!hit04SoundBuffer.loadFromFile("Resources/Sounds/hit_04.wav"))
     {
         std::cout << "Errorsbh04" << std::endl;
     }
-    else if (!hit05SoundBuffer.loadFromFile("Resources/Sounds/hit_05.wav"))
+    if (!hit05SoundBuffer.loadFromFile("Resources/Sounds/hit_05.wav"))
     {
         std::cout << "Errorsbh05" << std::endl;
     }
-    else if (!hit06SoundBuffer.loadFromFile("Resources/Sounds/hit_06.wav"))
+    if (!hit06SoundBuffer.loadFromFile("Resources/Sounds/hit_06.wav"))
     {
         std::cout << "Errorsbh06" << std::endl;
     }
@@ -968,23 +980,23 @@ int main()
     {
         std::cout << "Errorsbr01" << std::endl;
     }
-    else if (!reload02SoundBuffer.loadFromFile("Resources/Sounds/reload_02.wav"))
+    if (!reload02SoundBuffer.loadFromFile("Resources/Sounds/reload_02.wav"))
     {
         std::cout << "Errorsbr02" << std::endl;
     }
-    else if (!reload03SoundBuffer.loadFromFile("Resources/Sounds/reload_03.wav"))
+    if (!reload03SoundBuffer.loadFromFile("Resources/Sounds/reload_03.wav"))
     {
         std::cout << "Errorsbr03" << std::endl;
     }
-    else if (!reload04SoundBuffer.loadFromFile("Resources/Sounds/reload_04.wav"))
+    if (!reload04SoundBuffer.loadFromFile("Resources/Sounds/reload_04.wav"))
     {
         std::cout << "Errorsbr04" << std::endl;
     }
-    else if (!reload05SoundBuffer.loadFromFile("Resources/Sounds/reload_05.wav"))
+    if (!reload05SoundBuffer.loadFromFile("Resources/Sounds/reload_05.wav"))
     {
         std::cout << "Errorsbr05" << std::endl;
     }
-    else if (!reload06SoundBuffer.loadFromFile("Resources/Sounds/reload_06.wav"))
+    if (!reload06SoundBuffer.loadFromFile("Resources/Sounds/reload_06.wav"))
     {
         std::cout << "Errorsbr06" << std::endl;
     }
@@ -996,6 +1008,53 @@ int main()
         std::cout << "Errorsbm01" << std::endl;
     }
     menuSound.setBuffer(menuSoundBuffer);
+
+
+    if (!music_01.openFromFile("Resources/Music/music_01.ogg"))
+    {
+        std::cout << "Errormm01" << std::endl;
+    }
+    if (!music_02.openFromFile("Resources/Music/music_02.ogg"))
+    {
+        std::cout << "Errormm02" << std::endl;
+    }
+    if (!music_03.openFromFile("Resources/Music/music_03.ogg"))
+    {
+        std::cout << "Errormm03" << std::endl;
+    }
+    if (!music_04.openFromFile("Resources/Music/music_04.ogg"))
+    {
+        std::cout << "Errormm04" << std::endl;
+    }
+    if (!music_05.openFromFile("Resources/Music/music_05.ogg"))
+    {
+        std::cout << "Errormm05" << std::endl;
+    }
+    if (!music_06.openFromFile("Resources/Music/music_06.ogg"))
+    {
+        std::cout << "Errormm06" << std::endl;
+    }
+    if (!music_07.openFromFile("Resources/Music/music_07.ogg"))
+    {
+        std::cout << "Errormm07" << std::endl;
+    }
+    if (!music_08.openFromFile("Resources/Music/music_08.ogg"))
+    {
+        std::cout << "Errormm08" << std::endl;
+    }
+    if (!music_09.openFromFile("Resources/Music/music_09.ogg"))
+    {
+        std::cout << "Errormm09" << std::endl;
+    }
+    music_01.setLoop(true);
+    music_02.setLoop(true);
+    music_03.setLoop(true);
+    music_04.setLoop(true);
+    music_05.setLoop(true);
+    music_06.setLoop(true);
+    music_07.setLoop(true);
+    music_08.setLoop(true);
+    music_09.setLoop(true);
 
 
     sf::RectangleShape rec1n;
@@ -1450,7 +1509,7 @@ int main()
                 window.close();
                 break;
             case sf::Event::KeyReleased:
-                if (!menu && !settings && !select_player && !instruction)
+                if (!menu && !settings && !select_player && !instruction && !music)
                 {
                     if (sf::Keyboard::Escape == event.key.code)
                     {
@@ -1459,6 +1518,36 @@ int main()
                         sf::Mouse::setPosition(sf::Vector2i((window.getSize().x / 2), (window.getSize().y / 2)), window);
                         focus = true;
                         endg = false;
+                        switch (randMusic)
+                        {
+                        case 1:
+                            music_01.pause();
+                            break;
+                        case 2:
+                            music_02.pause();
+                            break;
+                        case 3:
+                            music_03.pause();
+                            break;
+                        case 4:
+                            music_04.pause();
+                            break;
+                        case 5:
+                            music_05.pause();
+                            break;
+                        case 6:
+                            music_06.pause();
+                            break;
+                        case 7:
+                            music_07.pause();
+                            break;
+                        case 8:
+                            music_08.pause();
+                            break;
+                        case 9:
+                            music_09.pause();
+                            break;
+                        }
                     }
                 }
                 if (sf::Keyboard::Space == event.key.code && (selectmjk1 == 3 || selectmjk2 == 3))
@@ -1567,6 +1656,41 @@ int main()
                             resetrof = true;
                             end = true;
                             clock4.restart().asSeconds();
+
+                            if (mOn)
+                            {
+                                randMusic = rand() % 9 + 1;
+                                switch (randMusic)
+                                {
+                                case 1:
+                                    music_01.play();
+                                    break;
+                                case 2:
+                                    music_02.play();
+                                    break;
+                                case 3:
+                                    music_03.play();
+                                    break;
+                                case 4:
+                                    music_04.play();
+                                    break;
+                                case 5:
+                                    music_05.play();
+                                    break;
+                                case 6:
+                                    music_06.play();
+                                    break;
+                                case 7:
+                                    music_07.play();
+                                    break;
+                                case 8:
+                                    music_08.play();
+                                    break;
+                                case 9:
+                                    music_09.play();
+                                    break;
+                                }
+                            }
                         }
                         //Continue
                         else if ((game == true) && ((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
@@ -1590,6 +1714,40 @@ int main()
                                 p2.getRec().setPosition(window.getSize().x / 2, window.getSize().y / 2);
                             else if (selectmjk1 == 2)
                                 p1.getRec().setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
+                            if (mOn)
+                            {
+                                switch (randMusic)
+                                {
+                                case 1:
+                                    music_01.play();
+                                    break;
+                                case 2:
+                                    music_02.play();
+                                    break;
+                                case 3:
+                                    music_03.play();
+                                    break;
+                                case 4:
+                                    music_04.play();
+                                    break;
+                                case 5:
+                                    music_05.play();
+                                    break;
+                                case 6:
+                                    music_06.play();
+                                    break;
+                                case 7:
+                                    music_07.play();
+                                    break;
+                                case 8:
+                                    music_08.play();
+                                    break;
+                                case 9:
+                                    music_09.play();
+                                    break;
+                                }
+                            }
                         }
                         //Player
                         else if ((game == false) && ((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 270 && p2.getRec().getPosition().y < 370)))
@@ -2359,6 +2517,41 @@ int main()
                             resetrof = true;
                             end = true;
                             clock4.restart().asSeconds();
+
+                            if (mOn)
+                            {
+                                randMusic = rand() % 9 + 1;
+                                switch (randMusic)
+                                {
+                                case 1:
+                                    music_01.play();
+                                    break;
+                                case 2:
+                                    music_02.play();
+                                    break;
+                                case 3:
+                                    music_03.play();
+                                    break;
+                                case 4:
+                                    music_04.play();
+                                    break;
+                                case 5:
+                                    music_05.play();
+                                    break;
+                                case 6:
+                                    music_06.play();
+                                    break;
+                                case 7:
+                                    music_07.play();
+                                    break;
+                                case 8:
+                                    music_08.play();
+                                    break;
+                                case 9:
+                                    music_09.play();
+                                    break;
+                                }
+                            }
                         }
                         //Continue
                         else if (game == true && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 270 && cursor_mouse.getPosition().y < 370)
@@ -2382,6 +2575,40 @@ int main()
                                 p2.getRec().setPosition(window.getSize().x / 2, window.getSize().y / 2);
                             else if (selectmjk1 == 2)
                                 p1.getRec().setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
+                            if (mOn)
+                            {
+                                switch (randMusic)
+                                {
+                                case 1:
+                                    music_01.play();
+                                    break;
+                                case 2:
+                                    music_02.play();
+                                    break;
+                                case 3:
+                                    music_03.play();
+                                    break;
+                                case 4:
+                                    music_04.play();
+                                    break;
+                                case 5:
+                                    music_05.play();
+                                    break;
+                                case 6:
+                                    music_06.play();
+                                    break;
+                                case 7:
+                                    music_07.play();
+                                    break;
+                                case 8:
+                                    music_08.play();
+                                    break;
+                                case 9:
+                                    music_09.play();
+                                    break;
+                                }
+                            }
                         }
                         //Player
                         else if (game == false && cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 270 && cursor_mouse.getPosition().y < 370)
@@ -2879,6 +3106,37 @@ int main()
                         {
                             MusicNT.setString("Off");
                             mOn = false;
+
+                            switch (randMusic)
+                            {
+                            case 1:
+                                music_01.stop();
+                                break;
+                            case 2:
+                                music_02.stop();
+                                break;
+                            case 3:
+                                music_03.stop();
+                                break;
+                            case 4:
+                                music_04.stop();
+                                break;
+                            case 5:
+                                music_05.stop();
+                                break;
+                            case 6:
+                                music_06.stop();
+                                break;
+                            case 7:
+                                music_07.stop();
+                                break;
+                            case 8:
+                                music_08.stop();
+                                break;
+                            case 9:
+                                music_09.stop();
+                                break;
+                            }
                         }
                         else if (musicOn && !mOn && ((cursor_mouse.getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2)))
                         {
@@ -3323,6 +3581,41 @@ int main()
                                 resetrof = true;
                                 end = true;
                                 clock4.restart().asSeconds();
+
+                                if (mOn)
+                                {
+                                    randMusic = rand() % 9 + 1;
+                                    switch (randMusic)
+                                    {
+                                    case 1:
+                                        music_01.play();
+                                        break;
+                                    case 2:
+                                        music_02.play();
+                                        break;
+                                    case 3:
+                                        music_03.play();
+                                        break;
+                                    case 4:
+                                        music_04.play();
+                                        break;
+                                    case 5:
+                                        music_05.play();
+                                        break;
+                                    case 6:
+                                        music_06.play();
+                                        break;
+                                    case 7:
+                                        music_07.play();
+                                        break;
+                                    case 8:
+                                        music_08.play();
+                                        break;
+                                    case 9:
+                                        music_09.play();
+                                        break;
+                                    }
+                                }
                             }
                             //Continue
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (game == true) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370))
@@ -3346,6 +3639,40 @@ int main()
                                     p2.getRec().setPosition(window.getSize().x / 2, window.getSize().y / 2);
                                 else if (selectmjk1 == 2)
                                     p1.getRec().setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
+                                if (mOn)
+                                {
+                                    switch (randMusic)
+                                    {
+                                    case 1:
+                                        music_01.play();
+                                        break;
+                                    case 2:
+                                        music_02.play();
+                                        break;
+                                    case 3:
+                                        music_03.play();
+                                        break;
+                                    case 4:
+                                        music_04.play();
+                                        break;
+                                    case 5:
+                                        music_05.play();
+                                        break;
+                                    case 6:
+                                        music_06.play();
+                                        break;
+                                    case 7:
+                                        music_07.play();
+                                        break;
+                                    case 8:
+                                        music_08.play();
+                                        break;
+                                    case 9:
+                                        music_09.play();
+                                        break;
+                                    }
+                                }
                             }
                             //Player
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (game == false) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 270 && p1.getRec().getPosition().y < 370))
@@ -5011,6 +5338,40 @@ int main()
                 p2.getRec().setTexture(&tgun02);
                 end_of_time1 = false;
                 game = false;
+
+                if (mOn)
+                {
+                    switch (randMusic)
+                    {
+                    case 1:
+                        music_01.stop();
+                        break;
+                    case 2:
+                        music_02.stop();
+                        break;
+                    case 3:
+                        music_03.stop();
+                        break;
+                    case 4:
+                        music_04.stop();
+                        break;
+                    case 5:
+                        music_05.stop();
+                        break;
+                    case 6:
+                        music_06.stop();
+                        break;
+                    case 7:
+                        music_07.stop();
+                        break;
+                    case 8:
+                        music_08.stop();
+                        break;
+                    case 9:
+                        music_09.stop();
+                        break;
+                    }
+                }
             }
 
             if (p1.getSelect() == 2)
