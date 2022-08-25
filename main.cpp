@@ -80,11 +80,13 @@ sf::SoundBuffer reload03SoundBuffer;
 sf::SoundBuffer reload04SoundBuffer;
 sf::SoundBuffer reload05SoundBuffer;
 sf::SoundBuffer reload06SoundBuffer;
+sf::SoundBuffer menuSoundBuffer;
 
 sf::Sound hit1Sound;
 sf::Sound hit2Sound;
 sf::Sound reload1Sound;
 sf::Sound reload2Sound;
+sf::Sound menuSound;
 
 void score(int& s, int row);
 
@@ -989,6 +991,12 @@ int main()
     reload1Sound.setBuffer(reload01SoundBuffer);
     reload2Sound.setBuffer(reload02SoundBuffer);
 
+    if (!menuSoundBuffer.loadFromFile("Resources/Sounds/sound_menu.wav"))
+    {
+        std::cout << "Errorsbm01" << std::endl;
+    }
+    menuSound.setBuffer(menuSoundBuffer);
+
 
     sf::RectangleShape rec1n;
     rec1n.setSize({ 900, 80 });
@@ -1497,7 +1505,8 @@ int main()
                                             clock3.restart().asMilliseconds();
                                             textAmmunition.setString("Ammunition: 1p." + std::to_string(p1.getAmmunition()) + "/" + p1samu + "  2p." + std::to_string(p2.getAmmunition()) + "/" + p2samu);
                                         }
-                                        hit1Sound.play();
+                                        if (smOn)
+                                            hit1Sound.play();
                                     }
                                 }
                                 if ((timee2.asMilliseconds() >= rate_of_fire) && (p2.getAmmunition() > 0) && (p2_exists))
@@ -1512,7 +1521,8 @@ int main()
                                             clock32.restart().asMilliseconds();
                                             textAmmunition.setString("Ammunition: 1p." + std::to_string(p1.getAmmunition()) + "/" + p1samu + "  2p." + std::to_string(p2.getAmmunition()) + "/" + p2samu);
                                         }
-                                        hit2Sound.play();
+                                        if (smOn)
+                                            hit2Sound.play();
                                     }
                                 }
                             }
@@ -1522,6 +1532,8 @@ int main()
                     else if (menu && !settings && !select_player && !instruction && !music)
                     {
                         //New Game
+                        if (smOn)
+                            menuSound.play();
                         if (((p1.getSelect() == 3 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 150 && p1.getRec().getPosition().y < 250) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x > 400 && p2.getRec().getPosition().x < 800 && p2.getRec().getPosition().y > 150 && p2.getRec().getPosition().y < 250)))
                         {
                             menu = false;
@@ -2283,7 +2295,8 @@ int main()
                                             clock3.restart().asMilliseconds();
                                             textAmmunition.setString("Ammunition: 1p." + std::to_string(p1.getAmmunition()) + "/" + p1samu + "  2p." + std::to_string(p2.getAmmunition()) + "/" + p2samu);
                                         }
-                                        hit1Sound.play();
+                                        if (smOn)
+                                            hit1Sound.play();
                                     }
                                 }
                                 if ((sf::Mouse::Button::Left == event.mouseButton.button) && (timee2.asMilliseconds() >= rate_of_fire) && (p2.getAmmunition() > 0) && (p2_exists))
@@ -2298,7 +2311,8 @@ int main()
                                             clock32.restart().asMilliseconds();
                                             textAmmunition.setString("Ammunition: 1p." + std::to_string(p1.getAmmunition()) + "/" + p1samu + "  2p." + std::to_string(p2.getAmmunition()) + "/" + p2samu);
                                         }
-                                        hit2Sound.play();
+                                        if (smOn)
+                                            hit2Sound.play();
                                     }
                                 }
                             }
@@ -2310,6 +2324,8 @@ int main()
                         cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                         cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
                         //New Game
+                        if (smOn)
+                            menuSound.play();
                         if (cursor_mouse.getPosition().x > 400 && cursor_mouse.getPosition().x < 800 && cursor_mouse.getPosition().y > 150 && cursor_mouse.getPosition().y < 250)
                         {
                             menu = false;
@@ -3245,7 +3261,8 @@ int main()
                                                 clock3.restart().asMilliseconds();
                                                 textAmmunition.setString("Ammunition: 1p." + std::to_string(p1.getAmmunition()) + "/" + p1samu + "  2p." + std::to_string(p2.getAmmunition()) + "/" + p2samu);
                                             }
-                                            hit1Sound.play();
+                                            if (smOn)
+                                                hit1Sound.play();
                                         }
                                     }
                                     if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (timee2.asMilliseconds() >= rate_of_fire) && (p2.getAmmunition() > 0) && (p2_exists))
@@ -3260,7 +3277,8 @@ int main()
                                                 clock32.restart().asMilliseconds();
                                                 textAmmunition.setString("Ammunition: 1p." + std::to_string(p1.getAmmunition()) + "/" + p1samu + "  2p." + std::to_string(p2.getAmmunition()) + "/" + p2samu);
                                             }
-                                            hit2Sound.play();
+                                            if (smOn)
+                                                hit2Sound.play();
                                         }
                                     }
                                 }
@@ -3270,6 +3288,8 @@ int main()
                         else if (menu && !settings && !select_player && !instruction && !music)
                         {
                             //New Game
+                            if (smOn)
+                                menuSound.play();
                             if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x > 400 && p1.getRec().getPosition().x < 800 && p1.getRec().getPosition().y > 150 && p1.getRec().getPosition().y < 250))
                             {
                                 menu = false;
