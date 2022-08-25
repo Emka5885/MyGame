@@ -3153,6 +3153,7 @@ int main()
                             SoundsNT.setString("On");
                             smOn = true;
                         }
+                        //Hit 1
                         else if (hit1_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2))
                         {
                             if (hit1_counter == 6)
@@ -3213,14 +3214,68 @@ int main()
                             hit1_counter++;
                             /*hit1Sound.play();*/
                         }
-                        else if (hit1_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn3left.getPosition().x - bn3left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn3left.getPosition().x + bn3left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn3left.getPosition().y - bn3left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn3left.getPosition().y + bn3left.getSize().y / 2))
+                        //Reload 1
+                        else if (reload1_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn3left.getPosition().x - bn3left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn3left.getPosition().x + bn3left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn3left.getPosition().y - bn3left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn3left.getPosition().y + bn3left.getSize().y / 2))
                         {
-
+                            if (reload1_counter == 6)
+                            {
+                                reload1Sound.setBuffer(reload05SoundBuffer);
+                                sMucicNT.setString("5");
+                            }
+                            else if (reload1_counter == 5)
+                            {
+                                reload1Sound.setBuffer(reload04SoundBuffer);
+                                sMucicNT.setString("4");
+                            }
+                            else if (reload1_counter == 4)
+                            {
+                                reload1Sound.setBuffer(reload03SoundBuffer);
+                                sMucicNT.setString("3");
+                            }
+                            else if (reload1_counter == 3)
+                            {
+                                reload1Sound.setBuffer(reload02SoundBuffer);
+                                sMucicNT.setString("2");
+                            }
+                            else if (reload1_counter == 2)
+                            {
+                                reload1Sound.setBuffer(reload01SoundBuffer);
+                                sMucicNT.setString("1");
+                            }
+                            reload1_counter--;
+                            /*reload1Sound.play();*/
                         }
                         else if (hit1_counter != 6 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn3right.getPosition().x - bn3right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn3right.getPosition().x + bn3right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn3right.getPosition().y - bn3right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn3right.getPosition().y + bn3right.getSize().y / 2))
                         {
-
+                            if (reload1_counter == 1)
+                            {
+                                reload1Sound.setBuffer(reload02SoundBuffer);
+                                sMucicNT.setString("2");
+                            }
+                            else if (reload1_counter == 2)
+                            {
+                                reload1Sound.setBuffer(reload03SoundBuffer);
+                                sMucicNT.setString("3");
+                            }
+                            else if (reload1_counter == 3)
+                            {
+                                reload1Sound.setBuffer(reload04SoundBuffer);
+                                sMucicNT.setString("4");
+                            }
+                            else if (reload1_counter == 4)
+                            {
+                                reload1Sound.setBuffer(reload05SoundBuffer);
+                                sMucicNT.setString("5");
+                            }
+                            else if (reload1_counter == 5)
+                            {
+                                reload1Sound.setBuffer(reload06SoundBuffer);
+                                sMucicNT.setString("6");
+                            }
+                            reload1_counter++;
+                            /*reload1Sound.play();*/
                         }
+                        //Hit 2
                         else if (hit2_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn4left.getPosition().x - bn4left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn4left.getPosition().x + bn4left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn4left.getPosition().y - bn4left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn4left.getPosition().y + bn4left.getSize().y / 2))
                         {
                             if (hit2_counter == 6)
