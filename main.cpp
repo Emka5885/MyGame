@@ -59,9 +59,13 @@ int selectmjk1 = 1;
 int selectmjk2 = 3;
 bool stop = true;
 bool p2_exists = false;
+bool music_stop = false;
 bool pla2;
 int times = 60;
 int randMusic = 1;
+int volumeConst = 50;
+int volume = volumeConst;
+int mClockS = 1;
 sf::Time ts = sf::seconds(times);
 sf::Time tspeed = sf::milliseconds(speed);
 sf::Time speedb = sf::milliseconds(rate_of_fire);
@@ -98,6 +102,7 @@ sf::Music music_06;
 sf::Music music_07;
 sf::Music music_08;
 sf::Music music_09;
+sf::Clock musicClock;
 
 
 void score(int& s, int row);
@@ -1659,6 +1664,7 @@ int main()
 
                             if (mOn)
                             {
+                                music_stop = true;
                                 randMusic = rand() % 9 + 1;
                                 switch (randMusic)
                                 {
@@ -2520,34 +2526,45 @@ int main()
 
                             if (mOn)
                             {
+                                music_stop = true;
+                                volume = volumeConst;
                                 randMusic = rand() % 9 + 1;
                                 switch (randMusic)
                                 {
                                 case 1:
+                                    music_01.setVolume(volume);
                                     music_01.play();
                                     break;
                                 case 2:
+                                    music_02.setVolume(volume);
                                     music_02.play();
                                     break;
                                 case 3:
+                                    music_03.setVolume(volume);
                                     music_03.play();
                                     break;
                                 case 4:
+                                    music_04.setVolume(volume);
                                     music_04.play();
                                     break;
                                 case 5:
+                                    music_05.setVolume(volume);
                                     music_05.play();
                                     break;
                                 case 6:
+                                    music_06.setVolume(volume);
                                     music_06.play();
                                     break;
                                 case 7:
+                                    music_07.setVolume(volume);
                                     music_07.play();
                                     break;
                                 case 8:
+                                    music_08.setVolume(volume);
                                     music_08.play();
                                     break;
                                 case 9:
+                                    music_09.setVolume(volume);
                                     music_09.play();
                                     break;
                                 }
@@ -3137,6 +3154,7 @@ int main()
                                 music_09.stop();
                                 break;
                             }
+                            music_stop = false;
                         }
                         else if (musicOn && !mOn && ((cursor_mouse.getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2)))
                         {
@@ -3335,6 +3353,67 @@ int main()
                             }
                             hit2_counter++;
                             /*hit2Sound.play();*/
+                        }
+                        //Reload 2
+                        else if (reload2_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn41left.getPosition().x - bn41left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn41left.getPosition().x + bn41left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn41left.getPosition().y - bn41left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn41left.getPosition().y + bn41left.getSize().y / 2))
+                        {
+                            if (reload2_counter == 6)
+                            {
+                                reload2Sound.setBuffer(reload05SoundBuffer);
+                                sSoundsN1T.setString("5");
+                            }
+                            else if (reload2_counter == 5)
+                            {
+                                reload2Sound.setBuffer(reload04SoundBuffer);
+                                sSoundsN1T.setString("4");
+                            }
+                            else if (reload2_counter == 4)
+                            {
+                                reload2Sound.setBuffer(reload03SoundBuffer);
+                                sSoundsN1T.setString("3");
+                            }
+                            else if (reload2_counter == 3)
+                            {
+                                reload2Sound.setBuffer(reload02SoundBuffer);
+                                sSoundsN1T.setString("2");
+                            }
+                            else if (reload2_counter == 2)
+                            {
+                                reload2Sound.setBuffer(reload01SoundBuffer);
+                                sSoundsN1T.setString("1");
+                            }
+                            reload2_counter--;
+                            /*reload2Sound.play();*/
+                        }
+                        else if (hit1_counter != 6 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn41right.getPosition().x - bn41right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn41right.getPosition().x + bn41right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn41right.getPosition().y - bn41right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn41right.getPosition().y + bn41right.getSize().y / 2))
+                        {
+                            if (reload2_counter == 1)
+                            {
+                                reload2Sound.setBuffer(reload02SoundBuffer);
+                                sSoundsN1T.setString("2");
+                            }
+                            else if (reload2_counter == 2)
+                            {
+                                reload2Sound.setBuffer(reload03SoundBuffer);
+                                sSoundsN1T.setString("3");
+                            }
+                            else if (reload2_counter == 3)
+                            {
+                                reload2Sound.setBuffer(reload04SoundBuffer);
+                                sSoundsN1T.setString("4");
+                            }
+                            else if (reload2_counter == 4)
+                            {
+                                reload2Sound.setBuffer(reload05SoundBuffer);
+                                sSoundsN1T.setString("5");
+                            }
+                            else if (reload2_counter == 5)
+                            {
+                                reload2Sound.setBuffer(reload06SoundBuffer);
+                                sSoundsN1T.setString("6");
+                            }
+                            reload2_counter++;
+                            /*reload2Sound.play();*/
                         }
                         if (!mOn && !smOn)
                         {
@@ -3639,6 +3718,7 @@ int main()
 
                                 if (mOn)
                                 {
+                                    music_stop = true;
                                     randMusic = rand() % 9 + 1;
                                     switch (randMusic)
                                     {
@@ -5393,39 +5473,129 @@ int main()
                 p2.getRec().setTexture(&tgun02);
                 end_of_time1 = false;
                 game = false;
-
+                cursorEndGame = false;
                 if (mOn)
+                    musicClock.restart();
+            }
+
+            if (mOn)
+            {
+                sf::Time mClockT = musicClock.getElapsedTime();
+                int mClock = mClockT.asSeconds();
+                if (music_stop && (mClock >= mClockS))
                 {
                     switch (randMusic)
                     {
                     case 1:
-                        music_01.stop();
+                        if (volume <= 0)
+                        {
+                            music_01.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_01.setVolume(volume);
+                        }
                         break;
                     case 2:
-                        music_02.stop();
+                        if (volume <= 0)
+                        {
+                            music_02.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_02.setVolume(volume);
+                        }
                         break;
                     case 3:
-                        music_03.stop();
+                        if (volume <= 0)
+                        {
+                            music_03.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_03.setVolume(volume);
+                        }
                         break;
                     case 4:
-                        music_04.stop();
+                        if (volume <= 0)
+                        {
+                            music_04.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_04.setVolume(volume);
+                        }
                         break;
                     case 5:
-                        music_05.stop();
+                        if (volume <= 0)
+                        {
+                            music_05.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_05.setVolume(volume);
+                        }
                         break;
                     case 6:
-                        music_06.stop();
+                        if (volume <= 0)
+                        {
+                            music_06.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_06.setVolume(volume);
+                        }
                         break;
                     case 7:
-                        music_07.stop();
+                        if (volume <= 0)
+                        {
+                            music_07.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_07.setVolume(volume);
+                        }
                         break;
                     case 8:
-                        music_08.stop();
+                        if (volume <= 0)
+                        {
+                            music_08.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_08.setVolume(volume);
+                        }
                         break;
                     case 9:
-                        music_09.stop();
+                        if (volume <= 0)
+                        {
+                            music_09.stop();
+                            music_stop = false;
+                        }
+                        else
+                        {
+                            volume--;
+                            music_09.setVolume(volume);
+                        }
                         break;
                     }
+                    musicClock.restart();
                 }
             }
 
