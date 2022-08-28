@@ -61,6 +61,8 @@ bool stop = true;
 bool p2_exists = false;
 bool music_stop = false;
 bool pla2;
+bool reloadSoundCounter = true;
+bool reloadSoundCounter2 = true;
 int times = 60;
 int randMusic = 1;
 int volumeConst = 50;
@@ -6369,35 +6371,48 @@ int main()
                         p1.getSB().setPosition(20, 100);
                         p2.getSB().setPosition(1170, 100);
                     }
+                    resetrof = false;
 
                 }
                 if (speedbar && clock3.getElapsedTime() < speedb)
                 {
+                    if (reloadSoundCounter)
+                    {
+                        reload1Sound.play();
+                        reloadSoundCounter = false;
+                    }
                     tym = clock3.getElapsedTime().asMilliseconds() - tym;
                     int change = tym / rate_of_fire * COUNT;
                     p1.getSB().setSize({ 10.0f, 600.0f - change });
                     p1.getSB().setPosition(20, 100 + change);
                     window.draw(p1.getSB());
-                    if (clock3.getElapsedTime() >= speedb)
-                    {
-                        speedbar = false;
-                        p1.getSB().setSize({ 10.0f, 600.0f });
-                        p1.getSB().setPosition(20, 100);
-                    }
+                }
+                else if (speedbar && clock3.getElapsedTime() >= speedb)
+                {
+                    speedbar = false;
+                    reloadSoundCounter = true;
+                    p1.getSB().setSize({ 10.0f, 600.0f });
+                    p1.getSB().setPosition(20, 100);
                 }
                 if (speedbar2 && clock32.getElapsedTime() < speedb2)
                 {
+                    if (reloadSoundCounter2)
+                    {
+                        reload2Sound.play();
+                        reloadSoundCounter2 = false;
+                    }
                     tym0 = clock32.getElapsedTime().asMilliseconds() - tym0;
                     int change = tym0 / rate_of_fire * COUNT;
                     p2.getSB().setSize({ 10.0f, 600.0f - change });
                     p2.getSB().setPosition(1170, 100 + change);
                     window.draw(p2.getSB());
-                    if (clock32.getElapsedTime() >= speedb2)
-                    {
-                        speedbar2 = false;
-                        p2.getSB().setSize({ 10.0f, 600.0f });
-                        p2.getSB().setPosition(1170, 100);
-                    }
+                }
+                else if (speedbar2 && clock32.getElapsedTime() >= speedb2)
+                {
+                    speedbar2 = false;
+                    reloadSoundCounter2 = true;
+                    p2.getSB().setSize({ 10.0f, 600.0f });
+                    p2.getSB().setPosition(1170, 100);
                 }
 
                 window.draw(textScore);
