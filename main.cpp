@@ -3295,7 +3295,6 @@ int main()
                         //Note
                         else if (cursor_mouse.getPosition().x > 900 && cursor_mouse.getPosition().x < 950 && cursor_mouse.getPosition().y > 680 && cursor_mouse.getPosition().y < 730)
                         {
-                            std::cout << "music" << std::endl;
                             menu = false;
                             music = true;
                         }
