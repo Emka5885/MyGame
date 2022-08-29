@@ -63,10 +63,13 @@ bool music_stop = false;
 bool pla2;
 bool reloadSoundCounter = true;
 bool reloadSoundCounter2 = true;
+bool volumeM = true;
 int times = 60;
 int randMusic = 1;
-int volumeConst = 50;
+int volumeConst = 35;
 int volume = volumeConst;
+int volumeConst1 = 100;
+int volume1 = volumeConst1;
 int mClockS = 1;
 sf::Time ts = sf::seconds(times);
 sf::Time tspeed = sf::milliseconds(speed);
@@ -974,6 +977,12 @@ int main()
         std::cout << "Errortv2" << std::endl;
         system("PAUSE");
     }
+    sf::Texture tvolume3;
+    if (!tvolume3.loadFromFile("Resources/Music/volume_stop.png"))
+    {
+        std::cout << "Errortv3" << std::endl;
+        system("PAUSE");
+    }
 
     if (!hit01SoundBuffer.loadFromFile("Resources/Sounds/hit_01.wav"))
     {
@@ -1073,14 +1082,23 @@ int main()
         std::cout << "Errormm09" << std::endl;
     }
     music_01.setLoop(true);
+    music_01.setVolume(volumeConst);
     music_02.setLoop(true);
+    music_02.setVolume(volumeConst);
     music_03.setLoop(true);
+    music_03.setVolume(volumeConst);
     music_04.setLoop(true);
+    music_04.setVolume(volumeConst);
     music_05.setLoop(true);
+    music_05.setVolume(volumeConst);
     music_06.setLoop(true);
+    music_06.setVolume(volumeConst);
     music_07.setLoop(true);
+    music_07.setVolume(volumeConst);
     music_08.setLoop(true);
+    music_08.setVolume(volumeConst);
     music_09.setLoop(true);
+    music_09.setVolume(volumeConst);
 
 
     sf::RectangleShape rec1n;
@@ -1126,6 +1144,34 @@ int main()
     rec121n.setSize({ 40, 40 });
     rec121n.setPosition(495, 170);
     rec121n.setTexture(&tvolume0);
+    sf::RectangleShape rec122n;
+    rec122n.setSize({ 40, 40 });
+    rec122n.setPosition(495, 170);
+    rec122n.setTexture(&tvolume3);
+    sf::Text volumeText;
+    volumeText.setFont(font);
+    volumeText.setString(std::to_string(volumeConst) + "%");
+    volumeText.setCharacterSize(30);
+    volumeText.setFillColor(sf::Color::Black);
+    volumeText.setPosition(385, 172);
+    sf::RectangleShape rec13n;
+    rec13n.setSize({ 50, 50 });
+    rec13n.setPosition(60, 165);
+    rec13n.setOutlineThickness(2);
+    rec13n.setOutlineColor(sf::Color::Black);
+    sf::RectangleShape rec131n;
+    rec131n.setSize({ 40, 40 });
+    rec131n.setPosition(65, 170);
+    rec131n.setTexture(&tvolume1);
+    sf::RectangleShape rec14n;
+    rec14n.setSize({ 50, 50 });
+    rec14n.setPosition(1090, 165);
+    rec14n.setOutlineThickness(2);
+    rec14n.setOutlineColor(sf::Color::Black);
+    sf::RectangleShape rec141n;
+    rec141n.setSize({ 40, 40 });
+    rec141n.setPosition(1095, 170);
+    rec141n.setTexture(&tvolume2);
 
     sf::RectangleShape rec2n;
     rec2n.setSize({ 900, 80 });
@@ -1170,6 +1216,30 @@ int main()
     rec221n.setSize({ 40, 40 });
     rec221n.setPosition(495, 270);
     rec221n.setTexture(&tvolume0);
+    sf::Text volumeText1;
+    volumeText1.setFont(font);
+    volumeText1.setString(std::to_string(volumeConst1) + "%");
+    volumeText1.setCharacterSize(30);
+    volumeText1.setFillColor(sf::Color::Black);
+    volumeText1.setPosition(385, 272);
+    sf::RectangleShape rec23n;
+    rec23n.setSize({ 50, 50 });
+    rec23n.setPosition(60, 265);
+    rec23n.setOutlineThickness(2);
+    rec23n.setOutlineColor(sf::Color::Black);
+    sf::RectangleShape rec231n;
+    rec231n.setSize({ 40, 40 });
+    rec231n.setPosition(65, 270);
+    rec231n.setTexture(&tvolume1);
+    sf::RectangleShape rec24n;
+    rec24n.setSize({ 50, 50 });
+    rec24n.setPosition(1090, 265);
+    rec24n.setOutlineThickness(2);
+    rec24n.setOutlineColor(sf::Color::Black);
+    sf::RectangleShape rec241n;
+    rec241n.setSize({ 40, 40 });
+    rec241n.setPosition(1095, 270);
+    rec241n.setTexture(&tvolume2);
 
     sf::RectangleShape rec21n;
     rec21n.setSize({ 900, 80 });
@@ -1852,6 +1922,7 @@ int main()
                         //Default
                         else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p1.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p1.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p1.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p2.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p2.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p2.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2)))
                         {
+                            menuSound.play();
                             ammun = 30;
                             ammun_text.setString(std::to_string(ammun));
                             ammun_text.setPosition(858, 165);
@@ -2268,6 +2339,409 @@ int main()
                         {
                             music = false;
                             menu = true;
+                        }
+                        else if ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p1.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p1.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p1.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p2.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p2.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p2.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2))
+                        {
+                            hit1_counter = 1;
+                            hit2_counter = 2;
+                            reload1_counter = 1;
+                            reload2_counter = 2;
+                            hit1Sound.setBuffer(hit01SoundBuffer);
+                            SoundsN1T.setString("1");
+                            reload1Sound.setBuffer(reload01SoundBuffer);
+                            sMucicNT.setString("1");
+                            hit2Sound.setBuffer(hit01SoundBuffer);
+                            sSoundsNT.setString("2");
+                            reload2Sound.setBuffer(reload01SoundBuffer);
+                            sSoundsN1T.setString("2");
+                            mOn = true;
+                            MusicNT.setString("On");
+                            smOn = true;
+                            SoundsNT.setString("On");
+                            menuSound.play();
+                            volumeConst = 35;
+                            volumeConst1 = 100;
+                            volumeText.setString(std::to_string(volumeConst) + "%");
+                            music_01.setVolume(volumeConst);
+                            music_02.setVolume(volumeConst);
+                            music_03.setVolume(volumeConst);
+                            music_04.setVolume(volumeConst);
+                            music_05.setVolume(volumeConst);
+                            music_06.setVolume(volumeConst);
+                            music_07.setVolume(volumeConst);
+                            music_08.setVolume(volumeConst);
+                            music_09.setVolume(volumeConst);
+                            volumeText1.setString(std::to_string(volumeConst1) + "%");
+                            hit1Sound.setVolume(volumeConst1);
+                            hit2Sound.setVolume(volumeConst1);
+                            reload1Sound.setVolume(volumeConst1);
+                            reload2Sound.setVolume(volumeConst1);
+                            menuSound.setVolume(volumeConst1);
+                        }
+                        else if (!musicOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec0n.getPosition().x && p1.getRec().getPosition().x <= rec0n.getPosition().x + rec0n.getSize().x && p1.getRec().getPosition().y >= rec0n.getPosition().y && p1.getRec().getPosition().y <= rec0n.getPosition().y + rec0n.getSize().y)) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec0n.getPosition().x - rec0n.getSize().x / 2 && p2.getRec().getPosition().x <= rec0n.getPosition().x + rec0n.getSize().x / 2 && p2.getRec().getPosition().y >= rec0n.getPosition().y - rec0n.getSize().y / 2 && p2.getRec().getPosition().y <= rec0n.getPosition().y + rec0n.getSize().y / 2))
+                        {
+                            musicOn = true;
+                            mOn = true;
+                            MusicNT.setString("On");
+                            smOn = true;
+                            SoundsNT.setString("On");
+                        }
+                        else if (musicOn && mOn && ((p1.getSelect() == 3 && (p1.getRec().getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && p1.getRec().getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && p1.getRec().getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && p1.getRec().getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (p1.getRec().getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && p1.getRec().getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && p1.getRec().getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && p1.getRec().getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2))) || (p2_exists && p2.getSelect() == 3 && (p2.getRec().getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && p2.getRec().getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && p2.getRec().getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && p2.getRec().getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (p2.getRec().getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && p2.getRec().getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && p2.getRec().getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && p2.getRec().getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2)))
+                        {
+                            MusicNT.setString("Off");
+                            mOn = false;
+
+                            switch (randMusic)
+                            {
+                            case 1:
+                                music_01.stop();
+                                break;
+                            case 2:
+                                music_02.stop();
+                                break;
+                            case 3:
+                                music_03.stop();
+                                break;
+                            case 4:
+                                music_04.stop();
+                                break;
+                            case 5:
+                                music_05.stop();
+                                break;
+                            case 6:
+                                music_06.stop();
+                                break;
+                            case 7:
+                                music_07.stop();
+                                break;
+                            case 8:
+                                music_08.stop();
+                                break;
+                            case 9:
+                                music_09.stop();
+                                break;
+                            }
+                            music_stop = false;
+                        }
+                        else if (musicOn && !mOn && ((p1.getSelect() == 3 && (p1.getRec().getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && p1.getRec().getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && p1.getRec().getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && p1.getRec().getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (p1.getRec().getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && p1.getRec().getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && p1.getRec().getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && p1.getRec().getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2))) || (p2_exists && p2.getSelect() == 3 && (p2.getRec().getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && p2.getRec().getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && p2.getRec().getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && p2.getRec().getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (p2.getRec().getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && p2.getRec().getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && p2.getRec().getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && p2.getRec().getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2)))
+                        {
+                            MusicNT.setString("On");
+                            mOn = true;
+                        }
+                        else if (musicOn && mOn && volumeM && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec12n.getPosition().x && p1.getRec().getPosition().x <= rec12n.getPosition().x + rec12n.getSize().x && p1.getRec().getPosition().y >= rec12n.getPosition().y && p1.getRec().getPosition().y <= rec12n.getPosition().y + rec12n.getSize().y) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec12n.getPosition().x && p2.getRec().getPosition().x <= rec12n.getPosition().x + rec12n.getSize().x && p2.getRec().getPosition().y >= rec12n.getPosition().y && p2.getRec().getPosition().y <= rec12n.getPosition().y + rec12n.getSize().y)))
+                        {
+                            volumeM = false;
+                            music_01.play();
+                        }
+                        else if (musicOn && mOn && !volumeM && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec12n.getPosition().x && p1.getRec().getPosition().x <= rec12n.getPosition().x + rec12n.getSize().x && p1.getRec().getPosition().y >= rec12n.getPosition().y && p1.getRec().getPosition().y <= rec12n.getPosition().y + rec12n.getSize().y) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec12n.getPosition().x && p2.getRec().getPosition().x <= rec12n.getPosition().x + rec12n.getSize().x && p2.getRec().getPosition().y >= rec12n.getPosition().y && p2.getRec().getPosition().y <= rec12n.getPosition().y + rec12n.getSize().y)))
+                        {
+                            volumeM = true;
+                            music_01.stop();
+                        }
+                        else if (musicOn && mOn && (volumeConst != 1) && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec13n.getPosition().x && p1.getRec().getPosition().x <= rec13n.getPosition().x + rec13n.getSize().x && p1.getRec().getPosition().y >= rec13n.getPosition().y && p1.getRec().getPosition().y <= rec13n.getPosition().y + rec13n.getSize().y) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec13n.getPosition().x && p2.getRec().getPosition().x <= rec13n.getPosition().x + rec13n.getSize().x && p2.getRec().getPosition().y >= rec13n.getPosition().y && p2.getRec().getPosition().y <= rec13n.getPosition().y + rec13n.getSize().y)))
+                        {
+                            music_01.stop();
+                            volumeConst--;
+                            volumeText.setString(std::to_string(volumeConst) + "%");
+                            music_01.setVolume(volumeConst);
+                            music_02.setVolume(volumeConst);
+                            music_03.setVolume(volumeConst);
+                            music_04.setVolume(volumeConst);
+                            music_05.setVolume(volumeConst);
+                            music_06.setVolume(volumeConst);
+                            music_07.setVolume(volumeConst);
+                            music_08.setVolume(volumeConst);
+                            music_09.setVolume(volumeConst);
+
+                        }
+                        else if (musicOn && mOn && (volumeConst != 100) && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec14n.getPosition().x && p1.getRec().getPosition().x <= rec14n.getPosition().x + rec14n.getSize().x && p1.getRec().getPosition().y >= rec14n.getPosition().y && p1.getRec().getPosition().y <= rec14n.getPosition().y + rec14n.getSize().y) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec14n.getPosition().x && p2.getRec().getPosition().x <= rec14n.getPosition().x + rec14n.getSize().x && p2.getRec().getPosition().y >= rec14n.getPosition().y && p2.getRec().getPosition().y <= rec14n.getPosition().y + rec14n.getSize().y)))
+                        {
+                            music_01.stop();
+                            volumeConst++;
+                            volumeText.setString(std::to_string(volumeConst) + "%");
+                            music_01.setVolume(volumeConst);
+                            music_02.setVolume(volumeConst);
+                            music_03.setVolume(volumeConst);
+                            music_04.setVolume(volumeConst);
+                            music_05.setVolume(volumeConst);
+                            music_06.setVolume(volumeConst);
+                            music_07.setVolume(volumeConst);
+                            music_08.setVolume(volumeConst);
+                            music_09.setVolume(volumeConst);
+                        }
+                        else if (musicOn && smOn && ((p1.getSelect() == 3 && (p1.getRec().getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && p1.getRec().getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && p1.getRec().getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && p1.getRec().getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (p1.getRec().getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && p1.getRec().getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && p1.getRec().getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && p1.getRec().getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2))) || (p2_exists && p2.getSelect() == 3 && (p2.getRec().getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && p2.getRec().getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && p2.getRec().getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && p2.getRec().getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && p2.getRec().getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && p2.getRec().getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && p2.getRec().getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2)))
+                        {
+                            SoundsNT.setString("Off");
+                            smOn = false;
+                        }
+                        else if (musicOn && !smOn && ((p1.getSelect() == 3 && (p1.getRec().getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && p1.getRec().getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && p1.getRec().getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && p1.getRec().getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (p1.getRec().getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && p1.getRec().getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && p1.getRec().getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && p1.getRec().getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2))) || (p2_exists && p2.getSelect() == 3 && (p2.getRec().getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && p2.getRec().getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && p2.getRec().getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && p2.getRec().getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && p2.getRec().getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && p2.getRec().getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && p2.getRec().getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2)))
+                        {
+                            SoundsNT.setString("On");
+                            smOn = true;
+                        }
+                        else if (musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec22n.getPosition().x && p1.getRec().getPosition().x <= rec22n.getPosition().x + rec22n.getSize().x && p1.getRec().getPosition().y >= rec22n.getPosition().y && p1.getRec().getPosition().y <= rec22n.getPosition().y + rec22n.getSize().y) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec22n.getPosition().x && p2.getRec().getPosition().x <= rec22n.getPosition().x + rec22n.getSize().x && p2.getRec().getPosition().y >= rec22n.getPosition().y && p2.getRec().getPosition().y <= rec22n.getPosition().y + rec22n.getSize().y)))
+                        {
+                            hit1Sound.play();
+                        }
+                        else if (musicOn && smOn && (volumeConst1 != 1) && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec23n.getPosition().x && p1.getRec().getPosition().x <= rec23n.getPosition().x + rec23n.getSize().x && p1.getRec().getPosition().y >= rec23n.getPosition().y && p1.getRec().getPosition().y <= rec23n.getPosition().y + rec23n.getSize().y) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec23n.getPosition().x && p2.getRec().getPosition().x <= rec23n.getPosition().x + rec23n.getSize().x && p2.getRec().getPosition().y >= rec23n.getPosition().y && p2.getRec().getPosition().y <= rec23n.getPosition().y + rec23n.getSize().y)))
+                        {
+                            volumeConst1--;
+                            volumeText1.setString(std::to_string(volumeConst1) + "%");
+                            hit1Sound.setVolume(volumeConst1);
+                            hit2Sound.setVolume(volumeConst1);
+                            reload1Sound.setVolume(volumeConst1);
+                            reload2Sound.setVolume(volumeConst1);
+                            menuSound.setVolume(volumeConst1);
+                        }
+                        else if (musicOn && smOn && (volumeConst1 != 100) && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec24n.getPosition().x && p1.getRec().getPosition().x <= rec24n.getPosition().x + rec24n.getSize().x && p1.getRec().getPosition().y >= rec24n.getPosition().y && p1.getRec().getPosition().y <= rec24n.getPosition().y + rec24n.getSize().y) || (p2_exists && p2.getSelect() == 3 && p1.getRec().getPosition().x >= rec24n.getPosition().x && p2.getRec().getPosition().x <= rec24n.getPosition().x + rec24n.getSize().x && p2.getRec().getPosition().y >= rec24n.getPosition().y && p2.getRec().getPosition().y <= rec24n.getPosition().y + rec24n.getSize().y)))
+                        {
+                            volumeConst1++;
+                            volumeText1.setString(std::to_string(volumeConst1) + "%");
+                            hit1Sound.setVolume(volumeConst1);
+                            hit2Sound.setVolume(volumeConst1);
+                            reload1Sound.setVolume(volumeConst1);
+                            reload2Sound.setVolume(volumeConst1);
+                            menuSound.setVolume(volumeConst1);
+                        }
+                        //Hit 1
+                        else if (hit1_counter != 1 && musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && p1.getRec().getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && p1.getRec().getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && p1.getRec().getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && p2.getRec().getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && p2.getRec().getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && p2.getRec().getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2)))
+                        {
+                            if (hit1_counter == 6)
+                            {
+                                hit1Sound.setBuffer(hit05SoundBuffer);
+                                SoundsN1T.setString("5");
+                            }
+                            else if (hit1_counter == 5)
+                            {
+                                hit1Sound.setBuffer(hit04SoundBuffer);
+                                SoundsN1T.setString("4");
+                            }
+                            else if (hit1_counter == 4)
+                            {
+                                hit1Sound.setBuffer(hit03SoundBuffer);
+                                SoundsN1T.setString("3");
+                            }
+                            else if (hit1_counter == 3)
+                            {
+                                hit1Sound.setBuffer(hit02SoundBuffer);
+                                SoundsN1T.setString("2");
+                            }
+                            else if (hit1_counter == 2)
+                            {
+                                hit1Sound.setBuffer(hit01SoundBuffer);
+                                SoundsN1T.setString("1");
+                            }
+                            hit1_counter--;
+                        }
+                        else if (hit1_counter != 6 && musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= bn21right.getPosition().x - bn21right.getSize().x / 2 && p1.getRec().getPosition().x <= bn21right.getPosition().x + bn21right.getSize().x / 2 && p1.getRec().getPosition().y >= bn21right.getPosition().y - bn21right.getSize().y / 2 && p1.getRec().getPosition().y <= bn21right.getPosition().y + bn21right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn21right.getPosition().x - bn21right.getSize().x / 2 && p2.getRec().getPosition().x <= bn21right.getPosition().x + bn21right.getSize().x / 2 && p2.getRec().getPosition().y >= bn21right.getPosition().y - bn21right.getSize().y / 2 && p2.getRec().getPosition().y <= bn21right.getPosition().y + bn21right.getSize().y / 2)))
+                        {
+                            if (hit1_counter == 1)
+                            {
+                                hit1Sound.setBuffer(hit02SoundBuffer);
+                                SoundsN1T.setString("2");
+                            }
+                            else if (hit1_counter == 2)
+                            {
+                                hit1Sound.setBuffer(hit03SoundBuffer);
+                                SoundsN1T.setString("3");
+                            }
+                            else if (hit1_counter == 3)
+                            {
+                                hit1Sound.setBuffer(hit04SoundBuffer);
+                                SoundsN1T.setString("4");
+                            }
+                            else if (hit1_counter == 4)
+                            {
+                                hit1Sound.setBuffer(hit05SoundBuffer);
+                                SoundsN1T.setString("5");
+                            }
+                            else if (hit1_counter == 5)
+                            {
+                                hit1Sound.setBuffer(hit06SoundBuffer);
+                                SoundsN1T.setString("6");
+                            }
+                            hit1_counter++;
+                        }
+                        //Reload 1
+                        else if (reload1_counter != 1 && musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= bn3left.getPosition().x - bn3left.getSize().x / 2 && p1.getRec().getPosition().x <= bn3left.getPosition().x + bn3left.getSize().x / 2 && p1.getRec().getPosition().y >= bn3left.getPosition().y - bn3left.getSize().y / 2 && p1.getRec().getPosition().y <= bn3left.getPosition().y + bn3left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn3left.getPosition().x - bn3left.getSize().x / 2 && p2.getRec().getPosition().x <= bn3left.getPosition().x + bn3left.getSize().x / 2 && p2.getRec().getPosition().y >= bn3left.getPosition().y - bn3left.getSize().y / 2 && p2.getRec().getPosition().y <= bn3left.getPosition().y + bn3left.getSize().y / 2)))
+                        {
+                            if (reload1_counter == 6)
+                            {
+                                reload1Sound.setBuffer(reload05SoundBuffer);
+                                sMucicNT.setString("5");
+                            }
+                            else if (reload1_counter == 5)
+                            {
+                                reload1Sound.setBuffer(reload04SoundBuffer);
+                                sMucicNT.setString("4");
+                            }
+                            else if (reload1_counter == 4)
+                            {
+                                reload1Sound.setBuffer(reload03SoundBuffer);
+                                sMucicNT.setString("3");
+                            }
+                            else if (reload1_counter == 3)
+                            {
+                                reload1Sound.setBuffer(reload02SoundBuffer);
+                                sMucicNT.setString("2");
+                            }
+                            else if (reload1_counter == 2)
+                            {
+                                reload1Sound.setBuffer(reload01SoundBuffer);
+                                sMucicNT.setString("1");
+                            }
+                            reload1_counter--;
+                        }
+                        else if (hit1_counter != 6 && musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= bn3right.getPosition().x - bn3right.getSize().x / 2 && p1.getRec().getPosition().x <= bn3right.getPosition().x + bn3right.getSize().x / 2 && p1.getRec().getPosition().y >= bn3right.getPosition().y - bn3right.getSize().y / 2 && p1.getRec().getPosition().y <= bn3right.getPosition().y + bn3right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn3right.getPosition().x - bn3right.getSize().x / 2 && p2.getRec().getPosition().x <= bn3right.getPosition().x + bn3right.getSize().x / 2 && p2.getRec().getPosition().y >= bn3right.getPosition().y - bn3right.getSize().y / 2 && p2.getRec().getPosition().y <= bn3right.getPosition().y + bn3right.getSize().y / 2)))
+                        {
+                            if (reload1_counter == 1)
+                            {
+                                reload1Sound.setBuffer(reload02SoundBuffer);
+                                sMucicNT.setString("2");
+                            }
+                            else if (reload1_counter == 2)
+                            {
+                                reload1Sound.setBuffer(reload03SoundBuffer);
+                                sMucicNT.setString("3");
+                            }
+                            else if (reload1_counter == 3)
+                            {
+                                reload1Sound.setBuffer(reload04SoundBuffer);
+                                sMucicNT.setString("4");
+                            }
+                            else if (reload1_counter == 4)
+                            {
+                                reload1Sound.setBuffer(reload05SoundBuffer);
+                                sMucicNT.setString("5");
+                            }
+                            else if (reload1_counter == 5)
+                            {
+                                reload1Sound.setBuffer(reload06SoundBuffer);
+                                sMucicNT.setString("6");
+                            }
+                            reload1_counter++;
+                        }
+                        //Hit 2
+                        else if (hit2_counter != 1 && musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= bn4left.getPosition().x - bn4left.getSize().x / 2 && p1.getRec().getPosition().x <= bn4left.getPosition().x + bn4left.getSize().x / 2 && p1.getRec().getPosition().y >= bn4left.getPosition().y - bn4left.getSize().y / 2 && p1.getRec().getPosition().y <= bn4left.getPosition().y + bn4left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn4left.getPosition().x - bn4left.getSize().x / 2 && p2.getRec().getPosition().x <= bn4left.getPosition().x + bn4left.getSize().x / 2 && p2.getRec().getPosition().y >= bn4left.getPosition().y - bn4left.getSize().y / 2 && p2.getRec().getPosition().y <= bn4left.getPosition().y + bn4left.getSize().y / 2)))
+                        {
+                            if (hit2_counter == 6)
+                            {
+                                hit2Sound.setBuffer(hit05SoundBuffer);
+                                sSoundsNT.setString("5");
+                            }
+                            else if (hit2_counter == 5)
+                            {
+                                hit2Sound.setBuffer(hit04SoundBuffer);
+                                sSoundsNT.setString("4");
+                            }
+                            else if (hit2_counter == 4)
+                            {
+                                hit2Sound.setBuffer(hit03SoundBuffer);
+                                sSoundsNT.setString("3");
+                            }
+                            else if (hit2_counter == 3)
+                            {
+                                hit2Sound.setBuffer(hit02SoundBuffer);
+                                sSoundsNT.setString("2");
+                            }
+                            else if (hit2_counter == 2)
+                            {
+                                hit2Sound.setBuffer(hit01SoundBuffer);
+                                sSoundsNT.setString("1");
+                            }
+                            hit2_counter--;
+                        }
+                        else if (hit2_counter != 6 && musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= bn4right.getPosition().x - bn4right.getSize().x / 2 && p1.getRec().getPosition().x <= bn4right.getPosition().x + bn4right.getSize().x / 2 && p1.getRec().getPosition().y >= bn4right.getPosition().y - bn4right.getSize().y / 2 && p1.getRec().getPosition().y <= bn4right.getPosition().y + bn4right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn4right.getPosition().x - bn4right.getSize().x / 2 && p2.getRec().getPosition().x <= bn4right.getPosition().x + bn4right.getSize().x / 2 && p2.getRec().getPosition().y >= bn4right.getPosition().y - bn4right.getSize().y / 2 && p2.getRec().getPosition().y <= bn4right.getPosition().y + bn4right.getSize().y / 2)))
+                        {
+                            if (hit2_counter == 1)
+                            {
+                                hit2Sound.setBuffer(hit02SoundBuffer);
+                                sSoundsNT.setString("2");
+                            }
+                            else if (hit2_counter == 2)
+                            {
+                                hit2Sound.setBuffer(hit03SoundBuffer);
+                                sSoundsNT.setString("3");
+                            }
+                            else if (hit2_counter == 3)
+                            {
+                                hit2Sound.setBuffer(hit04SoundBuffer);
+                                sSoundsNT.setString("4");
+                            }
+                            else if (hit2_counter == 4)
+                            {
+                                hit2Sound.setBuffer(hit05SoundBuffer);
+                                sSoundsNT.setString("5");
+                            }
+                            else if (hit2_counter == 5)
+                            {
+                                hit2Sound.setBuffer(hit06SoundBuffer);
+                                sSoundsNT.setString("6");
+                            }
+                            hit2_counter++;
+                        }
+                        //Reload 2
+                        else if (reload2_counter != 1 && musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= bn41left.getPosition().x - bn41left.getSize().x / 2 && p1.getRec().getPosition().x <= bn41left.getPosition().x + bn41left.getSize().x / 2 && p1.getRec().getPosition().y >= bn41left.getPosition().y - bn41left.getSize().y / 2 && p1.getRec().getPosition().y <= bn41left.getPosition().y + bn41left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn41left.getPosition().x - bn41left.getSize().x / 2 && p2.getRec().getPosition().x <= bn41left.getPosition().x + bn41left.getSize().x / 2 && p2.getRec().getPosition().y >= bn41left.getPosition().y - bn41left.getSize().y / 2 && p2.getRec().getPosition().y <= bn41left.getPosition().y + bn41left.getSize().y / 2)))
+                        {
+                            if (reload2_counter == 6)
+                            {
+                                reload2Sound.setBuffer(reload05SoundBuffer);
+                                sSoundsN1T.setString("5");
+                            }
+                            else if (reload2_counter == 5)
+                            {
+                                reload2Sound.setBuffer(reload04SoundBuffer);
+                                sSoundsN1T.setString("4");
+                            }
+                            else if (reload2_counter == 4)
+                            {
+                                reload2Sound.setBuffer(reload03SoundBuffer);
+                                sSoundsN1T.setString("3");
+                            }
+                            else if (reload2_counter == 3)
+                            {
+                                reload2Sound.setBuffer(reload02SoundBuffer);
+                                sSoundsN1T.setString("2");
+                            }
+                            else if (reload2_counter == 2)
+                            {
+                                reload2Sound.setBuffer(reload01SoundBuffer);
+                                sSoundsN1T.setString("1");
+                            }
+                            reload2_counter--;
+                        }
+                        else if (hit1_counter != 6 && musicOn && smOn && ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= bn41right.getPosition().x - bn41right.getSize().x / 2 && p1.getRec().getPosition().x <= bn41right.getPosition().x + bn41right.getSize().x / 2 && p1.getRec().getPosition().y >= bn41right.getPosition().y - bn41right.getSize().y / 2 && p1.getRec().getPosition().y <= bn41right.getPosition().y + bn41right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= bn41right.getPosition().x - bn41right.getSize().x / 2 && p2.getRec().getPosition().x <= bn41right.getPosition().x + bn41right.getSize().x / 2 && p2.getRec().getPosition().y >= bn41right.getPosition().y - bn41right.getSize().y / 2 && p2.getRec().getPosition().y <= bn41right.getPosition().y + bn41right.getSize().y / 2)))
+                        {
+                            if (reload2_counter == 1)
+                            {
+                                reload2Sound.setBuffer(reload02SoundBuffer);
+                                sSoundsN1T.setString("2");
+                            }
+                            else if (reload2_counter == 2)
+                            {
+                                reload2Sound.setBuffer(reload03SoundBuffer);
+                                sSoundsN1T.setString("3");
+                            }
+                            else if (reload2_counter == 3)
+                            {
+                                reload2Sound.setBuffer(reload04SoundBuffer);
+                                sSoundsN1T.setString("4");
+                            }
+                            else if (reload2_counter == 4)
+                            {
+                                reload2Sound.setBuffer(reload05SoundBuffer);
+                                sSoundsN1T.setString("5");
+                            }
+                            else if (reload2_counter == 5)
+                            {
+                                reload2Sound.setBuffer(reload06SoundBuffer);
+                                sSoundsN1T.setString("6");
+                            }
+                            reload2_counter++;
+                        }
+                        if (!mOn && !smOn)
+                        {
+                            musicOn = false;
                         }
                     }
                     //Player
@@ -2728,6 +3202,7 @@ int main()
                         //Default
                         else if (cursor_mouse.getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && cursor_mouse.getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && cursor_mouse.getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && cursor_mouse.getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2)
                         {
+                            menuSound.play();
                             ammun = 30;
                             ammun_text.setString(std::to_string(ammun));
                             ammun_text.setPosition(858, 165);
@@ -3166,6 +3641,25 @@ int main()
                             MusicNT.setString("On");
                             smOn = true;
                             SoundsNT.setString("On");
+                            menuSound.play();
+                            volumeConst = 35;
+                            volumeConst1 = 100;
+                            volumeText.setString(std::to_string(volumeConst) + "%");
+                            music_01.setVolume(volumeConst);
+                            music_02.setVolume(volumeConst);
+                            music_03.setVolume(volumeConst);
+                            music_04.setVolume(volumeConst);
+                            music_05.setVolume(volumeConst);
+                            music_06.setVolume(volumeConst);
+                            music_07.setVolume(volumeConst);
+                            music_08.setVolume(volumeConst);
+                            music_09.setVolume(volumeConst);
+                            volumeText1.setString(std::to_string(volumeConst1) + "%");
+                            hit1Sound.setVolume(volumeConst1);
+                            hit2Sound.setVolume(volumeConst1);
+                            reload1Sound.setVolume(volumeConst1);
+                            reload2Sound.setVolume(volumeConst1);
+                            menuSound.setVolume(volumeConst1);
                         }
                         else if (!musicOn && (cursor_mouse.getPosition().x >= rec0n.getPosition().x && cursor_mouse.getPosition().x <= rec0n.getPosition().x + rec0n.getSize().x && cursor_mouse.getPosition().y >= rec0n.getPosition().y && cursor_mouse.getPosition().y <= rec0n.getPosition().y + rec0n.getSize().y))
                         {
@@ -3217,6 +3711,47 @@ int main()
                             MusicNT.setString("On");
                             mOn = true;
                         }
+                        else if (musicOn && mOn && volumeM && (cursor_mouse.getPosition().x >= rec12n.getPosition().x && cursor_mouse.getPosition().x <= rec12n.getPosition().x + rec12n.getSize().x && cursor_mouse.getPosition().y >= rec12n.getPosition().y && cursor_mouse.getPosition().y <= rec12n.getPosition().y + rec12n.getSize().y))
+                        {
+                            volumeM = false;
+                            music_01.play();
+                        }
+                        else if (musicOn && mOn && !volumeM && (cursor_mouse.getPosition().x >= rec12n.getPosition().x && cursor_mouse.getPosition().x <= rec12n.getPosition().x + rec12n.getSize().x && cursor_mouse.getPosition().y >= rec12n.getPosition().y && cursor_mouse.getPosition().y <= rec12n.getPosition().y + rec12n.getSize().y))
+                        {
+                            volumeM = true;
+                            music_01.stop();
+                        }
+                        else if (musicOn && mOn && (volumeConst != 1) && (cursor_mouse.getPosition().x >= rec13n.getPosition().x && cursor_mouse.getPosition().x <= rec13n.getPosition().x + rec13n.getSize().x && cursor_mouse.getPosition().y >= rec13n.getPosition().y && cursor_mouse.getPosition().y <= rec13n.getPosition().y + rec13n.getSize().y))
+                        {
+                            music_01.stop();
+                            volumeConst--;
+                            volumeText.setString(std::to_string(volumeConst) + "%");
+                            music_01.setVolume(volumeConst);
+                            music_02.setVolume(volumeConst);
+                            music_03.setVolume(volumeConst);
+                            music_04.setVolume(volumeConst);
+                            music_05.setVolume(volumeConst);
+                            music_06.setVolume(volumeConst);
+                            music_07.setVolume(volumeConst);
+                            music_08.setVolume(volumeConst);
+                            music_09.setVolume(volumeConst);
+
+                        }
+                        else if (musicOn && mOn && (volumeConst != 100) && (cursor_mouse.getPosition().x >= rec14n.getPosition().x && cursor_mouse.getPosition().x <= rec14n.getPosition().x + rec14n.getSize().x && cursor_mouse.getPosition().y >= rec14n.getPosition().y && cursor_mouse.getPosition().y <= rec14n.getPosition().y + rec14n.getSize().y))
+                        {
+                            music_01.stop();
+                            volumeConst++;
+                            volumeText.setString(std::to_string(volumeConst) + "%");
+                            music_01.setVolume(volumeConst);
+                            music_02.setVolume(volumeConst);
+                            music_03.setVolume(volumeConst);
+                            music_04.setVolume(volumeConst);
+                            music_05.setVolume(volumeConst);
+                            music_06.setVolume(volumeConst);
+                            music_07.setVolume(volumeConst);
+                            music_08.setVolume(volumeConst);
+                            music_09.setVolume(volumeConst);
+                        }
                         else if (musicOn && smOn && ((cursor_mouse.getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (cursor_mouse.getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2)))
                         {
                             SoundsNT.setString("Off");
@@ -3226,6 +3761,30 @@ int main()
                         {
                             SoundsNT.setString("On");
                             smOn = true;
+                        }
+                        else if (musicOn && smOn && (cursor_mouse.getPosition().x >= rec22n.getPosition().x && cursor_mouse.getPosition().x <= rec22n.getPosition().x + rec22n.getSize().x && cursor_mouse.getPosition().y >= rec22n.getPosition().y && cursor_mouse.getPosition().y <= rec22n.getPosition().y + rec22n.getSize().y))
+                        {
+                            hit1Sound.play();
+                        }
+                        else if (musicOn && smOn && (volumeConst1 != 1) && (cursor_mouse.getPosition().x >= rec23n.getPosition().x && cursor_mouse.getPosition().x <= rec23n.getPosition().x + rec23n.getSize().x && cursor_mouse.getPosition().y >= rec23n.getPosition().y && cursor_mouse.getPosition().y <= rec23n.getPosition().y + rec23n.getSize().y))
+                        {
+                            volumeConst1--;
+                            volumeText1.setString(std::to_string(volumeConst1) + "%");
+                            hit1Sound.setVolume(volumeConst1);
+                            hit2Sound.setVolume(volumeConst1);
+                            reload1Sound.setVolume(volumeConst1);
+                            reload2Sound.setVolume(volumeConst1);
+                            menuSound.setVolume(volumeConst1);
+                        }
+                        else if (musicOn && smOn && (volumeConst1 != 100) && (cursor_mouse.getPosition().x >= rec24n.getPosition().x && cursor_mouse.getPosition().x <= rec24n.getPosition().x + rec24n.getSize().x && cursor_mouse.getPosition().y >= rec24n.getPosition().y && cursor_mouse.getPosition().y <= rec24n.getPosition().y + rec24n.getSize().y))
+                        {
+                            volumeConst1++;
+                            volumeText1.setString(std::to_string(volumeConst1) + "%");
+                            hit1Sound.setVolume(volumeConst1);
+                            hit2Sound.setVolume(volumeConst1);
+                            reload1Sound.setVolume(volumeConst1);
+                            reload2Sound.setVolume(volumeConst1);
+                            menuSound.setVolume(volumeConst1);
                         }
                         //Hit 1
                         else if (hit1_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2))
@@ -3909,6 +4468,7 @@ int main()
                             //Default
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p1.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p1.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p1.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2))
                             {
+                                menuSound.play();
                                 ammun = 30;
                                 ammun_text.setString(std::to_string(ammun));
                                 ammun_text.setPosition(858, 165);
@@ -4323,6 +4883,409 @@ int main()
                             {
                                 music = false;
                                 menu = true;
+                            }
+                            else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && p1.getRec().getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && p1.getRec().getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && p1.getRec().getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2))
+                            {
+                                hit1_counter = 1;
+                                hit2_counter = 2;
+                                reload1_counter = 1;
+                                reload2_counter = 2;
+                                hit1Sound.setBuffer(hit01SoundBuffer);
+                                SoundsN1T.setString("1");
+                                reload1Sound.setBuffer(reload01SoundBuffer);
+                                sMucicNT.setString("1");
+                                hit2Sound.setBuffer(hit01SoundBuffer);
+                                sSoundsNT.setString("2");
+                                reload2Sound.setBuffer(reload01SoundBuffer);
+                                sSoundsN1T.setString("2");
+                                mOn = true;
+                                MusicNT.setString("On");
+                                smOn = true;
+                                SoundsNT.setString("On");
+                                menuSound.play();
+                                volumeConst = 35;
+                                volumeConst1 = 100;
+                                volumeText.setString(std::to_string(volumeConst) + "%");
+                                music_01.setVolume(volumeConst);
+                                music_02.setVolume(volumeConst);
+                                music_03.setVolume(volumeConst);
+                                music_04.setVolume(volumeConst);
+                                music_05.setVolume(volumeConst);
+                                music_06.setVolume(volumeConst);
+                                music_07.setVolume(volumeConst);
+                                music_08.setVolume(volumeConst);
+                                music_09.setVolume(volumeConst);
+                                volumeText1.setString(std::to_string(volumeConst1) + "%");
+                                hit1Sound.setVolume(volumeConst1);
+                                hit2Sound.setVolume(volumeConst1);
+                                reload1Sound.setVolume(volumeConst1);
+                                reload2Sound.setVolume(volumeConst1);
+                                menuSound.setVolume(volumeConst1);
+                            }
+                            else if (!musicOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec0n.getPosition().x && p1.getRec().getPosition().x <= rec0n.getPosition().x + rec0n.getSize().x && p1.getRec().getPosition().y >= rec0n.getPosition().y && p1.getRec().getPosition().y <= rec0n.getPosition().y + rec0n.getSize().y)))
+                            {
+                                musicOn = true;
+                                mOn = true;
+                                MusicNT.setString("On");
+                                smOn = true;
+                                SoundsNT.setString("On");
+                            }
+                            else if (musicOn && mOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && (p1.getRec().getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && p1.getRec().getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && p1.getRec().getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && p1.getRec().getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (p1.getRec().getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && p1.getRec().getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && p1.getRec().getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && p1.getRec().getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2))))
+                            {
+                                MusicNT.setString("Off");
+                                mOn = false;
+
+                                switch (randMusic)
+                                {
+                                case 1:
+                                    music_01.stop();
+                                    break;
+                                case 2:
+                                    music_02.stop();
+                                    break;
+                                case 3:
+                                    music_03.stop();
+                                    break;
+                                case 4:
+                                    music_04.stop();
+                                    break;
+                                case 5:
+                                    music_05.stop();
+                                    break;
+                                case 6:
+                                    music_06.stop();
+                                    break;
+                                case 7:
+                                    music_07.stop();
+                                    break;
+                                case 8:
+                                    music_08.stop();
+                                    break;
+                                case 9:
+                                    music_09.stop();
+                                    break;
+                                }
+                                music_stop = false;
+                            }
+                            else if (musicOn && !mOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && (p1.getRec().getPosition().x >= bn1left.getPosition().x - bn1left.getSize().x / 2 && p1.getRec().getPosition().x <= bn1left.getPosition().x + bn1left.getSize().x / 2 && p1.getRec().getPosition().y >= bn1left.getPosition().y - bn1left.getSize().y / 2 && p1.getRec().getPosition().y <= bn1left.getPosition().y + bn1left.getSize().y / 2) || (p1.getRec().getPosition().x >= bn1right.getPosition().x - bn1right.getSize().x / 2 && p1.getRec().getPosition().x <= bn1right.getPosition().x + bn1right.getSize().x / 2 && p1.getRec().getPosition().y >= bn1right.getPosition().y - bn1right.getSize().y / 2 && p1.getRec().getPosition().y <= bn1right.getPosition().y + bn1right.getSize().y / 2))))
+                            {
+                                MusicNT.setString("On");
+                                mOn = true;
+                            }
+                            else if (musicOn && mOn && volumeM && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec12n.getPosition().x && p1.getRec().getPosition().x <= rec12n.getPosition().x + rec12n.getSize().x && p1.getRec().getPosition().y >= rec12n.getPosition().y && p1.getRec().getPosition().y <= rec12n.getPosition().y + rec12n.getSize().y)))
+                            {
+                                volumeM = false;
+                                music_01.play();
+                            }
+                            else if (musicOn && mOn && !volumeM && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec12n.getPosition().x && p1.getRec().getPosition().x <= rec12n.getPosition().x + rec12n.getSize().x && p1.getRec().getPosition().y >= rec12n.getPosition().y && p1.getRec().getPosition().y <= rec12n.getPosition().y + rec12n.getSize().y)))
+                            {
+                                volumeM = true;
+                                music_01.stop();
+                            }
+                            else if (musicOn && mOn && (volumeConst != 1) && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec13n.getPosition().x && p1.getRec().getPosition().x <= rec13n.getPosition().x + rec13n.getSize().x && p1.getRec().getPosition().y >= rec13n.getPosition().y && p1.getRec().getPosition().y <= rec13n.getPosition().y + rec13n.getSize().y)))
+                            {
+                                music_01.stop();
+                                volumeConst--;
+                                volumeText.setString(std::to_string(volumeConst) + "%");
+                                music_01.setVolume(volumeConst);
+                                music_02.setVolume(volumeConst);
+                                music_03.setVolume(volumeConst);
+                                music_04.setVolume(volumeConst);
+                                music_05.setVolume(volumeConst);
+                                music_06.setVolume(volumeConst);
+                                music_07.setVolume(volumeConst);
+                                music_08.setVolume(volumeConst);
+                                music_09.setVolume(volumeConst);
+
+                            }
+                            else if (musicOn && mOn && (volumeConst != 100) && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec14n.getPosition().x && p1.getRec().getPosition().x <= rec14n.getPosition().x + rec14n.getSize().x && p1.getRec().getPosition().y >= rec14n.getPosition().y && p1.getRec().getPosition().y <= rec14n.getPosition().y + rec14n.getSize().y)))
+                            {
+                                music_01.stop();
+                                volumeConst++;
+                                volumeText.setString(std::to_string(volumeConst) + "%");
+                                music_01.setVolume(volumeConst);
+                                music_02.setVolume(volumeConst);
+                                music_03.setVolume(volumeConst);
+                                music_04.setVolume(volumeConst);
+                                music_05.setVolume(volumeConst);
+                                music_06.setVolume(volumeConst);
+                                music_07.setVolume(volumeConst);
+                                music_08.setVolume(volumeConst);
+                                music_09.setVolume(volumeConst);
+                            }
+                            else if (musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && (p1.getRec().getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && p1.getRec().getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && p1.getRec().getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && p1.getRec().getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (p1.getRec().getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && p1.getRec().getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && p1.getRec().getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && p1.getRec().getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2))))
+                            {
+                                SoundsNT.setString("Off");
+                                smOn = false;
+                            }
+                            else if (musicOn && !smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && (p1.getRec().getPosition().x >= bn2left.getPosition().x - bn2left.getSize().x / 2 && p1.getRec().getPosition().x <= bn2left.getPosition().x + bn2left.getSize().x / 2 && p1.getRec().getPosition().y >= bn2left.getPosition().y - bn2left.getSize().y / 2 && p1.getRec().getPosition().y <= bn2left.getPosition().y + bn2left.getSize().y / 2) || (p1.getRec().getPosition().x >= bn2right.getPosition().x - bn2right.getSize().x / 2 && p1.getRec().getPosition().x <= bn2right.getPosition().x + bn2right.getSize().x / 2 && p1.getRec().getPosition().y >= bn2right.getPosition().y - bn2right.getSize().y / 2 && p1.getRec().getPosition().y <= bn2right.getPosition().y + bn2right.getSize().y / 2))))
+                            {
+                                SoundsNT.setString("On");
+                                smOn = true;
+                            }
+                            else if (musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec22n.getPosition().x && p1.getRec().getPosition().x <= rec22n.getPosition().x + rec22n.getSize().x && p1.getRec().getPosition().y >= rec22n.getPosition().y && p1.getRec().getPosition().y <= rec22n.getPosition().y + rec22n.getSize().y)))
+                            {
+                                hit1Sound.play();
+                            }
+                            else if (musicOn && smOn && (volumeConst1 != 1) && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec23n.getPosition().x && p1.getRec().getPosition().x <= rec23n.getPosition().x + rec23n.getSize().x && p1.getRec().getPosition().y >= rec23n.getPosition().y && p1.getRec().getPosition().y <= rec23n.getPosition().y + rec23n.getSize().y)))
+                            {
+                                volumeConst1--;
+                                volumeText1.setString(std::to_string(volumeConst1) + "%");
+                                hit1Sound.setVolume(volumeConst1);
+                                hit2Sound.setVolume(volumeConst1);
+                                reload1Sound.setVolume(volumeConst1);
+                                reload2Sound.setVolume(volumeConst1);
+                                menuSound.setVolume(volumeConst1);
+                            }
+                            else if (musicOn && smOn && (volumeConst1 != 100) && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec24n.getPosition().x && p1.getRec().getPosition().x <= rec24n.getPosition().x + rec24n.getSize().x && p1.getRec().getPosition().y >= rec24n.getPosition().y && p1.getRec().getPosition().y <= rec24n.getPosition().y + rec24n.getSize().y)))
+                            {
+                                volumeConst1++;
+                                volumeText1.setString(std::to_string(volumeConst1) + "%");
+                                hit1Sound.setVolume(volumeConst1);
+                                hit2Sound.setVolume(volumeConst1);
+                                reload1Sound.setVolume(volumeConst1);
+                                reload2Sound.setVolume(volumeConst1);
+                                menuSound.setVolume(volumeConst1);
+                            }
+                            //Hit 1
+                            else if (hit1_counter != 1 && musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bn21left.getPosition().x - bn21left.getSize().x / 2 && p1.getRec().getPosition().x <= bn21left.getPosition().x + bn21left.getSize().x / 2 && p1.getRec().getPosition().y >= bn21left.getPosition().y - bn21left.getSize().y / 2 && p1.getRec().getPosition().y <= bn21left.getPosition().y + bn21left.getSize().y / 2)))
+                            {
+                                if (hit1_counter == 6)
+                                {
+                                    hit1Sound.setBuffer(hit05SoundBuffer);
+                                    SoundsN1T.setString("5");
+                                }
+                                else if (hit1_counter == 5)
+                                {
+                                    hit1Sound.setBuffer(hit04SoundBuffer);
+                                    SoundsN1T.setString("4");
+                                }
+                                else if (hit1_counter == 4)
+                                {
+                                    hit1Sound.setBuffer(hit03SoundBuffer);
+                                    SoundsN1T.setString("3");
+                                }
+                                else if (hit1_counter == 3)
+                                {
+                                    hit1Sound.setBuffer(hit02SoundBuffer);
+                                    SoundsN1T.setString("2");
+                                }
+                                else if (hit1_counter == 2)
+                                {
+                                    hit1Sound.setBuffer(hit01SoundBuffer);
+                                    SoundsN1T.setString("1");
+                                }
+                                hit1_counter--;
+                            }
+                            else if (hit1_counter != 6 && musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bn21right.getPosition().x - bn21right.getSize().x / 2 && p1.getRec().getPosition().x <= bn21right.getPosition().x + bn21right.getSize().x / 2 && p1.getRec().getPosition().y >= bn21right.getPosition().y - bn21right.getSize().y / 2 && p1.getRec().getPosition().y <= bn21right.getPosition().y + bn21right.getSize().y / 2)))
+                            {
+                                if (hit1_counter == 1)
+                                {
+                                    hit1Sound.setBuffer(hit02SoundBuffer);
+                                    SoundsN1T.setString("2");
+                                }
+                                else if (hit1_counter == 2)
+                                {
+                                    hit1Sound.setBuffer(hit03SoundBuffer);
+                                    SoundsN1T.setString("3");
+                                }
+                                else if (hit1_counter == 3)
+                                {
+                                    hit1Sound.setBuffer(hit04SoundBuffer);
+                                    SoundsN1T.setString("4");
+                                }
+                                else if (hit1_counter == 4)
+                                {
+                                    hit1Sound.setBuffer(hit05SoundBuffer);
+                                    SoundsN1T.setString("5");
+                                }
+                                else if (hit1_counter == 5)
+                                {
+                                    hit1Sound.setBuffer(hit06SoundBuffer);
+                                    SoundsN1T.setString("6");
+                                }
+                                hit1_counter++;
+                            }
+                            //Reload 1
+                            else if (reload1_counter != 1 && musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bn3left.getPosition().x - bn3left.getSize().x / 2 && p1.getRec().getPosition().x <= bn3left.getPosition().x + bn3left.getSize().x / 2 && p1.getRec().getPosition().y >= bn3left.getPosition().y - bn3left.getSize().y / 2 && p1.getRec().getPosition().y <= bn3left.getPosition().y + bn3left.getSize().y / 2)))
+                            {
+                                if (reload1_counter == 6)
+                                {
+                                    reload1Sound.setBuffer(reload05SoundBuffer);
+                                    sMucicNT.setString("5");
+                                }
+                                else if (reload1_counter == 5)
+                                {
+                                    reload1Sound.setBuffer(reload04SoundBuffer);
+                                    sMucicNT.setString("4");
+                                }
+                                else if (reload1_counter == 4)
+                                {
+                                    reload1Sound.setBuffer(reload03SoundBuffer);
+                                    sMucicNT.setString("3");
+                                }
+                                else if (reload1_counter == 3)
+                                {
+                                    reload1Sound.setBuffer(reload02SoundBuffer);
+                                    sMucicNT.setString("2");
+                                }
+                                else if (reload1_counter == 2)
+                                {
+                                    reload1Sound.setBuffer(reload01SoundBuffer);
+                                    sMucicNT.setString("1");
+                                }
+                                reload1_counter--;
+                            }
+                            else if (hit1_counter != 6 && musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bn3right.getPosition().x - bn3right.getSize().x / 2 && p1.getRec().getPosition().x <= bn3right.getPosition().x + bn3right.getSize().x / 2 && p1.getRec().getPosition().y >= bn3right.getPosition().y - bn3right.getSize().y / 2 && p1.getRec().getPosition().y <= bn3right.getPosition().y + bn3right.getSize().y / 2)))
+                            {
+                                if (reload1_counter == 1)
+                                {
+                                    reload1Sound.setBuffer(reload02SoundBuffer);
+                                    sMucicNT.setString("2");
+                                }
+                                else if (reload1_counter == 2)
+                                {
+                                    reload1Sound.setBuffer(reload03SoundBuffer);
+                                    sMucicNT.setString("3");
+                                }
+                                else if (reload1_counter == 3)
+                                {
+                                    reload1Sound.setBuffer(reload04SoundBuffer);
+                                    sMucicNT.setString("4");
+                                }
+                                else if (reload1_counter == 4)
+                                {
+                                    reload1Sound.setBuffer(reload05SoundBuffer);
+                                    sMucicNT.setString("5");
+                                }
+                                else if (reload1_counter == 5)
+                                {
+                                    reload1Sound.setBuffer(reload06SoundBuffer);
+                                    sMucicNT.setString("6");
+                                }
+                                reload1_counter++;
+                            }
+                            //Hit 2
+                            else if (hit2_counter != 1 && musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bn4left.getPosition().x - bn4left.getSize().x / 2 && p1.getRec().getPosition().x <= bn4left.getPosition().x + bn4left.getSize().x / 2 && p1.getRec().getPosition().y >= bn4left.getPosition().y - bn4left.getSize().y / 2 && p1.getRec().getPosition().y <= bn4left.getPosition().y + bn4left.getSize().y / 2)))
+                            {
+                                if (hit2_counter == 6)
+                                {
+                                    hit2Sound.setBuffer(hit05SoundBuffer);
+                                    sSoundsNT.setString("5");
+                                }
+                                else if (hit2_counter == 5)
+                                {
+                                    hit2Sound.setBuffer(hit04SoundBuffer);
+                                    sSoundsNT.setString("4");
+                                }
+                                else if (hit2_counter == 4)
+                                {
+                                    hit2Sound.setBuffer(hit03SoundBuffer);
+                                    sSoundsNT.setString("3");
+                                }
+                                else if (hit2_counter == 3)
+                                {
+                                    hit2Sound.setBuffer(hit02SoundBuffer);
+                                    sSoundsNT.setString("2");
+                                }
+                                else if (hit2_counter == 2)
+                                {
+                                    hit2Sound.setBuffer(hit01SoundBuffer);
+                                    sSoundsNT.setString("1");
+                                }
+                                hit2_counter--;
+                            }
+                            else if (hit2_counter != 6 && musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bn4right.getPosition().x - bn4right.getSize().x / 2 && p1.getRec().getPosition().x <= bn4right.getPosition().x + bn4right.getSize().x / 2 && p1.getRec().getPosition().y >= bn4right.getPosition().y - bn4right.getSize().y / 2 && p1.getRec().getPosition().y <= bn4right.getPosition().y + bn4right.getSize().y / 2)))
+                            {
+                                if (hit2_counter == 1)
+                                {
+                                    hit2Sound.setBuffer(hit02SoundBuffer);
+                                    sSoundsNT.setString("2");
+                                }
+                                else if (hit2_counter == 2)
+                                {
+                                    hit2Sound.setBuffer(hit03SoundBuffer);
+                                    sSoundsNT.setString("3");
+                                }
+                                else if (hit2_counter == 3)
+                                {
+                                    hit2Sound.setBuffer(hit04SoundBuffer);
+                                    sSoundsNT.setString("4");
+                                }
+                                else if (hit2_counter == 4)
+                                {
+                                    hit2Sound.setBuffer(hit05SoundBuffer);
+                                    sSoundsNT.setString("5");
+                                }
+                                else if (hit2_counter == 5)
+                                {
+                                    hit2Sound.setBuffer(hit06SoundBuffer);
+                                    sSoundsNT.setString("6");
+                                }
+                                hit2_counter++;
+                            }
+                            //Reload 2
+                            else if (reload2_counter != 1 && musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bn41left.getPosition().x - bn41left.getSize().x / 2 && p1.getRec().getPosition().x <= bn41left.getPosition().x + bn41left.getSize().x / 2 && p1.getRec().getPosition().y >= bn41left.getPosition().y - bn41left.getSize().y / 2 && p1.getRec().getPosition().y <= bn41left.getPosition().y + bn41left.getSize().y / 2)))
+                            {
+                                if (reload2_counter == 6)
+                                {
+                                    reload2Sound.setBuffer(reload05SoundBuffer);
+                                    sSoundsN1T.setString("5");
+                                }
+                                else if (reload2_counter == 5)
+                                {
+                                    reload2Sound.setBuffer(reload04SoundBuffer);
+                                    sSoundsN1T.setString("4");
+                                }
+                                else if (reload2_counter == 4)
+                                {
+                                    reload2Sound.setBuffer(reload03SoundBuffer);
+                                    sSoundsN1T.setString("3");
+                                }
+                                else if (reload2_counter == 3)
+                                {
+                                    reload2Sound.setBuffer(reload02SoundBuffer);
+                                    sSoundsN1T.setString("2");
+                                }
+                                else if (reload2_counter == 2)
+                                {
+                                    reload2Sound.setBuffer(reload01SoundBuffer);
+                                    sSoundsN1T.setString("1");
+                                }
+                                reload2_counter--;
+                            }
+                            else if (hit1_counter != 6 && musicOn && smOn && ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= bn41right.getPosition().x - bn41right.getSize().x / 2 && p1.getRec().getPosition().x <= bn41right.getPosition().x + bn41right.getSize().x / 2 && p1.getRec().getPosition().y >= bn41right.getPosition().y - bn41right.getSize().y / 2 && p1.getRec().getPosition().y <= bn41right.getPosition().y + bn41right.getSize().y / 2)))
+                            {
+                                if (reload2_counter == 1)
+                                {
+                                    reload2Sound.setBuffer(reload02SoundBuffer);
+                                    sSoundsN1T.setString("2");
+                                }
+                                else if (reload2_counter == 2)
+                                {
+                                    reload2Sound.setBuffer(reload03SoundBuffer);
+                                    sSoundsN1T.setString("3");
+                                }
+                                else if (reload2_counter == 3)
+                                {
+                                    reload2Sound.setBuffer(reload04SoundBuffer);
+                                    sSoundsN1T.setString("4");
+                                }
+                                else if (reload2_counter == 4)
+                                {
+                                    reload2Sound.setBuffer(reload05SoundBuffer);
+                                    sSoundsN1T.setString("5");
+                                }
+                                else if (reload2_counter == 5)
+                                {
+                                    reload2Sound.setBuffer(reload06SoundBuffer);
+                                    sSoundsN1T.setString("6");
+                                }
+                                reload2_counter++;
+                            }
+                            if (!mOn && !smOn)
+                            {
+                                musicOn = false;
                             }
                         }
                         //Player
@@ -5447,8 +6410,21 @@ int main()
                 window.draw(bn1left);
                 window.draw(bn1right);
                 window.draw(MusicNT);
+                window.draw(volumeText);
                 window.draw(rec12n);
-                window.draw(rec121n);
+                window.draw(rec13n);
+                window.draw(rec131n);
+                window.draw(rec14n);
+                window.draw(rec141n);
+
+                if (volumeM)
+                {
+                    window.draw(rec121n);
+                }
+                else
+                {
+                    window.draw(rec122n);
+                }
 
                 window.draw(rec2n);
                 window.draw(SoundsN);
@@ -5456,8 +6432,14 @@ int main()
                 window.draw(bn2left);
                 window.draw(bn2right);
                 window.draw(SoundsNT);
+                window.draw(volumeText1);
                 window.draw(rec22n);
                 window.draw(rec221n);
+                window.draw(rec23n);
+                window.draw(rec231n);
+                window.draw(rec24n);
+                window.draw(rec241n);
+
 
                 if (smOn)
                 {
