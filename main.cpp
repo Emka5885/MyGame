@@ -956,6 +956,25 @@ int main()
     NoteOn.setPosition(557, 358);
 
 
+    sf::Texture tvolume0;
+    if (!tvolume0.loadFromFile("Resources/Music/volume.png"))
+    {
+        std::cout << "Errortv0" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tvolume1;
+    if (!tvolume1.loadFromFile("Resources/Music/volume_minus.png"))
+    {
+        std::cout << "Errortv1" << std::endl;
+        system("PAUSE");
+    }
+    sf::Texture tvolume2;
+    if (!tvolume2.loadFromFile("Resources/Music/volume_plus.png"))
+    {
+        std::cout << "Errortv2" << std::endl;
+        system("PAUSE");
+    }
+
     if (!hit01SoundBuffer.loadFromFile("Resources/Sounds/hit_01.wav"))
     {
         std::cout << "Errorsbh01" << std::endl;
@@ -1098,6 +1117,16 @@ int main()
     MusicNT.setFillColor(sf::Color::Black);
     MusicNT.setPosition(850, 165);
 
+    sf::RectangleShape rec12n;
+    rec12n.setSize({ 50, 50 });
+    rec12n.setPosition(490, 165);
+    rec12n.setOutlineThickness(2);
+    rec12n.setOutlineColor(sf::Color::Black);
+    sf::RectangleShape rec121n;
+    rec121n.setSize({ 40, 40 });
+    rec121n.setPosition(495, 170);
+    rec121n.setTexture(&tvolume0);
+
     sf::RectangleShape rec2n;
     rec2n.setSize({ 900, 80 });
     rec2n.setPosition(150, 250);
@@ -1131,6 +1160,16 @@ int main()
     SoundsNT.setCharacterSize(38);
     SoundsNT.setFillColor(sf::Color::Black);
     SoundsNT.setPosition(850, 265);
+
+    sf::RectangleShape rec22n;
+    rec22n.setSize({ 50, 50 });
+    rec22n.setPosition(490, 265);
+    rec22n.setOutlineThickness(2);
+    rec22n.setOutlineColor(sf::Color::Black);
+    sf::RectangleShape rec221n;
+    rec221n.setSize({ 40, 40 });
+    rec221n.setPosition(495, 270);
+    rec221n.setTexture(&tvolume0);
 
     sf::RectangleShape rec21n;
     rec21n.setSize({ 900, 80 });
@@ -3111,7 +3150,6 @@ int main()
                         }
                         else if (cursor_mouse.getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && cursor_mouse.getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && cursor_mouse.getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && cursor_mouse.getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2)
                         {
-                            std::cout << "Default" << std::endl;
                             hit1_counter = 1;
                             hit2_counter = 2;
                             reload1_counter = 1;
@@ -5409,6 +5447,8 @@ int main()
                 window.draw(bn1left);
                 window.draw(bn1right);
                 window.draw(MusicNT);
+                window.draw(rec12n);
+                window.draw(rec121n);
 
                 window.draw(rec2n);
                 window.draw(SoundsN);
@@ -5416,6 +5456,8 @@ int main()
                 window.draw(bn2left);
                 window.draw(bn2right);
                 window.draw(SoundsNT);
+                window.draw(rec22n);
+                window.draw(rec221n);
 
                 if (smOn)
                 {
