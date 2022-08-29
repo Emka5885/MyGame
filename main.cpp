@@ -26,9 +26,9 @@ int helpc = 0;
 int hcount = 1;
 bool menu = true;
 bool music = false;
-bool musicOn = false;
-bool mOn = false;
-bool smOn = false;
+bool musicOn = true;
+bool mOn = true;
+bool smOn = true;
 int hit1_counter = 1;
 int hit2_counter = 2;
 int reload1_counter = 1;
@@ -3112,6 +3112,22 @@ int main()
                         else if (cursor_mouse.getPosition().x >= recdo.getPosition().x - recdo.getSize().x / 2 && cursor_mouse.getPosition().x <= recdo.getPosition().x + recdo.getSize().x / 2 && cursor_mouse.getPosition().y >= recdo.getPosition().y - recdo.getSize().y / 2 && cursor_mouse.getPosition().y <= recdo.getPosition().y + recdo.getSize().y / 2)
                         {
                             std::cout << "Default" << std::endl;
+                            hit1_counter = 1;
+                            hit2_counter = 2;
+                            reload1_counter = 1;
+                            reload2_counter = 2;
+                            hit1Sound.setBuffer(hit01SoundBuffer);
+                            SoundsN1T.setString("1");
+                            reload1Sound.setBuffer(reload01SoundBuffer);
+                            sMucicNT.setString("1");
+                            hit2Sound.setBuffer(hit01SoundBuffer);
+                            sSoundsNT.setString("2");
+                            reload2Sound.setBuffer(reload01SoundBuffer);
+                            sSoundsN1T.setString("2");
+                            mOn = true;
+                            MusicNT.setString("On");
+                            smOn = true;
+                            SoundsNT.setString("On");
                         }
                         else if (!musicOn && (cursor_mouse.getPosition().x >= rec0n.getPosition().x && cursor_mouse.getPosition().x <= rec0n.getPosition().x + rec0n.getSize().x && cursor_mouse.getPosition().y >= rec0n.getPosition().y && cursor_mouse.getPosition().y <= rec0n.getPosition().y + rec0n.getSize().y))
                         {
@@ -3202,7 +3218,6 @@ int main()
                                 SoundsN1T.setString("1");
                             }
                             hit1_counter--;
-                            /*hit1Sound.play();*/
                         }
                         else if (hit1_counter != 6 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn21right.getPosition().x - bn21right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn21right.getPosition().x + bn21right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn21right.getPosition().y - bn21right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn21right.getPosition().y + bn21right.getSize().y / 2))
                         {
@@ -3232,7 +3247,6 @@ int main()
                                 SoundsN1T.setString("6");
                             }
                             hit1_counter++;
-                            /*hit1Sound.play();*/
                         }
                         //Reload 1
                         else if (reload1_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn3left.getPosition().x - bn3left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn3left.getPosition().x + bn3left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn3left.getPosition().y - bn3left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn3left.getPosition().y + bn3left.getSize().y / 2))
@@ -3263,7 +3277,6 @@ int main()
                                 sMucicNT.setString("1");
                             }
                             reload1_counter--;
-                            /*reload1Sound.play();*/
                         }
                         else if (hit1_counter != 6 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn3right.getPosition().x - bn3right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn3right.getPosition().x + bn3right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn3right.getPosition().y - bn3right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn3right.getPosition().y + bn3right.getSize().y / 2))
                         {
@@ -3293,7 +3306,6 @@ int main()
                                 sMucicNT.setString("6");
                             }
                             reload1_counter++;
-                            /*reload1Sound.play();*/
                         }
                         //Hit 2
                         else if (hit2_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn4left.getPosition().x - bn4left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn4left.getPosition().x + bn4left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn4left.getPosition().y - bn4left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn4left.getPosition().y + bn4left.getSize().y / 2))
@@ -3324,7 +3336,6 @@ int main()
                                 sSoundsNT.setString("1");
                             }
                             hit2_counter--;
-                            /*hit2Sound.play();*/
                         }
                         else if (hit2_counter != 6 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn4right.getPosition().x - bn4right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn4right.getPosition().x + bn4right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn4right.getPosition().y - bn4right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn4right.getPosition().y + bn4right.getSize().y / 2))
                         {
@@ -3354,7 +3365,6 @@ int main()
                                 sSoundsNT.setString("6");
                             }
                             hit2_counter++;
-                            /*hit2Sound.play();*/
                         }
                         //Reload 2
                         else if (reload2_counter != 1 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn41left.getPosition().x - bn41left.getSize().x / 2 && cursor_mouse.getPosition().x <= bn41left.getPosition().x + bn41left.getSize().x / 2 && cursor_mouse.getPosition().y >= bn41left.getPosition().y - bn41left.getSize().y / 2 && cursor_mouse.getPosition().y <= bn41left.getPosition().y + bn41left.getSize().y / 2))
@@ -3385,7 +3395,6 @@ int main()
                                 sSoundsN1T.setString("1");
                             }
                             reload2_counter--;
-                            /*reload2Sound.play();*/
                         }
                         else if (hit1_counter != 6 && musicOn && smOn && (cursor_mouse.getPosition().x >= bn41right.getPosition().x - bn41right.getSize().x / 2 && cursor_mouse.getPosition().x <= bn41right.getPosition().x + bn41right.getSize().x / 2 && cursor_mouse.getPosition().y >= bn41right.getPosition().y - bn41right.getSize().y / 2 && cursor_mouse.getPosition().y <= bn41right.getPosition().y + bn41right.getSize().y / 2))
                         {
@@ -3415,7 +3424,6 @@ int main()
                                 sSoundsN1T.setString("6");
                             }
                             reload2_counter++;
-                            /*reload2Sound.play();*/
                         }
                         if (!mOn && !smOn)
                         {
@@ -6170,7 +6178,7 @@ int main()
                     tv -= tv * 1 * dt;
                 }
 
-                if (tv2 == 0 && ((p2_exists && p2.getSelect() == 1 && focus) || (p2_exists && p2.getSelect() == 2 || p2_exists && p2.getSelect() == 3)))
+                if (tv2 == 0 && ((p2_exists && p2.getSelect() == 1 && focus) || (p2_exists && p2.getSelect() == 3)))
                 {
                     int p2_v = p2.getVibrations();
                     int yes_or_no = rand() % 2;
@@ -6195,7 +6203,7 @@ int main()
 
                     tv2 = p2.getTimeV();
                 }
-                else if (tv2 != 0 && ((p2_exists && p2.getSelect() == 1 && focus) || (p2_exists && p2.getSelect() == 2 || p2_exists && p2.getSelect() == 3)))
+                else if (tv2 != 0 && ((p2_exists && p2.getSelect() == 1 && focus) || (p2_exists && p2.getSelect() == 3)))
                 {
                     tv2 -= tv2 * 1 * dt;
                 }
