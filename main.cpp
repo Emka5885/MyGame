@@ -2401,6 +2401,15 @@ int main()
                     //Music
                     if (!menu && !settings && !select_player && !instruction && music)
                     {
+                        music_01.setVolume(volumeConst);
+                        music_02.setVolume(volumeConst);
+                        music_03.setVolume(volumeConst);
+                        music_04.setVolume(volumeConst);
+                        music_05.setVolume(volumeConst);
+                        music_06.setVolume(volumeConst);
+                        music_07.setVolume(volumeConst);
+                        music_08.setVolume(volumeConst);
+                        music_09.setVolume(volumeConst);
                         //Back
                         if ((p1.getSelect() == 3 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p2.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p2.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p2.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
                         {
@@ -3733,6 +3742,15 @@ int main()
                     {
                         cursor_mouse.setOrigin(cursor_mouse.getRadius() / 2, cursor_mouse.getRadius() / 2);
                         cursor_mouse.setPosition(sf::Mouse::getPosition(window).x + (igun02.getSize().x / 2), sf::Mouse::getPosition(window).y + (igun02.getSize().y / 2));
+                        music_01.setVolume(volumeConst);
+                        music_02.setVolume(volumeConst);
+                        music_03.setVolume(volumeConst);
+                        music_04.setVolume(volumeConst);
+                        music_05.setVolume(volumeConst);
+                        music_06.setVolume(volumeConst);
+                        music_07.setVolume(volumeConst);
+                        music_08.setVolume(volumeConst);
+                        music_09.setVolume(volumeConst);
                         //Back
                         if (cursor_mouse.getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && cursor_mouse.getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && cursor_mouse.getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && cursor_mouse.getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2)
                         {
@@ -5075,6 +5093,15 @@ int main()
                         //Music
                         if (!menu && !settings && !select_player && !instruction && music)
                         {
+                            music_01.setVolume(volumeConst);
+                            music_02.setVolume(volumeConst);
+                            music_03.setVolume(volumeConst);
+                            music_04.setVolume(volumeConst);
+                            music_05.setVolume(volumeConst);
+                            music_06.setVolume(volumeConst);
+                            music_07.setVolume(volumeConst);
+                            music_08.setVolume(volumeConst);
+                            music_09.setVolume(volumeConst);
                             //Back
                             if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= rec0o.getPosition().x - rec0o.getSize().x / 2 && p1.getRec().getPosition().x <= rec0o.getPosition().x + rec0o.getSize().x / 2 && p1.getRec().getPosition().y >= rec0o.getPosition().y - rec0o.getSize().y / 2 && p1.getRec().getPosition().y <= rec0o.getPosition().y + rec0o.getSize().y / 2))
                             {
