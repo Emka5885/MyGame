@@ -66,9 +66,9 @@ bool reloadSoundCounter2 = true;
 bool volumeM = true;
 int times = 60;
 int randMusic = 1;
-int volumeConst = 35;
+int volumeConst = 25;
 int volume = volumeConst;
-int volumeConst1 = 100;
+int volumeConst1 = 40;
 int volume1 = volumeConst1;
 int mClockS = 1;
 sf::Time ts = sf::seconds(times);
@@ -1043,6 +1043,11 @@ int main()
         std::cout << "Errorsbm01" << std::endl;
     }
     menuSound.setBuffer(menuSoundBuffer);
+    hit1Sound.setVolume(volumeConst1);
+    hit2Sound.setVolume(volumeConst1);
+    reload1Sound.setVolume(volumeConst1);
+    reload2Sound.setVolume(volumeConst1);
+    menuSound.setVolume(volumeConst1);
 
 
     if (!music_01.openFromFile("Resources/Music/music_01.ogg"))
@@ -2435,8 +2440,8 @@ int main()
                             smOn = true;
                             SoundsNT.setString("On");
                             menuSound.play();
-                            volumeConst = 35;
-                            volumeConst1 = 100;
+                            volumeConst = 25;
+                            volumeConst1 = 40;
                             volumeText.setString(std::to_string(volumeConst) + "%");
                             music_01.setVolume(volumeConst);
                             music_02.setVolume(volumeConst);
@@ -3776,8 +3781,8 @@ int main()
                             smOn = true;
                             SoundsNT.setString("On");
                             menuSound.play();
-                            volumeConst = 35;
-                            volumeConst1 = 100;
+                            volumeConst = 25;
+                            volumeConst1 = 40;
                             volumeText.setString(std::to_string(volumeConst) + "%");
                             music_01.setVolume(volumeConst);
                             music_02.setVolume(volumeConst);
@@ -5127,8 +5132,8 @@ int main()
                                 smOn = true;
                                 SoundsNT.setString("On");
                                 menuSound.play();
-                                volumeConst = 35;
-                                volumeConst1 = 100;
+                                volumeConst = 25;
+                                volumeConst1 = 40;
                                 volumeText.setString(std::to_string(volumeConst) + "%");
                                 music_01.setVolume(volumeConst);
                                 music_02.setVolume(volumeConst);
@@ -7666,7 +7671,8 @@ int main()
                 {
                     if (reloadSoundCounter)
                     {
-                        reload1Sound.play();
+                        if (smOn)
+                            reload1Sound.play();
                         reloadSoundCounter = false;
                     }
                     tym = clock3.getElapsedTime().asMilliseconds() - tym;
@@ -7686,7 +7692,8 @@ int main()
                 {
                     if (reloadSoundCounter2)
                     {
-                        reload2Sound.play();
+                        if (smOn)
+                            reload2Sound.play();
                         reloadSoundCounter2 = false;
                     }
                     tym0 = clock32.getElapsedTime().asMilliseconds() - tym0;
