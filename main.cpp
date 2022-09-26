@@ -1599,6 +1599,9 @@ int main()
     Player p2(&igun02, &tgun02, vibrations, ammun, window, tv2, selectmjk2);
     std::string p2samu = std::to_string(p2.getAmmunition());
 
+    p1.setTimeV(tv);
+    p2.setTimeV(tv2);
+
     sf::Clock dtime;
     float dt;
     float multiplier = 500.f;
@@ -2017,11 +2020,9 @@ int main()
                             sensitivity = 20;
                             s_text.setString(std::to_string(sensitivity));
                             s_text.setPosition(858, 665);
-                            p1.setTimeV(tv);
                             p2.setAmmunition(ammun);
                             p2samu = std::to_string(p2.getAmmunition());
                             p2.setVibrations(vibrations);
-                            p2.setTimeV(tv);
                             if (!p2_exists)
                             {
                                 textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
@@ -3355,11 +3356,9 @@ int main()
                             sensitivity = 20;
                             s_text.setString(std::to_string(sensitivity));
                             s_text.setPosition(858, 665);
-                            p1.setTimeV(tv);
                             p2.setAmmunition(ammun);
                             p2samu = std::to_string(p2.getAmmunition());
                             p2.setVibrations(vibrations);
-                            p2.setTimeV(tv);
                             if (!p2_exists)
                             {
                                 textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
@@ -4711,11 +4710,9 @@ int main()
                                 sensitivity = 20;
                                 s_text.setString(std::to_string(sensitivity));
                                 s_text.setPosition(858, 665);
-                                p1.setTimeV(tv);
                                 p2.setAmmunition(ammun);
                                 p2samu = std::to_string(p2.getAmmunition());
                                 p2.setVibrations(vibrations);
-                                p2.setTimeV(tv);
                                 if (!p2_exists)
                                 {
                                     textAmmunition.setString("Ammunition: " + p1samu + "/" + p1samu);
