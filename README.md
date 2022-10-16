@@ -7,3 +7,19 @@ Looking for some quick entertainment for an evening with a friend?
 Or maybe you just want to play a 2D game on a controller?  
 
 If so, you've come to the perfect place. My game meets all these requirements. :heavy_check_mark:
+
+<h2></h2>
+<h3>Instruction :mag:</h3>
+
+1) Download:
+* openal32.dll
+* sfml-audio-2.dll
+* sfml-graphics-2.dll
+* sfml-system-2.dll
+* sfml-window-2.dll
+* Young master of aiming.exe (Releases / Main Version)
+* Resources (folder)
+2) Create a folder and put everything you downloaded ( 1. ) into it
+3) Fire up the .exe file
+
+![Game Folder](./readme/image_1.jpg)
