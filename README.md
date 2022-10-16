@@ -29,6 +29,7 @@ https://user-images.githubusercontent.com/90275335/196039633-79235a3a-51cc-4ae4-
 * Young master of aiming.exe (Releases / Main Version)
 * Resources
 2) Create a folder and put everything you downloaded ( 1. ) into it
-3) Fire up the .exe file
 
 ![Game Folder](./readme/image_1.jpg)
+
+3) Fire up the .exe file
