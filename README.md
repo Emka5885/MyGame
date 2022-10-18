@@ -13,11 +13,7 @@ If so, you've come to the perfect place. My game meets all these requirements. :
 
 
 
-
-
-https://user-images.githubusercontent.com/90275335/196518459-fb6fcabf-7c20-4f6c-814e-264b6cdbc7d9.mp4
-
-
+https://user-images.githubusercontent.com/90275335/196559220-033ba5c8-69eb-47a4-9701-bb156a315f84.mp4
 
 
 
