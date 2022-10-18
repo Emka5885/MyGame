@@ -17,7 +17,7 @@ int seconds1;
 int seconds2;
 int ammun = 30;
 int vibrations = 6;
-int speed = 50;
+int speed = 150;
 int rate_of_fire = 1200;
 int tv = 1000;
 int tv2 = 1000;
@@ -72,7 +72,7 @@ int volumeConst1 = 40;
 int volume1 = volumeConst1;
 int mClockS = 1;
 sf::Time ts = sf::seconds(times);
-sf::Time tspeed = sf::milliseconds(speed);
+sf::Time tspeed = sf::milliseconds(210 - speed);
 sf::Time speedb = sf::milliseconds(rate_of_fire);
 sf::Time speedb2 = sf::milliseconds(rate_of_fire);
 sf::Cursor c;
@@ -2010,10 +2010,10 @@ int main()
                             vib_text.setString(std::to_string(vibrations));
                             vib_text.setPosition(868, 365);
                             p1.setVibrations(vibrations);
-                            speed = 50;
+                            speed = 150;
                             sot_text.setString(std::to_string(speed));
-                            sot_text.setPosition(858, 465);
-                            tspeed = sf::milliseconds(speed);
+                            sot_text.setPosition(848, 465);
+                            tspeed = sf::milliseconds(210 - speed);
                             rate_of_fire = 1200;
                             rof_text.setString(std::to_string(rate_of_fire));
                             rof_text.setPosition(838, 565);
@@ -2173,7 +2173,7 @@ int main()
                                 sot_text.setString(std::to_string(speed));
                             }
                             change = true;
-                            tspeed = sf::milliseconds(speed);
+                            tspeed = sf::milliseconds(210 - speed);
                         }
                         else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p1.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p1.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p1.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p2.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p2.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p2.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2)))
                         {
@@ -2183,13 +2183,13 @@ int main()
                                 sot_text.setString(std::to_string(speed));
                                 sot_text.setPosition(848, 465);
                             }
-                            else if (speed != 400)
+                            else if (speed != 200)
                             {
                                 speed += 10;
                                 sot_text.setString(std::to_string(speed));
                             }
                             change = true;
-                            tspeed = sf::milliseconds(speed);
+                            tspeed = sf::milliseconds(210 - speed);
                         }
                         //Rate of fire
                         else if (((p1.getSelect() == 3 && p1.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p1.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p1.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p1.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2) || (p2_exists && p2.getSelect() == 3 && p2.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p2.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p2.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p2.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2)))
@@ -3346,10 +3346,10 @@ int main()
                             vib_text.setString(std::to_string(vibrations));
                             vib_text.setPosition(868, 365);
                             p1.setVibrations(vibrations);
-                            speed = 50;
+                            speed = 150;
                             sot_text.setString(std::to_string(speed));
-                            sot_text.setPosition(858, 465);
-                            tspeed = sf::milliseconds(speed);
+                            sot_text.setPosition(848, 465);
+                            tspeed = sf::milliseconds(210 - speed);
                             rate_of_fire = 1200;
                             rof_text.setString(std::to_string(rate_of_fire));
                             rof_text.setPosition(838, 565);
@@ -3509,7 +3509,7 @@ int main()
                                 sot_text.setString(std::to_string(speed));
                             }
                             change = true;
-                            tspeed = sf::milliseconds(speed);
+                            tspeed = sf::milliseconds(210 - speed);
                         }
                         else if (cursor_mouse.getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && cursor_mouse.getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && cursor_mouse.getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && cursor_mouse.getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2)
                         {
@@ -3519,13 +3519,13 @@ int main()
                                 sot_text.setString(std::to_string(speed));
                                 sot_text.setPosition(848, 465);
                             }
-                            else if (speed != 400)
+                            else if (speed != 200)
                             {
                                 speed += 10;
                                 sot_text.setString(std::to_string(speed));
                             }
                             change = true;
-                            tspeed = sf::milliseconds(speed);
+                            tspeed = sf::milliseconds(210 - speed);
                         }
                         //Rate of fire
                         else if (cursor_mouse.getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && cursor_mouse.getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && cursor_mouse.getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && cursor_mouse.getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2)
@@ -4700,10 +4700,10 @@ int main()
                                 vib_text.setString(std::to_string(vibrations));
                                 vib_text.setPosition(868, 365);
                                 p1.setVibrations(vibrations);
-                                speed = 50;
+                                speed = 150;
                                 sot_text.setString(std::to_string(speed));
-                                sot_text.setPosition(858, 465);
-                                tspeed = sf::milliseconds(speed);
+                                sot_text.setPosition(848, 465);
+                                tspeed = sf::milliseconds(210 - speed);
                                 rate_of_fire = 1200;
                                 rof_text.setString(std::to_string(rate_of_fire));
                                 rof_text.setPosition(838, 565);
@@ -4863,7 +4863,7 @@ int main()
                                     sot_text.setString(std::to_string(speed));
                                 }
                                 change = true;
-                                tspeed = sf::milliseconds(speed);
+                                tspeed = sf::milliseconds(210 - speed);
                             }
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b4right.getPosition().x - b4right.getSize().x / 2 && p1.getRec().getPosition().x <= b4right.getPosition().x + b4right.getSize().x / 2 && p1.getRec().getPosition().y >= b4right.getPosition().y - b4right.getSize().y / 2 && p1.getRec().getPosition().y <= b4right.getPosition().y + b4right.getSize().y / 2))
                             {
@@ -4873,13 +4873,13 @@ int main()
                                     sot_text.setString(std::to_string(speed));
                                     sot_text.setPosition(848, 465);
                                 }
-                                else if (speed != 400)
+                                else if (speed != 200)
                                 {
                                     speed += 10;
                                     sot_text.setString(std::to_string(speed));
                                 }
                                 change = true;
-                                tspeed = sf::milliseconds(speed);
+                                tspeed = sf::milliseconds(210 - speed);
                             }
                             //Rate of fire
                             else if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (p1.getSelect() == 2 && p1.getRec().getPosition().x >= b5left.getPosition().x - b5left.getSize().x / 2 && p1.getRec().getPosition().x <= b5left.getPosition().x + b5left.getSize().x / 2 && p1.getRec().getPosition().y >= b5left.getPosition().y - b5left.getSize().y / 2 && p1.getRec().getPosition().y <= b5left.getPosition().y + b5left.getSize().y / 2))
