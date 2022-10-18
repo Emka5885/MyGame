@@ -6989,14 +6989,17 @@ int main()
         }
         else
         {
-            if (sf::Mouse::getPosition(window).x < 0 + 0.5 * igun00.getSize().x)
-                sf::Mouse::setPosition(sf::Vector2i((0 + 0.5 * igun00.getSize().x), (sf::Mouse::getPosition(window).y)), window);
-            else if (sf::Mouse::getPosition(window).x > window.getSize().x - 1.5 * igun00.getSize().x)
-                sf::Mouse::setPosition(sf::Vector2i((window.getSize().x - 1.5 * igun00.getSize().x), (sf::Mouse::getPosition(window).y)), window);
-            if (sf::Mouse::getPosition(window).y < 0 + igun00.getSize().y)
-                sf::Mouse::setPosition(sf::Vector2i((sf::Mouse::getPosition(window).x), (0 + igun00.getSize().y)), window);
-            else if (sf::Mouse::getPosition(window).y > window.getSize().y - 1.5 * igun00.getSize().y)
-                sf::Mouse::setPosition(sf::Vector2i((sf::Mouse::getPosition(window).x), (window.getSize().y - 1.5 * igun00.getSize().y)), window);
+            if (focus)
+            {
+                if (sf::Mouse::getPosition(window).x < 0 + 0.5 * igun00.getSize().x)
+                    sf::Mouse::setPosition(sf::Vector2i((0 + 0.5 * igun00.getSize().x), (sf::Mouse::getPosition(window).y)), window);
+                else if (sf::Mouse::getPosition(window).x > window.getSize().x - 1.5 * igun00.getSize().x)
+                    sf::Mouse::setPosition(sf::Vector2i((window.getSize().x - 1.5 * igun00.getSize().x), (sf::Mouse::getPosition(window).y)), window);
+                if (sf::Mouse::getPosition(window).y < 0 + igun00.getSize().y)
+                    sf::Mouse::setPosition(sf::Vector2i((sf::Mouse::getPosition(window).x), (0 + igun00.getSize().y)), window);
+                else if (sf::Mouse::getPosition(window).y > window.getSize().y - 1.5 * igun00.getSize().y)
+                    sf::Mouse::setPosition(sf::Vector2i((sf::Mouse::getPosition(window).x), (window.getSize().y - 1.5 * igun00.getSize().y)), window);
+            }
 
             if (p1.getSelect() == 3 || (p2_exists && p2.getSelect() == 3))
             {
