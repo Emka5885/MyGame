@@ -18,7 +18,7 @@ int seconds2;
 int ammun = 30;
 int vibrations = 6;
 int speed = 150;
-int rate_of_fire = 1200;
+int rate_of_fire = 2600;
 int tv = 1000;
 int tv2 = 1000;
 int sensitivity = 20;
@@ -73,8 +73,8 @@ int volume1 = volumeConst1;
 int mClockS = 1;
 sf::Time ts = sf::seconds(times);
 sf::Time tspeed = sf::milliseconds(210 - speed);
-sf::Time speedb = sf::milliseconds(rate_of_fire);
-sf::Time speedb2 = sf::milliseconds(rate_of_fire);
+sf::Time speedb = sf::milliseconds(3800 - rate_of_fire);
+sf::Time speedb2 = sf::milliseconds(3800 - rate_of_fire);
 sf::Cursor c;
 sf::CircleShape cursor_mouse(2);
 
@@ -1735,7 +1735,7 @@ int main()
                                         timee2 = speedb2;
                                     resetrof = false;
                                 }
-                                if ((timee.asMilliseconds() >= rate_of_fire) && (p1.getAmmunition() > 0) && (selectmjk1 == 3))
+                                if ((timee.asMilliseconds() >= (3800 - rate_of_fire)) && (p1.getAmmunition() > 0) && (selectmjk1 == 3))
                                 {
                                     if (!end_of_time)
                                     {
@@ -1759,7 +1759,7 @@ int main()
                                             hit1Sound.play();
                                     }
                                 }
-                                if ((timee2.asMilliseconds() >= rate_of_fire) && (p2.getAmmunition() > 0) && (p2_exists))
+                                if ((timee2.asMilliseconds() >= (3800 - rate_of_fire)) && (p2.getAmmunition() > 0) && (p2_exists))
                                 {
                                     if (!end_of_time)
                                     {
@@ -2014,7 +2014,7 @@ int main()
                             sot_text.setString(std::to_string(speed));
                             sot_text.setPosition(848, 465);
                             tspeed = sf::milliseconds(210 - speed);
-                            rate_of_fire = 1200;
+                            rate_of_fire = 2600;
                             rof_text.setString(std::to_string(rate_of_fire));
                             rof_text.setPosition(838, 565);
                             sensitivity = 20;
@@ -2032,8 +2032,8 @@ int main()
                                 textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                             }
                             change = true;
-                            speedb = sf::milliseconds(rate_of_fire);
-                            speedb2 = sf::milliseconds(rate_of_fire);
+                            speedb = sf::milliseconds(3800 - rate_of_fire);
+                            speedb2 = sf::milliseconds(3800 - rate_of_fire);
                             speedbar = true;
                             speedbar2 = true;
                         }
@@ -2206,8 +2206,8 @@ int main()
                                 rof_text.setString(std::to_string(rate_of_fire));
                             }
                             change = true;
-                            speedb = sf::milliseconds(rate_of_fire);
-                            speedb2 = sf::milliseconds(rate_of_fire);
+                            speedb = sf::milliseconds(3800 - rate_of_fire);
+                            speedb2 = sf::milliseconds(3800 - rate_of_fire);
                             speedbar = true;
                             speedbar2 = true;
                         }
@@ -2219,14 +2219,14 @@ int main()
                                 rof_text.setString(std::to_string(rate_of_fire));
                                 rof_text.setPosition(838, 565);
                             }
-                            else if (rate_of_fire != 5000)
+                            else if (rate_of_fire != 3000)
                             {
                                 rate_of_fire += 100;
                                 rof_text.setString(std::to_string(rate_of_fire));
                             }
                             change = true;
-                            speedb = sf::milliseconds(rate_of_fire);
-                            speedb2 = sf::milliseconds(rate_of_fire);
+                            speedb = sf::milliseconds(3800 - rate_of_fire);
+                            speedb2 = sf::milliseconds(3800 - rate_of_fire);
                             speedbar = true;
                             speedbar2 = true;
                         }
@@ -3056,7 +3056,7 @@ int main()
                                         timee2 = speedb2;
                                     resetrof = false;
                                 }
-                                if ((sf::Mouse::Button::Left == event.mouseButton.button) && (timee.asMilliseconds() >= rate_of_fire) && (p1.getAmmunition() > 0) && (selectmjk1 == 1))
+                                if ((sf::Mouse::Button::Left == event.mouseButton.button) && (timee.asMilliseconds() >= (3800 - rate_of_fire)) && (p1.getAmmunition() > 0) && (selectmjk1 == 1))
                                 {
                                     if (!end_of_time)
                                     {
@@ -3080,7 +3080,7 @@ int main()
                                             hit1Sound.play();
                                     }
                                 }
-                                if ((sf::Mouse::Button::Left == event.mouseButton.button) && (timee2.asMilliseconds() >= rate_of_fire) && (p2.getAmmunition() > 0) && (p2_exists))
+                                if ((sf::Mouse::Button::Left == event.mouseButton.button) && (timee2.asMilliseconds() >= (3800 - rate_of_fire)) && (p2.getAmmunition() > 0) && (p2_exists))
                                 {
                                     if (!end_of_time)
                                     {
@@ -3350,7 +3350,7 @@ int main()
                             sot_text.setString(std::to_string(speed));
                             sot_text.setPosition(848, 465);
                             tspeed = sf::milliseconds(210 - speed);
-                            rate_of_fire = 1200;
+                            rate_of_fire = 2600;
                             rof_text.setString(std::to_string(rate_of_fire));
                             rof_text.setPosition(838, 565);
                             sensitivity = 20;
@@ -3368,8 +3368,8 @@ int main()
                                 textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                             }
                             change = true;
-                            speedb = sf::milliseconds(rate_of_fire);
-                            speedb2 = sf::milliseconds(rate_of_fire);
+                            speedb = sf::milliseconds(3800 - rate_of_fire);
+                            speedb2 = sf::milliseconds(3800 - rate_of_fire);
                             speedbar = true;
                             speedbar2 = true;
                         }
@@ -3542,8 +3542,8 @@ int main()
                                 rof_text.setString(std::to_string(rate_of_fire));
                             }
                             change = true;
-                            speedb = sf::milliseconds(rate_of_fire);
-                            speedb2 = sf::milliseconds(rate_of_fire);
+                            speedb = sf::milliseconds(3800 - rate_of_fire);
+                            speedb2 = sf::milliseconds(3800 - rate_of_fire);
                             speedbar = true;
                             speedbar2 = true;
                         }
@@ -3555,14 +3555,14 @@ int main()
                                 rof_text.setString(std::to_string(rate_of_fire));
                                 rof_text.setPosition(838, 565);
                             }
-                            else if (rate_of_fire != 5000)
+                            else if (rate_of_fire != 3000)
                             {
                                 rate_of_fire += 100;
                                 rof_text.setString(std::to_string(rate_of_fire));
                             }
                             change = true;
-                            speedb = sf::milliseconds(rate_of_fire);
-                            speedb2 = sf::milliseconds(rate_of_fire);
+                            speedb = sf::milliseconds(3800 - rate_of_fire);
+                            speedb2 = sf::milliseconds(3800 - rate_of_fire);
                             speedbar = true;
                             speedbar2 = true;
                         }
@@ -4429,7 +4429,7 @@ int main()
                                             timee2 = speedb2;
                                         resetrof = false;
                                     }
-                                    if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (timee.asMilliseconds() >= rate_of_fire) && (p1.getAmmunition() > 0) && (selectmjk1 == 2))
+                                    if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (timee.asMilliseconds() >= (3800 - rate_of_fire)) && (p1.getAmmunition() > 0) && (selectmjk1 == 2))
                                     {
                                         if (!end_of_time)
                                         {
@@ -4453,7 +4453,7 @@ int main()
                                                 hit1Sound.play();
                                         }
                                     }
-                                    if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (timee2.asMilliseconds() >= rate_of_fire) && (p2.getAmmunition() > 0) && (p2_exists))
+                                    if ((sf::Joystick::Axis::Z == event.joystickMove.axis) && (timee2.asMilliseconds() >= (3800 - rate_of_fire)) && (p2.getAmmunition() > 0) && (p2_exists))
                                     {
                                         if (!end_of_time)
                                         {
@@ -4704,7 +4704,7 @@ int main()
                                 sot_text.setString(std::to_string(speed));
                                 sot_text.setPosition(848, 465);
                                 tspeed = sf::milliseconds(210 - speed);
-                                rate_of_fire = 1200;
+                                rate_of_fire = 2600;
                                 rof_text.setString(std::to_string(rate_of_fire));
                                 rof_text.setPosition(838, 565);
                                 sensitivity = 20;
@@ -4722,8 +4722,8 @@ int main()
                                     textAmmunition.setString("Ammunition: 1p." + p1samu + "/" + p1samu + "  2p." + p2samu + "/" + p2samu);
                                 }
                                 change = true;
-                                speedb = sf::milliseconds(rate_of_fire);
-                                speedb2 = sf::milliseconds(rate_of_fire);
+                                speedb = sf::milliseconds(3800 - rate_of_fire);
+                                speedb2 = sf::milliseconds(3800 - rate_of_fire);
                                 speedbar = true;
                                 speedbar2 = true;
                             }
@@ -4896,8 +4896,8 @@ int main()
                                     rof_text.setString(std::to_string(rate_of_fire));
                                 }
                                 change = true;
-                                speedb = sf::milliseconds(rate_of_fire);
-                                speedb2 = sf::milliseconds(rate_of_fire);
+                                speedb = sf::milliseconds(3800 - rate_of_fire);
+                                speedb2 = sf::milliseconds(3800 - rate_of_fire);
                                 speedbar = true;
                                 speedbar2 = true;
                             }
@@ -4909,13 +4909,14 @@ int main()
                                     rof_text.setString(std::to_string(rate_of_fire));
                                     rof_text.setPosition(838, 565);
                                 }
-                                else if (rate_of_fire != 5000)
+                                else if (rate_of_fire != 3000)
                                 {
                                     rate_of_fire += 100;
                                     rof_text.setString(std::to_string(rate_of_fire));
                                 }
                                 change = true;
-                                speedb = sf::milliseconds(rate_of_fire);
+                                speedb = sf::milliseconds(3800 - rate_of_fire);
+                                speedb2 = sf::milliseconds(3800 - rate_of_fire);
                                 speedbar = true;
                                 speedbar2 = true;
                             }
@@ -7676,7 +7677,7 @@ int main()
                         reloadSoundCounter = false;
                     }
                     tym = clock3.getElapsedTime().asMilliseconds() - tym;
-                    int change = tym / rate_of_fire * COUNT;
+                    int change = tym / (3800 - rate_of_fire) * COUNT;
                     p1.getSB().setSize({ 10.0f, 600.0f - change });
                     p1.getSB().setPosition(20, 100 + change);
                     window.draw(p1.getSB());
@@ -7697,7 +7698,7 @@ int main()
                         reloadSoundCounter2 = false;
                     }
                     tym0 = clock32.getElapsedTime().asMilliseconds() - tym0;
-                    int change = tym0 / rate_of_fire * COUNT;
+                    int change = tym0 / (3800 - rate_of_fire) * COUNT;
                     p2.getSB().setSize({ 10.0f, 600.0f - change });
                     p2.getSB().setPosition(1170, 100 + change);
                     window.draw(p2.getSB());
