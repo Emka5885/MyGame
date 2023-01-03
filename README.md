@@ -13,7 +13,7 @@ If so, you've come to the perfect place. My game meets all these requirements. :
 
 
 
-https://user-images.githubusercontent.com/90275335/196930749-9c467e64-7c6d-4a21-9ee1-f5b46df653cd.mp4
+[![Young master of aiming](./readme/Black.jpg)](https://www.youtube.com/watch?v=PIPt2OVr71Q&ab_channel=Emka5885)
 
 
 
